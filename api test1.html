@@ -1,0 +1,19 @@
+<!DOCTYPE>
+<html>
+<head>
+<script>
+
+fetch('https://komodomonitr.com/api/v1/data/summary?userId=0',{
+method: 'get',
+headers: {'X-Auth-Token': 'user-token-1234'}
+}).then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+
+</script>
+
+
+</html>
