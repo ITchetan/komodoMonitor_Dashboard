@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 
@@ -28,8 +29,9 @@ class Header extends Component {
           Player information for player-to-be-named-later.
         </p>
       </Jumbotron>;
-    )
+      </div>
+    );
   }
 }
 
-export default App;
+export default Header;
