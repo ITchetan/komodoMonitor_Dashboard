@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Jumbotron, Grid, Row, Col } from 'react-bootstrap';
+// import { Jumbotron, Grid, Row, Col, Panel } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
+
+import Header from "./components/Header";
+import Layout from "./components/Layout";
 
 // class App extends Component {
 //   render() {
@@ -22,61 +25,11 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
+      <div className="Wrapper">
       <Header />
       <Layout />
-      </React.Fragment>
-    );
-  }
-}
-
-class Header extends Component {
-  render() {
-    return (
-      <div className="Header">
-      <Jumbotron>
-        <h1>Komodo Monitr</h1>
-        <p>
-          Player information for player-to-be-named-later.
-        </p>
-      </Jumbotron>;
       </div>
     );
-  }
-}
-
-class Layout extends Component {
-  render() {
-    return (
-      <div className="Layout">
-      <Grid>
-        <Row>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-          <Col sm={6}>
-            <p>Placeholder text</p>
-          </Col>
-        </Row>
-        </Grid>
-        </div>
-      );
   }
 }
 
