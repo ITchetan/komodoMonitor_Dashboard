@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html>
+<head>
+<script>
+
+function login(url, data) {
+  // login with url and body data
+  return fetch(url, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // *client, no-referrer
+  })
+  .then(function(response) {
+      return response.json();
+    })
+
+}
+
+function getData(token, endPoint){ //retreives the token from the login function and passes it to the auth header in the get
+  fetch('http://app.komodomonitr.com/api/v1' + endPoint,{
+  method: 'get',
+  headers: {'X-Auth-Token': token}
+  })
+  .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      console.log(myJson);
+      // console.log(myJson[0].fname)
+    });
+
+
+  }
+
+login('http://app.komodomonitr.com/api/v1/users/login', {
+  "email": "player2@gmail.com",
+  "password": "abc123"
+})
+  .then(data => {console.log(data); let token = data.token; return token;}) // JSON from `response.json()` call
+  // .then(token => {getData(token, '/players')}) //passes token and api endpoint into get Data
+  .then(token => {getData(token, '/data/summary?userId=4')})
+
+</script>
+</head>
+<body>
+<p id=demo>
+</p>
+
+</body>
+
+</html>
