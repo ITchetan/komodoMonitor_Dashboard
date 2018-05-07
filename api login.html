@@ -3,15 +3,8 @@
 <head>
 <script>
 
-postData('http://app.komodomonitr.com/api/v1/users/login', {
-  "email": "player2@gmail.com",
-  "password": "abc123"
-})
-  .then(data => {console.log(data); let token = data.token; return token;}) // JSON from `response.json()` call
-  .then(token => {getData(token)})
-
-function postData(url, data) {
-  // Default options are marked with *
+function login(url, data) {
+  // login with url and body data
   return fetch(url, {
     body: JSON.stringify(data), // must match 'Content-Type' header
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -30,8 +23,8 @@ function postData(url, data) {
 
 }
 
-function getData(token){ //retreives the token from the login function and passes it to the auth header in the get
-  fetch('http://app.komodomonitr.com/api/v1/players',{
+function getData(token, endPoint){ //retreives the token from the login function and passes it to the auth header in the get
+  fetch('http://app.komodomonitr.com/api/v1' + endPoint,{
   method: 'get',
   headers: {'X-Auth-Token': token}
   })
@@ -40,11 +33,19 @@ function getData(token){ //retreives the token from the login function and passe
     })
     .then(function(myJson) {
       console.log(myJson);
-      console.log(myJson[0].fname)
+      // console.log(myJson[0].fname)
     });
 
 
   }
+
+login('http://app.komodomonitr.com/api/v1/users/login', {
+  "email": "player2@gmail.com",
+  "password": "abc123"
+})
+  .then(data => {console.log(data); let token = data.token; return token;}) // JSON from `response.json()` call
+  // .then(token => {getData(token, '/players')}) //passes token and api endpoint into get Data
+  .then(token => {getData(token, '/data/summary?userId=4')})
 
 </script>
 </head>
