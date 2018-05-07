@@ -15,6 +15,7 @@ class Chart extends Component{
     legendPosition:'right',
   }
 
+// Chart options
   render(){
     return (
       <div className="chart">
@@ -23,8 +24,8 @@ class Chart extends Component{
           options={{
             title:{
               display:this.props.displayTitle,
-              text:'Overall Wellness',
-              fontSize:15
+              text:'Individualised Wellness',
+              fontSize:25
             },
             legend:{
               display:this.props.displayLegend,
@@ -41,7 +42,7 @@ class Chart extends Component{
           }}
         />
 
-      </div>
+        </div>
     )
   }
 }
