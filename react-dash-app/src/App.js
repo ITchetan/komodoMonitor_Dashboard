@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import { Jumbotron, Grid, Row, Col, Panel } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 
+// Import components
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 
@@ -22,6 +22,7 @@ import Layout from "./components/Layout";
 //   }
 // }
 
+// Main function to display content
 class App extends Component {
   render() {
     return (
