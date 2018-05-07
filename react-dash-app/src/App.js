@@ -3,6 +3,10 @@ import './App.css';
 import BarChart from './components/wellnessChart';
 import WorkloadChart from  './components/workloadChart' ;
 
+// Import components
+import Header from "./components/Header";
+import Layout from "./components/Layout";
+
 // Bring data here for workload
 var minTarget = {
     label: "Min Target",
@@ -23,9 +27,7 @@ var maxTarget = {
     fill: 1,
     backgroundColor:'#ABEBC6'}
 
-// Import components
-import Header from "./components/Header";
-import Layout from "./components/Layout";
+
 
 // class App extends Component {
 //   render() {
