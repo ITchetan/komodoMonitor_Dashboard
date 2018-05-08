@@ -115,9 +115,11 @@ class App extends Component {
       headers: {'X-Auth-Token': token}
     })
     .then(response => response.json())
-    .then(result => {console.log(result); return result;})
-    .then(result => this.setState({ output: result }))
-    .then(display => {console.log(output);})
+    .then(result =>
+      {this.setState({ output: result }, function() {
+        console.log(this.state);
+      });
+    })
   })
 
 
