@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
-<<<<<<< HEAD
+
+
 import WellnessGauge from './WellnessGauge';
 import WorkloadGauge from './WorkloadGauge';
 import RPEGauge from './RPEGauge';
-=======
 import BarChart from './wellnessChart';
 import WorkloadChart from  './workloadChart' ;
 import RpeChart from  './rpeChart' ;
->>>>>>> b72f38f200b2b1709e8b0514f6f1c0ce6019833f
+
 
 
 class Layout extends Component{
@@ -33,11 +33,7 @@ class Layout extends Component{
         <Panel><Panel.Body><BarChart barData={this.state.barData}/></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
-<<<<<<< HEAD
         <Panel><Panel.Body><WellnessGauge /></Panel.Body></Panel>
-=======
-        <Panel><Panel.Body>Placeholder</Panel.Body></Panel>
->>>>>>> b72f38f200b2b1709e8b0514f6f1c0ce6019833f
       </Col>
     </Row>
     <Row>
