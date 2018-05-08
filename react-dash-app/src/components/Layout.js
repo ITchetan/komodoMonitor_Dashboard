@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import BarChart from './wellnessChart';
 
 const Layout = () => (
   <div className="Layout">

@@ -6,17 +6,17 @@
   			.chart-gauge
 			{
 			  width: 400px;
-			  margin: 20px auto
+			  margin: 40px auto
 			 }
 			 .gauge-workload
 		 {
 			 width: 400px;
-			 margin: 20px auto
+			 margin: 40px auto
 			}
 			.gauge-exertion
 		{
 			width: 400px;
-			margin: 20px auto
+			margin: 40px auto
 		 }
 			.green
 			{
@@ -58,9 +58,32 @@
 
 		<script>
 			window.onload = function() {
-				drawGauge('Wellness', 12, 15, 20, 30, '.chart-gauge', 'green', 'orange', 'red');
-				drawGauge('Workload', 7766.47, 6987.5, 12255, 20000, '.gauge-workload', 'blue', 'green', 'red');
-				drawGauge('Exertion', 7224.63, 5000, 8000, 12000, '.gauge-exertion', 'blue', 'green', 'red');
+
+				fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=0',{
+				method: 'get',
+				headers: {'X-Auth-Token': 'user-token-1234'}
+				}).then(function(response) {
+						return response.json();
+					})
+					.then(function(myJson) {
+						wellnessScore = myJson["Wellness"]["data"]["totalRating"];
+						workloadScore = myJson['Workload']['data'][myJson.Workload.data.length -1]['score'];
+						workloadLower = myJson['Workload']['data'][myJson.Workload.data.length -1]['targetMin'];
+						workloadUpper = myJson['Workload']['data'][myJson.Workload.data.length -1]['targetMax'];
+						exertionScore = myJson['RPE']['data'][myJson.RPE.data.length -1]['score'];
+						console.log(wellnessScore);
+						console.log(workloadScore);
+						console.log(workloadLower);
+						console.log(workloadUpper);
+						console.log(exertionScore);
+						drawGauge('Wellness', wellnessScore, 15, 20, 30, '.chart-gauge', 'green', 'orange', 'red');
+						drawGauge('Workload', workloadScore, workloadLower, workloadUpper, 20000, '.gauge-workload', 'blue', 'green', 'red');
+						drawGauge('Exertion', exertionScore, 5000, 8000, 12000, '.gauge-exertion', 'blue', 'green', 'red');
+						console.log(myJson);
+					});
+
+
+
 			}
 		</script>
 	</head>
