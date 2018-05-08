@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2';
 
-// class for workload chart
-class WorkloadChart extends Component{
+// class for rpe chart
+class RpeChart extends Component{
   constructor(props){
     super(props);
     this.state = {
       // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
-      workloadData:props.workloadData
+      rpeData:props.rpeData
     }
   }
 
@@ -18,11 +18,11 @@ class WorkloadChart extends Component{
       <div className="lineChart">
           <Line
           // here we tell chart to look for data in state
-            data={this.state.workloadData}
+            data={this.state.rpeData}
             options={{
               title:{
                 display:true,
-                text:'Workload',
+                text:'RPE',
 
                 fontSize:25
               },
@@ -46,4 +46,4 @@ class WorkloadChart extends Component{
 }
 
 //exporting class to use in other files
-export default WorkloadChart;
+export default RpeChart;
