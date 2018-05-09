@@ -33,7 +33,12 @@ class Layout extends Component{
         <Panel><Panel.Body><WellnessFlip /></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
-        <Panel><Panel.Body><h3>Insights</h3></Panel.Body></Panel>
+        <Panel><Panel.Body><h3>Insights</h3>
+        <ul>
+          <li>Sleep should be increased by 20%</li>
+          <li>Nutrition should be improved</li>
+        </ul>
+        </Panel.Body></Panel>
       </Col>
     </Row>
     <Row>
@@ -41,7 +46,11 @@ class Layout extends Component{
         <Panel><Panel.Body><WorkloadFlip /></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
-        <Panel><Panel.Body><h3>Insights</h3></Panel.Body></Panel>
+        <Panel><Panel.Body><h3>Insights</h3>
+        <ul>
+          <li>Total distance should be decreased by 15%</li>
+          </ul>
+        </Panel.Body></Panel>
       </Col>
     </Row>
     <Row>
@@ -49,7 +58,9 @@ class Layout extends Component{
         <Panel><Panel.Body><RpeFlip /></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
-        <Panel><Panel.Body><h3>Insights</h3></Panel.Body></Panel>
+        <Panel><Panel.Body>
+        <h3>Insights</h3>
+        </Panel.Body></Panel>
       </Col>
     </Row>
     </Grid>
