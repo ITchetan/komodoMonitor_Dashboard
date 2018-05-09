@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlexyFlipCard } from 'flexy-flipcards';
 import WorkloadChart from './workloadChart.js';
+import { Button } from 'react-bootstrap';
 
 class WorkloadFlip extends Component {
   constructor(props){
@@ -20,11 +21,11 @@ class WorkloadFlip extends Component {
         backBackgroundColor="#ffffff">
         <div>
           <div className='gauge-workload'></div>
-          <button ref="flipper">Show Detail</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
           <WorkloadChart workloadData={this.state.workloadData} />
-          <button ref="flipper">Show Summary</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>
     );

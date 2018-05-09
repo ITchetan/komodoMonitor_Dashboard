@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlexyFlipCard } from 'flexy-flipcards';
 import BarChart from './wellnessChart.js';
+import { Button } from 'react-bootstrap';
 
 class WellnessFlip extends Component {
   constructor(props){
@@ -20,11 +21,11 @@ class WellnessFlip extends Component {
         backBackgroundColor="#ffffff">
         <div>
           <div className='chart-gauge'></div>
-          <button ref="flipper">Show Detail</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
           <BarChart barData={this.state.barData} />
-          <button ref="flipper">Show Summary</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>
     );

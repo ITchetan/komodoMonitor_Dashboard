@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlexyFlipCard } from 'flexy-flipcards';
 import RpeChart from './rpeChart.js';
+import { Button } from 'react-bootstrap';
 
 class RpeFlip extends Component {
   constructor(props){
@@ -20,11 +21,11 @@ class RpeFlip extends Component {
         backBackgroundColor="#ffffff">
         <div>
           <div className='gauge-exertion'></div>
-          <button ref="flipper">Show Detail</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
           <RpeChart rpeData={this.state.rpeData} />
-          <button ref="flipper">Show Summary</button>
+          <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>
     );
