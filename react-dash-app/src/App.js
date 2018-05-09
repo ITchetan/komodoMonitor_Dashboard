@@ -12,9 +12,13 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      barData:{}
-    }
+      barData:{},
+      chartData:{},
+      output: [],
+    };
   }
+
+
 
   componentWillMount(){
     this.getChartData();
@@ -92,7 +96,41 @@ class App extends Component {
     });
   }
 
+  componentDidMount(){
+
+    fetch('http://app.komodomonitr.com/api/v1/users/login', {
+      body: JSON.stringify({
+        "email": "player2@gmail.com",
+        "password": "abc123"
+      }), // must match 'Content-Type' header
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+    })
+
+    .then(response => response.json())
+
+    .then(data => {console.log(data); let token = data.token; return token;})
+
+    .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
+      method: 'get',
+      headers: {'X-Auth-Token': token}
+    })
+    .then(response => response.json())
+    .then(result =>
+      {this.setState({ output: result }, function() {
+        console.log(this.state);
+      });
+    })
+  })
+
+
+  }
+
+
   render() {
+
     return (
       <div className="Wrapper">
       <Header />
