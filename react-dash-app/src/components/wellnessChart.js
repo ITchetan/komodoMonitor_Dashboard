@@ -5,7 +5,7 @@ class BarChart extends Component{
   constructor(props){
     super(props);
     this.state = {
-      barData:props.barData
+      output:props.output
     }
   }
 
@@ -20,7 +20,7 @@ class BarChart extends Component{
   {
     return (<div className="barChart">
         <HorizontalBar
-          data={this.state.barData}
+          data={this.state.output}
           options={{
             title:{
               display:this.props.displayTitle,

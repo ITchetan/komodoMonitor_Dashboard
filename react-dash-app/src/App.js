@@ -52,7 +52,7 @@ class App extends Component {
     this.state = {
       barData:{},
       chartData:{},
-      output: [],
+      output: {},
     };
   }
 
@@ -115,11 +115,58 @@ class App extends Component {
       headers: {'X-Auth-Token': token}
     })
     .then(response => response.json())
-    .then(result =>
-      {this.setState({ output: result }, function() {
-        console.log(this.state);
-      });
+    .then(result => { let output = result.workload.data; return output;})
+    .then(output => {
+
+      var weekData = []
+      var scoreData = []
+      var minData = []
+      var maxData = []
+
+      for (var i = 0, len = output.length; i < len; i++) {
+        weekData.push(output[i]["week"])
+        scoreData.push(output[i]["score"])
+        minData.push(output[i]["target_min"])
+        maxData.push(output[i]["target_mix"])
+
+      }
+
+      var score = {
+        label: "Score",
+        data: scoreData,
+        lineTension: 0.3,
+        borderColor: 'red',
+        fill: false,}
+
+    var minTarget = {
+        label: "Min Target",
+        data: minData,
+        lineTension: 0.3,
+        fill: 1,
+        backgroundColor:'#ABEBC6'}
+
+    var maxTarget = {
+        label: "Max Target",
+        data: maxData,
+        lineTension: 0.3,
+        fill: 1,
+        backgroundColor:'#ABEBC6'}
+
+      var labels = weekData
+      var dataSets = [minTarget, score, maxTarget]
+
+      var chartData = {labels, dataSets}
+
+      console.log(weekData);
+      console.log(dataSets);
+
+      return chartData
+
+      // for( var item in output) {
+      //   console.log(item, output[item]);
+      // }
     })
+    .then(chartData => {this.setState({ chartData })})
   })
 
 
@@ -128,8 +175,13 @@ class App extends Component {
 
   render() {
 
+
+console.log(this.state.chartData)
+
     return (
       <div className="Wrapper">
+      <div>
+      </div>
       <Header />
       <Layout />
       <BarChart barData={this.state.barData}/>
