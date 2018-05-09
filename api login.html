@@ -33,6 +33,7 @@ function getData(token, endPoint){ //retreives the token from the login function
     })
     .then(function(myJson) {
       console.log(myJson);
+      return myJson;
       // console.log(myJson[0].fname)
     });
 
@@ -46,7 +47,8 @@ login('http://app.komodomonitr.com/api/v1/users/login', {
 .then(data => {console.log(data); let token = data.token; return token;}) // JSON from `response.json()` call
 // .then(token => {getData(token, '/players')}) //passes token and api endpoint into get Data
 
-.then(token => {getData(token, '/data/summary?userId=4')})
+.then(token => {getData(token, '/data/summary?userId=4'); return myJson;})
+.then(myJson => {console.log(myJson);})
 
 
 </script>
