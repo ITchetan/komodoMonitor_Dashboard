@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
-import BarChart from './wellnessChart';
-
 
 import WellnessGauge from './WellnessGauge';
 import WorkloadGauge from './WorkloadGauge';
