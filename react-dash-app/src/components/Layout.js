@@ -16,7 +16,7 @@ class Layout extends Component{
     super(props);
     this.state = {
       // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
-      // barData:props.barData,
+      barData:props.barData,
       workloadData:props.workloadData,
       rpeData:props.rpeData
     }
@@ -30,7 +30,7 @@ class Layout extends Component{
   <Grid>
     <Row>
       <Col sm={6}>
-        <Panel><Panel.Body><WellnessFlip /></Panel.Body></Panel>
+        <Panel><Panel.Body><WellnessFlip barData={this.state.barData}/></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
         <Panel><Panel.Body><h3>Insights</h3>
@@ -43,7 +43,7 @@ class Layout extends Component{
     </Row>
     <Row>
       <Col sm={6}>
-        <Panel><Panel.Body><WorkloadFlip /></Panel.Body></Panel>
+        <Panel><Panel.Body><WorkloadFlip workloadData={this.state.workloadData} /></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
         <Panel><Panel.Body><h3>Insights</h3>
@@ -55,7 +55,7 @@ class Layout extends Component{
     </Row>
     <Row>
       <Col sm={6}>
-        <Panel><Panel.Body><RpeFlip /></Panel.Body></Panel>
+        <Panel><Panel.Body><RpeFlip rpeData={this.state.rpeData} /></Panel.Body></Panel>
       </Col>
       <Col sm={6}>
         <Panel><Panel.Body>
