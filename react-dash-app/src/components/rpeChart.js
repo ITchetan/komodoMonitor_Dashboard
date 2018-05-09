@@ -28,7 +28,7 @@ class RpeChart extends Component{
               },
               legend:{
                 display:true,
-                position:'right'
+                position:'top'
               },
               scales: {
                 yAxes: [{

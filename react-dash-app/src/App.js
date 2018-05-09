@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import BarChart from './components/wellnessChart';
-import WorkloadChart from  './components/workloadChart' ;
-import RpeChart from  './components/rpeChart' ;
 import Header from "./components/Header";
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import Layout from "./components/Layout";
+// import Gauge from "./components/Gauge";
 
 
 
@@ -13,7 +12,6 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-
       barData:{},
       chartData:{},
       output: [],
@@ -136,10 +134,8 @@ class App extends Component {
     return (
       <div className="Wrapper">
       <Header />
-      <Layout />
-      <BarChart barData={this.state.barData}/>
-      <WorkloadChart   workloadData={this.state.workloadData} />
-      <RpeChart   rpeData={this.state.rpeData} />
+      <Layout barData={this.state.barData} workloadData={this.state.workloadData} rpeData={this.state.rpeData} />
+
       </div>
     );
   }

@@ -2,16 +2,6 @@
 
 function drawGauge(name, value, gaugeLowerBound, gaugeUpperBound, gaugeMaxValue, chartID, firstArc, secondArc, thirdArc) {
 
-  // var name = "Wellness"
-  // var value = 13;
-  // var gaugeLowerBound = 15;
-  // var gaugeUpperBound = 20;
-  // var gaugeMaxValue = 30;
-  // var chartID = '.chart-gauge';
-  // var firstArc = 'green';
-  // var secondArc = 'orange';
-  // var thirdArc = 'red';
-
 
 // données à calculer
 var percentValue = value / gaugeMaxValue;
