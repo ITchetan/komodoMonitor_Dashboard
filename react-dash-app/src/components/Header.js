@@ -4,7 +4,7 @@ import { PageHeader } from 'react-bootstrap';
 const Header = () => (
   <div className="Header">
   <PageHeader>
-    <h1>Komodo Monitr</h1>
+    Komodo Monitr
   </PageHeader>;
   </div>
 );

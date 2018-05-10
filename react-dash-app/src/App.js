@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header";
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import Layout from "./components/Layout";
 
 // Main function to display content
