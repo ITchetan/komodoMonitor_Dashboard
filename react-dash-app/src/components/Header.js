@@ -1,11 +1,13 @@
 import React from 'react';
-import { PageHeader } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 
 const Header = () => (
   <div className="Header">
-  <PageHeader>
-    Komodo Monitr
-  </PageHeader>;
+  <Panel>
+    <Panel.Heading>
+    <h1>Komodo Monitr</h1>
+    </Panel.Heading>
+  </Panel>
   </div>
 );
 
