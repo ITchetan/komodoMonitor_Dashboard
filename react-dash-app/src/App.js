@@ -3,9 +3,6 @@ import './App.css';
 import Header from "./components/Header";
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import Layout from "./components/Layout";
-// import Gauge from "./components/Gauge";
-
-
 
 // Main function to display content
 class App extends Component {
