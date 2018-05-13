@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       barData:{},
       chartData:{},
-      output: [],
+      output: {},
     };
   }
 
@@ -150,6 +150,7 @@ class App extends Component {
       headers: {'X-Auth-Token': token}
     })
     .then(response => response.json())
+
     .then((findresponse)=>
         {
           console.log(findresponse.wellness.data)
@@ -271,8 +272,11 @@ class App extends Component {
 
   render() {
     console.log(this.state.barData)
+
     return (
       <div className="Wrapper">
+      <div>
+      </div>
       <Header />
       <Layout barData={this.state.barData} workloadData={this.state.workloadData} rpeData={this.state.rpeData} />
 
