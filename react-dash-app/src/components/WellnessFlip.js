@@ -24,7 +24,7 @@ class WellnessFlip extends Component {
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
-          <BarChart barData={this.state.barData} />
+          <BarChart barData={this.props.barData} />
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>

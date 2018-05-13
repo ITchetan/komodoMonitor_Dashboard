@@ -24,7 +24,7 @@ class RpeFlip extends Component {
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
-          <RpeChart rpeData={this.state.rpeData} />
+          <RpeChart rpeData={this.props.rpeData} />
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>

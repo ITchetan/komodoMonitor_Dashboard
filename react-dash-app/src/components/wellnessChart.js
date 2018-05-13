@@ -20,7 +20,10 @@ class BarChart extends Component{
   {
     return (<div className="barChart">
         <HorizontalBar
-          data={this.state.output}
+
+        // here we tell chart to look for data in state
+          data={this.props.barData}
+
           options={{
             title:{
               display:this.props.displayTitle,
