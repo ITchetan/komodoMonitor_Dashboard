@@ -10,4 +10,5 @@
 .panel-default > .panel-heading {
   background: #d40000;
   color: #ffffff;
+  border-color: #d40000;
 }
