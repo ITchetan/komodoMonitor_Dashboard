@@ -3,8 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.1.1",
+    "chart.js": "^2.7.2",
+    "d3": "^5.2.0",
+    "flexy-flipcards": "^0.1.2",
+    "npm": "^6.0.0",
     "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
+    "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.3.2",
+    "react-faux-dom": "^4.1.0",
+    "react-flipcard": "^0.2.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -12,5 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

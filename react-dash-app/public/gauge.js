@@ -2,16 +2,6 @@
 
 function drawGauge(name, value, gaugeLowerBound, gaugeUpperBound, gaugeMaxValue, chartID, firstArc, secondArc, thirdArc) {
 
-  // var name = "Wellness"
-  // var value = 13;
-  // var gaugeLowerBound = 15;
-  // var gaugeUpperBound = 20;
-  // var gaugeMaxValue = 30;
-  // var chartID = '.chart-gauge';
-  // var firstArc = 'green';
-  // var secondArc = 'orange';
-  // var thirdArc = 'red';
-
 
 // données à calculer
 var percentValue = value / gaugeMaxValue;
@@ -39,7 +29,7 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
   numSections = 1;
   sectionPerc = 1 / numSections / 2;
   padRad = 0.025;
-  chartInset = 10;
+  chartInset = 30;
 
   // Orientation of gauge:
   totalPercent = .75;
@@ -48,9 +38,9 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
 
   margin = {
     top: 20,
-    right: 40,
+    right: 20,
     bottom: 30,
-    left: 40
+    left: 20
   };
 
   width = el[0][0].offsetWidth - margin.left - margin.right;
@@ -75,7 +65,7 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
   };
 
   // Create SVG element
-  svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+  svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom - (height * 0.42));
 
   // Add layer for the panel
   chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
@@ -126,21 +116,22 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
                 .data(dataset)
                 .enter();
 
-    texts.append("text")
-         .text(function(){
-              return dataset[0].metric;
-         })
-         .attr('id', "Name")
-         .attr('transform', "translate(" + ((width + margin.left) / 6) + ", " + ((height + margin.top) / 1.5) + ")")
-         .attr("font-size",25)
-         .style("fill", "#000000");
+    // Code for inserting chart name
+    // texts.append("text")
+    //      .text(function(){
+    //           return dataset[0].metric;
+    //      })
+    //      .attr('id', "Name")
+    //      .attr('transform', "translate(" + ((width + margin.left) / 6) + ", " + ((height + margin.top) / 1.5) + ")")
+    //      .attr("font-size",25)
+    //      .style("fill", "#000000");
 
    texts.append("text")
         .text(function(){
              return dataset[0].value;
         })
         .attr('id', "Value")
-        .attr('transform', "translate(" + ((width + margin.left) / 1.7) + ", " + ((height + margin.top) / 1.5) + ")")
+        .attr('transform', "translate(" + ((width + margin.left) / 2.15) + ", " + ((height + margin.top) / 1.5) + ")")
         .attr("font-size",25)
         .style("fill", "#000000");
 
@@ -149,16 +140,16 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
 var trY = 195 - 210 * Math.sin(percToRad(percent / 2));
 // (180, 195) are the coordinates of the center of the gauge.
 
-displayValue = function() {
-                texts.append("text")
-                    .text(function(){
-                        return dataset[0].value;
-                    })
-                    .attr('id', "Value")
-                    .attr('transform', "translate(" + trX + ", " + trY+ ")")
-                    .attr("font-size",18)
-                    .style("fill", '#000000');
-            }
+// displayValue = function() {
+//                 texts.append("text")
+//                     .text(function(){
+//                         return dataset[0].value;
+//                     })
+//                     .attr('id', "Value")
+//                     .attr('transform', "translate(" + trX + ", " + trY+ ")")
+//                     .attr("font-size",18)
+//                     .style("fill", '#000000');
+//             }
 
 
 
@@ -167,7 +158,7 @@ displayValue = function() {
             return 0;
         })
         .attr('id', 'scale0')
-        .attr('transform', "translate(" + ((width + margin.left) / 100 ) + ", " + ((height + margin.top) / 2) + ")")
+        .attr('transform', "translate(" + ((width + margin.left) / 15 ) + ", " + ((height + margin.top) / 2) + ")")
         .attr("font-size", 15)
         .style("fill", "#000000");
 
@@ -176,7 +167,7 @@ displayValue = function() {
             return gaugeMaxValue/2;
         })
         .attr('id', 'scale10')
-        .attr('transform', "translate(" + ((width + margin.left) / 2.15 ) + ", " + ((height + margin.top) / 30) + ")")
+        .attr('transform', "translate(" + ((width + margin.left) / 2.15 ) + ", " + ((height + margin.top) / 10) + ")")
         .attr("font-size", 15)
         .style("fill", "#000000");
 
@@ -186,7 +177,7 @@ displayValue = function() {
             return gaugeMaxValue;
         })
         .attr('id', 'scale20')
-        .attr('transform', "translate(" + ((width + margin.left) / 1.03 ) + ", " + ((height + margin.top) / 2) + ")")
+        .attr('transform', "translate(" + ((width + margin.left) / 1.1 ) + ", " + ((height + margin.top) / 2) + ")")
         .attr("font-size", 15)
         .style("fill", "#000000");
 
@@ -215,7 +206,7 @@ displayValue = function() {
 
     function Needle(el) {
       this.el = el;
-      this.len = width / 2.5;
+      this.len = width / 3;
       this.radius = this.len / 8;
     }
 
@@ -272,7 +263,7 @@ displayValue = function() {
   needle.render();
   needle.moveTo(percent);
 
-  setTimeout(displayValue, 1350);
+  // setTimeout(displayValue, 1350);
 
 
 
