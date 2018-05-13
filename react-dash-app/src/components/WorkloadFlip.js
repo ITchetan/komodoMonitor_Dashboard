@@ -8,7 +8,7 @@ class WorkloadFlip extends Component {
     super(props);
     this.state = {
       // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
-      // barData:props.barData,
+      //barData:props.barData,
       workloadData:props.workloadData,
       // rpeData:props.rpeData
     }
@@ -24,7 +24,7 @@ class WorkloadFlip extends Component {
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Detail</Button></div>
         </div>
         <div>
-          <WorkloadChart workloadData={this.state.workloadData} />
+          <WorkloadChart workloadData={this.props.workloadData} />
           <div style={{ float: 'right' }}><Button ref="flipper" bsStyle="primary" bsSize="large">Show Summary</Button></div>
         </div>
       </FlexyFlipCard>

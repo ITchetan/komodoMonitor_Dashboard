@@ -18,7 +18,7 @@ class RpeChart extends Component{
       <div className="lineChart">
           <Line
           // here we tell chart to look for data in state
-            data={this.state.rpeData}
+            data={this.props.rpeData}
             options={{
               title:{
                 display:true,

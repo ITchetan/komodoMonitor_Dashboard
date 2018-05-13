@@ -29,7 +29,7 @@ class Layout extends Component{
       <Panel.Heading><h4>Wellness</h4></Panel.Heading>
       <Panel.Body>
         <Col sm={6}>
-          <WellnessFlip barData={this.state.barData}/>
+          <WellnessFlip barData={this.props.barData}/>
         </Col>
         <Col sm={6}>
           <ul>
@@ -45,7 +45,7 @@ class Layout extends Component{
         <Panel.Heading><h4>Workload</h4></Panel.Heading>
           <Panel.Body>
             <Col sm={6}>
-              <WorkloadFlip workloadData={this.state.workloadData} />
+              <WorkloadFlip workloadData={this.props.workloadData} />
             </Col>
             <Col sm={6}>
               <ul>
@@ -60,7 +60,7 @@ class Layout extends Component{
         <Panel.Heading><h4>RPE</h4></Panel.Heading>
           <Panel.Body>
             <Col sm={6}>
-              <RpeFlip rpeData={this.state.rpeData} />
+              <RpeFlip rpeData={this.props.rpeData} />
             </Col>
             <Col sm={6}>
             </Col>

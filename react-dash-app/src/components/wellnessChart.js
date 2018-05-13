@@ -17,7 +17,7 @@ class BarChart extends Component{
     return (<div className="barChart">
         <HorizontalBar
         // here we tell chart to look for data in state
-          data={this.state.barData}
+          data={this.props.barData}
           options={{
             title:{
               display:true,
