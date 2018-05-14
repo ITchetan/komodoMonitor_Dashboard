@@ -19,23 +19,23 @@ class Navigator extends Component{
   render()
   {
     return (
-    <div className="Navigator">
-    <Card style={{ text: 'center'}}>
-      <CardTitle>Summary</CardTitle>
-      <HomeIcon size={72} color="#d40000" />
-    </Card>
-    <Card>
-      <CardTitle>Workload</CardTitle>
-      <HeartPulseIcon size={72} color="#d40000" />
-    </Card>
-    <Card>
-      <CardTitle>Wellness</CardTitle>
-      <MedicalBagIcon size={72} color="#d40000" />
-    </Card>
-    <Card>
-      <CardTitle>RPE</CardTitle>
-      <RunFastIcon size={72} color="#d40000" />
-    </Card>
+    <div>
+      <div style={{ textAlign: 'center' }}>
+        <h4>Summary</h4>
+        <HomeIcon size={72} color="#d40000" />
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <h4>Workload</h4>
+        <HeartPulseIcon size={72} color="#C0C0C0" />
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <h4>Wellness</h4>
+        <MedicalBagIcon size={72} color="#C0C0C0" />
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <h4>RPE</h4>
+        <RunFastIcon size={72} color="#C0C0C0" />
+      </div>
     </div>
   );
 }

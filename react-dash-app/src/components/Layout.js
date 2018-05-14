@@ -31,7 +31,7 @@ class Layout extends Component{
         <Navigator />
       </Col>
       <Col sm={6}>
-      <Card color="custom">
+      <Card>
       <CardHeader>Placeholder text</CardHeader>
       <CardBody>This is a placeholder</CardBody>
       </Card>
