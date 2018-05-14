@@ -176,18 +176,18 @@ class App extends Component {
             for (var i = 0; i < dataworkload.length; i++) {
               var dict = dataworkload[i];
               for (var key in dict) {
-                if (key == 'week') {
+                if (key === 'week') {
                   workload_lbl.push(dict[key]);
                 }
-                else if (key=='score') {
+                else if (key==='score') {
                   workload_score.push(dict[key]);
                 }
 
-                else if (key=='target_min') {
+                else if (key==='target_min') {
                   workload_target_min.push(dict[key]);
                 }
 
-                else if (key=='target_max') {
+                else if (key==='target_max') {
                   workload_target_max.push(dict[key]);
                 }
               }

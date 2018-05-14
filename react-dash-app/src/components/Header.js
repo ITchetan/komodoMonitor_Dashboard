@@ -1,20 +1,17 @@
 import React from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardBody, CardHeader} from 'reactstrap';
 
 const Header = () => (
   <div className="Header">
-  <Grid>
+  <Container>
   <Row>
   <Col>
-  <Panel>
-    <Panel.Heading>
-      <h1>Komodo Monitr</h1>
-      <h3>John Doe</h3>
-    </Panel.Heading>
-  </Panel>
+  <Card>
+    <CardHeader>Komodo Monitr</CardHeader>
+  </Card>
   </Col>
   </Row>
-  </Grid>
+  </Container>
   </div>
 );
 

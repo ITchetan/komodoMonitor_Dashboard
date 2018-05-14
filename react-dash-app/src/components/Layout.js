@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
+import Insight from './Insight'
+import Navigator from './Navigator'
 import '../App.css';
 
 // Import React components
-import WellnessFlip from './WellnessFlip';
-import WorkloadFlip from './WorkloadFlip';
-import RpeFlip from './RPEFlip';
+// import WellnessFlip from './WellnessFlip';
+// import WorkloadFlip from './WorkloadFlip';
+// import RpeFlip from './RPEFlip';
 
 class Layout extends Component{
   constructor(props){
@@ -23,51 +25,38 @@ class Layout extends Component{
   {
     return (
   <div className="Layout">
-  <Grid>
+  <Container>
     <Row>
-      <Panel>
-      <Panel.Heading><h4>Wellness</h4></Panel.Heading>
-      <Panel.Body>
-        <Col sm={6}>
-          <WellnessFlip barData={this.props.barData}/>
-        </Col>
-        <Col sm={6}>
-          <ul>
-            <li><h4>Sleep should be increased by 20%</h4></li>
-            <li><h4>Nutrition should be improved</h4></li>
-          </ul>
-        </Col>
-      </Panel.Body>
-      </Panel>
+      <Col sm={2}>
+        <Navigator />
+      </Col>
+      <Col sm={6}>
+      <Card color="custom">
+      <CardHeader>Placeholder text</CardHeader>
+      <CardBody>This is a placeholder</CardBody>
+      </Card>
+      </Col>
+      <Col sm={4}>
+      <Container>
+        <Row>
+          <Col>
+          <Insight insight="You need 15% more sleep" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Insight insight="Decrease running distance by 10%" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Insight insight="Improve your nutrition" />
+          </Col>
+        </Row>
+      </Container>
+      </Col>
     </Row>
-    <Row>
-      <Panel>
-        <Panel.Heading><h4>Workload</h4></Panel.Heading>
-          <Panel.Body>
-            <Col sm={6}>
-              <WorkloadFlip workloadData={this.props.workloadData} />
-            </Col>
-            <Col sm={6}>
-              <ul>
-                <li><h4>Total distance should be decreased by 15%</h4></li>
-              </ul>
-            </Col>
-          </Panel.Body>
-        </Panel>
-    </Row>
-    <Row>
-      <Panel>
-        <Panel.Heading><h4>RPE</h4></Panel.Heading>
-          <Panel.Body>
-            <Col sm={6}>
-              <RpeFlip rpeData={this.props.rpeData} />
-            </Col>
-            <Col sm={6}>
-            </Col>
-          </Panel.Body>
-        </Panel>
-    </Row>
-    </Grid>
+    </Container>
     </div>
   );
 }
