@@ -9,7 +9,8 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      email: "",
+      value: "",
+      email: "player2@gmail.com",
       password: "",
       login: "true",
       barData:{},
@@ -17,6 +18,17 @@ class App extends Component {
       output: {},
     };
     this.getData = this.getData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.setState({ email: this.state.value })
   }
 
   getData(){
@@ -26,7 +38,7 @@ class App extends Component {
 
     fetch('http://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
-        "email": "player2@gmail.com",
+        "email": this.state.email,
         "password": "abc123"
       }), // must match 'Content-Type' header
       headers: {
@@ -38,7 +50,7 @@ class App extends Component {
 
     .then(data => {console.log(data); let token = data.token; return token;})
 
-    .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=3',{
+    .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': token}
     })
@@ -46,9 +58,9 @@ class App extends Component {
 
     .then((findresponse)=>
     {
-      console.log(findresponse.wellness.data)
-      datajson = findresponse.wellness.data
-      dataworkload = findresponse.workload.data
+      console.log(findresponse.wellness)
+      datajson = findresponse.wellness
+      dataworkload = findresponse.training_load
       console.log(datajson)
       console.log(dataworkload)
 
@@ -157,11 +169,12 @@ class App extends Component {
 
         render() {
           console.log(this.state.barData);
-
+          console.log(this.state.email);
+          console.log(this.state.value);
           if (this.state.login === "true") {
             return(
               <div className="Login">
-              <Login loginState={this.loginState} getData={this.getData}/>
+              <Login getData={this.getData} handleChange = {this.handleChange} handleSubmit = {this.handleSubmit}/>
               </div>
             )
           }

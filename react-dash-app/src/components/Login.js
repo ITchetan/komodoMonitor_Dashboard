@@ -20,16 +20,12 @@ class Login extends Component{
   <p>Hello</p>
     </Row>
     <Row>
-  <Form inline>
+  <Form inline onSubmit={this.props.handleSubmit}>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="exampleEmail" className="mr-sm-2">Email</Label>
           <Input type="email" name="email" id="exampleEmail" placeholder="" />
         </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="examplePassword" className="mr-sm-2">Password</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="" />
-        </FormGroup>
-        <Button id="login" onClick={this.props.getData}>Submit</Button>
+        <Button id="login" value={this.props.value} onChange={this.props.handleChange} onClick={this.props.getData}>Submit</Button>
       </Form>
       </Row>
     </Container>
