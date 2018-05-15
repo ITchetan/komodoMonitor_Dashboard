@@ -61,17 +61,17 @@ class Layout extends Component{
       <Container>
         <Row>
           <Col>
-          <Insight insight="Placeholder" />
+          <Insight insight="Placeholder" insightValue="-15" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" />
+          <Insight insight="Placeholder" insightValue ="20" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" />
+          <Insight insight="Placeholder" insightValue="10" />
           </Col>
         </Row>
       </Container>
