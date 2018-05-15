@@ -130,6 +130,7 @@ class App extends Component {
   componentDidMount(){
     let datajson = {}
     let dataworkload = {}
+    let datainsights = {}
 
     fetch('http://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
@@ -153,11 +154,19 @@ class App extends Component {
 
     .then((findresponse)=>
         {
+          console.log(findresponse)
           console.log(findresponse.wellness.data)
           datajson = findresponse.wellness.data
           dataworkload = findresponse.workload.data
+          datainsights = findresponse.insights.data
+          console.log(datainsights)
           console.log(datajson)
           console.log(dataworkload)
+
+            let insightsArray = [];
+            for (i = 0; i < datainsights.length; i++) {
+              insightsArray.push(datainsights[i]);
+            };
 
              var lbs = [];
              var values = [];
@@ -201,6 +210,9 @@ class App extends Component {
 
 
              this.setState({
+
+               insightsData:
+                 insightsArray,
 
                barData:{
                        labels:lbs,
@@ -272,13 +284,14 @@ class App extends Component {
 
   render() {
     console.log(this.state.barData)
+    console.log(this.state.insightsData)
+
+
 
     return (
       <div className="Wrapper">
-      <div>
-      </div>
       <Header />
-      <Layout barData={this.state.barData} workloadData={this.state.workloadData} rpeData={this.state.rpeData} />
+      <Layout barData={this.state.barData} workloadData={this.state.workloadData} rpeData={this.state.rpeData} insightsData ={this.state.insightsData} />
 
       </div>
     );

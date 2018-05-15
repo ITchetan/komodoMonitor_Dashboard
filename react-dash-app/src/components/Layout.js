@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
 import Insight from './Insight'
-import Navigator from './Navigator'
 import '../App.css';
 
 // Import React components
@@ -14,21 +14,45 @@ class Layout extends Component{
     super(props);
     this.state = {
       // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
-      barData:props.barData,
-      workloadData:props.workloadData,
-      rpeData:props.rpeData
+      barData: props.barData,
+      workloadData: props.workloadData,
+      rpeData: props.rpeData,
+      insightsData: props.insightsData,
+      view: 'home'
     }
   }
+
 
   //chart is drown here
   render()
   {
+    console.log(this.props.insightsData)
+
+    let testText = JSON.stringify(this.props.insightsData)
+
     return (
   <div className="Layout">
   <Container>
     <Row>
       <Col sm={2}>
-        <Navigator />
+      <div className="Navigator">
+        <div style={{ textAlign: 'center' }}>
+          <h4>Summary</h4>
+          <HomeIcon size={72} color="#d40000" />
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h4>Workload</h4>
+          <HeartPulseIcon size={72} color="#C0C0C0" />
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h4>Wellness</h4>
+          <MedicalBagIcon size={72} color="#C0C0C0" />
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <h4>RPE</h4>
+          <RunFastIcon size={72} color="#C0C0C0" />
+        </div>
+      </div>
       </Col>
       <Col sm={6}>
       <Card>
@@ -40,17 +64,17 @@ class Layout extends Component{
       <Container>
         <Row>
           <Col>
-          <Insight insight="You need 15% more sleep" />
+          <Insight insight="Placeholder" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Decrease running distance by 10%" />
+          <Insight insight="Placeholder" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Improve your nutrition" />
+          <Insight insight="Placeholder" />
           </Col>
         </Row>
       </Container>

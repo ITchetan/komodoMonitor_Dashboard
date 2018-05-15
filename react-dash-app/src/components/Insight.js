@@ -4,7 +4,7 @@ import '../App.css';
 
 const Insight = (props) => (
   <div className="Insight">
-  <Card>
+  <Card color="#d40000" font-color="#fff">
     <CardHeader>{props.insight}</CardHeader>
   </Card>
   </div>

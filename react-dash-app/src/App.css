@@ -2,6 +2,18 @@
   padding: 20px;
   }
 
+
+.Insights {
+  border-color: #d40000;
+  border-width: medium
+  color: #fff;
+}
+
+.InsightValues {
+  font-weight: bold;
+  font-size: 3em;
+}
+
 .card-default {
   border-color: #d40000;
   border-width: medium;
