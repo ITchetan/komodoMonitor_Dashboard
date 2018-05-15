@@ -26,10 +26,7 @@ class Layout extends Component{
   //chart is drown here
   render()
   {
-    console.log(this.props.insightsData)
-
-    let testText = JSON.stringify(this.props.insightsData)
-
+    console.log(this.props.workloadData);
     return (
   <div className="Layout">
   <Container>
