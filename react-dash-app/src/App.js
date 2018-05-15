@@ -35,6 +35,7 @@ class App extends Component {
     this.setState({ login: "false"})
     let datajson = {}
     let dataworkload = {}
+    let datainsights = {}
 
     fetch('http://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({

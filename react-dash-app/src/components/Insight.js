@@ -3,9 +3,12 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import '../App.css';
 
 const Insight = (props) => (
-  <div className="Insight">
-  <Card>
-    <CardHeader>{props.insight}</CardHeader>
+  <div>
+  <div className="InsightValue">
+  {props.insightValue}
+  </div>
+  <Card className="Insights">
+    <CardBody>{props.insight}</CardBody>
   </Card>
   </div>
 );

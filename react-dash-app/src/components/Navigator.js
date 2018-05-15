@@ -19,7 +19,7 @@ class Navigator extends Component{
   render()
   {
     return (
-    <div>
+    <div className="Navigator">
       <div style={{ textAlign: 'center' }}>
         <h4>Summary</h4>
         <HomeIcon size={72} color="#d40000" />
