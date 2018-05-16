@@ -51,7 +51,8 @@ class Layout extends Component{
         </div>
       </div>
       </Col>
-      <Col sm={6} className="align-self-center">
+      <Col sm={6} className="align-self-center text-center">
+        <h3>Welcome back, John Doe</h3>
         <GaugeChart />
       </Col>
       <Col sm={4}>

@@ -5,7 +5,7 @@ class GaugeChart extends Component {
     render() {
         return (
             <div text-align="center">
-                <Gauge value={33} width={300} height={240} label="" />
+                <Gauge value={33} width={400} height={320} label="" />
             </div>
         );
     }
