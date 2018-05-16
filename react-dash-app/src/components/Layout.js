@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
 
@@ -18,7 +19,6 @@ class Layout extends Component{
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
-      view: 'home'
     }
   }
 
@@ -51,27 +51,24 @@ class Layout extends Component{
         </div>
       </div>
       </Col>
-      <Col sm={6}>
-      <Card>
-      <CardHeader>Placeholder text</CardHeader>
-      <CardBody>This is a placeholder</CardBody>
-      </Card>
+      <Col sm={6} className="align-self-center">
+        <GaugeChart />
       </Col>
       <Col sm={4}>
       <Container>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue="-15" />
+          <Insight insight="You should decrease your distance by 15%" insightValue="-15" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue ="20" />
+          <Insight insight="Your should increase your sleep by 20%" insightValue ="20" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue="10" />
+          <Insight insight="Increase your protein intake by 10%" insightValue="10" />
           </Col>
         </Row>
       </Container>
