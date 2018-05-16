@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
 import Insight from './Insight'
 import '../App.css';
@@ -18,15 +18,19 @@ class Layout extends Component{
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
-      view: 'home'
     }
+
   }
+
+
+
 
 
   //chart is drown here
   render()
   {
     console.log(this.props.workloadData);
+    console.log(this.props.view);
     return (
   <div className="Layout">
   <Container>
@@ -35,19 +39,31 @@ class Layout extends Component{
       <div className="Navigator">
         <div style={{ textAlign: 'center' }}>
           <h4>Summary</h4>
-          <HomeIcon size={72} color="#d40000" />
+            {this.props.view === "home" &&
+          <HomeIcon size={72} color= '#d40000' />}
+            {this.props.view !== "home" &&
+          <a onClick={this.props.changeHome}><HomeIcon size={72} color="#C0C0C0" /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
           <h4>Workload</h4>
-          <HeartPulseIcon size={72} color="#C0C0C0" />
+          {this.props.view === "workload" &&
+          <HeartPulseIcon size={72} color="#d40000" />}
+          {this.props.view !== "workload" &&
+          <a onClick={this.props.changeWorkload}><HeartPulseIcon size={72} color="#C0C0C0" /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
           <h4>Wellness</h4>
-          <MedicalBagIcon size={72} color="#C0C0C0" />
+          {this.props.view === "wellness" &&
+          <MedicalBagIcon size={72} color="#d40000" />}
+          {this.props.view !== "wellness" &&
+          <a onClick={this.props.changeWellness}><MedicalBagIcon size={72} color="#C0C0C0" /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
           <h4>RPE</h4>
-          <RunFastIcon size={72} color="#C0C0C0" />
+          {this.props.view === "rpe" &&
+          <RunFastIcon size={72} color="#d40000" />}
+          {this.props.view !== "rpe" &&
+          <a onClick={this.props.changeRpe}><RunFastIcon size={72} color="#C0C0C0" /></a>}
         </div>
       </div>
       </Col>
