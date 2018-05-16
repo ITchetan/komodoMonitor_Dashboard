@@ -8,6 +8,7 @@ import Login from "./components/Login";
 class App extends Component {
   constructor(){
     super();
+    //setting initial state of the react app
     this.state = {
       value: "",
       email: "player2@gmail.com",
@@ -16,12 +17,34 @@ class App extends Component {
       barData:{},
       chartData:{},
       output: {},
+      view: 'home',
     };
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeHome = this.changeHome.bind(this);
+    this.changeWorkload = this.changeWorkload.bind(this);
+    this.changeWellness = this.changeWellness.bind(this);
+    this.changeRpe = this.changeRpe.bind(this);
 
   }
+//functions to change the state of the page
+  changeHome(){
+    this.setState({ view: 'home' })
+  }
+
+  changeWorkload(){
+    this.setState({ view: 'workload'})
+  }
+
+  changeWellness(){
+    this.setState({ view: 'wellness'})
+  }
+
+  changeRpe(){
+    this.setState({ view: 'rpe'})
+  }
+
 
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -30,7 +53,7 @@ class App extends Component {
   handleSubmit(event) {
     this.setState({ email: this.state.value })
   }
-
+//function to fetch data from api and handle the data
   getData(){
     this.setState({ login: "false"})
     let datajson = {}
@@ -185,7 +208,16 @@ class App extends Component {
             <div>
             </div>
             <Header />
-            <Layout barData={this.state.barData} workloadData={this.state.workloadData} rpeData={this.state.rpeData} />
+            <Layout
+            barData={this.state.barData}
+            workloadData={this.state.workloadData}
+            rpeData={this.state.rpeData}
+            view={this.state.view}
+            changeHome={this.changeHome}
+            changeWorkload={this.changeWorkload}
+            changeWellness={this.changeWellness}
+            changeRpe={this.changeRpe}
+            />
 
             </div>
           );
