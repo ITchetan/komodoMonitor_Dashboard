@@ -16,7 +16,8 @@ class App extends Component {
       login: "true",
       barData:{},
       chartData:{},
-      output: {},
+      insightsDescriptionData: {},
+
       view: 'home',
     };
     this.getData = this.getData.bind(this);
@@ -85,6 +86,7 @@ class App extends Component {
       console.log(findresponse.wellness)
       datajson = findresponse.wellness
       dataworkload = findresponse.training_load
+      datainsights = findresponse.insights
       console.log(datajson)
       console.log(dataworkload)
 
@@ -96,6 +98,17 @@ class App extends Component {
       }
       console.log(lbs)
       console.log(values)
+
+      var insightsType = [];
+      var insightsDescription = [];
+      var insightsValue = [];
+
+      for (var i = 0; i < datainsights.length; i++) {
+        var dict = datainsights[i];
+        for (var key in dict) {
+          if (key === 'description') {
+            insightsDescription.push(dict[key]);
+          }}}
 
       var workload_lbl = [];
       var workload_score = [];
@@ -130,6 +143,8 @@ class App extends Component {
 
 
       this.setState({
+
+        insightsDescriptionData: insightsDescription,
 
         barData:{
           labels:lbs,
@@ -217,6 +232,7 @@ class App extends Component {
             changeWorkload={this.changeWorkload}
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
+            insightsDescriptionData={this.state.insightsDescriptionData}
             />
 
             </div>

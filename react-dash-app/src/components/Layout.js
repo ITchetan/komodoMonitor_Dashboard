@@ -4,6 +4,8 @@ import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
+import BarChart from './wellnessChart'
+import WorkloadChart from './workloadChart'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -30,7 +32,7 @@ class Layout extends Component{
   //chart is drown here
   render()
   {
-    console.log(this.props.workloadData);
+    console.log(this.props.insightsDescriptionData[0]);
     console.log(this.props.view);
     return (
   <div className="Layout">
@@ -68,15 +70,27 @@ class Layout extends Component{
         </div>
       </div>
       </Col>
+
       <Col sm={6} className="align-self-center text-center">
         <h3>Welcome back, John Doe</h3>
         <GaugeChart />
+      {this.props.view === "wellness" &&
+      <Card>
+      <CardHeader><h4>Wellness</h4></CardHeader>
+      <CardBody><BarChart barData={this.props.barData}/></CardBody>
+      </Card>}
+      {this.props.view === "workload" &&
+      <Card>
+      <CardHeader><h4>Workload</h4></CardHeader>
+      <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
+      </Card>}
+
       </Col>
       <Col sm={4}>
       <Container>
         <Row>
           <Col>
-          <Insight insight="You should decrease your distance by 15%" insightValue="-15" />
+          <Insight insight={this.props.insightsDescriptionData[0]} insightValue="-15" />
           </Col>
         </Row>
         <Row>
