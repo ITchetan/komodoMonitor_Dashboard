@@ -3,6 +3,8 @@ import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactst
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
 import Insight from './Insight'
 import '../App.css';
+import BarChart from './wellnessChart'
+import WorkloadChart from './workloadChart'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -29,7 +31,7 @@ class Layout extends Component{
   //chart is drown here
   render()
   {
-    console.log(this.props.workloadData);
+    console.log(this.props.insightsDescriptionData[0]);
     console.log(this.props.view);
     return (
   <div className="Layout">
@@ -68,16 +70,24 @@ class Layout extends Component{
       </div>
       </Col>
       <Col sm={6}>
+
+      {this.props.view === "wellness" &&
       <Card>
-      <CardHeader>Placeholder text</CardHeader>
-      <CardBody>This is a placeholder</CardBody>
-      </Card>
+      <CardHeader><h4>Wellness</h4></CardHeader>
+      <CardBody><BarChart barData={this.props.barData}/></CardBody>
+      </Card>}
+      {this.props.view === "workload" &&
+      <Card>
+      <CardHeader><h4>Workload</h4></CardHeader>
+      <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
+      </Card>}
+
       </Col>
       <Col sm={4}>
       <Container>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue="-15" />
+          <Insight insight={this.props.insightsDescriptionData[0]} insightValue="-15" />
           </Col>
         </Row>
         <Row>
