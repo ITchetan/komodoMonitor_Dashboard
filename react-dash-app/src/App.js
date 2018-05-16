@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
+import ModalFormWellness from './components/ModalFormWellness'
 
 // Main function to display content
 class App extends Component {
@@ -96,8 +97,8 @@ class App extends Component {
         lbs.push(x);
         values.push(datajson[x]);
       }
-      console.log(lbs)
-      console.log(values)
+      values.pop();
+      lbs.pop();
 
       var insightsType = [];
       var insightsDescription = [];
@@ -138,9 +139,6 @@ class App extends Component {
       console.log(workload_score)
       console.log(workload_target_min)
       console.log(workload_target_max)
-
-
-
 
       this.setState({
 
@@ -234,6 +232,7 @@ class App extends Component {
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
             />
+            <ModalFormWellness profileName = " Chris"/>
 
             </div>
           );
