@@ -73,7 +73,8 @@ class Layout extends Component{
 
       <Col sm={6} className="align-self-center text-center Column">
         <h3>Welcome back, John Doe</h3>
-        <GaugeChart />
+      {this.props.view === "home" &&
+        <GaugeChart />}
       {this.props.view === "wellness" &&
       <Card>
       <CardHeader><h4>Wellness</h4></CardHeader>
