@@ -38,7 +38,9 @@ class BarChart extends Component{
             scales: {
               xAxes: [{
                   ticks: {
-                      min: 0
+                      stepSize: 1,
+                      min: 0,
+                      suggestedMax: 5
                   }
               }]
             }
