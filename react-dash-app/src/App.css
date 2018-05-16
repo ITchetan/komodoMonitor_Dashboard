@@ -1,7 +1,15 @@
 .Wrapper {
-  padding: 20px;
+  padding: 0px;
+  background-color: #DCDCDC;
   }
 
+.Header {
+  background-color: #fff;
+}
+
+.Column {
+  background-color: #fff;
+}
 
 .Insights {
   border-color: #d40000;
@@ -90,4 +98,9 @@
     position: relative;
     top: 3px;
     left: -3px
+}
+
+.mdi-icon:hover {
+  fill: #d40000;
+  cursor: pointer;
 }

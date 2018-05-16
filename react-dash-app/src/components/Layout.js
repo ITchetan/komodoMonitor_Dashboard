@@ -38,40 +38,40 @@ class Layout extends Component{
   <div className="Layout">
   <Container>
     <Row>
-      <Col sm={2}>
+      <Col sm={2} className="Column">
       <div className="Navigator">
         <div style={{ textAlign: 'center' }}>
-          <h4>Summary</h4>
+          <h5>Summary</h5>
             {this.props.view === "home" &&
-          <HomeIcon size={72} color= '#d40000' />}
+          <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
-          <a onClick={this.props.changeHome}><HomeIcon size={72} color="#C0C0C0" /></a>}
+          <a onClick={this.props.changeHome}><HomeIcon size={62} color="#C0C0C0"  /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h4>Workload</h4>
+          <h4>Training Load</h4>
           {this.props.view === "workload" &&
           <HeartPulseIcon size={72} color="#d40000" />}
           {this.props.view !== "workload" &&
-          <a onClick={this.props.changeWorkload}><HeartPulseIcon size={72} color="#C0C0C0" /></a>}
+          <a onClick={this.props.changeWorkload}><HeartPulseIcon size={72} color="#C0C0C0" className="icon" /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
           <h4>Wellness</h4>
           {this.props.view === "wellness" &&
           <MedicalBagIcon size={72} color="#d40000" />}
           {this.props.view !== "wellness" &&
-          <a onClick={this.props.changeWellness}><MedicalBagIcon size={72} color="#C0C0C0" /></a>}
+          <a onClick={this.props.changeWellness}><MedicalBagIcon size={72} color="#C0C0C0"  /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
           <h4>RPE</h4>
           {this.props.view === "rpe" &&
           <RunFastIcon size={72} color="#d40000" />}
           {this.props.view !== "rpe" &&
-          <a onClick={this.props.changeRpe}><RunFastIcon size={72} color="#C0C0C0" /></a>}
+          <a onClick={this.props.changeRpe}><RunFastIcon size={72} color="#C0C0C0"  /></a>}
         </div>
       </div>
       </Col>
 
-      <Col sm={6} className="align-self-center text-center">
+      <Col sm={6} className="align-self-center text-center Column">
         <h3>Welcome back, John Doe</h3>
         <GaugeChart />
       {this.props.view === "wellness" &&
@@ -86,7 +86,7 @@ class Layout extends Component{
       </Card>}
 
       </Col>
-      <Col sm={4}>
+      <Col sm={4} className="Column">
       <Container>
         <Row>
           <Col>
@@ -95,12 +95,12 @@ class Layout extends Component{
         </Row>
         <Row>
           <Col>
-          <Insight insight="Your should increase your sleep by 20%" insightValue ="20" />
+          <Insight insight={this.props.insightsDescriptionData[1]} insightValue ="20" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Increase your protein intake by 10%" insightValue="10" />
+          <Insight insight={this.props.insightsDescriptionData[2]} insightValue="10" />
           </Col>
         </Row>
       </Container>
