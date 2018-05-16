@@ -11,7 +11,7 @@ class BarChart extends Component{
 
   static defaultProps =
   {
-    displayTitle:true,
+    displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
   }

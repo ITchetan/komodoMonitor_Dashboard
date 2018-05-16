@@ -6,6 +6,7 @@ import Insight from './Insight'
 import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
+import RpeChart from './rpeChart'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -84,6 +85,11 @@ class Layout extends Component{
       <Card>
       <CardHeader><h4>Workload</h4></CardHeader>
       <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
+      </Card>}
+      {this.props.view === "rpe" &&
+      <Card>
+      <CardHeader><h4>RPE</h4></CardHeader>
+      <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
       </Card>}
 
       </Col>
