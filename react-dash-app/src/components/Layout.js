@@ -90,17 +90,17 @@ class Layout extends Component{
       <Container>
         <Row>
           <Col>
-          <Insight insight={this.props.insightsDescriptionData[0]} insightValue="-15" />
+          <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight={this.props.insightsDescriptionData[1]} insightValue ="20" />
+          <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight={this.props.insightsDescriptionData[2]} insightValue="10" />
+          <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
           </Col>
         </Row>
       </Container>
