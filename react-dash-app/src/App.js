@@ -17,6 +17,11 @@ class App extends Component {
       barData:{},
       chartData:{},
       insightsDescriptionData: {},
+      insightsValueData: {},
+      tokenData: {},
+      playerIdData: {},
+      playerfirstData: {},
+      playerLastData: {},
 
       view: 'home',
     };
@@ -73,11 +78,48 @@ class App extends Component {
     })
     .then(response => response.json())
 
-    .then(data => {console.log(data); let token = data.token; return token;})
+    .then(data => this.setState({tokenData: data.token}))
+
+
+    .then(token => {fetch('http://app.komodomonitr.com/api/v1/players',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
+    })
+      .then(userResponse => userResponse.json())
+
+      .then((findUserResponse) =>{
+        console.log(findUserResponse)
+        let dataPlayer = findUserResponse
+
+        var playerId = [];
+        var playerFirst = [];
+        var playerLast = [];
+
+        for (var i = 0; i < dataPlayer.length; i++) {
+          var dict = dataPlayer[i];
+          for (var key in dict) {
+            if (key === 'user_id') {
+              playerId.push(dict[key]);
+            }
+            else if (key === 'fname') {
+              playerFirst.push(dict[key]);
+            }
+            else if (key === 'lname'){
+              playerLast.push(dict[key]);
+            }}}
+            
+          this.setState({
+
+            playerIdData: playerId,
+            playerFirstData: playerFirst,
+            playerLastData: playerLast,
+
+          })
+      })})
 
     .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
       method: 'get',
-      headers: {'X-Auth-Token': token}
+      headers: {'X-Auth-Token': this.state.tokenData}
     })
     .then(response => response.json())
 
@@ -108,6 +150,9 @@ class App extends Component {
         for (var key in dict) {
           if (key === 'description') {
             insightsDescription.push(dict[key]);
+          }
+          else if (key === 'value'){
+            insightsValue.push(dict[key]);
           }}}
 
       var workload_lbl = [];
@@ -144,7 +189,9 @@ class App extends Component {
 
       this.setState({
 
+
         insightsDescriptionData: insightsDescription,
+        insightsValueData: insightsValue,
 
         barData:{
           labels:lbs,
@@ -207,7 +254,7 @@ class App extends Component {
         }
 
         render() {
-          console.log(this.state.barData);
+          console.log(this.state.playerIdData);
           console.log(this.state.email);
           console.log(this.state.value);
           if (this.state.login === "true") {
@@ -233,6 +280,7 @@ class App extends Component {
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
+            insightsValueData={this.state.insightsValueData}
             />
 
             </div>
