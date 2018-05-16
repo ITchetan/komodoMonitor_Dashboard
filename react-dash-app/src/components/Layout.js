@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
 import BarChart from './wellnessChart'
@@ -69,8 +70,10 @@ class Layout extends Component{
         </div>
       </div>
       </Col>
-      <Col sm={6}>
 
+      <Col sm={6} className="align-self-center text-center">
+        <h3>Welcome back, John Doe</h3>
+        <GaugeChart />
       {this.props.view === "wellness" &&
       <Card>
       <CardHeader><h4>Wellness</h4></CardHeader>
@@ -92,12 +95,12 @@ class Layout extends Component{
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue ="20" />
+          <Insight insight="Your should increase your sleep by 20%" insightValue ="20" />
           </Col>
         </Row>
         <Row>
           <Col>
-          <Insight insight="Placeholder" insightValue="10" />
+          <Insight insight="Increase your protein intake by 10%" insightValue="10" />
           </Col>
         </Row>
       </Container>
