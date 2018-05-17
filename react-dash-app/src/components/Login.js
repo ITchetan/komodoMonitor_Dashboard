@@ -53,6 +53,7 @@ class Login extends Component{
                      />
             <input type="submit" />
           </form>
+          <button onClick={this.props.skipLogin} />
       </Row>
     </Container>
   </div>

@@ -31,6 +31,7 @@ class App extends Component {
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
     this.getEmail = this.getEmail.bind(this);
+    this.skipLogin = this.skipLogin.bind(this);
 
   }
 //functions to change the state of the page
@@ -56,6 +57,13 @@ class App extends Component {
     this.setState({ login: "false"})
     this.getData(emailData, passwordData);
   };
+
+  skipLogin() {
+    this.setState({ login: "false" })
+    let emailData = "player2@gmail.com"
+    let passwordData = "abc123"
+    this.getData(emailData, passwordData);
+  }
 
 //function to fetch data from api and handle the data
   getData(email, password){
@@ -254,7 +262,7 @@ class App extends Component {
           if (this.state.login === "true") {
             return(
               <div className="Login">
-              <Login handlerEmail={this.getEmail} getData={this.getData} />
+              <Login handlerEmail={this.getEmail} skipLogin={this.skipLogin}  />
               </div>
             )
           }
