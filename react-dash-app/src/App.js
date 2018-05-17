@@ -5,6 +5,9 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness'
 
+
+
+
 // Main function to display content
 class App extends Component {
   constructor(){
@@ -18,6 +21,11 @@ class App extends Component {
       barData:{},
       chartData:{},
       insightsDescriptionData: {},
+      insightsValueData: {},
+      tokenData: {},
+      playerIdData: {},
+      playerfirstData: {},
+      playerLastData: {},
 
       view: 'home',
     };
@@ -74,11 +82,48 @@ class App extends Component {
     })
     .then(response => response.json())
 
-    .then(data => {console.log(data); let token = data.token; return token;})
+    .then(data => this.setState({tokenData: data.token}))
+
+
+    .then(token => {fetch('http://app.komodomonitr.com/api/v1/players',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
+    })
+      .then(userResponse => userResponse.json())
+
+      .then((findUserResponse) =>{
+        console.log(findUserResponse)
+        let dataPlayer = findUserResponse
+
+        var playerId = [];
+        var playerFirst = [];
+        var playerLast = [];
+
+        for (var i = 0; i < dataPlayer.length; i++) {
+          var dict = dataPlayer[i];
+          for (var key in dict) {
+            if (key === 'user_id') {
+              playerId.push(dict[key]);
+            }
+            else if (key === 'fname') {
+              playerFirst.push(dict[key]);
+            }
+            else if (key === 'lname'){
+              playerLast.push(dict[key]);
+            }}}
+
+          this.setState({
+
+            playerIdData: playerId,
+            playerFirstData: playerFirst,
+            playerLastData: playerLast,
+
+          })
+      })})
 
     .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
       method: 'get',
-      headers: {'X-Auth-Token': token}
+      headers: {'X-Auth-Token': this.state.tokenData}
     })
     .then(response => response.json())
 
@@ -90,6 +135,7 @@ class App extends Component {
       datainsights = findresponse.insights
       console.log(datajson)
       console.log(dataworkload)
+      console.log(findresponse)
 
       var lbs = [];
       var values = [];
@@ -109,6 +155,9 @@ class App extends Component {
         for (var key in dict) {
           if (key === 'description') {
             insightsDescription.push(dict[key]);
+          }
+          else if (key === 'value'){
+            insightsValue.push(dict[key]);
           }}}
 
       var workload_lbl = [];
@@ -140,38 +189,71 @@ class App extends Component {
       console.log(workload_target_min)
       console.log(workload_target_max)
 
+      var bar_colour = [];
+      for (var i = 0; i < values.length; i++) {
+
+        if (values[i]===1 || values[i]===2 || values[i]===3) {
+          bar_colour.push('#2dc937')
+        }
+        else if (values[i] === 4) {
+          bar_colour.push('#e7b416')
+        }
+        else if (values[i]===5) {
+          bar_colour.push('#cc3232')
+        }
+
+      }
+      console.log(bar_colour)
+
+
       this.setState({
 
+
         insightsDescriptionData: insightsDescription,
+        insightsValueData: insightsValue,
 
         barData:{
           labels:lbs,
-          datasets:[{data:values,}]
+
+          datasets:[{data:values,
+            backgroundColor: bar_colour,
+
+      }]
+
+
+
 
         },
 
         workloadData:{
-          labels: workload_lbl,
+          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
           datasets:[{
             label: "Min Target",
-            data: workload_target_min,
+            //data: workload_target_min,
+            data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
             lineTension: 0.3,
             fill: 0,
             backgroundColor:'#ABEBC6'},
             {
               label: "Score",
-              data: workload_score,
+              //data: workload_score,
+              data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
               lineTension: 0.3,
               borderColor: 'red',
               fill: false,},
               {
                 label: "Max Target",
-                data: workload_target_max,
+                //data: workload_target_max,
+                data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
                 lineTension: 0.3,
                 fill: 0,
                 backgroundColor:'#ABEBC6'}
 
-              ]},
+              ],
+
+
+
+            },
 
               // Data for rpe Chart
               rpeData:{
@@ -205,7 +287,7 @@ class App extends Component {
         }
 
         render() {
-          console.log(this.state.barData);
+          console.log(this.state.playerIdData);
           console.log(this.state.email);
           console.log(this.state.value);
           if (this.state.login === "true") {
@@ -231,6 +313,7 @@ class App extends Component {
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
+            insightsValueData={this.state.insightsValueData}
             />
             <ModalFormWellness profileName = " Chris"/>
 
