@@ -15,7 +15,7 @@ class App extends Component {
     //setting initial state of the react app
     this.state = {
       value: "",
-      email: "player2@gmail.com",
+      email: "",
       password: "",
       login: "true",
       barData:{},
@@ -26,16 +26,15 @@ class App extends Component {
       playerIdData: {},
       playerfirstData: {},
       playerLastData: {},
-
       view: 'home',
     };
     this.getData = this.getData.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.changeHome = this.changeHome.bind(this);
     this.changeWorkload = this.changeWorkload.bind(this);
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
+    this.getEmail = this.getEmail.bind(this);
+    this.skipLogin = this.skipLogin.bind(this);
 
   }
 //functions to change the state of the page
@@ -55,25 +54,31 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    this.setState({ email: this.state.value })
-  }
-//function to fetch data from api and handle the data
-  getData(){
+  getEmail(emailData, passwordData){
+    this.setState({ email: emailData })
+    this.setState({ password: passwordData})
     this.setState({ login: "false"})
+    this.getData(emailData, passwordData);
+  };
+
+  skipLogin() {
+    this.setState({ login: "false" })
+    let emailData = "player2@gmail.com"
+    let passwordData = "abc123"
+    this.getData(emailData, passwordData);
+  }
+
+//function to fetch data from api and handle the data
+  getData(email, password){
+    // this.setState({ login: "false"})
     let datajson = {}
     let dataworkload = {}
     let datainsights = {}
 
     fetch('http://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
-        "email": this.state.email,
-        "password": "abc123"
+        "email": email,
+        "password": password
       }), // must match 'Content-Type' header
       headers: {
         'content-type': 'application/json'
@@ -288,15 +293,14 @@ class App extends Component {
         render() {
           console.log(this.state.playerIdData);
           console.log(this.state.email);
-          console.log(this.state.value);
           if (this.state.login === "true") {
             return(
               <div className="Login">
-              <Login getData={this.getData} handleChange = {this.handleChange} handleSubmit = {this.handleSubmit}/>
+              <Login handlerEmail={this.getEmail} skipLogin={this.skipLogin}  />
               </div>
             )
           }
-
+          else if (this.state.login === "false") {
           return (
             <div>
             <Header />
@@ -317,6 +321,7 @@ class App extends Component {
             </div>
           );
         }
+      }
       }
 
       export default App;
