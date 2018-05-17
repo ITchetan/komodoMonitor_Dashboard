@@ -1,15 +1,33 @@
 .Wrapper {
-  padding: 0px;
-  background-color: #DCDCDC;
+  background-color: #f5f5f5;
   }
 
 .Header {
-  background-color: #fff;
+  background-color: #dcdcdc;
 }
 
 .Column {
   background-color: #fff;
+  border: outset;
+  border-color: #000000;
+  border-width: thin;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px #808080;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
+
+.BrandName {
+  font-size: 2em;
+  font-weight: 550;
+}
+
+.SubBrand {
+  color: #d40000;
+  font-size: 1.2em;
+  font-weight: 550;
+}
+
 
 .Insights {
   border-color: #d40000;

@@ -37,83 +37,90 @@ class Layout extends Component{
     console.log(this.props.view);
     return (
   <div className="Layout">
-  <Container>
-    <Row>
-      <Col sm={2} className="Column">
-      <div className="Navigator">
+  <Container fluid={false}>
+    <Row>&nbsp;</Row>
+    <Row className="d-flex">
+      <Col sm={2} className="d-flex">
+        <Col className="Column">
         <div style={{ textAlign: 'center' }}>
           <h5>Summary</h5>
             {this.props.view === "home" &&
           <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
-          <a onClick={this.props.changeHome}><HomeIcon size={62} color="#C0C0C0"  /></a>}
+          <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h4>Training Load</h4>
+          <h5>Training Load</h5>
           {this.props.view === "workload" &&
-          <HeartPulseIcon size={72} color="#d40000" />}
+          <HeartPulseIcon size={60} color="#d40000" />}
           {this.props.view !== "workload" &&
-          <a onClick={this.props.changeWorkload}><HeartPulseIcon size={72} color="#C0C0C0" className="icon" /></a>}
+          <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h4>Wellness</h4>
+          <h5>Wellness</h5>
           {this.props.view === "wellness" &&
-          <MedicalBagIcon size={72} color="#d40000" />}
+          <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
-          <a onClick={this.props.changeWellness}><MedicalBagIcon size={72} color="#C0C0C0"  /></a>}
+          <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h4>RPE</h4>
+          <h5>RPE Load</h5>
           {this.props.view === "rpe" &&
-          <RunFastIcon size={72} color="#d40000" />}
+          <RunFastIcon size={60} color="#d40000" />}
           {this.props.view !== "rpe" &&
-          <a onClick={this.props.changeRpe}><RunFastIcon size={72} color="#C0C0C0"  /></a>}
+          <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
         </div>
-      </div>
+        </Col>
       </Col>
 
-      <Col sm={6} className="align-self-center text-center Column">
-        <h3>Welcome back, John Doe</h3>
-      {this.props.view === "home" &&
-        <GaugeChart />}
-      {this.props.view === "wellness" &&
-      <Card>
-      <CardHeader><h4>Wellness</h4></CardHeader>
-      <CardBody><BarChart barData={this.props.barData}/></CardBody>
-      </Card>}
-      {this.props.view === "workload" &&
-      <Card>
-      <CardHeader><h4>Workload</h4></CardHeader>
-      <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
-      </Card>}
-      {this.props.view === "rpe" &&
-      <Card>
-      <CardHeader><h4>RPE</h4></CardHeader>
-      <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
-      </Card>}
-
+      <Col sm={6} className="d-flex">
+        <Col className="text-center Column">
+          {this.props.view === "home" &&
+            <div>
+              <h3>Welcome back, John Doe</h3>
+              <h4>Your Komodo Number is 33</h4>
+              <p>&nbsp;</p>
+              <GaugeChart />
+            </div>}
+          {this.props.view === "wellness" &&
+            <Card>
+            <CardHeader><h4>Wellness</h4></CardHeader>
+            <CardBody><BarChart barData={this.props.barData}/></CardBody>
+            </Card>}
+          {this.props.view === "workload" &&
+            <Card>
+            <CardHeader><h4>Workload</h4></CardHeader>
+            <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
+            </Card>}
+           {this.props.view === "rpe" &&
+            <Card>
+            <CardHeader><h4>RPE</h4></CardHeader>
+            <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
+            </Card>}
+        </Col>
       </Col>
-      <Col sm={4} className="Column">
-      <Container>
-        <Row>
-          <Col>
-          <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
-          </Col>
-        </Row>
-      </Container>
+      <Col sm={4} className="d-flex">
+        <Col className="Column">
+          <Row>
+            <Col>
+            <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+            <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+            <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
+            </Col>
+          </Row>
+        </Col>
       </Col>
     </Row>
     </Container>
+
     </div>
   );
 }
