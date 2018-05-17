@@ -50,14 +50,15 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-  getEmail(emailData){
+  getEmail(emailData, passwordData){
     this.setState({ email: emailData })
+    this.setState({ password: passwordData})
     this.setState({ login: "false"})
-    this.getData(emailData);
+    this.getData(emailData, passwordData);
   };
 
 //function to fetch data from api and handle the data
-  getData(email){
+  getData(email, password){
     // this.setState({ login: "false"})
     let datajson = {}
     let dataworkload = {}
@@ -66,7 +67,7 @@ class App extends Component {
     fetch('http://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
         "email": email,
-        "password": "abc123"
+        "password": password
       }), // must match 'Content-Type' header
       headers: {
         'content-type': 'application/json'

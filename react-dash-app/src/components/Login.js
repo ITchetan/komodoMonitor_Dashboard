@@ -6,22 +6,28 @@ class Login extends Component{
   constructor(props){
     super(props);
     this.state = {
-      inputField: ''
+      inputField: '',
+      passField: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.handlePassChange = this.handlePassChange.bind(this);
   }
 
   submitHandler(evt) {
     evt.preventDefault();
-    this.props.handlerEmail(this.state.inputField);
+    this.props.handlerEmail(this.state.inputField, this.state.passField);
 
     this.setState({ inputField: '' });
+    this.setState({ passField: ''});
   }
 
     handleChange(event) {
     this.setState({inputField: event.target.value});
   }
+    handlePassChange(event) {
+    this.setState({passField: event.target.value});
+    }
 
 
   //chart is drown here
@@ -38,7 +44,13 @@ class Login extends Component{
             <input type="text"
                    id="theInput"
                    value={this.state.inputField}
-                   onChange={this.handleChange} />
+                   onChange={this.handleChange}
+                    />
+             <input type="text"
+                    id="theInput2"
+                    value={this.state.passField}
+                    onChange={this.handlePassChange}
+                     />
             <input type="submit" />
           </form>
       </Row>
