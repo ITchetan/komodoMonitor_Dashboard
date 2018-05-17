@@ -37,23 +37,38 @@ class Login extends Component{
   <div className="Login">
   <Container>
     <Row>
-  <p>Hello</p>
+    <Col sm={10}>
+        <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
+        <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
+
+    </Col>
     </Row>
     <Row>
+    <Col className="text-center">
+    <h5>Welcome to Komodo Monitr, please Log in</h5>
+    </Col>
+    </Row>
+    <Row>
+    <Col className="text-center">
     <form onSubmit={this.submitHandler}>
+            <p>Email</p>
             <input type="text"
                    id="theInput"
                    value={this.state.inputField}
                    onChange={this.handleChange}
                     />
+              <p>Password</p>
              <input type="text"
                     id="theInput2"
                     value={this.state.passField}
                     onChange={this.handlePassChange}
                      />
+                     <p/>
             <input type="submit" />
           </form>
-          <button onClick={this.props.skipLogin} />
+            </Col>
+          <button onClick={this.props.skipLogin}>
+          </button>
       </Row>
     </Container>
   </div>
