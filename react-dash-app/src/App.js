@@ -135,6 +135,7 @@ class App extends Component {
       datainsights = findresponse.insights
       console.log(datajson)
       console.log(dataworkload)
+      console.log(findresponse)
 
       var lbs = [];
       var values = [];
@@ -188,6 +189,23 @@ class App extends Component {
       console.log(workload_target_min)
       console.log(workload_target_max)
 
+      var bar_colour = [];
+      for (var i = 0; i < values.length; i++) {
+
+        if (values[i]===1 || values[i]===2 || values[i]===3) {
+          bar_colour.push('#2dc937')
+        }
+        else if (values[i] === 4) {
+          bar_colour.push('#e7b416')
+        }
+        else if (values[i]===5) {
+          bar_colour.push('#cc3232')
+        }
+
+      }
+      console.log(bar_colour)
+
+
       this.setState({
 
 
@@ -196,9 +214,15 @@ class App extends Component {
 
         barData:{
           labels:lbs,
-          datasets:[{data:values}]
 
-        },
+
+          datasets:[{data:values,
+            backgroundColor: bar_colour,
+
+      }]
+
+
+      },
 
         workloadData:{
           labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
@@ -224,7 +248,11 @@ class App extends Component {
                 fill: 0,
                 backgroundColor:'#ABEBC6'}
 
-              ]},
+              ],
+
+
+
+            },
 
               // Data for rpe Chart
               rpeData:{
