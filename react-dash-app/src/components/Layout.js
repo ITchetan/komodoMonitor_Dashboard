@@ -77,7 +77,7 @@ class Layout extends Component{
         <Col className="text-center Column">
           {this.props.view === "home" &&
             <div>
-              <h3>Welcome back, John Doe</h3>
+              <h3>Welcome back, Chris</h3>
               <h4>Your Komodo Number is 33</h4>
               <p>&nbsp;</p>
               <GaugeChart />
