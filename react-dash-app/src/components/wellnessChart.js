@@ -14,7 +14,7 @@ class BarChart extends Component{
     displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
-    backgroundColor: 'green'
+    
   }
 
   render()
