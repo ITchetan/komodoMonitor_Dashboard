@@ -298,9 +298,7 @@ class App extends Component {
           }
 
           return (
-            <div className="Wrapper">
             <div>
-            </div>
             <Header />
             <Layout
             barData={this.state.barData}
