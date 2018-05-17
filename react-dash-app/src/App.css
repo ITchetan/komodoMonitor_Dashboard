@@ -43,6 +43,10 @@
   text-align: center;
 }
 
+.SmallText {
+  font-size: 0.8em;
+}
+
 .card-default {
   border-color: #d40000;
   border-width: medium;
