@@ -5,6 +5,9 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness'
 
+
+
+
 // Main function to display content
 class App extends Component {
   constructor(){
@@ -108,7 +111,7 @@ class App extends Component {
             else if (key === 'lname'){
               playerLast.push(dict[key]);
             }}}
-            
+
           this.setState({
 
             playerIdData: playerId,
@@ -193,27 +196,30 @@ class App extends Component {
 
         barData:{
           labels:lbs,
-          datasets:[{data:values,}]
+          datasets:[{data:values}]
 
         },
 
         workloadData:{
-          labels: workload_lbl,
+          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
           datasets:[{
             label: "Min Target",
-            data: workload_target_min,
+            //data: workload_target_min,
+            data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
             lineTension: 0.3,
             fill: 0,
             backgroundColor:'#ABEBC6'},
             {
               label: "Score",
-              data: workload_score,
+              //data: workload_score,
+              data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
               lineTension: 0.3,
               borderColor: 'red',
               fill: false,},
               {
                 label: "Max Target",
-                data: workload_target_max,
+                //data: workload_target_max,
+                data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
                 lineTension: 0.3,
                 fill: 0,
                 backgroundColor:'#ABEBC6'}

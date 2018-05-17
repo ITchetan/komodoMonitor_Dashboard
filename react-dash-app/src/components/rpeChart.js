@@ -21,7 +21,7 @@ class RpeChart extends Component{
             data={this.props.rpeData}
             options={{
               title:{
-                display:true,
+                display:false,
                 text:'RPE',
 
                 fontSize:25

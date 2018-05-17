@@ -11,9 +11,10 @@ class BarChart extends Component{
 
   static defaultProps =
   {
-    displayTitle:true,
+    displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
+    
   }
 
   render()
@@ -24,6 +25,7 @@ class BarChart extends Component{
         // here we tell chart to look for data in state
           data={this.props.barData}
 
+
           options={{
             title:{
               display:this.props.displayTitle,
@@ -31,6 +33,7 @@ class BarChart extends Component{
 
               fontSize:25
             },
+
             legend:{
               display:this.props.displayLegend,
               position:this.props.legendPosition
@@ -38,7 +41,9 @@ class BarChart extends Component{
             scales: {
               xAxes: [{
                   ticks: {
-                      min: 0
+                      stepSize: 1,
+                      min: 0,
+                      suggestedMax: 5
                   }
               }]
             }
