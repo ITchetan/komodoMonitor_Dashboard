@@ -14,6 +14,7 @@ class BarChart extends Component{
     displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
+    backgroundColor: 'green'
   }
 
   render()
@@ -24,6 +25,7 @@ class BarChart extends Component{
         // here we tell chart to look for data in state
           data={this.props.barData}
 
+
           options={{
             title:{
               display:this.props.displayTitle,
@@ -31,6 +33,7 @@ class BarChart extends Component{
 
               fontSize:25
             },
+
             legend:{
               display:this.props.displayLegend,
               position:this.props.legendPosition
