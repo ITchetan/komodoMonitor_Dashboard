@@ -21,7 +21,7 @@ class WorkloadChart extends Component{
             data={this.props.workloadData}
             options={{
               title:{
-                display:true,
+                display:false,
                 text:'Workload',
 
                 fontSize:25
