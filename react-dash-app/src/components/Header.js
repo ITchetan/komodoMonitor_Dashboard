@@ -1,20 +1,28 @@
 import React from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardBody, CardHeader} from 'reactstrap';
 
 const Header = () => (
+
   <div className="Header">
-  <Grid>
-  <Row>
-  <Col>
-  <Panel>
-    <Panel.Heading>
-      <h1>Komodo Monitr</h1>
-      <h3>John Doe</h3>
-    </Panel.Heading>
-  </Panel>
-  </Col>
-  </Row>
-  </Grid>
+  <Container  >
+
+      <Row>
+
+
+        <Col sm={10}>
+            <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
+            <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
+
+        </Col>
+
+          <Col sm={2}>
+          <button><img src={require('./fakePlayer.jpg')} height="80" width="80" /></button>
+
+          </Col>
+
+      </Row>
+
+  </Container>
   </div>
 );
 
