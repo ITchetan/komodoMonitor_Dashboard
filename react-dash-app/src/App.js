@@ -59,11 +59,9 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-  //receive email and password from login page
   getLogin(emailData, passwordData){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
-    //enter laoding state after user and pass have been received
     this.setState({ page: "loading"})
   };
 
@@ -74,8 +72,6 @@ class App extends Component {
     this.setState({ password: passwordData})
     this.setState({ page: "loading" })
   }
-
-  //recieve fetched data from loading page and set them into current state of app.js
   loadingData(summary, players, wellness, workload, rpe){
     this.setState({ endPointSummary: summary })
     this.setState({ endPointPlayers: players })
@@ -83,14 +79,12 @@ class App extends Component {
     this.setState({ endPointWorkload: workload })
     this.setState({ endPointRpe: rpe })
     this.defineData()
-    //end loading and show main page
     this.setState({ page: "main" })
   }
 
-//take data from the states and configure the data to go into the page as graphs etc...
+
 defineData(){
 
-  //extract player data
   let dataPlayer = this.state.endPointPlayers
   let playerId = [];
   let playerFirst = [];
@@ -109,7 +103,7 @@ defineData(){
         playerLast.push(dict[key]);
       }}}
 
-  //extract wellness summary data
+
   let dataWellness = this.state.endPointSummary.wellness
   let wellnessLabels = [];
   let wellnessValues = [];
@@ -120,7 +114,6 @@ defineData(){
   wellnessValues.pop();
   wellnessLabels.pop();
 
-  //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
   let insightsType = [];
   let insightsDescription = [];
@@ -165,7 +158,6 @@ defineData(){
   // console.log(workload_target_min)
   // console.log(workload_target_max)
   //
-
   let bar_colour = [];
   for (let i = 0; i < wellnessValues.length; i++) {
 
@@ -193,9 +185,14 @@ defineData(){
 
     barData:{
       labels:wellnessLabels,
+
+
       datasets:[{data:wellnessValues,
-      backgroundColor: bar_colour,
-    }]
+        backgroundColor: bar_colour,
+
+  }]
+
+
   },
 
     // workloadData:{
@@ -257,6 +254,8 @@ defineData(){
 }
 
         render() {
+          console.log(this.state.dataWellness);
+          console.log(this.state.email);
           if (this.state.page === "login") {
             return(
               <div className="Login">
