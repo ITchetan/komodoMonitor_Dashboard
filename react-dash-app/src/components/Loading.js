@@ -7,6 +7,9 @@ class Loading extends Component {
       tokenData: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -17,7 +20,10 @@ class Loading extends Component {
   }
 
   endLoadingHandler(){
-    this.props.loadingData(this.state.endPointSummary, this.state.endPointPlayers);
+    this.props.loadingData(this.state.endPointSummary,
+                            this.state.endPointPlayers,
+                            this.state.endPointWellness,
+                            this.state.endPointWorkload,);
   }
 
   getData(email, password){
@@ -43,7 +49,7 @@ class Loading extends Component {
     })
       .then(userResponse => userResponse.json())
 
-      .then((findUserResponse) =>{
+      .then((findUserResponse) => {
         this.setState({ endPointPlayers: findUserResponse })
         })})
 
@@ -51,16 +57,44 @@ class Loading extends Component {
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
     })
-    .then(response => response.json())
+      .then(response => response.json())
 
-    .then((findresponse)=>
-    {
-      this.setState({ endPointSummary: findresponse })
+      .then((summaryResponse)=> {
+        this.setState({ endPointSummary: summaryResponse })
 
+      })})
 
-      this.endLoadingHandler()
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
     })
-  })
+      .then(wellnessResponse => wellnessResponse.json())
+
+      .then((wellnessResponse)=> {
+        this.setState({ endPointWellness: wellnessResponse })
+      })})
+
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=4',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
+    })
+      .then(workloadResponse => workloadResponse.json())
+
+      .then((workloadResponse)=> {
+        this.setState({ endPointWorkload: workloadResponse })
+      })})
+
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=4',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
+    })
+      .then(rpeResponse => rpeResponse.json())
+
+      .then((rpeResponse)=> {
+        this.setState({ endPointRpe: rpeResponse })
+        this.endLoadingHandler()
+      })})
+
 }
 
 render(){
