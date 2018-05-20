@@ -21,11 +21,12 @@ class Loading extends Component {
   }
   //send the state of the endpoints to app.js
   endLoadingHandler(){
-    this.props.loadingData(this.state.endPointSummary,
+    this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
-                            this.state.endPointRpe,);
+                            this.state.endPointRpe,
+                          );
   }
   //fetching all the data from the endpoints and updating the states
   getData(email, password){
@@ -98,7 +99,7 @@ class Loading extends Component {
 
       .then((rpeResponse)=> {
         this.setState({ endPointRpe: rpeResponse })
-      //send the end point states to app.js
+        //send the end point states to app.js
         this.endLoadingHandler()
       })})
 

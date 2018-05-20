@@ -121,20 +121,20 @@ defineData(){
   wellnessLabels.pop();
 
   //extract insights summary data
-  let dataInsights = this.state.endPointSummary.insights
-  let insightsType = [];
-  let insightsDescription = [];
-  let insightsValue = [];
-
-  for (let i = 0; i < dataInsights.length; i++) {
-    var dict = dataInsights[i];
-    for (let key in dict) {
-      if (key === 'description') {
-        insightsDescription.push(dict[key]);
-      }
-      else if (key === 'value'){
-        insightsValue.push(dict[key]);
-      }}}
+  // let dataInsights = this.state.endPointSummary.insights
+  // let insightsType = [];
+  // let insightsDescription = [];
+  // let insightsValue = [];
+  //
+  // for (let i = 0; i < dataInsights.length; i++) {
+  //   var dict = dataInsights[i];
+  //   for (let key in dict) {
+  //     if (key === 'description') {
+  //       insightsDescription.push(dict[key]);
+  //     }
+  //     else if (key === 'value'){
+  //       insightsValue.push(dict[key]);
+  //     }}}
 
   // var workload_lbl = [];
   // var workload_score = [];
@@ -188,8 +188,8 @@ defineData(){
     playerLastData: playerLast,
 
 
-    insightsDescriptionData: insightsDescription,
-    insightsValueData: insightsValue,
+    // insightsDescriptionData: insightsDescription,
+    // insightsValueData: insightsValue,
 
     barData:{
       labels:wellnessLabels,
