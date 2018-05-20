@@ -16,14 +16,16 @@ class Loading extends Component {
   }
 
   componentDidMount(){
+  //get username and password from app.js
     this.getData(this.props.loginEmail, this.props.loginPass);
   }
-
+  //send the state of the endpoints to app.js
   endLoadingHandler(){
     this.props.loadingData(this.state.endPointSummary,
                             this.state.endPointPlayers,
                             this.state.endPointWellness,
-                            this.state.endPointWorkload,);
+                            this.state.endPointWorkload,
+                            this.state.endPointRpe,);
   }
 
   getData(email, password){
