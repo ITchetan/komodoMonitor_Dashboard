@@ -27,9 +27,10 @@ class Loading extends Component {
                             this.state.endPointWorkload,
                             this.state.endPointRpe,);
   }
-
+  //fetching all the data from the endpoints and updating the states
   getData(email, password){
 
+    // login, get the token and set token state
     fetch('https://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
         "email": email,
@@ -44,7 +45,7 @@ class Loading extends Component {
 
     .then(data => this.setState({tokenData: data.token}))
 
-
+    //fetch players endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/players',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
@@ -55,6 +56,7 @@ class Loading extends Component {
         this.setState({ endPointPlayers: findUserResponse })
         })})
 
+    //fetch summary endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
@@ -63,9 +65,9 @@ class Loading extends Component {
 
       .then((summaryResponse)=> {
         this.setState({ endPointSummary: summaryResponse })
-
       })})
 
+    //fetch wellness endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
@@ -76,6 +78,7 @@ class Loading extends Component {
         this.setState({ endPointWellness: wellnessResponse })
       })})
 
+    //fetch workload endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
@@ -86,6 +89,7 @@ class Loading extends Component {
         this.setState({ endPointWorkload: workloadResponse })
       })})
 
+    //fetch rpe laod endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
@@ -94,6 +98,7 @@ class Loading extends Component {
 
       .then((rpeResponse)=> {
         this.setState({ endPointRpe: rpeResponse })
+      //send the end point states to app.js
         this.endLoadingHandler()
       })})
 
