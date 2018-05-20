@@ -25,7 +25,8 @@ class App extends Component {
       playerIdData: {},
       playerfirstData: {},
       playerLastData: {},
-      dataWellness: {},
+      endPointSummary: {},
+      endPointPlayers: {},
       view: 'home',
 
     };
@@ -33,7 +34,7 @@ class App extends Component {
     this.changeWorkload = this.changeWorkload.bind(this);
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
-    this.getEmail = this.getEmail.bind(this);
+    this.getLogin = this.getLogin.bind(this);
     this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
 
@@ -55,10 +56,10 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-  getEmail(emailData, passwordData){
+  getLogin(emailData, passwordData){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
-    this.setState({ page: "main"})
+    this.setState({ page: "loading"})
   };
 
   skipLogin() {
@@ -68,62 +69,60 @@ class App extends Component {
     this.setState({ password: passwordData})
     this.setState({ page: "loading" })
   }
-  loadingData(wellnessData){
-    this.setState({ dataWellness: wellnessData})
+  loadingData(summary, players){
+    this.setState({ endPointSummary: summary })
+    this.setState({ endPointPlayers: players})
     this.defineData()
     this.setState({ page: "main" })
   }
 
+
 defineData(){
 
-  // var playerId = [];
-  // var playerFirst = [];
-  // var playerLast = [];
-  //
-  // for (var i = 0; i < dataPlayer.length; i++) {
-  //   var dict = dataPlayer[i];
-  //   for (var key in dict) {
-  //     if (key === 'user_id') {
-  //       playerId.push(dict[key]);
-  //     }
-  //     else if (key === 'fname') {
-  //       playerFirst.push(dict[key]);
-  //     }
-  //     else if (key === 'lname'){
-  //       playerLast.push(dict[key]);
-  //     }}}
-  //
-  //   this.setState({
-  //
-  //     playerIdData: playerId,
-  //     playerFirstData: playerFirst,
-  //     playerLastData: playerLast,
-  //
-  //   })
-  var dataWellness = this.state.dataWellness
-  var wellnessLabels = [];
-  var wellnessValues = [];
-  for (var x in dataWellness) {
-    wellnessLabels.push(x);
-    wellnessValues.push(dataWellness[x]);
+  let dataPlayer = this.state.endPointPlayers
+  let playerId = [];
+  let playerFirst = [];
+  let playerLast = [];
+
+  for (let i = 0; i < dataPlayer.length; i++) {
+    let dict = dataPlayer[i];
+    for (let key in dict) {
+      if (key === 'user_id') {
+        playerId.push(dict[key]);
+      }
+      else if (key === 'fname') {
+        playerFirst.push(dict[key]);
+      }
+      else if (key === 'lname'){
+        playerLast.push(dict[key]);
+      }}}
+
+
+  let dataWellness = this.state.endPointSummary.wellness
+  let wellnessLabels = [];
+  let wellnessValues = [];
+  for (let items in dataWellness) {
+    wellnessLabels.push(items);
+    wellnessValues.push(dataWellness[items]);
   }
   wellnessValues.pop();
   wellnessLabels.pop();
 
-  // var insightsType = [];
-  // var insightsDescription = [];
-  // var insightsValue = [];
-  //
-  // for (var i = 0; i < datainsights.length; i++) {
-  //   var dict = datainsights[i];
-  //   for (var key in dict) {
-  //     if (key === 'description') {
-  //       insightsDescription.push(dict[key]);
-  //     }
-  //     else if (key === 'value'){
-  //       insightsValue.push(dict[key]);
-  //     }}}
-  //
+  let dataInsights = this.state.endPointSummary.insights
+  let insightsType = [];
+  let insightsDescription = [];
+  let insightsValue = [];
+
+  for (let i = 0; i < dataInsights.length; i++) {
+    var dict = dataInsights[i];
+    for (let key in dict) {
+      if (key === 'description') {
+        insightsDescription.push(dict[key]);
+      }
+      else if (key === 'value'){
+        insightsValue.push(dict[key]);
+      }}}
+
   // var workload_lbl = [];
   // var workload_score = [];
   // var workload_target_min = [];
@@ -153,34 +152,37 @@ defineData(){
   // console.log(workload_target_min)
   // console.log(workload_target_max)
   //
-  // var bar_colour = [];
-  // for (var i = 0; i < values.length; i++) {
-  //
-  //   if (values[i]===1 || values[i]===2 || values[i]===3) {
-  //     bar_colour.push('#2dc937')
-  //   }
-  //   else if (values[i] === 4) {
-  //     bar_colour.push('#e7b416')
-  //   }
-  //   else if (values[i]===5) {
-  //     bar_colour.push('#cc3232')
-  //   }
-  //
-  // }
-  // console.log(bar_colour)
+  let bar_colour = [];
+  for (let i = 0; i < wellnessValues.length; i++) {
+
+    if (wellnessValues[i]===1 || wellnessValues[i]===2 || wellnessValues[i]===3) {
+      bar_colour.push('#2dc937')
+    }
+    else if (wellnessValues[i] === 4) {
+      bar_colour.push('#e7b416')
+    }
+    else if (wellnessValues[i]===5) {
+      bar_colour.push('#cc3232')
+    }
+
+  }
 
   this.setState({
 
+    playerIdData: playerId,
+    playerFirstData: playerFirst,
+    playerLastData: playerLast,
 
-    // insightsDescriptionData: insightsDescription,
-    // insightsValueData: insightsValue,
+
+    insightsDescriptionData: insightsDescription,
+    insightsValueData: insightsValue,
 
     barData:{
       labels:wellnessLabels,
 
 
       datasets:[{data:wellnessValues,
-        // backgroundColor: bar_colour,
+        backgroundColor: bar_colour,
 
   }]
 
@@ -251,7 +253,7 @@ defineData(){
           if (this.state.page === "login") {
             return(
               <div className="Login">
-              <Login handlerEmail={this.getEmail} skipLogin={this.skipLogin}  />
+              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin}  />
               </div>
             )
           }

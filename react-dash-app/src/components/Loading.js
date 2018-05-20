@@ -5,7 +5,8 @@ class Loading extends Component {
     super(props);
     this.state = {
       tokenData: {},
-      wellnessData: {},
+      endPointSummary: {},
+      endPointPlayers: {},
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -16,16 +17,12 @@ class Loading extends Component {
   }
 
   endLoadingHandler(){
-    this.props.loadingData(this.state.wellnessData);
+    this.props.loadingData(this.state.endPointSummary, this.state.endPointPlayers);
   }
 
   getData(email, password){
-    // this.setState({ login: "false"})
-    let dataWellness = {}
-    let dataworkload = {}
-    let datainsights = {}
 
-    fetch('http://app.komodomonitr.com/api/v1/users/login', {
+    fetch('https://app.komodomonitr.com/api/v1/users/login', {
       body: JSON.stringify({
         "email": email,
         "password": password
@@ -40,18 +37,17 @@ class Loading extends Component {
     .then(data => this.setState({tokenData: data.token}))
 
 
-    // .then(token => {fetch('http://app.komodomonitr.com/api/v1/players',{
-    //   method: 'get',
-    //   headers: {'X-Auth-Token': this.state.tokenData}
-    // })
-    //   .then(userResponse => userResponse.json())
-    //
-    //   .then((findUserResponse) =>{
-    //     console.log(findUserResponse)
-    //     let dataPlayer = findUserResponse
-    //     })})
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/players',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.state.tokenData}
+    })
+      .then(userResponse => userResponse.json())
 
-    .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
+      .then((findUserResponse) =>{
+        this.setState({ endPointPlayers: findUserResponse })
+        })})
+
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=4',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
     })
@@ -59,14 +55,9 @@ class Loading extends Component {
 
     .then((findresponse)=>
     {
-      console.log(findresponse.wellness)
-      dataWellness = findresponse.wellness
-      dataworkload = findresponse.training_load
-      datainsights = findresponse.insights
-      console.log(dataWellness)
-      console.log(dataworkload)
-      console.log(findresponse)
-      this.setState({wellnessData: dataWellness })
+      this.setState({ endPointSummary: findresponse })
+
+
       this.endLoadingHandler()
     })
   })
