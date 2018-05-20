@@ -27,6 +27,9 @@ class App extends Component {
       playerLastData: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
       view: 'home',
 
     };
@@ -69,9 +72,12 @@ class App extends Component {
     this.setState({ password: passwordData})
     this.setState({ page: "loading" })
   }
-  loadingData(summary, players){
+  loadingData(summary, players, wellness, workload, rpe){
     this.setState({ endPointSummary: summary })
-    this.setState({ endPointPlayers: players})
+    this.setState({ endPointPlayers: players })
+    this.setState({ endPointWellness: wellness })
+    this.setState({ endPointWorkload: workload })
+    this.setState({ endPointRpe: rpe })
     this.defineData()
     this.setState({ page: "main" })
   }
