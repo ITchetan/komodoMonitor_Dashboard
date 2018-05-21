@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { select, selectAll } from 'd3-selection';
+import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
-import { transition, ease } from 'd3-transition';
+import { transition } from 'd3-transition';
 
 
 class PointerGauge extends Component {
@@ -29,7 +29,7 @@ class PointerGauge extends Component {
     let arcSecond = (gaugeUpperBound - gaugeLowerBound) / gaugeMaxValue
     let arcThird = (gaugeMaxValue - gaugeUpperBound) / gaugeMaxValue
 
-    let needleClient, barWidth, chart, chartInset, degToRad, repaintGauge, height, margin, numSections, padRad, percToDeg, percToRad, percent, radius, sectionIndx, svg, totalPercent, width, sectionPerc, arc1, arc2, arc3, perc, arcStartRad, arcEndRad;
+    let barWidth, chart, chartInset, degToRad, repaintGauge, height, margin, numSections, padRad, percToDeg, percToRad, percent, radius, sectionIndx, totalPercent, width, sectionPerc, arc1, arc2, arc3, perc, arcStartRad, arcEndRad;
 
     percent = percentValue;
 
