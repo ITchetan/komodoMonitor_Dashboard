@@ -7,6 +7,7 @@ import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
+import PlayerProfile from './PlayerProfile'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -22,6 +23,8 @@ class Layout extends Component{
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
+      playerFirstData: props.playerFirstData,
+      playerLastData: props.playerLastData
     }
 
   }
@@ -36,6 +39,8 @@ class Layout extends Component{
     return (
   <div className="Layout">
   <Container fluid={false}>
+
+
     <Row>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={2} className="d-flex">
@@ -68,7 +73,8 @@ class Layout extends Component{
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
         </div>
-        </Col>
+        
+      </Col>
       </Col>
 
       <Col sm={6} className="d-flex">
@@ -81,20 +87,34 @@ class Layout extends Component{
               <GaugeChart />
             </div>}
           {this.props.view === "wellness" &&
-            <Card>
-            <CardHeader><h4>Wellness</h4></CardHeader>
-            <CardBody><BarChart barData={this.props.barData}/></CardBody>
-            </Card>}
+            <div>
+              <h4>Wellness</h4>
+              <p>&nbsp;</p>
+              <BarChart barData={this.props.barData}/>
+            </div>
+            }
           {this.props.view === "workload" &&
-            <Card>
-            <CardHeader><h4>Workload</h4></CardHeader>
-            <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
-            </Card>}
-           {this.props.view === "rpe" &&
-            <Card>
-            <CardHeader><h4>RPE</h4></CardHeader>
-            <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
-            </Card>}
+          <div>
+            <h4>Training Load</h4>
+            <p>&nbsp;</p>
+            <WorkloadChart workloadData={this.props.workloadData}/>
+          </div>
+        }
+          {this.props.view === "rpe" &&
+            <div>
+              <h4>RPE Load</h4>
+              <p>&nbsp;</p>
+              <RpeChart rpeData={this.props.rpeData}/>
+            </div>
+          }
+            {this.props.view === "profile" &&
+             <Card>
+             <CardHeader><h4>My Profile</h4></CardHeader>
+             <CardBody><PlayerProfile
+             playerFirstData={this.props.playerFirstData}
+             playerLastData={this.props.playerLastData}/></CardBody>
+             </Card>}
+
         </Col>
       </Col>
       <Col sm={4} className="d-flex">

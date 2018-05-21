@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness'
 import Loading from "./components/Loading";
+import PlayerProfile from './components/PlayerProfile'
 
 
 
@@ -40,6 +41,7 @@ class App extends Component {
     this.getLogin = this.getLogin.bind(this);
     this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
+    this.changeProfile = this.changeProfile.bind(this);
 
   }
 //functions to change the state of the page
@@ -59,7 +61,13 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
+  changeProfile(){
+    this.setState({ view: 'profile'})
+  }
+
+
   //receive email and password from login page
+
   getLogin(emailData, passwordData){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
@@ -275,7 +283,8 @@ defineData(){
           else if (this.state.page === "main") {
           return (
             <div>
-            <Header />
+            <Header changeProfile={this.changeProfile}
+            />
             <Layout
             barData={this.state.barData}
             workloadData={this.state.workloadData}
@@ -287,6 +296,8 @@ defineData(){
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
+            playerFirstData={this.state.playerFirstData}
+            playerLastData={this.state.playerLastData}
             />
             <ModalFormWellness profileName = " Chris"/>
 
