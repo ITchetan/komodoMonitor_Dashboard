@@ -10,6 +10,11 @@ class Loading extends Component {
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      players: {},
+      summary: {},
+      wellness: {},
+      workload: {},
+      rpe: {},
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -19,14 +24,21 @@ class Loading extends Component {
   //get username and password from app.js
     this.getData(this.props.loginEmail, this.props.loginPass);
   }
+
   //send the state of the endpoints to app.js
   endLoadingHandler(){
+    if (this.state.players === true &&
+        this.state.summary === true &&
+        this.state.wellness === true &&
+        this.state.workload === true &&
+        this.state.rpe === true) {
     this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
                           );
+                        }
   }
   //fetching all the data from the endpoints and updating the states
   getData(email, password){
@@ -54,7 +66,9 @@ class Loading extends Component {
       .then(userResponse => userResponse.json())
 
       .then((findUserResponse) => {
-        this.setState({ endPointPlayers: findUserResponse })
+        this.setState({ endPointPlayers: findUserResponse,
+                        players: true})
+        this.endLoadingHandler()
         })})
 
     //fetch summary endpoint
@@ -65,7 +79,9 @@ class Loading extends Component {
       .then(response => response.json())
 
       .then((summaryResponse)=> {
-        this.setState({ endPointSummary: summaryResponse })
+        this.setState({ endPointSummary: summaryResponse,
+                        summary: true})
+        this.endLoadingHandler()
       })})
 
     //fetch wellness endpoint
@@ -76,7 +92,9 @@ class Loading extends Component {
       .then(wellnessResponse => wellnessResponse.json())
 
       .then((wellnessResponse)=> {
-        this.setState({ endPointWellness: wellnessResponse })
+        this.setState({ endPointWellness: wellnessResponse,
+                        wellness: true})
+        this.endLoadingHandler()
       })})
 
     //fetch workload endpoint
@@ -87,7 +105,9 @@ class Loading extends Component {
       .then(workloadResponse => workloadResponse.json())
 
       .then((workloadResponse)=> {
-        this.setState({ endPointWorkload: workloadResponse })
+        this.setState({ endPointWorkload: workloadResponse,
+                        workload: true})
+        this.endLoadingHandler()
       })})
 
     //fetch rpe laod endpoint
@@ -98,7 +118,8 @@ class Loading extends Component {
       .then(rpeResponse => rpeResponse.json())
 
       .then((rpeResponse)=> {
-        this.setState({ endPointRpe: rpeResponse })
+        this.setState({ endPointRpe: rpeResponse,
+                        rpe: true})
         //send the end point states to app.js
         this.endLoadingHandler()
       })})

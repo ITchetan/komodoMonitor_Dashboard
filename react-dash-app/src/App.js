@@ -77,14 +77,14 @@ class App extends Component {
 
   //recieve fetched data from loading page and set them into current state of app.js
   loadingData(summary, players, wellness, workload, rpe){
-    this.setState({ endPointSummary: summary })
-    this.setState({ endPointPlayers: players })
-    this.setState({ endPointWellness: wellness })
-    this.setState({ endPointWorkload: workload })
-    this.setState({ endPointRpe: rpe })
+    this.setState({ endPointSummary: summary,
+      endPointPlayers: players,
+      endPointWellness: wellness,
+      endPointWorkload: workload,
+      endPointRpe: rpe,})
     this.defineData()
     //end loading and show main page
-    this.setState({ page: "main" })
+    this.setState({page: "main"})
   }
 
 //take data from the states and configure the data to go into the page as graphs etc...
@@ -121,20 +121,20 @@ defineData(){
   wellnessLabels.pop();
 
   //extract insights summary data
-  // let dataInsights = this.state.endPointSummary.insights
-  // let insightsType = [];
-  // let insightsDescription = [];
-  // let insightsValue = [];
-  //
-  // for (let i = 0; i < dataInsights.length; i++) {
-  //   var dict = dataInsights[i];
-  //   for (let key in dict) {
-  //     if (key === 'description') {
-  //       insightsDescription.push(dict[key]);
-  //     }
-  //     else if (key === 'value'){
-  //       insightsValue.push(dict[key]);
-  //     }}}
+  let dataInsights = this.state.endPointSummary.insights
+  let insightsType = [];
+  let insightsDescription = [];
+  let insightsValue = [];
+
+  for (let i = 0; i < dataInsights.length; i++) {
+    var dict = dataInsights[i];
+    for (let key in dict) {
+      if (key === 'description') {
+        insightsDescription.push(dict[key]);
+      }
+      else if (key === 'value'){
+        insightsValue.push(dict[key]);
+      }}}
 
   // var workload_lbl = [];
   // var workload_score = [];
@@ -188,8 +188,8 @@ defineData(){
     playerLastData: playerLast,
 
 
-    // insightsDescriptionData: insightsDescription,
-    // insightsValueData: insightsValue,
+    insightsDescriptionData: insightsDescription,
+    insightsValueData: insightsValue,
 
     barData:{
       labels:wellnessLabels,
@@ -253,6 +253,7 @@ defineData(){
     //             ]}
     //           });
     //         }
+
   })
 }
 
