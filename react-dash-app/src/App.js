@@ -15,7 +15,7 @@ class App extends Component {
     super();
     //setting initial state of the react app
     this.state = {
-      value: "",
+      loginToken: {},
       email: "",
       password: "",
       page: "login",
@@ -24,8 +24,9 @@ class App extends Component {
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
-      playerfirstData: {},
+      playerFirstData: {},
       playerLastData: {},
+      wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
       endPointWellness: {},
@@ -67,8 +68,7 @@ class App extends Component {
 
 
   //receive email and password from login page
-
-  getLogin(emailData, passwordData){
+  getLogin(emailData, passwordData,){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
     //enter laoding state after user and pass have been received
@@ -84,12 +84,13 @@ class App extends Component {
   }
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe){
+  loadingData(summary, players, wellness, workload, rpe, token){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointWellness: wellness,
       endPointWorkload: workload,
-      endPointRpe: rpe,})
+      endPointRpe: rpe,
+      loginToken: token,})
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
@@ -121,9 +122,13 @@ defineData(){
   let dataWellness = this.state.endPointSummary.wellness
   let wellnessLabels = [];
   let wellnessValues = [];
-  for (let items in dataWellness) {
-    wellnessLabels.push(items);
-    wellnessValues.push(dataWellness[items]);
+  let wellnessInput = [];
+  for (let item in dataWellness) {
+    wellnessLabels.push(item);
+    wellnessValues.push(dataWellness[item]);
+    if (item === 'input_due') {
+      wellnessInput = dataWellness[item]
+    }
   }
   wellnessValues.pop();
   wellnessLabels.pop();
@@ -194,6 +199,8 @@ defineData(){
     playerIdData: playerId,
     playerFirstData: playerFirst,
     playerLastData: playerLast,
+
+    wellnessForm: wellnessInput,
 
 
     insightsDescriptionData: insightsDescription,
@@ -266,6 +273,7 @@ defineData(){
 }
 
         render() {
+          console.log(this.state.wellnessForm)
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -299,8 +307,9 @@ defineData(){
             playerFirstData={this.state.playerFirstData}
             playerLastData={this.state.playerLastData}
             />
-            <ModalFormWellness profileName = " Chris"/>
-
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
             </div>
           );
         }
