@@ -123,15 +123,32 @@ defineData(){
   let wellnessLabels = [];
   let wellnessValues = [];
   let wellnessInput = [];
+  let wellnessTotal = 0;
+
+
   for (let item in dataWellness) {
     wellnessLabels.push(item);
     wellnessValues.push(dataWellness[item]);
+
     if (item === 'input_due') {
       wellnessInput = dataWellness[item]
     }
   }
   wellnessValues.pop();
   wellnessLabels.pop();
+
+  for (let score in wellnessValues) {
+    console.log(wellnessValues[score])
+    wellnessTotal = wellnessTotal + wellnessValues[score]
+    console.log(wellnessTotal)
+  }
+
+
+  // Extract workload summary dataset
+  let workloadSummaryValue = this.state.endPointSummary.training_load.score
+  let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
+  let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
+  console.log(workloadSummaryValue, workloadSummaryMin, workloadSummaryMax)
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
@@ -201,6 +218,13 @@ defineData(){
     playerLastData: playerLast,
 
     wellnessForm: wellnessInput,
+    wellnessTotalData: wellnessTotal,
+
+    workloadSummaryData:{
+      value: workloadSummaryValue,
+      min: workloadSummaryMin,
+      max: workloadSummaryMax
+    },
 
 
     insightsDescriptionData: insightsDescription,
@@ -306,6 +330,8 @@ defineData(){
             insightsValueData={this.state.insightsValueData}
             playerFirstData={this.state.playerFirstData}
             playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
             />
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>

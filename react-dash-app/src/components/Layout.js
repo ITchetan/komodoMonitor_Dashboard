@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
@@ -10,11 +10,6 @@ import RpeChart from './rpeChart'
 
 import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
-
-// Import React components
-// import WellnessFlip from './WellnessFlip';
-// import WorkloadFlip from './WorkloadFlip';
-// import RpeFlip from './RPEFlip';
 
 class Layout extends Component{
   constructor(props){
@@ -98,14 +93,14 @@ class Layout extends Component{
             <div>
             <h4>Wellness</h4>
             <hr />
-            <PointerGauge name={"Wellness"} value={13} gaugeLowerBound={15} gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"green"} secondArc={"orange"} thirdArc={"red"} />
+            <PointerGauge name={"Wellness"} value={this.props.wellnessTotal} gaugeLowerBound={15} gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"green"} secondArc={"orange"} thirdArc={"red"} />
             <BarChart barData={this.props.barData}/>
               </div>}
           {this.props.view === "workload" &&
           <div>
             <h4>Training Load</h4>
             <hr />
-            <p>&nbsp;</p>
+            <PointerGauge name={"Wellness"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
             <WorkloadChart workloadData={this.props.workloadData}/>
           </div>
         }
