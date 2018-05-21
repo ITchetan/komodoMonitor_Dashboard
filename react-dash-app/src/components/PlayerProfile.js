@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
 
-var playerFirst = 'Amol';
-var playerLast = 'Ghadage';
+
 
 class PlayerProfile extends Component{
   constructor(props){
@@ -14,6 +13,7 @@ class PlayerProfile extends Component{
   }
 
   render(){
+    console.log(this.props.playerFirstData);
     return (
       <div >
       <Container  >

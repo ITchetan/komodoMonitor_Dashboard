@@ -79,9 +79,9 @@ class Layout extends Component{
         <div style={{ textAlign: 'center' }}>
           <h5>Player</h5>
           {this.props.view === "profile" &&
-          <RunFastIcon size={60} color="#d40000" />}
+          <img src={require('./fakePlayer.jpg')} height="80" width="80" />}
           {this.props.view !== "profile" &&
-          <a onClick={this.props.changeProfile}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+          <a onClick={this.props.changeProfile}><img src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}
         </div>
       </Col>
       </Col>
@@ -96,20 +96,26 @@ class Layout extends Component{
               <GaugeChart />
             </div>}
           {this.props.view === "wellness" &&
-            <Card>
-            <CardHeader><h4>Wellness</h4></CardHeader>
-            <CardBody><BarChart barData={this.props.barData}/></CardBody>
-            </Card>}
+            <div>
+              <h4>Wellness</h4>
+              <p>&nbsp;</p>
+              <BarChart barData={this.props.barData}/>
+            </div>
+            }
           {this.props.view === "workload" &&
-            <Card>
-            <CardHeader><h4>Workload</h4></CardHeader>
-            <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
-            </Card>}
-           {this.props.view === "rpe" &&
-            <Card>
-            <CardHeader><h4>RPE</h4></CardHeader>
-            <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
-            </Card>}
+          <div>
+            <h4>Training Load</h4>
+            <p>&nbsp;</p>
+            <WorkloadChart workloadData={this.props.workloadData}/>
+          </div>
+        }
+          {this.props.view === "rpe" &&
+            <div>
+              <h4>RPE Load</h4>
+              <p>&nbsp;</p>
+              <RpeChart rpeData={this.props.rpeData}/>
+            </div>
+          }
             {this.props.view === "profile" &&
              <Card>
              <CardHeader><h4>My Profile</h4></CardHeader>
