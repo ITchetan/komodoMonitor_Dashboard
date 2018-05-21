@@ -7,6 +7,7 @@ import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
+import PointerGauge from './PointerGauge'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -85,7 +86,10 @@ class Layout extends Component{
           {this.props.view === "wellness" &&
             <Card>
             <CardHeader><h4>Wellness</h4></CardHeader>
-            <CardBody><BarChart barData={this.props.barData}/></CardBody>
+            <CardBody>
+            <PointerGauge name={"Wellness"} value={13} gaugeLowerBound={15} gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"Green"} secondArc={"Orange"} thirdArc={"Red"} />
+            <BarChart barData={this.props.barData}/>
+            </CardBody>
             </Card>}
           {this.props.view === "workload" &&
             <Card>
