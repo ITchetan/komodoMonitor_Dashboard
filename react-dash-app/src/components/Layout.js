@@ -7,7 +7,6 @@ import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
-import Header from './Header'
 import PlayerProfile from './PlayerProfile'
 
 // Import React components
@@ -43,7 +42,7 @@ class Layout extends Component{
   <div className="Layout">
   <Container fluid={false}>
 
-  <Header />
+
     <Row>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={2} className="d-flex">
@@ -76,13 +75,7 @@ class Layout extends Component{
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
         </div>
-        <div style={{ textAlign: 'center' }}>
-          <h5>Player</h5>
-          {this.props.view === "profile" &&
-          <img src={require('./fakePlayer.jpg')} height="80" width="80" />}
-          {this.props.view !== "profile" &&
-          <a onClick={this.props.changeProfile}><img src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}
-        </div>
+        
       </Col>
       </Col>
 

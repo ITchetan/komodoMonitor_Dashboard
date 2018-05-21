@@ -18,25 +18,16 @@ class PlayerProfile extends Component{
       <div >
       <Container  >
 
-
-
-
-
             <Col >
                 <img src={require('./fakePlayer.jpg')} height="150" width="150" />
-
             </Col>
+            
             <br />
+
             <Col >
                 <h5><strong> First Name :</strong> {this.props.playerFirstData} </h5>
                 <h5><strong> Last Name : </strong> {this.props.playerLastData} </h5>
-
-
             </Col>
-
-
-
-
       </Container>
       </div>
     )

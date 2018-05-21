@@ -271,6 +271,8 @@ defineData(){
           else if (this.state.page === "main") {
           return (
             <div>
+            <Header changeProfile={this.changeProfile}
+            />
             <Layout
             barData={this.state.barData}
             workloadData={this.state.workloadData}
@@ -282,7 +284,6 @@ defineData(){
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
-            changeProfile={this.changeProfile}
             playerFirstData={this.state.playerFirstData}
             playerLastData={this.state.playerLastData}
             />
