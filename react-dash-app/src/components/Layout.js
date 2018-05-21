@@ -33,8 +33,6 @@ class Layout extends Component{
   //chart is drown here
   render()
   {
-    console.log(this.props.insightsDescriptionData[0]);
-    console.log(this.props.view);
     return (
   <div className="Layout">
   <Container fluid={false}>
