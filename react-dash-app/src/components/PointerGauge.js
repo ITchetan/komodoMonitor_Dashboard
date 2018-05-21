@@ -25,9 +25,11 @@ class PointerGauge extends Component {
     // Set up variables
     let percentValue = value / gaugeMaxValue;
 
-    let arcFirst = gaugeLowerBound / gaugeMaxValue
-    let arcSecond = (gaugeUpperBound - gaugeLowerBound) / gaugeMaxValue
-    let arcThird = (gaugeMaxValue - gaugeUpperBound) / gaugeMaxValue
+    let arcFirst = gaugeLowerBound / gaugeMaxValue;
+    let arcSecond = (gaugeUpperBound - gaugeLowerBound) / gaugeMaxValue;
+    let arcThird = (gaugeMaxValue - gaugeUpperBound) / gaugeMaxValue;
+
+    (function() {
 
     let barWidth, chart, chartInset, degToRad, repaintGauge, height, margin, numSections, padRad, percToDeg, percToRad, percent, radius, sectionIndx, totalPercent, width, sectionPerc, arc1, arc2, arc3, perc, arcStartRad, arcEndRad;
 
@@ -152,8 +154,6 @@ class PointerGauge extends Component {
          .attr("font-size", 15)
          .style("fill", "#000000");
 
-         console.log(texts)
-
         var Needle = (function() {
 
           //Helper function that returns the `d` value for moving the needle
@@ -180,37 +180,9 @@ class PointerGauge extends Component {
 
             Needle.prototype.render = function() {
               this.node.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
-
-              return this.node.append('path').attr('class', 'needle').attr('id', 'client-needle').attr('d', recalcPointerPos.call(this, 0));
+              repaintGauge();
+              return this.node.append('path').attr('class', 'needle').attr('id', 'client-needle').attr('d', recalcPointerPos.call(this, percent));
               };
-
-            Needle.prototype.moveTo = function(perc) {
-              var self,
-                  oldValue = this.perc || 0;
-
-              this.perc = perc;
-              self = this;
-
-              // Reset pointer position
-              transition().delay(100).duration(200).select('.needle').tween('reset-progress', function() {
-                return function(percentOfPercent) {
-                  var progress = (1 - percentOfPercent) * oldValue;
-
-                  repaintGauge(progress);
-                  return select(this).attr('d', recalcPointerPos.call(self, progress));
-                };
-              });
-
-              transition().delay(300).duration(1500).select('.needle').tween('progress', function() {
-                return function(percentOfPercent) {
-                  var progress = percentOfPercent * perc;
-
-                  repaintGauge(progress);
-                  return select(this).attr('d', recalcPointerPos.call(self, progress));
-                };
-              });
-
-            };
 
             return Needle;
 
@@ -218,7 +190,7 @@ class PointerGauge extends Component {
 
             let needle = new Needle(chart);
             needle.render();
-            needle.moveTo(percent);
+    })();
   }
 
 
