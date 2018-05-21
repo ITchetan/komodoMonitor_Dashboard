@@ -10,21 +10,39 @@ class ModalFormWellness extends React.Component {
       profileName:props.profileName
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.sendData = this.sendData.bind(this);
   }
+  //sends data to the wellness post endpoint
+  sendData(){
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
+      body:
+      {
+      "nutrition": 0,
+      "energy": 0,
+      "stress": 0,
+      "sleep_quality": 0,
+      "sleep_amount": 0,
+      "muscle_pain": 0
+      }, // must match 'Content-Type' header
+      headers: {
+        'content-type': 'application/json',
+        'X-Auth-Token': this.props.loginToken
+      },
+      method: 'POST',
+    });
 
-  toggle() {
     this.setState({
       modal: !this.state.modal,
     });
+    
   }
 
   render() {
     return (
       <div className = "ModalForm">
       <Container>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
-              <ModalHeader toggle={this.toggle}>Hi{this.props.profileName}, please complete your wellness survey!!</ModalHeader>
+            <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
+              <ModalHeader>Hi{this.props.profileName}, please complete your wellness survey!!</ModalHeader>
               <ModalBody>
                 <div>
                       <Row>
@@ -182,8 +200,8 @@ class ModalFormWellness extends React.Component {
               </ModalBody>
 
               <ModalFooter>
-                <Button color="primary" onClick={this.toggle}>Submit</Button>{' '}
-                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                <Button color="primary" onClick={this.sendData}>Submit</Button>{' '}
+                <Button color="secondary" onClick={this.sendData}>Cancel</Button>
               </ModalFooter>
             </Modal>
         </Container>
