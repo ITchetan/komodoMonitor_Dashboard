@@ -51,6 +51,7 @@ class Layout extends Component{
           <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
           <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
           <h5>Training Load</h5>
@@ -58,6 +59,7 @@ class Layout extends Component{
           <HeartPulseIcon size={60} color="#d40000" />}
           {this.props.view !== "workload" &&
           <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
           <h5>Wellness</h5>
@@ -65,6 +67,7 @@ class Layout extends Component{
           <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
           <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
           <h5>RPE Load</h5>
@@ -72,8 +75,9 @@ class Layout extends Component{
           <RunFastIcon size={60} color="#d40000" />}
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+          <hr />
         </div>
-        
+
       </Col>
       </Col>
 
@@ -82,6 +86,8 @@ class Layout extends Component{
           {this.props.view === "home" &&
             <div>
               <h3>Welcome back, Chris</h3>
+              <hr />
+              <p>&nbsp;</p>
               <h4>Your Komodo Number is 33</h4>
               <p>&nbsp;</p>
               <GaugeChart />
@@ -89,6 +95,7 @@ class Layout extends Component{
           {this.props.view === "wellness" &&
             <div>
               <h4>Wellness</h4>
+              <hr />
               <p>&nbsp;</p>
               <BarChart barData={this.props.barData}/>
             </div>
@@ -96,6 +103,7 @@ class Layout extends Component{
           {this.props.view === "workload" &&
           <div>
             <h4>Training Load</h4>
+            <hr />
             <p>&nbsp;</p>
             <WorkloadChart workloadData={this.props.workloadData}/>
           </div>
@@ -103,17 +111,19 @@ class Layout extends Component{
           {this.props.view === "rpe" &&
             <div>
               <h4>RPE Load</h4>
+              <hr />
               <p>&nbsp;</p>
               <RpeChart rpeData={this.props.rpeData}/>
             </div>
           }
             {this.props.view === "profile" &&
-             <Card>
-             <CardHeader><h4>My Profile</h4></CardHeader>
-             <CardBody><PlayerProfile
-             playerFirstData={this.props.playerFirstData}
-             playerLastData={this.props.playerLastData}/></CardBody>
-             </Card>}
+             <div>
+              <h3>My Profile</h3>
+              <hr />
+              <PlayerProfile
+               playerFirstData={this.props.playerFirstData}
+               playerLastData={this.props.playerLastData}/>
+             </div>}
 
         </Col>
       </Col>

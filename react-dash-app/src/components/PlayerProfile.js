@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
+import '../App.css';
 
 
 
@@ -19,7 +20,7 @@ class PlayerProfile extends Component{
       <Container  >
 
             <Col >
-                <img src={require('./fakePlayer.jpg')} height="150" width="150" />
+                <img className="profile" src={require('./fakePlayer.jpg')} height="250" width="250" />
             </Col>
 
             <br />
