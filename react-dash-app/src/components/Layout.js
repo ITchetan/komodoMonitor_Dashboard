@@ -7,6 +7,8 @@ import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
+import Header from './Header'
+import PlayerProfile from './PlayerProfile'
 
 // Import React components
 // import WellnessFlip from './WellnessFlip';
@@ -22,6 +24,8 @@ class Layout extends Component{
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
+      playerFirstData: props.playerFirstData,
+      playerLastData: props.playerLastData
     }
 
   }
@@ -38,6 +42,8 @@ class Layout extends Component{
     return (
   <div className="Layout">
   <Container fluid={false}>
+
+  <Header />
     <Row>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={2} className="d-flex">
@@ -70,7 +76,14 @@ class Layout extends Component{
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
         </div>
-        </Col>
+        <div style={{ textAlign: 'center' }}>
+          <h5>Player</h5>
+          {this.props.view === "profile" &&
+          <RunFastIcon size={60} color="#d40000" />}
+          {this.props.view !== "profile" &&
+          <a onClick={this.props.changeProfile}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+        </div>
+      </Col>
       </Col>
 
       <Col sm={6} className="d-flex">
@@ -97,6 +110,14 @@ class Layout extends Component{
             <CardHeader><h4>RPE</h4></CardHeader>
             <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
             </Card>}
+            {this.props.view === "profile" &&
+             <Card>
+             <CardHeader><h4>My Profile</h4></CardHeader>
+             <CardBody><PlayerProfile
+             playerFirstData={this.props.playerFirstData}
+             playerLastData={this.props.playerLastData}/></CardBody>
+             </Card>}
+
         </Col>
       </Col>
       <Col sm={4} className="d-flex">
