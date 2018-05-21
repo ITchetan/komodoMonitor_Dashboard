@@ -47,7 +47,7 @@ class PointerGauge extends Component {
       left: 20
     };
 
-    width = 400;
+    width = 300;
     height = width;
     radius = Math.min(width, height) / 2;
     barWidth = 40 * width / 300;
@@ -111,16 +111,16 @@ class PointerGauge extends Component {
       // Add labels
       var dataset = [{metric:name, value: value}]
 
-      var texts = selectAll("text")
+      var texts =  chart.selectAll("text")
                   .data(dataset)
                   .enter();
 
-      texts.append("text")
+          texts.append("text")
            .text(function(){
                 return dataset[0].value;
            })
            .attr('id', "Value")
-           .attr('transform', "translate(" + ((width + margin.left) / 2.15) + ", " + ((height + margin.top) / 1.5) + ")")
+           .attr('transform', "translate(" + 0 + ", " + 40 + ")")
            .attr("font-size",25)
            .style("fill", "#000000");
 
@@ -129,7 +129,7 @@ class PointerGauge extends Component {
              return 0;
          })
          .attr('id', 'scale0')
-         .attr('transform', "translate(" + ((width + margin.left) / 15 ) + ", " + ((height + margin.top) / 2) + ")")
+         .attr('transform', "translate(" + -150 + ", " + 0 + ")")
          .attr("font-size", 15)
          .style("fill", "#000000");
 
@@ -138,7 +138,7 @@ class PointerGauge extends Component {
              return gaugeMaxValue/2;
          })
          .attr('id', 'scale10')
-         .attr('transform', "translate(" + ((width + margin.left) / 2.15 ) + ", " + ((height + margin.top) / 10) + ")")
+         .attr('transform', "translate(" + 0 + ", " + -130 + ")")
          .attr("font-size", 15)
          .style("fill", "#000000");
 
@@ -148,9 +148,11 @@ class PointerGauge extends Component {
              return gaugeMaxValue;
          })
          .attr('id', 'scale20')
-         .attr('transform', "translate(" + ((width + margin.left) / 1.1 ) + ", " + ((height + margin.top) / 2) + ")")
+         .attr('transform', "translate(" + 150 + ", " + 0 + ")")
          .attr("font-size", 15)
          .style("fill", "#000000");
+
+         console.log(texts)
 
         var Needle = (function() {
 

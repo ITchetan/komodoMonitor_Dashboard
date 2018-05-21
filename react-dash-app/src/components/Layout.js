@@ -87,7 +87,7 @@ class Layout extends Component{
             <Card>
             <CardHeader><h4>Wellness</h4></CardHeader>
             <CardBody>
-            <PointerGauge name={"Wellness"} value={13} gaugeLowerBound={15} gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"Green"} secondArc={"Orange"} thirdArc={"Red"} />
+            <PointerGauge name={"Wellness"} value={13} gaugeLowerBound={15} gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"green"} secondArc={"orange"} thirdArc={"red"} />
             <BarChart barData={this.props.barData}/>
             </CardBody>
             </Card>}
