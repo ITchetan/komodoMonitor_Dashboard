@@ -163,9 +163,7 @@ defineData(){
   wellnessLabels.pop();
 
   for (let score in wellnessValues) {
-    console.log(wellnessValues[score])
     wellnessTotal = wellnessTotal + wellnessValues[score]
-    console.log(wellnessTotal)
   }
 
 
@@ -178,7 +176,6 @@ defineData(){
   let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
   let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
   let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
-  console.log(rpeSummaryMin, rpeSummaryValue, rpeSummaryMax)
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
