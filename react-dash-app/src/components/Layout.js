@@ -31,8 +31,23 @@ class Layout extends Component{
 
 
   //chart is drown here
-  render()
-  {
+  render() {
+    let komodoScore = this.props.komodoNumber.total
+    komodoScore = komodoScore*100
+    komodoScore = komodoScore.toFixed(0)
+
+    let workloadScore = this.props.komodoNumber.workload
+    workloadScore = workloadScore*100
+    workloadScore = workloadScore.toFixed(0)
+
+    let wellnessScore = this.props.komodoNumber.wellness
+    wellnessScore = wellnessScore*100
+    wellnessScore = wellnessScore.toFixed(0)
+
+    let rpeScore = this.props.komodoNumber.rpe
+    rpeScore = rpeScore*100
+    rpeScore = rpeScore.toFixed(0)
+
     return (
   <div className="Layout">
   <Container fluid={false}>
@@ -85,9 +100,10 @@ class Layout extends Component{
               <h3>Welcome back, Chris</h3>
               <hr />
               <p>&nbsp;</p>
-              <h4>Your Komodo Number is 33</h4>
+              <h4>Your Komodo Number is {komodoScore}</h4>
               <p>&nbsp;</p>
-              <GaugeChart />
+              <GaugeChart value={komodoScore} />
+              <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
             </div>}
           {this.props.view === "wellness" &&
             <div>
