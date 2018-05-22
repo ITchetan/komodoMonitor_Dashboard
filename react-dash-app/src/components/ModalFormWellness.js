@@ -34,7 +34,7 @@ class ModalFormWellness extends React.Component {
     this.setState({
       modal: !this.state.modal,
     });
-    
+
   }
 
   render() {
@@ -201,7 +201,6 @@ class ModalFormWellness extends React.Component {
 
               <ModalFooter>
                 <Button color="primary" onClick={this.sendData}>Submit</Button>{' '}
-                <Button color="secondary" onClick={this.sendData}>Cancel</Button>
               </ModalFooter>
             </Modal>
         </Container>

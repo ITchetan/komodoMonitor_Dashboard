@@ -3,9 +3,9 @@ import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import ModalFormWellness from './components/ModalFormWellness'
+import ModalFormWellness from './components/ModalFormWellness';
 import Loading from "./components/Loading";
-import PlayerProfile from './components/PlayerProfile'
+import PlayerProfile from './components/PlayerProfile';
 
 
 
@@ -21,6 +21,7 @@ class App extends Component {
       page: "login",
       barData:{},
       chartData:{},
+      rpeData: {},
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
@@ -43,6 +44,7 @@ class App extends Component {
     this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
+    this.logout = this.logout.bind(this);
 
   }
 //functions to change the state of the page
@@ -64,6 +66,29 @@ class App extends Component {
 
   changeProfile(){
     this.setState({ view: 'profile'})
+  }
+
+  logout(){
+    this.setState({
+    loginToken: {},
+    email: "",
+    password: "",
+    page: "login",
+    barData:{},
+    chartData:{},
+    rpeData: {},
+    insightsDescriptionData: {},
+    insightsValueData: {},
+    playerIdData: {},
+    playerFirstData: {},
+    playerLastData: {},
+    wellnessForm: {},
+    endPointSummary: {},
+    endPointPlayers: {},
+    endPointWellness: {},
+    endPointWorkload: {},
+    endPointRpe: {},
+    view: 'home', })
   }
 
 
@@ -171,36 +196,55 @@ defineData(){
         insightsValue.push(dict[key]);
       }}}
 
-  // var workload_lbl = [];
-  // var workload_score = [];
-  // var workload_target_min = [];
-  // var workload_target_max = [];
-  //
-  // for (var i = 0; i < dataworkload.length; i++) {
-  //   var dict = dataworkload[i];
-  //   for (var key in dict) {
-  //     if (key === 'week') {
-  //       workload_lbl.push(dict[key]);
-  //     }
-  //     else if (key==='score') {
-  //       workload_score.push(dict[key]);
-  //     }
-  //
-  //     else if (key==='target_min') {
-  //       workload_target_min.push(dict[key]);
-  //     }
-  //
-  //     else if (key==='target_max') {
-  //       workload_target_max.push(dict[key]);
-  //     }
-  //   }
-  // }
-  // console.log(workload_lbl)
-  // console.log(workload_score)
-  // console.log(workload_target_min)
-  // console.log(workload_target_max)
-  //
+  //map weekly workload data to variables
+  let dataWorkload = this.state.endPointWorkload.data;
+  let workloadLabel = [];
+  let workloadScore = [];
+  let workloadMin = [];
+  let workloadMax = [];
 
+  for (let i = 0; i < dataWorkload.length; i++) {
+    let dict = dataWorkload[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        workloadLabel.push(dict[key]);
+      }
+      else if (key ==='score') {
+        workloadScore.push(dict[key]);
+      }
+
+      else if (key ==='target_min') {
+        workloadMin.push(dict[key]);
+      }
+
+      else if (key ==='target_max') {
+        workloadMax.push(dict[key]);
+      }
+    }
+  }
+
+  //map weekly rpe data to variables
+  let dataRpe = this.state.endPointRpe.data;
+  let rpeLabel = [];
+  let rpeScore = [];
+  let rpeMin = [];
+  let rpeMax = [];
+
+  for (let i = 0; i < dataRpe.length; i++) {
+    let dict = dataRpe[i];
+    rpeMin.push(this.state.endPointRpe.target_min)
+    rpeMax.push(this.state.endPointRpe.target_max)
+    for (let key in dict) {
+      if (key === 'week_start') {
+        rpeLabel.push(dict[key]);
+      }
+      else if (key === 'score') {
+        rpeScore.push(dict[key]);
+      }
+    }
+  }
+
+  //set colors for the wellness graph
   let bar_colour = [];
   for (let i = 0; i < wellnessValues.length; i++) {
 
@@ -213,15 +257,16 @@ defineData(){
     else if (wellnessValues[i]===5) {
       bar_colour.push('#cc3232')
     }
-
   }
 
   this.setState({
 
+    //set player data states
     playerIdData: playerId,
     playerFirstData: playerFirst,
     playerLastData: playerLast,
 
+    //set wellness state
     wellnessForm: wellnessInput,
     wellnessTotalData: wellnessTotal,
 
@@ -237,78 +282,73 @@ defineData(){
       max: rpeSummaryMax
     },
 
-
+    //set insights state
     insightsDescriptionData: insightsDescription,
     insightsValueData: insightsValue,
 
+    //map data for wellness graph
     barData:{
       labels:wellnessLabels,
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
-    }]
-  },
+    }]},
 
-    // workloadData:{
-    //   labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-    //   datasets:[{
-    //     label: "Min Target",
-    //     //data: workload_target_min,
-    //     data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
-    //     lineTension: 0.3,
-    //     fill: 0,
-    //     backgroundColor:'#ABEBC6'},
-    //     {
-    //       label: "Score",
-    //       //data: workload_score,
-    //       data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
-    //       lineTension: 0.3,
-    //       borderColor: 'red',
-    //       fill: false,},
-    //       {
-    //         label: "Max Target",
-    //         //data: workload_target_max,
-    //         data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-    //         lineTension: 0.3,
-    //         fill: 0,
-    //         backgroundColor:'#ABEBC6'}
-    //
-    //       ],
-    //
-    //
-    //
-    //     },
-    //
-    //       // Data for rpe Chart
-    //       rpeData:{
-    //         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-    //         datasets:[{
-    //           label: "Min Target",
-    //           data: [1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
-    //           lineTension: 0.3,
-    //           fill: 0,
-    //           backgroundColor:'#ABEBC6'},
-    //           {
-    //             label: "Score",
-    //             data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
-    //             lineTension: 0.3,
-    //             borderColor: 'red',
-    //             fill: false,},
-    //             {
-    //               label: "Max Target",
-    //               data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-    //               lineTension: 0.3,
-    //               fill: 0,
-    //               backgroundColor:'#ABEBC6'}
-    //
-    //             ]}
-    //           });
-    //         }
+    //map data for workload line graph
+    workloadData:{
+      labels: workloadLabel,
+      datasets:[{
+        label: "Min Target",
+        //data: workload_target_min,
+        data:workloadMin,
+        lineTension: 0.3,
+        fill: 0,
+        backgroundColor:'#ABEBC6'},
+        {
+          label: "Score",
+          //data: workload_score,
+          data: workloadScore,
+          lineTension: 0.3,
+          borderColor: 'red',
+          fill: false,},
+          {
+            label: "Max Target",
+            //data: workload_target_max,
+            data: workloadMax,
+            lineTension: 0.3,
+            fill: 0,
+            backgroundColor:'#ABEBC6'}
+          ],
+        },
 
-  })
-}
+
+      // Data for rpe Chart
+      rpeData:{
+        labels: rpeLabel,
+        datasets:[{
+          label: "Min Target",
+          data: rpeMin,
+          lineTension: 0.3,
+          fill: 0,
+          backgroundColor:'#ABEBC6'},
+          {
+            label: "Score",
+            data: rpeScore,
+            lineTension: 0.3,
+            borderColor: 'red',
+            fill: false,},
+            {
+              label: "Max Target",
+              data: rpeMax,
+              lineTension: 0.3,
+              fill: 0,
+              backgroundColor:'#ABEBC6'}
+
+            ]}
+          });
+        }
 
         render() {
-          console.log(this.state.wellnessForm)
+
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -327,6 +367,7 @@ defineData(){
           return (
             <div>
             <Header changeProfile={this.changeProfile}
+                    logout={this.logout}
             />
             <Layout
             barData={this.state.barData}

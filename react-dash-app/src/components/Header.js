@@ -31,7 +31,10 @@ class Header extends Component{
                       {this.props.view === "profile" &&
                       <img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" />}
                       {this.props.view !== "profile" &&
+
                       <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}
+                      <a onClick={this.props.logout}>Logout</a>
+
                     </div>
 
                 </Col>
