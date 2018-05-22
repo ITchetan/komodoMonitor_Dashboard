@@ -100,7 +100,7 @@ class Layout extends Component{
           <div>
             <h4>Training Load</h4>
             <hr />
-            <PointerGauge name={"Wellness"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
+            <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
             <WorkloadChart workloadData={this.props.workloadData}/>
           </div>
         }
@@ -108,7 +108,7 @@ class Layout extends Component{
             <div>
               <h4>RPE Load</h4>
               <hr />
-              <p>&nbsp;</p>
+              <PointerGauge name={"RPE"} value={this.props.rpeSummary.value} gaugeLowerBound={this.props.rpeSummary.min} gaugeUpperBound={this.props.rpeSummary.max} gaugeMaxValue={10000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
               <RpeChart rpeData={this.props.rpeData}/>
             </div>
           }

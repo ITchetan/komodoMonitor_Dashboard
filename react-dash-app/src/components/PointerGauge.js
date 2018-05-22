@@ -198,7 +198,7 @@ class PointerGauge extends Component {
 
   render() {
     return (
-      <svg ref={node => this.node = node} viewBox="0 0 400 240">
+      <svg ref={node => this.node = node} viewBox="-40 0 400 240">
       </svg>
     )
   }

@@ -148,7 +148,12 @@ defineData(){
   let workloadSummaryValue = this.state.endPointSummary.training_load.score
   let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
   let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
-  console.log(workloadSummaryValue, workloadSummaryMin, workloadSummaryMax)
+
+  // Extract RPE summary dataset
+  let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
+  let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
+  let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
+  console.log(rpeSummaryMin, rpeSummaryValue, rpeSummaryMax)
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
@@ -224,6 +229,12 @@ defineData(){
       value: workloadSummaryValue,
       min: workloadSummaryMin,
       max: workloadSummaryMax
+    },
+
+    rpeSummaryData:{
+      value: rpeSummaryValue,
+      min: rpeSummaryMin,
+      max: rpeSummaryMax
     },
 
 
@@ -332,6 +343,7 @@ defineData(){
             playerLastData={this.state.playerLastData}
             wellnessTotal={this.state.wellnessTotalData}
             workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
             />
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
