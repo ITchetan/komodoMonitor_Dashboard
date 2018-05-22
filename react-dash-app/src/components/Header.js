@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, CardBody, CardHeader} from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import { Container, Row, Col } from 'reactstrap';
 import '../App.css';
 
 class Header extends Component{
@@ -29,7 +28,7 @@ class Header extends Component{
 
                     <div style={{ textAlign: 'center' }}>
                       {this.props.view === "profile" &&
-                      <img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" />}
+                      <img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80"  />}
                       {this.props.view !== "profile" &&
 
                       <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}

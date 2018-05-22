@@ -5,9 +5,6 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness';
 import Loading from "./components/Loading";
-import PlayerProfile from './components/PlayerProfile';
-
-
 
 // Main function to display content
 class App extends Component {
@@ -234,7 +231,6 @@ defineData(){
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
-  let insightsType = [];
   let insightsDescription = [];
   let insightsValue = [];
 
