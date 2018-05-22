@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness'
+import ModalFormRPE from './components/ModalFormRPE'
+
 import Loading from "./components/Loading";
 
 
@@ -281,6 +283,7 @@ defineData(){
             insightsValueData={this.state.insightsValueData}
             />
             <ModalFormWellness profileName = " Chris"/>
+            <ModalFormRPE profileName = " Chris"/>
 
             </div>
           );
