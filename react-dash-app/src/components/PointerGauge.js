@@ -111,7 +111,8 @@ class PointerGauge extends Component {
       }
 
       // Add labels
-      var dataset = [{metric:name, value: value}]
+      var valueLabel = value.toFixed(0)
+      var dataset = [{metric:name, value: valueLabel}]
 
       var texts =  chart.selectAll("text")
                   .data(dataset)

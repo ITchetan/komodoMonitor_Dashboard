@@ -58,35 +58,38 @@ class Layout extends Component{
       <Col sm={2} className="d-flex">
         <Col className="Column">
         <div style={{ textAlign: 'center' }}>
-          <h5>Summary</h5>
+
             {this.props.view === "home" &&
           <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
           <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Summary</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Training Load</h5>
+
           {this.props.view === "workload" &&
           <HeartPulseIcon size={60} color="#d40000" />}
           {this.props.view !== "workload" &&
           <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+          <h5>Training Load</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Wellness</h5>
           {this.props.view === "wellness" &&
           <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
           <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Wellness</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>RPE Load</h5>
+
           {this.props.view === "rpe" &&
           <RunFastIcon size={60} color="#d40000" />}
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>RPE Load</h5>
           <hr />
         </div>
 
