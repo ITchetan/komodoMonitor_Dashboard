@@ -163,13 +163,10 @@ defineData(){
   wellnessLabels.pop();
 
   for (let score in wellnessValues) {
-    console.log(wellnessValues[score])
     wellnessTotal = wellnessTotal + wellnessValues[score]
-    console.log(wellnessTotal)
   }
 
-
-  // Extract workload summary dataset
+    // Extract workload summary dataset
   let workloadSummaryValue = this.state.endPointSummary.training_load.score
   let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
   let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
@@ -178,7 +175,62 @@ defineData(){
   let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
   let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
   let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
-  console.log(rpeSummaryMin, rpeSummaryValue, rpeSummaryMax)
+
+  // Komodo number generation
+
+  // Wellness percentage
+
+  let wellnessPercent
+  let wellnessThreshold = 15
+  let wellnessCalc = wellnessTotal / wellnessThreshold
+  if (wellnessCalc <= 1 ) {
+    wellnessPercent = 1
+  } else {
+    wellnessPercent = 2 - wellnessCalc
+    if (wellnessPercent < 0) {
+      wellnessPercent = 0
+    }
+  }
+
+
+  // Workload percentage
+
+  let workloadPercent
+  let workloadCalc
+  if (workloadSummaryValue < workloadSummaryMin) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMin
+    workloadPercent = workloadCalc
+  } else if (workloadSummaryValue > workloadSummaryMax) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMax
+    workloadPercent = 2 - workloadCalc
+    if (workloadPercent < 0) {
+      workloadPercent = 0
+    }
+  } else {
+    workloadPercent = 1
+  }
+
+  // RPE percentage
+
+  let rpePercent
+  let rpeCalc
+  if (rpeSummaryValue < rpeSummaryMin) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMin
+    rpePercent = rpeCalc
+  } else if (rpeSummaryValue > rpeSummaryMax) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMax
+    rpePercent = 2 - rpeCalc
+    if (rpePercent < 0) {
+      rpePercent = 0
+    }
+  } else {
+    rpePercent = 1
+  }
+
+  // Calculate Komodo Number
+
+  let komodoPercent = (wellnessPercent + workloadPercent + rpePercent) / 3
+
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
@@ -282,7 +334,17 @@ defineData(){
       max: rpeSummaryMax
     },
 
+
+    komodoNumberData:{
+      total: komodoPercent,
+      workload: workloadPercent,
+      wellness: wellnessPercent,
+      rpe: rpePercent
+    },
+
+
     //set insights state
+
     insightsDescriptionData: insightsDescription,
     insightsValueData: insightsValue,
 
@@ -385,6 +447,7 @@ defineData(){
             wellnessTotal={this.state.wellnessTotalData}
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
+            komodoNumber={this.state.komodoNumberData}
             />
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>

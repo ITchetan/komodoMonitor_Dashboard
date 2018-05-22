@@ -31,8 +31,23 @@ class Layout extends Component{
 
 
   //chart is drown here
-  render()
-  {
+  render() {
+    let komodoScore = this.props.komodoNumber.total
+    komodoScore = komodoScore*100
+    komodoScore = komodoScore.toFixed(0)
+
+    let workloadScore = this.props.komodoNumber.workload
+    workloadScore = workloadScore*100
+    workloadScore = workloadScore.toFixed(0)
+
+    let wellnessScore = this.props.komodoNumber.wellness
+    wellnessScore = wellnessScore*100
+    wellnessScore = wellnessScore.toFixed(0)
+
+    let rpeScore = this.props.komodoNumber.rpe
+    rpeScore = rpeScore*100
+    rpeScore = rpeScore.toFixed(0)
+
     return (
   <div className="Layout">
   <Container fluid={false}>
@@ -43,35 +58,38 @@ class Layout extends Component{
       <Col sm={2} className="d-flex">
         <Col className="Column">
         <div style={{ textAlign: 'center' }}>
-          <h5>Summary</h5>
+
             {this.props.view === "home" &&
           <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
           <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Summary</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Training Load</h5>
+
           {this.props.view === "workload" &&
           <HeartPulseIcon size={60} color="#d40000" />}
           {this.props.view !== "workload" &&
           <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+          <h5>Training Load</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Wellness</h5>
           {this.props.view === "wellness" &&
           <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
           <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Wellness</h5>
           <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>RPE Load</h5>
+
           {this.props.view === "rpe" &&
           <RunFastIcon size={60} color="#d40000" />}
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>RPE Load</h5>
           <hr />
         </div>
 
@@ -85,9 +103,10 @@ class Layout extends Component{
               <h3>Welcome back, Chris</h3>
               <hr />
               <p>&nbsp;</p>
-              <h4>Your Komodo Number is 33</h4>
+              <h4>Your Komodo Number is {komodoScore}</h4>
               <p>&nbsp;</p>
-              <GaugeChart />
+              <GaugeChart value={komodoScore} />
+              <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
             </div>}
           {this.props.view === "wellness" &&
             <div>

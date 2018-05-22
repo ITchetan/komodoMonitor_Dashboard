@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import Gauge from 'react-svg-gauge';
 
-class GaugeChart extends Component {
-    render() {
-        return (
+const GaugeChart = (props) => (
             <div text-align="center">
-                <Gauge value={33} width={400} height={240} label="" />
+                <Gauge value={props.value} width={400} height={240} label="" />
             </div>
         );
-    }
-}
 
 export default GaugeChart;
