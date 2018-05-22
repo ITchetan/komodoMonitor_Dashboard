@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie, HorizontalBar} from 'react-chartjs-2';
+import {HorizontalBar} from 'react-chartjs-2';
 
 class BarChart extends Component{
   constructor(props){
@@ -14,7 +14,7 @@ class BarChart extends Component{
     displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
-    
+
   }
 
   render()
