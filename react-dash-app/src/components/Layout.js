@@ -7,9 +7,11 @@ import '../App.css';
 import BarChart from './wellnessChart'
 import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
-
 import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
+import WellnessDoughnut from './WellnessDoughnut'
+import RpeDoughnut from './RpeDoughnut'
+import WorkloadDoughnut from './WorkloadDoughnut'
 
 class Layout extends Component{
   constructor(props){
@@ -81,14 +83,32 @@ class Layout extends Component{
       <Col sm={6} className="d-flex">
         <Col className="text-center Column">
           {this.props.view === "home" &&
+          <div>
+            <h3>Welcome back, Chris</h3>
+            <hr />
+            <h4>Your Komodo Number is 33</h4>
+            <GaugeChart />
+            <hr />
             <div>
-              <h3>Welcome back, Chris</h3>
-              <hr />
-              <p>&nbsp;</p>
-              <h4>Your Komodo Number is 33</h4>
-              <p>&nbsp;</p>
-              <GaugeChart />
-            </div>}
+              <Row>
+                <Col sm={4}>
+                <div>
+                  <h5> 80% </h5>
+                </div>
+                <WorkloadDoughnut workloadDoughnutData={this.props.workloadDoughnutData}/>
+                <h5> Training Load </h5>
+                </Col>
+                <Col sm={4}>
+                <WellnessDoughnut wellnessDoughnutData={this.props.wellnessDoughnutData}/>
+                <h5> Wellness </h5>
+                </Col>
+                <Col sm={4}>
+                <RpeDoughnut rpeDoughnutData={this.props.rpeDoughnutData}/>
+                <h5> RPE Load </h5>
+                </Col>
+              </Row>
+            </div>
+          </div>}
           {this.props.view === "wellness" &&
             <div>
             <h4>Wellness</h4>

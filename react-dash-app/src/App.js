@@ -304,6 +304,37 @@ defineData(){
     //           });
     //         }
 
+    // Data for Doughnut Charts
+        wellnessDoughnutData:{
+                datasets:[{
+                    label: "score",
+                    data: [80],
+                    backgroundColor:'green'
+                    },
+                    {
+                      label: "total",
+                      data: [100],
+                      backgroundColor:'red'
+                    }
+                ]},
+
+          rpeDoughnutData:{
+                  datasets:[{
+                      label: "score",
+                      data: [80],
+                      backgroundColor:'green'
+                      }
+                  ]},
+
+            workloadDoughnutData:{
+                    datasets:[{
+                        label: "score",
+                        data: [80],
+                        backgroundColor:'green'
+                        }
+                    ]}
+
+
   })
 }
 
@@ -344,6 +375,9 @@ defineData(){
             wellnessTotal={this.state.wellnessTotalData}
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
+            wellnessDoughnutData={this.state.wellnessDoughnutData}
+            rpeDoughnutData={this.state.rpeDoughnutData}
+            workloadDoughnutData={this.state.workloadDoughnutData}
             />
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
