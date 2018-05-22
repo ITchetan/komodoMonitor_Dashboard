@@ -15,7 +15,7 @@ class App extends Component {
     super();
     //setting initial state of the react app
     this.state = {
-      value: "",
+      loginToken: {},
       email: "",
       password: "",
       page: "login",
@@ -24,8 +24,9 @@ class App extends Component {
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
-      playerfirstData: {},
+      playerFirstData: {},
       playerLastData: {},
+      wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
       endPointWellness: {},
@@ -67,8 +68,7 @@ class App extends Component {
 
 
   //receive email and password from login page
-
-  getLogin(emailData, passwordData){
+  getLogin(emailData, passwordData,){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
     //enter laoding state after user and pass have been received
@@ -84,12 +84,13 @@ class App extends Component {
   }
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe){
+  loadingData(summary, players, wellness, workload, rpe, token){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointWellness: wellness,
       endPointWorkload: workload,
-      endPointRpe: rpe,})
+      endPointRpe: rpe,
+      loginToken: token,})
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
@@ -121,12 +122,38 @@ defineData(){
   let dataWellness = this.state.endPointSummary.wellness
   let wellnessLabels = [];
   let wellnessValues = [];
-  for (let items in dataWellness) {
-    wellnessLabels.push(items);
-    wellnessValues.push(dataWellness[items]);
+  let wellnessInput = [];
+  let wellnessTotal = 0;
+
+
+  for (let item in dataWellness) {
+    wellnessLabels.push(item);
+    wellnessValues.push(dataWellness[item]);
+
+    if (item === 'input_due') {
+      wellnessInput = dataWellness[item]
+    }
   }
   wellnessValues.pop();
   wellnessLabels.pop();
+
+  for (let score in wellnessValues) {
+    console.log(wellnessValues[score])
+    wellnessTotal = wellnessTotal + wellnessValues[score]
+    console.log(wellnessTotal)
+  }
+
+
+  // Extract workload summary dataset
+  let workloadSummaryValue = this.state.endPointSummary.training_load.score
+  let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
+  let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
+
+  // Extract RPE summary dataset
+  let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
+  let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
+  let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
+  console.log(rpeSummaryMin, rpeSummaryValue, rpeSummaryMax)
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
@@ -194,6 +221,21 @@ defineData(){
     playerIdData: playerId,
     playerFirstData: playerFirst,
     playerLastData: playerLast,
+
+    wellnessForm: wellnessInput,
+    wellnessTotalData: wellnessTotal,
+
+    workloadSummaryData:{
+      value: workloadSummaryValue,
+      min: workloadSummaryMin,
+      max: workloadSummaryMax
+    },
+
+    rpeSummaryData:{
+      value: rpeSummaryValue,
+      min: rpeSummaryMin,
+      max: rpeSummaryMax
+    },
 
 
     insightsDescriptionData: insightsDescription,
@@ -266,6 +308,7 @@ defineData(){
 }
 
         render() {
+          console.log(this.state.wellnessForm)
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -298,9 +341,13 @@ defineData(){
             insightsValueData={this.state.insightsValueData}
             playerFirstData={this.state.playerFirstData}
             playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
             />
-            <ModalFormWellness profileName = " Chris"/>
-
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
             </div>
           );
         }

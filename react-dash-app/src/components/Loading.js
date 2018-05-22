@@ -37,6 +37,7 @@ class Loading extends Component {
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
+                            this.state.tokenData,
                           );
                         }
   }
