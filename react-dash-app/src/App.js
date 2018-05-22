@@ -3,9 +3,9 @@ import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import ModalFormWellness from './components/ModalFormWellness'
+import ModalFormWellness from './components/ModalFormWellness';
 import Loading from "./components/Loading";
-import PlayerProfile from './components/PlayerProfile'
+import PlayerProfile from './components/PlayerProfile';
 
 
 
@@ -44,6 +44,7 @@ class App extends Component {
     this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
+    this.logout = this.logout.bind(this);
 
   }
 //functions to change the state of the page
@@ -65,6 +66,29 @@ class App extends Component {
 
   changeProfile(){
     this.setState({ view: 'profile'})
+  }
+
+  logout(){
+    this.setState({
+    loginToken: {},
+    email: "",
+    password: "",
+    page: "login",
+    barData:{},
+    chartData:{},
+    rpeData: {},
+    insightsDescriptionData: {},
+    insightsValueData: {},
+    playerIdData: {},
+    playerFirstData: {},
+    playerLastData: {},
+    wellnessForm: {},
+    endPointSummary: {},
+    endPointPlayers: {},
+    endPointWellness: {},
+    endPointWorkload: {},
+    endPointRpe: {},
+    view: 'home', })
   }
 
 
@@ -177,6 +201,7 @@ defineData(){
     }
   }
 
+  //map weekly rpe data to variables
   let dataRpe = this.state.endPointRpe.data;
   let rpeLabel = [];
   let rpeScore = [];
@@ -196,12 +221,6 @@ defineData(){
       }
     }
   }
-  console.log(dataRpe)
-  console.log(rpeLabel)
-  console.log(rpeScore)
-  console.log(rpeMin)
-  console.log(rpeMax)
-
 
   //set colors for the wellness graph
   let bar_colour = [];
@@ -216,7 +235,6 @@ defineData(){
     else if (wellnessValues[i]===5) {
       bar_colour.push('#cc3232')
     }
-
   }
 
   this.setState({
@@ -295,7 +313,7 @@ defineData(){
         }
 
         render() {
-          console.log(this.state.wellnessForm)
+
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -314,6 +332,7 @@ defineData(){
           return (
             <div>
             <Header changeProfile={this.changeProfile}
+                    logout={this.logout}
             />
             <Layout
             barData={this.state.barData}
