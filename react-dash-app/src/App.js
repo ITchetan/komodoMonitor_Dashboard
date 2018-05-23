@@ -41,7 +41,6 @@ class App extends Component {
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
     this.getLogin = this.getLogin.bind(this);
-    this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
     this.logout = this.logout.bind(this);
@@ -93,20 +92,13 @@ class App extends Component {
 
 
   //receive email and password from login page
-  getLogin(emailData, passwordData,){
-    this.setState({ email: emailData })
-    this.setState({ password: passwordData})
+  getLogin(tokenData){
+    this.setState({ loginToken: tokenData })
     //enter laoding state after user and pass have been received
     this.setState({ page: "loading"})
   };
 
-  skipLogin() {
-    let emailData = "player2@gmail.com"
-    let passwordData = "abc123"
-    this.setState({ email: emailData })
-    this.setState({ password: passwordData})
-    this.setState({ page: "loading" })
-  }
+
 
   //recieve fetched data from loading page and set them into current state of app.js
   loadingData(summary, players, wellness, workload, rpe, token){
@@ -175,8 +167,6 @@ defineData(){
   let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
   let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
   let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
-<<<<<<< HEAD
-=======
 
   // Komodo number generation
 
@@ -233,7 +223,6 @@ defineData(){
 
   let komodoPercent = (wellnessPercent + workloadPercent + rpePercent) / 3
 
->>>>>>> sprint-week-3
 
   //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
@@ -424,7 +413,7 @@ defineData(){
           else if (this.state.page === "loading") {
             return(
               <div className="Loading">
-              <Loading loadingData={this.loadingData} loginEmail={this.state.email} loginPass={this.state.password}/>
+              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken}/>
               </div>
             )
           }

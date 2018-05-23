@@ -17,28 +17,54 @@ class Login extends Component{
   constructor(props){
     super(props);
     this.state = {
-      inputField: '',
+      emailField: '',
       passField: '',
+      tokenData: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.handlePassChange = this.handlePassChange.bind(this);
+    this.skipLogin = this.skipLogin.bind(this);
   }
 
   submitHandler(evt) {
     evt.preventDefault();
-    this.props.handlerEmail(this.state.inputField, this.state.passField);
-
-    this.setState({ inputField: '' });
-    this.setState({ passField: ''});
+    this.loginData()
+    // this.setState({ emailField: '' });
+    // this.setState({ passField: ''});
   }
 
     handleChange(event) {
-    this.setState({inputField: event.target.value});
+    this.setState({emailField: event.target.value});
   }
     handlePassChange(event) {
     this.setState({passField: event.target.value});
     }
+
+    skipLogin(tokenData) {
+      let emailData = "player2@gmail.com"
+      let passwordData = "abc123"
+      this.setState({ emailField: emailData })
+      this.setState({ passField: passwordData})
+    }
+
+loginData(){
+  fetch('https://app.komodomonitr.com/api/v1/users/login', {
+    body: JSON.stringify({
+      "email": this.state.emailField,
+      "password": this.state.passField,
+    }), // must match 'Content-Type' header
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST',
+  })
+  .then(response => response.json())
+
+  .then(data => {this.setState({tokenData: data.token})
+    this.props.handlerEmail(this.state.tokenData)})
+}
+
 
 
   //chart is drown here
@@ -65,7 +91,7 @@ class Login extends Component{
             <p>Email</p>
             <input type="text"
                    id="theInput"
-                   value={this.state.inputField}
+                   value={this.state.emailField}
                    onChange={this.handleChange}
                     />
               <p>Password</p>
@@ -78,7 +104,7 @@ class Login extends Component{
             <input type="submit" />
           </form>
             </Col>
-          <button onClick={this.props.skipLogin}>
+          <button onClick={this.skipLogin}>
           </button>
       </Row>
     </Container>
