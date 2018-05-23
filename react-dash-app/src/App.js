@@ -351,6 +351,7 @@ defineData(){
       labels:wellnessLabels,
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
+
     }]},
 
     //map data for workload line graph
@@ -407,6 +408,100 @@ defineData(){
           });
         }
 
+    }]
+  },
+
+    // workloadData:{
+    //   labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
+    //   datasets:[{
+    //     label: "Min Target",
+    //     //data: workload_target_min,
+    //     data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
+    //     lineTension: 0.3,
+    //     fill: 0,
+    //     backgroundColor:'#ABEBC6'},
+    //     {
+    //       label: "Score",
+    //       //data: workload_score,
+    //       data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
+    //       lineTension: 0.3,
+    //       borderColor: 'red',
+    //       fill: false,},
+    //       {
+    //         label: "Max Target",
+    //         //data: workload_target_max,
+    //         data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
+    //         lineTension: 0.3,
+    //         fill: 0,
+    //         backgroundColor:'#ABEBC6'}
+    //
+    //       ],
+    //
+    //
+    //
+    //     },
+    //
+    //       // Data for rpe Chart
+    //       rpeData:{
+    //         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
+    //         datasets:[{
+    //           label: "Min Target",
+    //           data: [1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
+    //           lineTension: 0.3,
+    //           fill: 0,
+    //           backgroundColor:'#ABEBC6'},
+    //           {
+    //             label: "Score",
+    //             data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
+    //             lineTension: 0.3,
+    //             borderColor: 'red',
+    //             fill: false,},
+    //             {
+    //               label: "Max Target",
+    //               data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
+    //               lineTension: 0.3,
+    //               fill: 0,
+    //               backgroundColor:'#ABEBC6'}
+    //
+    //             ]}
+    //           });
+    //         }
+
+    // Data for Doughnut Charts
+        wellnessDoughnutData:{
+                datasets:[{
+                    label: "score",
+                    data: [80],
+                    backgroundColor:'green'
+                    },
+                    {
+                      label: "total",
+                      data: [100],
+                      backgroundColor:'red'
+                    }
+                ]},
+
+          rpeDoughnutData:{
+                  datasets:[{
+                      label: "score",
+                      data: [80],
+                      backgroundColor:'green'
+                      }
+                  ]},
+
+            workloadDoughnutData:{
+                    datasets:[{
+                        label: "score",
+                        data: [80],
+                        backgroundColor:'green'
+                        }
+                    ]}
+
+
+  })
+}
+
+
         render() {
 
           if (this.state.page === "login") {
@@ -445,7 +540,9 @@ defineData(){
             wellnessTotal={this.state.wellnessTotalData}
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
+
             komodoNumber={this.state.komodoNumberData}
+
             />
 
             <ModalFormRPE profileName = " Chris"/>

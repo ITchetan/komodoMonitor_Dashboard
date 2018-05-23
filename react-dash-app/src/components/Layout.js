@@ -5,7 +5,17 @@ import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
 
+
+
+import BarChart from './wellnessChart'
+import WorkloadChart from './workloadChart'
+import RpeChart from './rpeChart'
+import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
+import WellnessLiquid from './WellnessLiquid'
+import WorkloadLiquid from './WorkloadLiquid'
+import RpeLiquid from './RpeLiquid'
+
 
 import WellnessPane from './WellnessPane'
 import WorkloadPane from './WorkloadPane'
@@ -100,7 +110,14 @@ class Layout extends Component{
         <Col className="text-center Column">
 
           {this.props.view === "home" &&
+          <div>
+            <h3>Welcome back, Chris</h3>
+            <hr />
+            <h4>Your Komodo Number is 33</h4>
+            <GaugeChart />
+            <hr />
             <div>
+
               <h3>Welcome back, Chris</h3>
               <hr />
               <p>&nbsp;</p>
@@ -109,6 +126,21 @@ class Layout extends Component{
               <GaugeChart value={komodoScore} />
               <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
             </div>}
+
+
+              <Row>
+                <Col sm={4}>
+                <WorkloadLiquid />
+                </Col>
+                <Col sm={4}>
+                <WellnessLiquid wellnessDoughnutData={this.props.wellnessDoughnutData}/>
+                </Col>
+                <Col sm={4}>
+                <RpeLiquid />
+                </Col>
+              </Row>
+            </div>
+          </div>}
 
           {this.props.view === "wellness" &&
             <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
