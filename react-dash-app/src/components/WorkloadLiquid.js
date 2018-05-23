@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import LiquidChart from 'react-liquidchart';
 
 const stops = [
@@ -11,6 +10,9 @@ const stops = [
 class WorkloadLiquid extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+
+    }
   }
 
   render() {
@@ -20,7 +22,7 @@ class WorkloadLiquid extends Component {
         <LiquidChart
             responsive
             legend="Training"
-            value={80}
+            value={this.props.value}
             amplitude={10}
             frequency={2}
             animationTime={1000}

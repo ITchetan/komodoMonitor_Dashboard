@@ -48,15 +48,12 @@ class Layout extends Component{
 
     let workloadScore = this.props.komodoNumber.workload
     workloadScore = workloadScore*100
-    workloadScore = workloadScore.toFixed(0)
 
     let wellnessScore = this.props.komodoNumber.wellness
     wellnessScore = wellnessScore*100
-    wellnessScore = wellnessScore.toFixed(0)
 
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
-    rpeScore = rpeScore.toFixed(0)
 
     return (
   <div className="Layout">
@@ -108,34 +105,28 @@ class Layout extends Component{
 
       <Col sm={6} className="d-flex">
         <Col className="text-center Column">
-
           {this.props.view === "home" &&
           <div>
-
-            <div>
-
-              <h3>Welcome back, Chris</h3>
+              <div>
+                <h3>Welcome back, Chris</h3>
+                <hr />
+                <h4>Your Komodo Number is</h4>
+                <GaugeChart value={komodoScore} />
+              </div>
               <hr />
-              <p>&nbsp;</p>
-              <h4>Your Komodo Number is {komodoScore}</h4>
-              <p>&nbsp;</p>
-              <GaugeChart value={komodoScore} />
-              <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
-            </div>}
-
-
-              <Row>
-                <Col sm={4}>
-                <WorkloadLiquid />
-                </Col>
-                <Col sm={4}>
-                <WellnessLiquid wellnessDoughnutData={this.props.wellnessDoughnutData}/>
-                </Col>
-                <Col sm={4}>
-                <RpeLiquid />
-                </Col>
-              </Row>
-
+              <div>
+                <Row>
+                  <Col sm={4}>
+                  <WorkloadLiquid value={workloadScore}/>
+                  </Col>
+                  <Col sm={4}>
+                  <WellnessLiquid value={wellnessScore}/>
+                  </Col>
+                  <Col sm={4}>
+                  <RpeLiquid value={rpeScore}/>
+                  </Col>
+                </Row>
+              </div>
           </div>}
 
           {this.props.view === "wellness" &&
