@@ -3,7 +3,9 @@ import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import ModalFormWellness from './components/ModalFormWellness';
+
+import ModalFormWellness from './components/ModalFormWellness'
+import ModalFormRPE from './components/ModalFormRPE'
 import Loading from "./components/Loading";
 
 // Main function to display content
@@ -445,9 +447,13 @@ defineData(){
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
             />
+
+            <ModalFormRPE profileName = " Chris"/>
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
+
             </div>
           );
         }
