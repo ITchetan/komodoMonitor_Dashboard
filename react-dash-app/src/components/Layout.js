@@ -111,11 +111,7 @@ class Layout extends Component{
 
           {this.props.view === "home" &&
           <div>
-            <h3>Welcome back, Chris</h3>
-            <hr />
-            <h4>Your Komodo Number is 33</h4>
-            <GaugeChart />
-            <hr />
+
             <div>
 
               <h3>Welcome back, Chris</h3>
@@ -139,7 +135,7 @@ class Layout extends Component{
                 <RpeLiquid />
                 </Col>
               </Row>
-            </div>
+
           </div>}
 
           {this.props.view === "wellness" &&
