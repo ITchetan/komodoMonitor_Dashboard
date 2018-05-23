@@ -9,9 +9,10 @@ import WorkloadChart from './workloadChart'
 import RpeChart from './rpeChart'
 import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
-import WellnessDoughnut from './WellnessDoughnut'
-import RpeDoughnut from './RpeDoughnut'
-import WorkloadDoughnut from './WorkloadDoughnut'
+import WellnessLiquid from './WellnessLiquid'
+import WorkloadLiquid from './WorkloadLiquid'
+import RpeLiquid from './RpeLiquid'
+
 
 class Layout extends Component{
   constructor(props){
@@ -92,19 +93,13 @@ class Layout extends Component{
             <div>
               <Row>
                 <Col sm={4}>
-                <div>
-                  <h5> 80% </h5>
-                </div>
-                <WorkloadDoughnut workloadDoughnutData={this.props.workloadDoughnutData}/>
-                <h5> Training Load </h5>
+                <WorkloadLiquid />
                 </Col>
                 <Col sm={4}>
-                <WellnessDoughnut wellnessDoughnutData={this.props.wellnessDoughnutData}/>
-                <h5> Wellness </h5>
+                <WellnessLiquid wellnessDoughnutData={this.props.wellnessDoughnutData}/>
                 </Col>
                 <Col sm={4}>
-                <RpeDoughnut rpeDoughnutData={this.props.rpeDoughnutData}/>
-                <h5> RPE Load </h5>
+                <RpeLiquid />
                 </Col>
               </Row>
             </div>
