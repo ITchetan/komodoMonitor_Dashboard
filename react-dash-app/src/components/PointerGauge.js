@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
-import { transition } from 'd3-transition';
 
 
 class PointerGauge extends Component {
@@ -31,12 +30,10 @@ class PointerGauge extends Component {
 
     (function() {
 
-    let barWidth, chart, chartInset, degToRad, repaintGauge, height, margin, numSections, padRad, percToDeg, percToRad, percent, radius, sectionIndx, totalPercent, width, sectionPerc, arc1, arc2, arc3, perc, arcStartRad, arcEndRad;
+    let barWidth, chart, chartInset, degToRad, repaintGauge, height, margin, padRad, percToDeg, percToRad, percent, radius, totalPercent, width, arc1, arc2, arc3, perc, arcStartRad, arcEndRad;
 
     percent = percentValue;
 
-    numSections = 1;
-    sectionPerc = 1 / numSections / 2;
     padRad = 0.025;
     chartInset = 30;
 
@@ -111,7 +108,8 @@ class PointerGauge extends Component {
       }
 
       // Add labels
-      var dataset = [{metric:name, value: value}]
+      var valueLabel = value.toFixed(0)
+      var dataset = [{metric:name, value: valueLabel}]
 
       var texts =  chart.selectAll("text")
                   .data(dataset)
