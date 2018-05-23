@@ -68,49 +68,68 @@ handleChangeMuscleSorness = (e) => {
   )
 }
 
-//sends data to the wellness post endpoint
-  sendData(){
-    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
-      body:
-      {
-      "nutrition": 0,
-      "energy": 0,
-      "stress": 0,
-      "sleep_quality": 0,
-      "sleep_amount": 0,
-      "muscle_pain": 0
-      }, // must match 'Content-Type' header
-      headers: {
-        'content-type': 'application/json',
-        'X-Auth-Token': this.props.loginToken
-      },
-      method: 'POST',
-    });
-
-    this.setState({
-      modal: !this.state.modal,
-    });
+// //sends data to the wellness post endpoint
+//   sendData(){
+//     fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
+//       body:
+//       {
+//       "nutrition": 0,
+//       "energy": 0,
+//       "stress": 0,
+//       "sleep_quality": 0,
+//       "sleep_amount": 0,
+//       "muscle_pain": 0
+//       }, // must match 'Content-Type' header
+//       headers: {
+//         'content-type': 'application/json',
+//         'X-Auth-Token': this.props.loginToken
+//       },
+//       method: 'POST',
+//     });
+//
+//     this.setState({
+//       modal: !this.state.modal,
+//     });
+//   }
 
 
 handleSubmit = (e) =>{
-  var Ntemp
+  var nutritionScale
   var nutrition = this.state.nutrition
+
   if (nutrition <= 20){
-    Ntemp = 1;
+    nutritionScale = 1;
   }
   else if (nutrition >20 && nutrition <=40) {
-    Ntemp = 2;
+    nutritionScale = 2;
   }
   else if (nutrition >40 && nutrition <= 60) {
-    Ntemp = 3;
-   
+    nutritionScale = 3;
+
   }
   else if (nutrition>60 && nutrition <=80) {
-    Ntemp = 4;
+    nutritionScale = 4;
   }
   else if (nutrition > 80) {
-    Ntemp =5;
+    nutritionScale =5;
   }
+
+  fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
+    body:
+    {
+    "nutrition": nutritionScale,
+    "energy": energyScale,
+    "stress": stressScale,
+    "sleep_quality": sleepQualityScale,
+    "sleep_amount": sleepAmountScale,
+    "muscle_pain": musclePainScale
+    }, // must match 'Content-Type' header
+    headers: {
+      'content-type': 'application/json',
+      'X-Auth-Token': this.props.loginToken
+    },
+    method: 'POST',
+  });
 
   this.setState({
     modal: !this.state.modal,
@@ -126,7 +145,6 @@ handleSubmit = (e) =>{
     return (
       <div className = "ModalForm">
       <Container>
-
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
               <Form onSubmit ={this.handleSubmit}>
                   <ModalHeader toggle={this.toggle}>Hi{this.props.profileName}, please complete your wellness survey!!</ModalHeader>
