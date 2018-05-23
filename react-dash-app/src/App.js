@@ -3,12 +3,10 @@ import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
+
 import ModalFormWellness from './components/ModalFormWellness'
 import ModalFormRPE from './components/ModalFormRPE'
-
 import Loading from "./components/Loading";
-
-
 
 // Main function to display content
 class App extends Component {
@@ -16,19 +14,24 @@ class App extends Component {
     super();
     //setting initial state of the react app
     this.state = {
-      value: "",
+      loginToken: {},
       email: "",
       password: "",
       page: "login",
       barData:{},
       chartData:{},
+      rpeData: {},
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
-      playerfirstData: {},
+      playerFirstData: {},
       playerLastData: {},
+      wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
       view: 'home',
 
     };
@@ -39,6 +42,8 @@ class App extends Component {
     this.getLogin = this.getLogin.bind(this);
     this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
+    this.changeProfile = this.changeProfile.bind(this);
+    this.logout = this.logout.bind(this);
 
   }
 //functions to change the state of the page
@@ -58,9 +63,39 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-  getLogin(emailData, passwordData){
+  changeProfile(){
+    this.setState({ view: 'profile'})
+  }
+
+  logout(){
+    this.setState({
+    loginToken: {},
+    email: "",
+    password: "",
+    page: "login",
+    barData:{},
+    chartData:{},
+    rpeData: {},
+    insightsDescriptionData: {},
+    insightsValueData: {},
+    playerIdData: {},
+    playerFirstData: {},
+    playerLastData: {},
+    wellnessForm: {},
+    endPointSummary: {},
+    endPointPlayers: {},
+    endPointWellness: {},
+    endPointWorkload: {},
+    endPointRpe: {},
+    view: 'home', })
+  }
+
+
+  //receive email and password from login page
+  getLogin(emailData, passwordData,){
     this.setState({ email: emailData })
     this.setState({ password: passwordData})
+    //enter laoding state after user and pass have been received
     this.setState({ page: "loading"})
   };
 
@@ -71,16 +106,24 @@ class App extends Component {
     this.setState({ password: passwordData})
     this.setState({ page: "loading" })
   }
-  loadingData(summary, players){
-    this.setState({ endPointSummary: summary })
-    this.setState({ endPointPlayers: players})
+
+  //recieve fetched data from loading page and set them into current state of app.js
+  loadingData(summary, players, wellness, workload, rpe, token){
+    this.setState({ endPointSummary: summary,
+      endPointPlayers: players,
+      endPointWellness: wellness,
+      endPointWorkload: workload,
+      endPointRpe: rpe,
+      loginToken: token,})
     this.defineData()
-    this.setState({ page: "main" })
+    //end loading and show main page
+    this.setState({page: "main"})
   }
 
-
+//take data from the states and configure the data to go into the page as graphs etc...
 defineData(){
 
+  //extract player data
   let dataPlayer = this.state.endPointPlayers
   let playerId = [];
   let playerFirst = [];
@@ -99,19 +142,97 @@ defineData(){
         playerLast.push(dict[key]);
       }}}
 
-
+  //extract wellness summary data
   let dataWellness = this.state.endPointSummary.wellness
   let wellnessLabels = [];
   let wellnessValues = [];
-  for (let items in dataWellness) {
-    wellnessLabels.push(items);
-    wellnessValues.push(dataWellness[items]);
+  let wellnessInput = [];
+  let wellnessTotal = 0;
+
+
+  for (let item in dataWellness) {
+    wellnessLabels.push(item);
+    wellnessValues.push(dataWellness[item]);
+
+    if (item === 'input_due') {
+      wellnessInput = dataWellness[item]
+    }
   }
   wellnessValues.pop();
   wellnessLabels.pop();
 
+  for (let score in wellnessValues) {
+    wellnessTotal = wellnessTotal + wellnessValues[score]
+  }
+
+    // Extract workload summary dataset
+  let workloadSummaryValue = this.state.endPointSummary.training_load.score
+  let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
+  let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
+
+  // Extract RPE summary dataset
+  let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
+  let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
+  let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
+
+  // Komodo number generation
+
+  // Wellness percentage
+
+  let wellnessPercent
+  let wellnessThreshold = 15
+  let wellnessCalc = wellnessTotal / wellnessThreshold
+  if (wellnessCalc <= 1 ) {
+    wellnessPercent = 1
+  } else {
+    wellnessPercent = 2 - wellnessCalc
+    if (wellnessPercent < 0) {
+      wellnessPercent = 0
+    }
+  }
+
+
+  // Workload percentage
+
+  let workloadPercent
+  let workloadCalc
+  if (workloadSummaryValue < workloadSummaryMin) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMin
+    workloadPercent = workloadCalc
+  } else if (workloadSummaryValue > workloadSummaryMax) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMax
+    workloadPercent = 2 - workloadCalc
+    if (workloadPercent < 0) {
+      workloadPercent = 0
+    }
+  } else {
+    workloadPercent = 1
+  }
+
+  // RPE percentage
+
+  let rpePercent
+  let rpeCalc
+  if (rpeSummaryValue < rpeSummaryMin) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMin
+    rpePercent = rpeCalc
+  } else if (rpeSummaryValue > rpeSummaryMax) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMax
+    rpePercent = 2 - rpeCalc
+    if (rpePercent < 0) {
+      rpePercent = 0
+    }
+  } else {
+    rpePercent = 1
+  }
+
+  // Calculate Komodo Number
+
+  let komodoPercent = (wellnessPercent + workloadPercent + rpePercent) / 3
+
+
+  //extract insights summary data
   let dataInsights = this.state.endPointSummary.insights
-  let insightsType = [];
   let insightsDescription = [];
   let insightsValue = [];
 
@@ -125,35 +246,55 @@ defineData(){
         insightsValue.push(dict[key]);
       }}}
 
-  // var workload_lbl = [];
-  // var workload_score = [];
-  // var workload_target_min = [];
-  // var workload_target_max = [];
-  //
-  // for (var i = 0; i < dataworkload.length; i++) {
-  //   var dict = dataworkload[i];
-  //   for (var key in dict) {
-  //     if (key === 'week') {
-  //       workload_lbl.push(dict[key]);
-  //     }
-  //     else if (key==='score') {
-  //       workload_score.push(dict[key]);
-  //     }
-  //
-  //     else if (key==='target_min') {
-  //       workload_target_min.push(dict[key]);
-  //     }
-  //
-  //     else if (key==='target_max') {
-  //       workload_target_max.push(dict[key]);
-  //     }
-  //   }
-  // }
-  // console.log(workload_lbl)
-  // console.log(workload_score)
-  // console.log(workload_target_min)
-  // console.log(workload_target_max)
-  //
+  //map weekly workload data to variables
+  let dataWorkload = this.state.endPointWorkload.data;
+  let workloadLabel = [];
+  let workloadScore = [];
+  let workloadMin = [];
+  let workloadMax = [];
+
+  for (let i = 0; i < dataWorkload.length; i++) {
+    let dict = dataWorkload[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        workloadLabel.push(dict[key]);
+      }
+      else if (key ==='score') {
+        workloadScore.push(dict[key]);
+      }
+
+      else if (key ==='target_min') {
+        workloadMin.push(dict[key]);
+      }
+
+      else if (key ==='target_max') {
+        workloadMax.push(dict[key]);
+      }
+    }
+  }
+
+  //map weekly rpe data to variables
+  let dataRpe = this.state.endPointRpe.data;
+  let rpeLabel = [];
+  let rpeScore = [];
+  let rpeMin = [];
+  let rpeMax = [];
+
+  for (let i = 0; i < dataRpe.length; i++) {
+    let dict = dataRpe[i];
+    rpeMin.push(this.state.endPointRpe.target_min)
+    rpeMax.push(this.state.endPointRpe.target_max)
+    for (let key in dict) {
+      if (key === 'week_start') {
+        rpeLabel.push(dict[key]);
+      }
+      else if (key === 'score') {
+        rpeScore.push(dict[key]);
+      }
+    }
+  }
+
+  //set colors for the wellness graph
   let bar_colour = [];
   for (let i = 0; i < wellnessValues.length; i++) {
 
@@ -166,92 +307,108 @@ defineData(){
     else if (wellnessValues[i]===5) {
       bar_colour.push('#cc3232')
     }
-
   }
 
   this.setState({
 
+    //set player data states
     playerIdData: playerId,
     playerFirstData: playerFirst,
     playerLastData: playerLast,
 
+    //set wellness state
+    wellnessForm: wellnessInput,
+    wellnessTotalData: wellnessTotal,
+
+    workloadSummaryData:{
+      value: workloadSummaryValue,
+      min: workloadSummaryMin,
+      max: workloadSummaryMax
+    },
+
+    rpeSummaryData:{
+      value: rpeSummaryValue,
+      min: rpeSummaryMin,
+      max: rpeSummaryMax
+    },
+
+
+    komodoNumberData:{
+      total: komodoPercent,
+      workload: workloadPercent,
+      wellness: wellnessPercent,
+      rpe: rpePercent
+    },
+
+
+    //set insights state
 
     insightsDescriptionData: insightsDescription,
     insightsValueData: insightsValue,
 
+    //map data for wellness graph
     barData:{
       labels:wellnessLabels,
-
-
       datasets:[{data:wellnessValues,
-        backgroundColor: bar_colour,
+      backgroundColor: bar_colour,
+    }]},
 
-  }]
+    //map data for workload line graph
+    workloadData:{
+      labels: workloadLabel,
+      datasets:[{
+        label: "Min Target",
+        //data: workload_target_min,
+        data:workloadMin,
+        lineTension: 0.3,
+        fill: 0,
+        backgroundColor:'#ABEBC6'},
+        {
+          label: "Score",
+          //data: workload_score,
+          data: workloadScore,
+          lineTension: 0.3,
+          borderColor: 'red',
+          fill: false,},
+          {
+            label: "Max Target",
+            //data: workload_target_max,
+            data: workloadMax,
+            lineTension: 0.3,
+            fill: 0,
+            backgroundColor:'#ABEBC6'}
+          ],
+        },
 
 
-  },
+      // Data for rpe Chart
+      rpeData:{
+        labels: rpeLabel,
+        datasets:[{
+          label: "Min Target",
+          data: rpeMin,
+          lineTension: 0.3,
+          fill: 0,
+          backgroundColor:'#ABEBC6'},
+          {
+            label: "Score",
+            data: rpeScore,
+            lineTension: 0.3,
+            borderColor: 'red',
+            fill: false,},
+            {
+              label: "Max Target",
+              data: rpeMax,
+              lineTension: 0.3,
+              fill: 0,
+              backgroundColor:'#ABEBC6'}
 
-    // workloadData:{
-    //   labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-    //   datasets:[{
-    //     label: "Min Target",
-    //     //data: workload_target_min,
-    //     data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
-    //     lineTension: 0.3,
-    //     fill: 0,
-    //     backgroundColor:'#ABEBC6'},
-    //     {
-    //       label: "Score",
-    //       //data: workload_score,
-    //       data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
-    //       lineTension: 0.3,
-    //       borderColor: 'red',
-    //       fill: false,},
-    //       {
-    //         label: "Max Target",
-    //         //data: workload_target_max,
-    //         data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-    //         lineTension: 0.3,
-    //         fill: 0,
-    //         backgroundColor:'#ABEBC6'}
-    //
-    //       ],
-    //
-    //
-    //
-    //     },
-    //
-    //       // Data for rpe Chart
-    //       rpeData:{
-    //         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-    //         datasets:[{
-    //           label: "Min Target",
-    //           data: [1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
-    //           lineTension: 0.3,
-    //           fill: 0,
-    //           backgroundColor:'#ABEBC6'},
-    //           {
-    //             label: "Score",
-    //             data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
-    //             lineTension: 0.3,
-    //             borderColor: 'red',
-    //             fill: false,},
-    //             {
-    //               label: "Max Target",
-    //               data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-    //               lineTension: 0.3,
-    //               fill: 0,
-    //               backgroundColor:'#ABEBC6'}
-    //
-    //             ]}
-    //           });
-    //         }
-  })
-}
+            ]}
+          });
+        }
 
         render() {
-          console.log(this.state.dataWellness);
-          console.log(this.state.email);
+
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -269,7 +426,9 @@ defineData(){
           else if (this.state.page === "main") {
           return (
             <div>
-            <Header />
+            <Header changeProfile={this.changeProfile}
+                    logout={this.logout}
+            />
             <Layout
             barData={this.state.barData}
             workloadData={this.state.workloadData}
@@ -281,9 +440,19 @@ defineData(){
             changeRpe={this.changeRpe}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
+            playerFirstData={this.state.playerFirstData}
+            playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
+            komodoNumber={this.state.komodoNumberData}
             />
-            <ModalFormWellness profileName = " Chris"/>
+
             <ModalFormRPE profileName = " Chris"/>
+
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
 
             </div>
           );

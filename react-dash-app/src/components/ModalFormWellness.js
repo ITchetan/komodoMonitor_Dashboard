@@ -19,6 +19,7 @@ class ModalFormWellness extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeNutrition = this.handleChangeNutrition.bind(this);
+    this.sendData = this.sendData.bind(this);
 
 
   }
@@ -67,8 +68,28 @@ handleChangeMuscleSorness = (e) => {
   )
 }
 
+//sends data to the wellness post endpoint
+  sendData(){
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
+      body:
+      {
+      "nutrition": 0,
+      "energy": 0,
+      "stress": 0,
+      "sleep_quality": 0,
+      "sleep_amount": 0,
+      "muscle_pain": 0
+      }, // must match 'Content-Type' header
+      headers: {
+        'content-type': 'application/json',
+        'X-Auth-Token': this.props.loginToken
+      },
+      method: 'POST',
+    });
 
-
+    this.setState({
+      modal: !this.state.modal,
+    });
 
 
 handleSubmit = (e) =>{
@@ -82,12 +103,11 @@ handleSubmit = (e) =>{
   }
   else if (nutrition >40 && nutrition <= 60) {
     Ntemp = 3;
+   
   }
-
   else if (nutrition>60 && nutrition <=80) {
     Ntemp = 4;
   }
-
   else if (nutrition > 80) {
     Ntemp =5;
   }
@@ -106,6 +126,7 @@ handleSubmit = (e) =>{
     return (
       <div className = "ModalForm">
       <Container>
+
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
               <Form onSubmit ={this.handleSubmit}>
                   <ModalHeader toggle={this.toggle}>Hi{this.props.profileName}, please complete your wellness survey!!</ModalHeader>
@@ -266,6 +287,7 @@ handleSubmit = (e) =>{
                   </ModalFooter>
 
                 </Form>
+
             </Modal>
         </Container>
       </div>

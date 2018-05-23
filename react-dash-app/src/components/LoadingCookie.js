@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class Loading extends Component {
+class LoadingCookie extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tokenData: {},
+      tokenData: document.cookie,
       endPointSummary: {},
       endPointPlayers: {},
       endPointWellness: {},
@@ -22,7 +22,8 @@ class Loading extends Component {
 
   componentDidMount(){
   //get username and password from app.js
-    this.getData(this.props.loginEmail, this.props.loginPass);
+    console.log(this.state.tokenData)
+    this.getData();
   }
 
   //send the state of the endpoints to app.js
@@ -44,23 +45,8 @@ class Loading extends Component {
   //fetching all the data from the endpoints and updating the states
   getData(email, password){
 
-    // login, get the token and set token state
-    fetch('https://app.komodomonitr.com/api/v1/users/login', {
-      body: JSON.stringify({
-        "email": email,
-        "password": password
-      }), // must match 'Content-Type' header
-      headers: {
-        'content-type': 'application/json'
-      },
-      method: 'POST',
-    })
-    .then(response => response.json())
-
-    .then(data => this.setState({tokenData: data.token}))
-
     //fetch players endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/players',{
+    fetch('https://app.komodomonitr.com/api/v1/players',{
       method: 'get',
       headers: {'X-Auth-Token': this.state.tokenData}
     })
@@ -70,7 +56,7 @@ class Loading extends Component {
         this.setState({ endPointPlayers: findUserResponse,
                         players: true})
         this.endLoadingHandler()
-        })})
+        })
 
     //fetch summary endpoint
     .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=4',{
@@ -131,10 +117,10 @@ render(){
 
   return(
     <div>
-    <p>loading...</p>
+    <p>loadingCookie...</p>
     </div>
   )
 }
 }
 
-export default Loading;
+export default LoadingCookie;

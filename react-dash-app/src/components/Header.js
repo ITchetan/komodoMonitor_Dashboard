@@ -1,29 +1,49 @@
-import React from 'react';
-import { Container, Row, Col, Card, CardBody, CardHeader} from 'reactstrap';
+import React, {Component} from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import '../App.css';
 
-const Header = () => (
+class Header extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
 
-  <div className="Header">
-  <Container  >
+    }
 
-      <Row>
+  }
+  render()
+  {
+      return (
+
+        <div className="Header">
+        <Container >
+          <Row>
+              <Col sm={10}>
+                  <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
+                  <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
+
+              </Col>
+
+                <Col sm={2}>
 
 
-        <Col sm={10}>
-            <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-            <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
+                    <div style={{ textAlign: 'center' }}>
+                      {this.props.view === "profile" &&
+                      <img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80"  />}
+                      {this.props.view !== "profile" &&
 
-        </Col>
+                      <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}
+                      <a onClick={this.props.logout}>Logout</a>
 
-          <Col sm={2}>
-          <button><img src={require('./fakePlayer.jpg')} height="80" width="80" /></button>
+                    </div>
 
-          </Col>
+                </Col>
 
-      </Row>
+            </Row>
 
-  </Container>
-  </div>
-);
+        </Container>
+        </div>
+      );
+    }
+}
 
 export default Header;
