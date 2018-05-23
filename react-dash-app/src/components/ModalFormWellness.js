@@ -68,33 +68,38 @@ handleChangeMuscleSorness = (e) => {
   )
 }
 
-// //sends data to the wellness post endpoint
-//   sendData(){
-//     fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
-//       body:
-//       {
-//       "nutrition": 0,
-//       "energy": 0,
-//       "stress": 0,
-//       "sleep_quality": 0,
-//       "sleep_amount": 0,
-//       "muscle_pain": 0
-//       }, // must match 'Content-Type' header
-//       headers: {
-//         'content-type': 'application/json',
-//         'X-Auth-Token': this.props.loginToken
-//       },
-//       method: 'POST',
-//     });
-//
-//     this.setState({
-//       modal: !this.state.modal,
-//     });
-//   }
+//sends data to the wellness post endpoint
+  sendData(){
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
+      body:
+      {
+      "nutrition": 0,
+      "energy": 0,
+      "stress": 0,
+      "sleep_quality": 0,
+      "sleep_amount": 0,
+      "muscle_pain": 0
+      }, // must match 'Content-Type' header
+      headers: {
+        'content-type': 'application/json',
+        'X-Auth-Token': this.props.loginToken
+      },
+      method: 'POST',
+    });
+
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
 
 
 handleSubmit = (e) =>{
-  var nutritionScale
+  var nutritionScale;
+  var stressScale;
+  var sleepAmountScale;
+  var sleepQualityScale;
+  var energyScale;
+  var musclePainScale;
   var nutrition = this.state.nutrition
 
   if (nutrition <= 20){
@@ -134,7 +139,7 @@ handleSubmit = (e) =>{
   this.setState({
     modal: !this.state.modal,
   });
-  console.log(Ntemp)
+  console.log(nutritionScale)
   e.preventDefault()
 
 }
