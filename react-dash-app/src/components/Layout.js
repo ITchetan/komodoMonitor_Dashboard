@@ -4,13 +4,6 @@ import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
-
-
-
-import BarChart from './wellnessChart'
-import WorkloadChart from './workloadChart'
-import RpeChart from './rpeChart'
-import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
 import WellnessLiquid from './WellnessLiquid'
 import WorkloadLiquid from './WorkloadLiquid'

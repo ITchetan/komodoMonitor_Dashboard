@@ -20,7 +20,7 @@ class PlayerProfile extends Component{
       <Container  >
 
             <Col >
-                <img className="profile" src={require('./fakePlayer.jpg')} height="250" width="250" />
+                <img className="profile" src={require('./fakePlayer.jpg')} alt="" height="250" width="250" />
             </Col>
 
             <br />
