@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import LiquidChart from 'react-liquidchart';
 
 const stops = [
@@ -20,7 +19,7 @@ class RpeLiquid extends Component {
         <LiquidChart
             responsive
             legend="RPE"
-            value={40}
+            value={this.props.value}
             amplitude={10}
             frequency={2}
             animationTime={1000}
