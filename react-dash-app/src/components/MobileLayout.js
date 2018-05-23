@@ -54,40 +54,43 @@ class MobileLayout extends Component{
 
 
     <Row>&nbsp;</Row>
-    <Row className="d-flex" className="Column">
+
+    <Row className="Column">
 
       <Col xs={3}>
         {this.props.view === "home" &&
-        <HomeIcon size={60} color= '#d40000' />}
+        <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
-        <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeHome}><HomeIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
       <Col xs={3}>
         {this.props.view === "workload" &&
-        <HeartPulseIcon size={60} color="#d40000" />}
+        <HeartPulseIcon size={36} color="#d40000" />}
         {this.props.view !== "workload" &&
-        <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+        <a onClick={this.props.changeWorkload}><HeartPulseIcon size={36} color="#C0C0C0" className="icon" /></a>}
       </Col>
 
       <Col xs={3}>
         {this.props.view === "wellness" &&
-        <MedicalBagIcon size={60} color="#d40000" />}
+        <MedicalBagIcon size={36} color="#d40000" />}
         {this.props.view !== "wellness" &&
-        <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeWellness}><MedicalBagIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
       <Col xs={3}>
         {this.props.view === "rpe" &&
-        <RunFastIcon size={60} color="#d40000" />}
+        <RunFastIcon size={36} color="#d40000" />}
         {this.props.view !== "rpe" &&
-        <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeRpe}><RunFastIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
       </Row>
 
-      <Row>
+      <Row>&nbsp;</Row>
 
-      <Col className="text-center d-flex Column">
+      <Row className="Column">
+
+      <Col xs={12} className="text-center">
 
       {this.props.view === "home" &&
         <div>
@@ -101,7 +104,7 @@ class MobileLayout extends Component{
         </div>}
 
         {this.props.view === "wellness" &&
-          <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
         }
 
         {this.props.view === "workload" &&
@@ -122,26 +125,32 @@ class MobileLayout extends Component{
         </div>}
 
         </Col>
-      </Col>
-      <Col sm={4} className="d-flex">
-        <Col className="Column">
+      </Row>
+
+      <Row>&nbsp;</Row>
+
+      <Row className="Column">
+      <Col>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
             </Col>
           </Row>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
             </Col>
           </Row>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
             </Col>
           </Row>
+
         </Col>
-      </Col>
     </Row>
     </Container>
 

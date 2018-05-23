@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
+import MobileLayout from "./components/MobileLayout"
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness';
 import Loading from "./components/Loading";
@@ -427,7 +428,7 @@ defineData(){
             <Header changeProfile={this.changeProfile}
                     logout={this.logout}
             />
-            <Layout
+            <MobileLayout
             barData={this.state.barData}
             workloadData={this.state.workloadData}
             rpeData={this.state.rpeData}
