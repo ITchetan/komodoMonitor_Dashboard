@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
-import MobileLayout from "./components/MobileLayout"
+import MobileLayout from "./components/MobileLayout";
+import MobileHeader from "./components/MobileHeader"
 import Login from "./components/Login";
 import ModalFormWellness from './components/ModalFormWellness';
 import Loading from "./components/Loading";
@@ -425,7 +426,7 @@ defineData(){
           else if (this.state.page === "main") {
           return (
             <div>
-            <Header changeProfile={this.changeProfile}
+            <MobileHeader changeProfile={this.changeProfile}
                     logout={this.logout}
             />
             <MobileLayout

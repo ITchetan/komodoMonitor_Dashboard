@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import CircularProgressBar from 'react-circular-progressbar'
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
+
 import '../App.css';
+import 'react-circular-progressbar/dist/styles.css'
 
 import PlayerProfile from './PlayerProfile'
 
@@ -94,13 +97,11 @@ class MobileLayout extends Component{
 
       {this.props.view === "home" &&
         <div>
-          <h3>Welcome back, Chris</h3>
+          <h4>Welcome back, Chris</h4>
           <hr />
-          <p>&nbsp;</p>
-          <h4>Your Komodo Number is {komodoScore}</h4>
-          <p>&nbsp;</p>
-          <GaugeChart value={komodoScore} />
-          <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
+          <Col xs={{ size:6, offset: 3}}>
+          <CircularProgressBar percentage={komodoScore} />
+          </Col>
         </div>}
 
         {this.props.view === "wellness" &&
