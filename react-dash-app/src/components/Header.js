@@ -28,10 +28,10 @@ class Header extends Component{
 
                     <div style={{ textAlign: 'center' }}>
                       {this.props.view === "profile" &&
-                      <img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80"  />}
+                      <img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80"  />}
                       {this.props.view !== "profile" &&
 
-                      <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} height="80" width="80" /></a>}
+                      <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80" /></a>}
                       <a onClick={this.props.logout}>Logout</a>
 
                     </div>

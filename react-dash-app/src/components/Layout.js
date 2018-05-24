@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import CircularProgressBar from 'react-circular-progressbar'
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
-
 import PlayerProfile from './PlayerProfile'
+import WellnessLiquid from './WellnessLiquid'
+import WorkloadLiquid from './WorkloadLiquid'
+import RpeLiquid from './RpeLiquid'
+
 
 import WellnessPane from './WellnessPane'
 import WorkloadPane from './WorkloadPane'
@@ -38,15 +42,12 @@ class Layout extends Component{
 
     let workloadScore = this.props.komodoNumber.workload
     workloadScore = workloadScore*100
-    workloadScore = workloadScore.toFixed(0)
 
     let wellnessScore = this.props.komodoNumber.wellness
     wellnessScore = wellnessScore*100
-    wellnessScore = wellnessScore.toFixed(0)
 
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
-    rpeScore = rpeScore.toFixed(0)
 
     return (
   <div className="Layout">
@@ -98,17 +99,30 @@ class Layout extends Component{
 
       <Col sm={6} className="d-flex">
         <Col className="text-center Column">
-
           {this.props.view === "home" &&
-            <div>
-              <h3>Welcome back, Chris</h3>
+          <div>
+              <div>
+                <h3>Welcome back, Chris</h3>
+                <hr />
+                <Col xs={{ size:6, offset: 3}}>
+                <CircularProgressBar percentage={komodoScore} />
+                </Col>
+              </div>
               <hr />
-              <p>&nbsp;</p>
-              <h4>Your Komodo Number is {komodoScore}</h4>
-              <p>&nbsp;</p>
-              <GaugeChart value={komodoScore} />
-              <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
-            </div>}
+              <div>
+                <Row>
+                  <Col sm={4}>
+                  <WorkloadLiquid value={workloadScore}/>
+                  </Col>
+                  <Col sm={4}>
+                  <WellnessLiquid value={wellnessScore}/>
+                  </Col>
+                  <Col sm={4}>
+                  <RpeLiquid value={rpeScore}/>
+                  </Col>
+                </Row>
+              </div>
+          </div>}
 
           {this.props.view === "wellness" &&
             <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>

@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
+import MobileLayout from "./components/MobileLayout";
+import MobileHeader from "./components/MobileHeader"
 import Login from "./components/Login";
 
 import ModalFormWellness from './components/ModalFormWellness'
+
 
 import Loading from "./components/Loading";
 import ModalFormRPE from './components/ModalFormRPE'
@@ -34,6 +37,7 @@ class App extends Component {
       endPointWorkload: {},
       endPointRpe: {},
       view: 'home',
+      width: window.innerWidth,
 
     };
     this.changeHome = this.changeHome.bind(this);
@@ -47,6 +51,21 @@ class App extends Component {
     this.logout = this.logout.bind(this);
 
   }
+
+// Listeners for resizing widow for mobile View
+componentWillMount() {
+  window.addEventListener('resize', this.handleWindowSizeChange)
+}
+
+componentWillUnmount() {
+  window.removeEventListener('resize', this.handleWindowSizeChange)
+}
+
+handleWindowSizeChange = () => {
+  this.setState({ width: window.innerWidth });
+}
+
+
 //functions to change the state of the page
   changeHome(){
     this.setState({ view: 'home' })
@@ -410,6 +429,9 @@ defineData(){
 
         render() {
 
+          const { width } = this.state
+          const isMobile = width <= 575
+
           if (this.state.page === "login") {
             return(
               <div className="Login">
@@ -424,6 +446,38 @@ defineData(){
               </div>
             )
           }
+          else if (this.state.page === "main" && isMobile) {
+          return (
+            <div>
+            <MobileHeader changeProfile={this.changeProfile}
+                    logout={this.logout}
+            />
+            <MobileLayout
+            barData={this.state.barData}
+            workloadData={this.state.workloadData}
+            rpeData={this.state.rpeData}
+            view={this.state.view}
+            changeHome={this.changeHome}
+            changeWorkload={this.changeWorkload}
+            changeWellness={this.changeWellness}
+            changeRpe={this.changeRpe}
+            changeProfile={this.changeProfile}
+            insightsDescriptionData={this.state.insightsDescriptionData}
+            insightsValueData={this.state.insightsValueData}
+            playerFirstData={this.state.playerFirstData}
+            playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
+            komodoNumber={this.state.komodoNumberData}
+            />
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
+            </div>
+          );
+        }
+
           else if (this.state.page === "main") {
           return (
             <div>
@@ -439,6 +493,7 @@ defineData(){
             changeWorkload={this.changeWorkload}
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
+            changeProfile={this.changeProfile}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
             playerFirstData={this.state.playerFirstData}
@@ -448,6 +503,7 @@ defineData(){
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
             />
+
 
     
 
