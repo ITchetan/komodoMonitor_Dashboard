@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie, HorizontalBar} from 'react-chartjs-2';
+import {HorizontalBar} from 'react-chartjs-2';
 
 class BarChart extends Component{
   constructor(props){
@@ -14,7 +14,7 @@ class BarChart extends Component{
     displayTitle:false,
     displayLegend: false,
     legendPosition:'right',
-    
+
   }
 
   render()
@@ -24,15 +24,20 @@ class BarChart extends Component{
 
         // here we tell chart to look for data in state
           data={this.props.barData}
+          width={80}
+        	height={300}
+
 
 
           options={{
+            maintainAspectRatio: false,
             title:{
               display:this.props.displayTitle,
               text:'Individualised Wellness',
 
               fontSize:25
             },
+
 
             legend:{
               display:this.props.displayLegend,

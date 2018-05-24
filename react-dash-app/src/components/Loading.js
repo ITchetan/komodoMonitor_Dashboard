@@ -71,7 +71,7 @@ class Loading extends Component {
         })
 
     //fetch summary endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=4',{
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
@@ -84,7 +84,7 @@ class Loading extends Component {
       })})
 
     //fetch wellness endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4',{
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
@@ -97,7 +97,7 @@ class Loading extends Component {
       })})
 
     //fetch workload endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=4',{
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
@@ -110,7 +110,7 @@ class Loading extends Component {
       })})
 
     //fetch rpe laod endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=4',{
+    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
