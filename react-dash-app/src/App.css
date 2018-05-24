@@ -43,6 +43,32 @@
   text-align: center;
 }
 
+.green
+{
+fill: #2dc937;
+}
+.orange
+{
+fill: #e7b416;
+}
+.red
+{
+  fill: #cc3232;
+}
+.blue
+{
+fill: #90C3D4;
+}
+
+.needle, .needle-center
+{
+fill: #000000;
+}
+    .text {
+        color: "#112864";
+        font-size: 16px;
+    }
+
 .SmallText {
   font-size: 0.8em;
 }
@@ -126,6 +152,23 @@
   fill: #d40000;
   cursor: pointer;
 }
+
+.profile {
+  border-radius: 50%;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+
+.modal-dialog {
+
+          width: 1800px;
+
+        }
+
+
 
 /* .Login {
   background: "../components/field-bg.59a5e231.jpg";

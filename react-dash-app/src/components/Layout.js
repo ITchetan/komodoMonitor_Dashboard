@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
-import GaugeChart from './GaugeChart'
+import CircularProgressBar from 'react-circular-progressbar'
 import Insight from './Insight'
 import '../App.css';
-import BarChart from './wellnessChart'
-import WorkloadChart from './workloadChart'
-import RpeChart from './rpeChart'
+import PlayerProfile from './PlayerProfile'
+import Liquid from './LiquidChart'
 
-// Import React components
-// import WellnessFlip from './WellnessFlip';
-// import WorkloadFlip from './WorkloadFlip';
-// import RpeFlip from './RPEFlip';
+
+import WellnessPane from './WellnessPane'
+import WorkloadPane from './WorkloadPane'
+import RpePane from './RpePane'
 
 class Layout extends Component{
   constructor(props){
@@ -22,6 +21,8 @@ class Layout extends Component{
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
+      playerFirstData: props.playerFirstData,
+      playerLastData: props.playerLastData
     }
 
   }
@@ -30,73 +31,117 @@ class Layout extends Component{
 
 
 
-  //chart is drown here
-  render()
-  {
-    console.log(this.props.insightsDescriptionData[0]);
-    console.log(this.props.view);
+  // Turn overall numbers into percentages with no decimal places
+  render() {
+    let komodoScore = this.props.komodoNumber.total
+    komodoScore = komodoScore*100
+    komodoScore = komodoScore.toFixed(0)
+
+    let workloadScore = this.props.komodoNumber.workload
+    workloadScore = workloadScore*100
+
+    let wellnessScore = this.props.komodoNumber.wellness
+    wellnessScore = wellnessScore*100
+
+    let rpeScore = this.props.komodoNumber.rpe
+    rpeScore = rpeScore*100
+
     return (
   <div className="Layout">
-  <Container fluid={false}>
-    <Row>&nbsp;</Row>
+  <Container fluid={true}>
+
+
+    <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
-      <Col sm={2} className="d-flex">
+      <Col sm={3} lg={2} className="d-flex">
         <Col className="Column">
         <div style={{ textAlign: 'center' }}>
-          <h5>Summary</h5>
+
             {this.props.view === "home" &&
           <HomeIcon size={60} color= '#d40000' />}
             {this.props.view !== "home" &&
           <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Summary</h5>
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Training Load</h5>
+
           {this.props.view === "workload" &&
           <HeartPulseIcon size={60} color="#d40000" />}
           {this.props.view !== "workload" &&
           <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+          <h5>Training Load</h5>
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>Wellness</h5>
           {this.props.view === "wellness" &&
           <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
           <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>Wellness</h5>
+          <hr />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h5>RPE Load</h5>
+
           {this.props.view === "rpe" &&
           <RunFastIcon size={60} color="#d40000" />}
           {this.props.view !== "rpe" &&
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+          <h5>RPE Load</h5>
+          <hr />
         </div>
-        </Col>
+
+      </Col>
       </Col>
 
-      <Col sm={6} className="d-flex">
+      <Col sm={5} lg={6} className="d-flex">
         <Col className="text-center Column">
           {this.props.view === "home" &&
-            <div>
-              <h3>Welcome back, Chris</h3>
-              <h4>Your Komodo Number is 33</h4>
-              <p>&nbsp;</p>
-              <GaugeChart />
-            </div>}
+          <div>
+              <div>
+                <h3>Welcome back, Chris</h3>
+                <hr />
+                <Col xs={{ size:6, offset: 3}}>
+                <CircularProgressBar percentage={komodoScore} />
+                </Col>
+              </div>
+              <hr />
+              <div>
+                <Row>
+                  <Col sm={4}>
+                  <Liquid value={workloadScore} legend={'Training'}/>
+                  </Col>
+                  <Col sm={4}>
+                  <Liquid value={wellnessScore} legend={'Wellness'}/>
+                  </Col>
+                  <Col sm={4}>
+                  <Liquid value={rpeScore} legend={'RPE'}/>
+                  </Col>
+                </Row>
+              </div>
+          </div>}
+
           {this.props.view === "wellness" &&
-            <Card>
-            <CardHeader><h4>Wellness</h4></CardHeader>
-            <CardBody><BarChart barData={this.props.barData}/></CardBody>
-            </Card>}
+            <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+          }
+
           {this.props.view === "workload" &&
-            <Card>
-            <CardHeader><h4>Workload</h4></CardHeader>
-            <CardBody><WorkloadChart workloadData={this.props.workloadData}/></CardBody>
-            </Card>}
-           {this.props.view === "rpe" &&
-            <Card>
-            <CardHeader><h4>RPE</h4></CardHeader>
-            <CardBody><RpeChart rpeData={this.props.rpeData}/></CardBody>
-            </Card>}
+          <WorkloadPane workloadSummary={this.props.workloadSummary} workloadData={this.props.workloadData} />
+          }
+
+          {this.props.view === "rpe" &&
+          <RpePane rpeSummary={this.props.rpeSummary} rpeData={this.props.rpeData} />
+          }
+
+          {this.props.view === "profile" &&
+          <div>
+            <h3>My Profile</h3>
+            <hr />
+            <PlayerProfile
+             playerFirstData={this.props.playerFirstData}
+             playerLastData={this.props.playerLastData}/>
+          </div>}
+
         </Col>
       </Col>
       <Col sm={4} className="d-flex">

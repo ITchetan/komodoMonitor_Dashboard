@@ -18,6 +18,8 @@ class WorkloadChart extends Component{
       <div className="lineChart">
           <Line
           // here we tell chart to look for data in state
+            width={80}
+          	height={60}
             data={this.props.workloadData}
             options={{
               title:{
@@ -27,13 +29,14 @@ class WorkloadChart extends Component{
                 fontSize:25
               },
               legend:{
-                display:true,
+                display:false,
                 position:'top'
               },
               scales: {
                 yAxes: [{
                     ticks: {
-                        min: 0
+                      suggestedMin: 0,
+                      suggestedMax: 12000
                     }
                 }]
               }

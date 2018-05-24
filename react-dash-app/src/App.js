@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Layout from "./components/Layout";
+import MobileLayout from "./components/MobileLayout";
+import MobileHeader from "./components/MobileHeader"
 import Login from "./components/Login";
+
 import ModalFormWellness from './components/ModalFormWellness'
 
 
-
+import Loading from "./components/Loading";
+import ModalFormRPE from './components/ModalFormRPE'
 
 // Main function to display content
 class App extends Component {
@@ -14,29 +18,53 @@ class App extends Component {
     super();
     //setting initial state of the react app
     this.state = {
-      value: "",
+      loginToken: {},
       email: "",
       password: "",
-      login: "true",
+      page: "login",
       barData:{},
       chartData:{},
+      rpeData: {},
       insightsDescriptionData: {},
       insightsValueData: {},
-      tokenData: {},
       playerIdData: {},
-      playerfirstData: {},
+      playerFirstData: {},
       playerLastData: {},
+      wellnessForm: {},
+      endPointSummary: {},
+      endPointPlayers: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
       view: 'home',
+      width: window.innerWidth,
+
     };
-    this.getData = this.getData.bind(this);
     this.changeHome = this.changeHome.bind(this);
     this.changeWorkload = this.changeWorkload.bind(this);
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
-    this.getEmail = this.getEmail.bind(this);
-    this.skipLogin = this.skipLogin.bind(this);
+    this.getLogin = this.getLogin.bind(this);
+    this.loadingData = this.loadingData.bind(this);
+    this.changeProfile = this.changeProfile.bind(this);
+    this.logout = this.logout.bind(this);
 
   }
+
+// Listeners for resizing widow for mobile View
+componentWillMount() {
+  window.addEventListener('resize', this.handleWindowSizeChange)
+}
+
+componentWillUnmount() {
+  window.removeEventListener('resize', this.handleWindowSizeChange)
+}
+
+handleWindowSizeChange = () => {
+  this.setState({ width: window.innerWidth });
+}
+
+
 //functions to change the state of the page
   changeHome(){
     this.setState({ view: 'home' })
@@ -54,256 +82,406 @@ class App extends Component {
     this.setState({ view: 'rpe'})
   }
 
-  getEmail(emailData, passwordData){
-    this.setState({ email: emailData })
-    this.setState({ password: passwordData})
-    this.setState({ login: "false"})
-    this.getData(emailData, passwordData);
-  };
-
-  skipLogin() {
-    this.setState({ login: "false" })
-    let emailData = "player2@gmail.com"
-    let passwordData = "abc123"
-    this.getData(emailData, passwordData);
+  changeProfile(){
+    this.setState({ view: 'profile'})
   }
 
-//function to fetch data from api and handle the data
-  getData(email, password){
-    // this.setState({ login: "false"})
-    let datajson = {}
-    let dataworkload = {}
-    let datainsights = {}
+  logout(){
+    this.setState({
+    loginToken: {},
+    email: "",
+    password: "",
+    page: "login",
+    barData:{},
+    chartData:{},
+    rpeData: {},
+    insightsDescriptionData: {},
+    insightsValueData: {},
+    playerIdData: {},
+    playerFirstData: {},
+    playerLastData: {},
+    wellnessForm: {},
+    endPointSummary: {},
+    endPointPlayers: {},
+    endPointWellness: {},
+    endPointWorkload: {},
+    endPointRpe: {},
+    view: 'home', })
+  }
 
-    fetch('http://app.komodomonitr.com/api/v1/users/login', {
-      body: JSON.stringify({
-        "email": email,
-        "password": password
-      }), // must match 'Content-Type' header
-      headers: {
-        'content-type': 'application/json'
-      },
-      method: 'POST',
-    })
-    .then(response => response.json())
 
-    .then(data => this.setState({tokenData: data.token}))
+  //receive email and password from login page
+  getLogin(tokenData, emailData, passwordData){
+    this.setState({ loginToken: tokenData,
+                    email: emailData,
+                    password: passwordData})
+    //enter laoding state after user and pass have been received
+    this.setState({ page: "loading", })
+  };
 
 
-    .then(token => {fetch('http://app.komodomonitr.com/api/v1/players',{
-      method: 'get',
-      headers: {'X-Auth-Token': this.state.tokenData}
-    })
-      .then(userResponse => userResponse.json())
 
-      .then((findUserResponse) =>{
-        console.log(findUserResponse)
-        let dataPlayer = findUserResponse
+  //recieve fetched data from loading page and set them into current state of app.js
+  loadingData(summary, players, wellness, workload, rpe,){
+    this.setState({ endPointSummary: summary,
+      endPointPlayers: players,
+      endPointWellness: wellness,
+      endPointWorkload: workload,
+      endPointRpe: rpe,
+      })
+    this.defineData()
+    //end loading and show main page
+    this.setState({page: "main"})
+  }
 
-        var playerId = [];
-        var playerFirst = [];
-        var playerLast = [];
+//take data from the states and configure the data to go into the page as graphs etc...
+defineData(){
 
-        for (var i = 0; i < dataPlayer.length; i++) {
-          var dict = dataPlayer[i];
-          for (var key in dict) {
-            if (key === 'user_id') {
-              playerId.push(dict[key]);
-            }
-            else if (key === 'fname') {
-              playerFirst.push(dict[key]);
-            }
-            else if (key === 'lname'){
-              playerLast.push(dict[key]);
-            }}}
+  //extract player data
+  let dataPlayer = this.state.endPointPlayers
+  let playerId = [];
+  let playerFirst = [];
+  let playerLast = [];
 
-          this.setState({
-
-            playerIdData: playerId,
-            playerFirstData: playerFirst,
-            playerLastData: playerLast,
-
-          })
-      })})
-
-    .then(token => {fetch('http://app.komodomonitr.com/api/v1/data/summary?userId=4',{
-      method: 'get',
-      headers: {'X-Auth-Token': this.state.tokenData}
-    })
-    .then(response => response.json())
-
-    .then((findresponse)=>
-    {
-      console.log(findresponse.wellness)
-      datajson = findresponse.wellness
-      dataworkload = findresponse.training_load
-      datainsights = findresponse.insights
-      console.log(datajson)
-      console.log(dataworkload)
-      console.log(findresponse)
-
-      var lbs = [];
-      var values = [];
-      for (var x in datajson) {
-        lbs.push(x);
-        values.push(datajson[x]);
+  for (let i = 0; i < dataPlayer.length; i++) {
+    let dict = dataPlayer[i];
+    for (let key in dict) {
+      if (key === 'user_id') {
+        playerId.push(dict[key]);
       }
-      values.pop();
-      lbs.pop();
-
-      var insightsType = [];
-      var insightsDescription = [];
-      var insightsValue = [];
-
-      for (var i = 0; i < datainsights.length; i++) {
-        var dict = datainsights[i];
-        for (var key in dict) {
-          if (key === 'description') {
-            insightsDescription.push(dict[key]);
-          }
-          else if (key === 'value'){
-            insightsValue.push(dict[key]);
-          }}}
-
-      var workload_lbl = [];
-      var workload_score = [];
-      var workload_target_min = [];
-      var workload_target_max = [];
-
-      for (var i = 0; i < dataworkload.length; i++) {
-        var dict = dataworkload[i];
-        for (var key in dict) {
-          if (key === 'week') {
-            workload_lbl.push(dict[key]);
-          }
-          else if (key==='score') {
-            workload_score.push(dict[key]);
-          }
-
-          else if (key==='target_min') {
-            workload_target_min.push(dict[key]);
-          }
-
-          else if (key==='target_max') {
-            workload_target_max.push(dict[key]);
-          }
-        }
+      else if (key === 'fname') {
+        playerFirst.push(dict[key]);
       }
-      console.log(workload_lbl)
-      console.log(workload_score)
-      console.log(workload_target_min)
-      console.log(workload_target_max)
+      else if (key === 'lname'){
+        playerLast.push(dict[key]);
+      }}}
 
-      var bar_colour = [];
-      for (var i = 0; i < values.length; i++) {
+  //extract wellness summary data
+  let dataWellness = this.state.endPointSummary.wellness
+  let wellnessLabels = [];
+  let wellnessValues = [];
+  let wellnessInput = [];
+  let wellnessTotal = 0;
 
-        if (values[i]===1 || values[i]===2 || values[i]===3) {
-          bar_colour.push('#2dc937')
-        }
-        else if (values[i] === 4) {
-          bar_colour.push('#e7b416')
-        }
-        else if (values[i]===5) {
-          bar_colour.push('#cc3232')
-        }
 
+  for (let item in dataWellness) {
+    wellnessLabels.push(item);
+    wellnessValues.push(dataWellness[item]);
+
+    if (item === 'input_due') {
+      wellnessInput = dataWellness[item]
+    }
+  }
+  wellnessValues.pop();
+  wellnessLabels.pop();
+
+  for (let score in wellnessValues) {
+    wellnessTotal = wellnessTotal + wellnessValues[score]
+  }
+
+    // Extract workload summary dataset
+  let workloadSummaryValue = this.state.endPointSummary.training_load.score
+  let workloadSummaryMin = this.state.endPointSummary.training_load.target_min
+  let workloadSummaryMax = this.state.endPointSummary.training_load.target_max
+
+  // Extract RPE summary dataset
+  let rpeSummaryValue = this.state.endPointSummary.rpe_load.score
+  let rpeSummaryMin = this.state.endPointSummary.rpe_load.target_min
+  let rpeSummaryMax = this.state.endPointSummary.rpe_load.target_max
+
+  // Komodo number generation
+
+  // Wellness percentage
+
+  let wellnessPercent
+  let wellnessThreshold = 15
+  let wellnessCalc = wellnessTotal / wellnessThreshold
+  if (wellnessCalc <= 1 ) {
+    wellnessPercent = 1
+  } else {
+    wellnessPercent = 2 - wellnessCalc
+    if (wellnessPercent < 0) {
+      wellnessPercent = 0
+    }
+  }
+
+
+  // Workload percentage
+
+  let workloadPercent
+  let workloadCalc
+  if (workloadSummaryValue < workloadSummaryMin) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMin
+    workloadPercent = workloadCalc
+  } else if (workloadSummaryValue > workloadSummaryMax) {
+    workloadCalc = workloadSummaryValue / workloadSummaryMax
+    workloadPercent = 2 - workloadCalc
+    if (workloadPercent < 0) {
+      workloadPercent = 0
+    }
+  } else {
+    workloadPercent = 1
+  }
+
+  // RPE percentage
+
+  let rpePercent
+  let rpeCalc
+  if (rpeSummaryValue < rpeSummaryMin) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMin
+    rpePercent = rpeCalc
+  } else if (rpeSummaryValue > rpeSummaryMax) {
+    rpeCalc = rpeSummaryValue / rpeSummaryMax
+    rpePercent = 2 - rpeCalc
+    if (rpePercent < 0) {
+      rpePercent = 0
+    }
+  } else {
+    rpePercent = 1
+  }
+
+  // Calculate Komodo Number
+
+  let komodoPercent = (wellnessPercent + workloadPercent + rpePercent) / 3
+
+
+  //extract insights summary data
+  let dataInsights = this.state.endPointSummary.insights
+  let insightsDescription = [];
+  let insightsValue = [];
+
+  for (let i = 0; i < dataInsights.length; i++) {
+    var dict = dataInsights[i];
+    for (let key in dict) {
+      if (key === 'description') {
+        insightsDescription.push(dict[key]);
       }
-      console.log(bar_colour)
+      else if (key === 'value'){
+        insightsValue.push(dict[key]);
+      }}}
+
+  //map weekly workload data to variables
+  let dataWorkload = this.state.endPointWorkload.data;
+  let workloadLabel = [];
+  let workloadScore = [];
+  let workloadMin = [];
+  let workloadMax = [];
+
+  for (let i = 0; i < dataWorkload.length; i++) {
+    let dict = dataWorkload[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        workloadLabel.push(dict[key]);
+      }
+      else if (key ==='score') {
+        workloadScore.push(dict[key]);
+      }
+
+      else if (key ==='target_min') {
+        workloadMin.push(dict[key]);
+      }
+
+      else if (key ==='target_max') {
+        workloadMax.push(dict[key]);
+      }
+    }
+  }
+
+  //map weekly rpe data to variables
+  let dataRpe = this.state.endPointRpe.data;
+  let rpeLabel = [];
+  let rpeScore = [];
+  let rpeMin = [];
+  let rpeMax = [];
+
+  for (let i = 0; i < dataRpe.length; i++) {
+    let dict = dataRpe[i];
+    rpeMin.push(this.state.endPointRpe.target_min)
+    rpeMax.push(this.state.endPointRpe.target_max)
+    for (let key in dict) {
+      if (key === 'week_start') {
+        rpeLabel.push(dict[key]);
+      }
+      else if (key === 'score') {
+        rpeScore.push(dict[key]);
+      }
+    }
+  }
+
+  //set colors for the wellness graph
+  let bar_colour = [];
+  for (let i = 0; i < wellnessValues.length; i++) {
+
+    if (wellnessValues[i]===1 || wellnessValues[i]===2 || wellnessValues[i]===3) {
+      bar_colour.push('#2dc937')
+    }
+    else if (wellnessValues[i] === 4) {
+      bar_colour.push('#e7b416')
+    }
+    else if (wellnessValues[i]===5) {
+      bar_colour.push('#cc3232')
+    }
+  }
+
+  this.setState({
+
+    //set player data states
+    playerIdData: playerId,
+    playerFirstData: playerFirst,
+    playerLastData: playerLast,
+
+    //set wellness state
+    wellnessForm: wellnessInput,
+    wellnessTotalData: wellnessTotal,
+
+    workloadSummaryData:{
+      value: workloadSummaryValue,
+      min: workloadSummaryMin,
+      max: workloadSummaryMax
+    },
+
+    rpeSummaryData:{
+      value: rpeSummaryValue,
+      min: rpeSummaryMin,
+      max: rpeSummaryMax
+    },
 
 
-      this.setState({
+    komodoNumberData:{
+      total: komodoPercent,
+      workload: workloadPercent,
+      wellness: wellnessPercent,
+      rpe: rpePercent
+    },
 
 
-        insightsDescriptionData: insightsDescription,
-        insightsValueData: insightsValue,
+    //set insights state
 
-        barData:{
-          labels:lbs,
+    insightsDescriptionData: insightsDescription,
+    insightsValueData: insightsValue,
 
+    //map data for wellness graph
+    barData:{
+      labels:wellnessLabels,
+      datasets:[{data:wellnessValues,
+      backgroundColor: bar_colour,
+    }]},
 
-          datasets:[{data:values,
-            backgroundColor: bar_colour,
-
-      }]
-
-
-      },
-
-        workloadData:{
-          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-          datasets:[{
-            label: "Min Target",
-            //data: workload_target_min,
-            data:[1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
+    //map data for workload line graph
+    workloadData:{
+      labels: workloadLabel,
+      datasets:[{
+        label: "Min Target",
+        //data: workload_target_min,
+        data:workloadMin,
+        lineTension: 0.3,
+        fill: 0,
+        backgroundColor:"rgba(145, 229, 74,0.6)"},
+        {
+          label: "Score",
+          //data: workload_score,
+          data: workloadScore,
+          lineTension: 0.3,
+          borderColor: 'red',
+          fill: false,},
+          {
+            label: "Max Target",
+            //data: workload_target_max,
+            data: workloadMax,
             lineTension: 0.3,
             fill: 0,
-            backgroundColor:'#ABEBC6'},
+            backgroundColor:"rgba(145, 229, 74,0.6)"}
+          ],
+        },
+
+
+      // Data for rpe Chart
+      rpeData:{
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets:[{
+          label: "Min Target",
+          //data: rpeMax
+          data: [4000,3000,4500,3200,4800,3300,3900],
+          lineTension: 0.3,
+          fill: 0,
+          backgroundColor:"rgba(145, 229, 74,0.6)"},
+          {
+            label: "Score",
+            //data: rpeScore,
+            data: [3000,4000,5000,3900,4800,5300,5900],
+            lineTension: 0.3,
+            borderColor: 'red',
+            fill: false,},
             {
-              label: "Score",
-              //data: workload_score,
-              data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
+              label: "Max Target",
+              //data: rpeMax,
+              data: [8000,10000,9000,8900,8800,5300,9900],
               lineTension: 0.3,
-              borderColor: 'red',
-              fill: false,},
-              {
-                label: "Max Target",
-                //data: workload_target_max,
-                data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-                lineTension: 0.3,
-                fill: 0,
-                backgroundColor:'#ABEBC6'}
+              fill: 0,
+              backgroundColor:"rgba(145, 229, 74,0.6)"}
 
-              ],
-
-
-
-            },
-
-              // Data for rpe Chart
-              rpeData:{
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8' ],
-                datasets:[{
-                  label: "Min Target",
-                  data: [1000, 2500,1800, 2000, 2500, 1000, 1500, 2200],
-                  lineTension: 0.3,
-                  fill: 0,
-                  backgroundColor:'#ABEBC6'},
-                  {
-                    label: "Score",
-                    data: [5000, 3500, 4000, 6000,4000, 5000, 4000, 6000 ],
-                    lineTension: 0.3,
-                    borderColor: 'red',
-                    fill: false,},
-                    {
-                      label: "Max Target",
-                      data: [4000, 5000, 6500, 8000,6000, 7000, 9000,7000 ],
-                      lineTension: 0.3,
-                      fill: 0,
-                      backgroundColor:'#ABEBC6'}
-
-                    ]}
-                  });
-                }
-              )
-            }
-          )
-
+            ]}
+          });
         }
 
         render() {
-          console.log(this.state.playerIdData);
-          console.log(this.state.email);
-          if (this.state.login === "true") {
+
+          const { width } = this.state
+          const isMobile = width <= 575
+
+          if (this.state.page === "login") {
             return(
               <div className="Login">
-              <Login handlerEmail={this.getEmail} skipLogin={this.skipLogin}  />
+              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin}  />
               </div>
             )
           }
-          else if (this.state.login === "false") {
+          else if (this.state.page === "loading") {
+            return(
+              <div className="Loading">
+              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken} email={this.state.email} pass={this.state.password}/>
+              </div>
+            )
+          }
+          else if (this.state.page === "main" && isMobile) {
           return (
             <div>
-            <Header />
+            <MobileHeader changeProfile={this.changeProfile}
+                    logout={this.logout}
+            />
+            <MobileLayout
+            barData={this.state.barData}
+            workloadData={this.state.workloadData}
+            rpeData={this.state.rpeData}
+            view={this.state.view}
+            changeHome={this.changeHome}
+            changeWorkload={this.changeWorkload}
+            changeWellness={this.changeWellness}
+            changeRpe={this.changeRpe}
+            changeProfile={this.changeProfile}
+            insightsDescriptionData={this.state.insightsDescriptionData}
+            insightsValueData={this.state.insightsValueData}
+            playerFirstData={this.state.playerFirstData}
+            playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
+            komodoNumber={this.state.komodoNumberData}
+            />
+            <ModalFormRPE/>
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
+            </div>
+          );
+        }
+
+          else if (this.state.page === "main") {
+          return (
+            <div>
+            <Header changeProfile={this.changeProfile}
+                    logout={this.logout}
+            />
             <Layout
             barData={this.state.barData}
             workloadData={this.state.workloadData}
@@ -313,10 +491,22 @@ class App extends Component {
             changeWorkload={this.changeWorkload}
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
+            changeProfile={this.changeProfile}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
+            playerFirstData={this.state.playerFirstData}
+            playerLastData={this.state.playerLastData}
+            wellnessTotal={this.state.wellnessTotalData}
+            workloadSummary={this.state.workloadSummaryData}
+            rpeSummary={this.state.rpeSummaryData}
+            komodoNumber={this.state.komodoNumberData}
             />
-            <ModalFormWellness profileName = " Chris"/>
+
+             <ModalFormRPE/>
+            {this.state.wellnessForm === true &&
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            }
+
 
             </div>
           );
