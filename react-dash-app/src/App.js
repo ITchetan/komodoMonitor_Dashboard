@@ -5,8 +5,9 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 
 import ModalFormWellness from './components/ModalFormWellness'
-import ModalFormRPE from './components/ModalFormRPE'
+
 import Loading from "./components/Loading";
+import ModalFormRPE from './components/ModalFormRPE'
 
 // Main function to display content
 class App extends Component {
@@ -448,11 +449,12 @@ defineData(){
             komodoNumber={this.state.komodoNumberData}
             />
 
-            <ModalFormRPE profileName = " Chris"/>
+    
 
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
+            <ModalFormRPE profileName = " Chris"/>
 
             </div>
           );
