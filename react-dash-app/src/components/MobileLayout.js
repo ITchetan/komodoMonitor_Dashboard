@@ -112,13 +112,13 @@ class MobileLayout extends Component{
           <hr />
           <div>
             <Row>
-              <Col sm={4}>
+              <Col xs={4}>
               <Liquid value={workloadScore} legend={'Training'}/>
               </Col>
-              <Col sm={4}>
+              <Col xs={4}>
               <Liquid value={wellnessScore} legend={'Wellness'}/>
               </Col>
-              <Col sm={4}>
+              <Col xs={4}>
               <Liquid value={rpeScore} legend={'RPE'}/>
               </Col>
             </Row>
