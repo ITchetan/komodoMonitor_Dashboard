@@ -157,6 +157,10 @@ fill: #000000;
   border-radius: 50%;
 }
 
+.logout {
+  cursor: pointer;
+}
+
 
 
 /* .Login {

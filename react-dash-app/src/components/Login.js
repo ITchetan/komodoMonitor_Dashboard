@@ -107,10 +107,11 @@ loginData(){
                      />
                      <p/>
             <input type="submit" />
+            <button onClick={this.skipLogin}>
+            Default
+            </button>
           </form>
             </Col>
-          <button onClick={this.skipLogin}>
-          </button>
       </Row>
       <Row>
         <Col xs="6">

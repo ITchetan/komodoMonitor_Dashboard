@@ -158,9 +158,10 @@ render(){
                        />
                        <p/>
                   <input type="submit" disabled/>
+                  <button disabled>
+                  Default
+                  </button>
               </Col>
-            <button onClick={this.skipLogin}>
-            </button>
         </Row>
         <Row>
           <Col xs="6">
