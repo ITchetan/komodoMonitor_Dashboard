@@ -4,12 +4,12 @@ import '../App.css';
 
 const Insight = (props) => (
   <div>
-  <div className="InsightValue">
-  {props.insightValue}
-  </div>
-  <Card className="Insights">
-    <CardBody>{props.insight}</CardBody>
-  </Card>
+    <div className="InsightValue">
+      {props.insightValue}
+    </div>
+    <Card className="Insights">
+      <CardBody>{props.insight}</CardBody>
+    </Card>
   </div>
 );
 
