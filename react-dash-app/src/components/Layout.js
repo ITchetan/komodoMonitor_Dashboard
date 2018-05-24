@@ -2,13 +2,10 @@ import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
-import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
 import PlayerProfile from './PlayerProfile'
-import WellnessLiquid from './WellnessLiquid'
-import WorkloadLiquid from './WorkloadLiquid'
-import RpeLiquid from './RpeLiquid'
+import Liquid from './LiquidChart'
 
 
 import WellnessPane from './WellnessPane'
@@ -112,13 +109,13 @@ class Layout extends Component{
               <div>
                 <Row>
                   <Col sm={4}>
-                  <WorkloadLiquid value={workloadScore}/>
+                  <Liquid value={workloadScore} legend={'Training'}/>
                   </Col>
                   <Col sm={4}>
-                  <WellnessLiquid value={wellnessScore}/>
+                  <Liquid value={wellnessScore} legend={'Wellness'}/>
                   </Col>
                   <Col sm={4}>
-                  <RpeLiquid value={rpeScore}/>
+                  <Liquid value={rpeScore} legend={'RPE'}/>
                   </Col>
                 </Row>
               </div>

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import LiquidChart from 'react-liquidchart';
 
+const fontSize = {
+      value: 0.6,
+      postfix: 0.4,
+      legend: 0.3,
+    };
 const stops = [
-  <stop key={4} offset="0" stopColor="blue" />,
-  <stop key={5} offset="1" stopColor="red" />,
+  <stop key={4} offset="0" stopColor="red" />,
+  <stop key={5} offset="1" stopColor="#F2F3F4" />,
 ];
 
-
-class WellnessLiquid extends Component {
+class Liquid extends Component {
 
   render() {
     return (
@@ -15,29 +19,25 @@ class WellnessLiquid extends Component {
 
         <LiquidChart
             responsive
-            legend="Wellness"
+            legend={this.props.legend}
             value={this.props.value}
             amplitude={10}
             frequency={2}
-            animationTime={1000}
-            animationWavesTime={2250}
+            animationTime={2000}
+            animationWavesTime={5000}
             gradient={{
               type: 1,
               x1: 0,
               x2: 0,
               y1: 100,
               y2: 0,
-              stops,
+              stops
             }}
             postfix="%"
-            fontSizes={{
-              legend: 0.30,
-              value: 0.50,
-              percentage: 0.15,
-            }}
+            fontSizes={fontSize}
           />
 
     );
   }
 }
-export default WellnessLiquid;
+export default Liquid;

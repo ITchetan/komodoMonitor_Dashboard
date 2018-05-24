@@ -2,15 +2,13 @@ import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
-import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 
 import '../App.css';
 import 'react-circular-progressbar/dist/styles.css'
 
-import WellnessLiquid from './WellnessLiquid'
-import WorkloadLiquid from './WorkloadLiquid'
-import RpeLiquid from './RpeLiquid'
+
+import Liquid from './LiquidChart'
 import PlayerProfile from './PlayerProfile'
 
 import WellnessPane from './WellnessPane'
@@ -114,14 +112,14 @@ class MobileLayout extends Component{
           <hr />
           <div>
             <Row>
-              <Col xs={4}>
-              <WorkloadLiquid value={workloadScore}/>
+              <Col sm={4}>
+              <Liquid value={workloadScore} legend={'Training'}/>
               </Col>
-              <Col xs={4}>
-              <WellnessLiquid value={wellnessScore}/>
+              <Col sm={4}>
+              <Liquid value={wellnessScore} legend={'Wellness'}/>
               </Col>
-              <Col xs={4}>
-              <RpeLiquid value={rpeScore}/>
+              <Col sm={4}>
+              <Liquid value={rpeScore} legend={'RPE'}/>
               </Col>
             </Row>
           </div>
