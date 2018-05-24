@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
-import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 
 import '../App.css';

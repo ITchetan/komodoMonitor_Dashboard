@@ -508,7 +508,7 @@ defineData(){
             />
 
 
-    
+
 
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>

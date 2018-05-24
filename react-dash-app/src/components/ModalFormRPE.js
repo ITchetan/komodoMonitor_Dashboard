@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter,FormGroup } from 'reactstrap';
+import { Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class ModalFormRPE extends React.Component {
   constructor(props) {
