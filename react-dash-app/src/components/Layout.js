@@ -48,12 +48,12 @@ class Layout extends Component{
 
     return (
   <div className="Layout">
-  <Container fluid={false}>
+  <Container fluid={true}>
 
 
-    <Row>&nbsp;</Row>
+    <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
-      <Col sm={2} className="d-flex">
+      <Col sm={3} lg={2} className="d-flex">
         <Col className="Column">
         <div style={{ textAlign: 'center' }}>
 
@@ -94,7 +94,7 @@ class Layout extends Component{
       </Col>
       </Col>
 
-      <Col sm={6} className="d-flex">
+      <Col sm={5} lg={6} className="d-flex">
         <Col className="text-center Column">
           {this.props.view === "home" &&
           <div>
