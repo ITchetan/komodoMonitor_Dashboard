@@ -36,7 +36,7 @@ class RpeChart extends Component{
                 yAxes: [{
                     ticks: {
                         suggestedMin: 0,
-                        suggestedMax: 10000
+                        suggestedMax: 12000
                     }
                 }]
               }
