@@ -45,7 +45,6 @@ class App extends Component {
     this.changeWellness = this.changeWellness.bind(this);
     this.changeRpe = this.changeRpe.bind(this);
     this.getLogin = this.getLogin.bind(this);
-    this.skipLogin = this.skipLogin.bind(this);
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
     this.logout = this.logout.bind(this);
@@ -112,29 +111,24 @@ handleWindowSizeChange = () => {
 
 
   //receive email and password from login page
-  getLogin(emailData, passwordData,){
-    this.setState({ email: emailData })
-    this.setState({ password: passwordData})
+  getLogin(tokenData, emailData, passwordData){
+    this.setState({ loginToken: tokenData,
+                    email: emailData,
+                    password: passwordData})
     //enter laoding state after user and pass have been received
-    this.setState({ page: "loading"})
+    this.setState({ page: "loading", })
   };
 
-  skipLogin() {
-    let emailData = "player2@gmail.com"
-    let passwordData = "abc123"
-    this.setState({ email: emailData })
-    this.setState({ password: passwordData})
-    this.setState({ page: "loading" })
-  }
+
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe, token){
+  loadingData(summary, players, wellness, workload, rpe,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
-      loginToken: token,})
+      })
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
@@ -445,7 +439,7 @@ defineData(){
           else if (this.state.page === "loading") {
             return(
               <div className="Loading">
-              <Loading loadingData={this.loadingData} loginEmail={this.state.email} loginPass={this.state.password}/>
+              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken} email={this.state.email} pass={this.state.password}/>
               </div>
             )
           }
