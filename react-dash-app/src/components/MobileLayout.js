@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
+import CircularProgressBar from 'react-circular-progressbar'
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
-import '../App.css';
 
+import '../App.css';
+import 'react-circular-progressbar/dist/styles.css'
+
+import WellnessLiquid from './WellnessLiquid'
+import WorkloadLiquid from './WorkloadLiquid'
+import RpeLiquid from './RpeLiquid'
 import PlayerProfile from './PlayerProfile'
 
 import WellnessPane from './WellnessPane'
@@ -38,15 +44,13 @@ class MobileLayout extends Component{
 
     let workloadScore = this.props.komodoNumber.workload
     workloadScore = workloadScore*100
-    workloadScore = workloadScore.toFixed(0)
 
     let wellnessScore = this.props.komodoNumber.wellness
     wellnessScore = wellnessScore*100
-    wellnessScore = wellnessScore.toFixed(0)
 
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
-    rpeScore = rpeScore.toFixed(0)
+
 
     return (
   <div className="Layout">
@@ -54,54 +58,77 @@ class MobileLayout extends Component{
 
 
     <Row>&nbsp;</Row>
-    <Row className="d-flex" className="Column">
 
-      <Col xs={3}>
+    <Row className="Column">
+
+      <Col xs={{ size:2, offset:1 }}>
         {this.props.view === "home" &&
-        <HomeIcon size={60} color= '#d40000' />}
+        <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
-        <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeHome}><HomeIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "workload" &&
-        <HeartPulseIcon size={60} color="#d40000" />}
+        <HeartPulseIcon size={36} color="#d40000" />}
         {this.props.view !== "workload" &&
-        <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
+        <a onClick={this.props.changeWorkload}><HeartPulseIcon size={36} color="#C0C0C0" className="icon" /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "wellness" &&
-        <MedicalBagIcon size={60} color="#d40000" />}
+        <MedicalBagIcon size={36} color="#d40000" />}
         {this.props.view !== "wellness" &&
-        <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeWellness}><MedicalBagIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "rpe" &&
-        <RunFastIcon size={60} color="#d40000" />}
+        <RunFastIcon size={36} color="#d40000" />}
         {this.props.view !== "rpe" &&
-        <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
+        <a onClick={this.props.changeRpe}><RunFastIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
+
+      <Col xs={2}>
+        {this.props.view === "profile" &&
+        <AccountIcon size={36} color="#d40000" />}
+        {this.props.view !== "profile" &&
+        <a onClick={this.props.changeProfile}><AccountIcon size={36} color="#C0C0C0"  /></a>}
+      </Col>
+
       </Row>
 
-      <Row>
+      <Row>&nbsp;</Row>
 
-      <Col className="text-center d-flex Column">
+      <Row className="Column">
+
+      <Col xs={12} className="text-center">
 
       {this.props.view === "home" &&
         <div>
-          <h3>Welcome back, Chris</h3>
+          <h4>Welcome back, Chris</h4>
           <hr />
-          <p>&nbsp;</p>
-          <h4>Your Komodo Number is {komodoScore}</h4>
-          <p>&nbsp;</p>
-          <GaugeChart value={komodoScore} />
-          <p>Workload: {workloadScore}% Wellness: {wellnessScore}% RPE: {rpeScore}%</p>
+          <Col xs={{ size:6, offset: 3}}>
+          <CircularProgressBar percentage={komodoScore} />
+          </Col>
+          <hr />
+          <div>
+            <Row>
+              <Col xs={4}>
+              <WorkloadLiquid value={workloadScore}/>
+              </Col>
+              <Col xs={4}>
+              <WellnessLiquid value={wellnessScore}/>
+              </Col>
+              <Col xs={4}>
+              <RpeLiquid value={rpeScore}/>
+              </Col>
+            </Row>
+          </div>
         </div>}
 
         {this.props.view === "wellness" &&
-          <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
         }
 
         {this.props.view === "workload" &&
@@ -122,26 +149,32 @@ class MobileLayout extends Component{
         </div>}
 
         </Col>
-      </Col>
-      <Col sm={4} className="d-flex">
-        <Col className="Column">
+      </Row>
+
+      <Row>&nbsp;</Row>
+
+      <Row className="Column">
+      <Col>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
             </Col>
           </Row>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
             </Col>
           </Row>
+
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
             </Col>
           </Row>
+
         </Col>
-      </Col>
     </Row>
     </Container>
 
