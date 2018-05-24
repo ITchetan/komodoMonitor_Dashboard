@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import '../App.css';
+import ReactLoading from 'react-loading';
 
 
 const styles = {
@@ -20,6 +21,7 @@ class Login extends Component{
       emailField: '',
       passField: '',
       tokenData: {},
+      loginLoad: 'false',
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -29,6 +31,7 @@ class Login extends Component{
 
   submitHandler(evt) {
     evt.preventDefault();
+    this.setState({ loginLoad: true})
     this.loginData()
     // this.setState({ emailField: '' });
     // this.setState({ passField: ''});
@@ -61,8 +64,10 @@ loginData(){
   })
   .then(response => response.json())
 
+
+
   .then(data => {this.setState({tokenData: data.token})
-    this.props.handlerEmail(this.state.tokenData)})
+      this.props.handlerEmail(this.state.tokenData, this.state.emailField, this.state.passField)})
 }
 
 
@@ -107,6 +112,14 @@ loginData(){
           <button onClick={this.skipLogin}>
           </button>
       </Row>
+      <Row>
+        <Col xs="6">
+        </Col>
+        <Col>
+        {this.state.loginLoad === true &&
+          <ReactLoading type='spin' color='#d40000'/>}
+          </Col>
+          </Row>
     </Container>
   </div>
 )

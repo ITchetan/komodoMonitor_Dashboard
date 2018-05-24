@@ -92,22 +92,24 @@ class App extends Component {
 
 
   //receive email and password from login page
-  getLogin(tokenData){
-    this.setState({ loginToken: tokenData })
+  getLogin(tokenData, emailData, passwordData){
+    this.setState({ loginToken: tokenData,
+                    email: emailData,
+                    password: passwordData})
     //enter laoding state after user and pass have been received
-    this.setState({ page: "loading"})
+    this.setState({ page: "loading", })
   };
 
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe, token){
+  loadingData(summary, players, wellness, workload, rpe,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
-      loginToken: token,})
+      })
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
@@ -413,7 +415,7 @@ defineData(){
           else if (this.state.page === "loading") {
             return(
               <div className="Loading">
-              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken}/>
+              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken} email={this.state.email} pass={this.state.password}/>
               </div>
             )
           }

@@ -14,17 +14,18 @@ class ModalFormWellness extends React.Component {
   }
   //sends data to the wellness post endpoint
   sendData(){
-    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
-      body:
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1', {
+      body: JSON.stringify(
       {
-      "nutrition": 0,
-      "energy": 0,
-      "stress": 0,
-      "sleep_quality": 0,
-      "sleep_amount": 0,
-      "muscle_pain": 0
-      }, // must match 'Content-Type' header
+      "nutrition": 1,
+      "energy": 1,
+      "stress": 1,
+      "sleep_quality": 1,
+      "sleep_amount": 1,
+      "muscle_pain": 1
+    }), // must match 'Content-Type' header
       headers: {
+        'accept': 'application/json',
         'content-type': 'application/json',
         'X-Auth-Token': this.props.loginToken
       },
