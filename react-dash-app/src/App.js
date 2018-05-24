@@ -382,7 +382,7 @@ defineData(){
         data:workloadMin,
         lineTension: 0.3,
         fill: 0,
-        backgroundColor:"rgba(112, 216, 23,0.7)"},
+        backgroundColor:"rgba(145, 229, 74,0.6)"},
         {
           label: "Score",
           //data: workload_score,
@@ -396,7 +396,7 @@ defineData(){
             data: workloadMax,
             lineTension: 0.3,
             fill: 0,
-            backgroundColor:"rgba(112, 216, 23 ,0.7)"}
+            backgroundColor:"rgba(145, 229, 74,0.6)"}
           ],
         },
 
@@ -508,7 +508,7 @@ defineData(){
             />
 
 
-    
+
 
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
