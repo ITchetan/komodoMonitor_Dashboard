@@ -19,11 +19,11 @@ class ModalFormWellness extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeNutrition = this.handleChangeNutrition.bind(this);
-    this.sendData = this.sendData.bind(this);
+    // this.sendData = this.sendData.bind(this);
 
 
   }
-
+// handle change fuctions to assign change to the variables
 
 handleChangeNutrition = (e) => {
 
@@ -68,39 +68,21 @@ handleChangeMuscleSorness = (e) => {
   )
 }
 
-//sends data to the wellness post endpoint
-  sendData(){
-    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
-      body:
-      {
-      "nutrition": 0,
-      "energy": 0,
-      "stress": 0,
-      "sleep_quality": 0,
-      "sleep_amount": 0,
-      "muscle_pain": 0
-      }, // must match 'Content-Type' header
-      headers: {
-        'content-type': 'application/json',
-        'X-Auth-Token': this.props.loginToken
-      },
-      method: 'POST',
-    });
-
-    this.setState({
-      modal: !this.state.modal,
-    });
-  }
-
+// handle submit for the modal button, which assiign scale values to the slider movement
 
 handleSubmit = (e) =>{
-  var nutritionScale;
-  var stressScale;
-  var sleepAmountScale;
-  var sleepQualityScale;
-  var energyScale;
-  var musclePainScale;
-  var nutrition = this.state.nutrition
+  let nutritionScale;
+  let stressScale;
+  let sleepAmountScale;
+  let sleepQualityScale;
+  let energyScale;
+  let musclePainScale;
+  let nutrition = this.state.nutrition;
+  let energy = this.state.energy;
+  let stress = this.state.stress;
+  let sleepQuality = this.state.sleepQuality;
+  let sleepAmount = this.state.sleepAmount;
+  let musclePain = this.state.muscleSoreness
 
   if (nutrition <= 20){
     nutritionScale = 1;
@@ -119,18 +101,113 @@ handleSubmit = (e) =>{
     nutritionScale =5;
   }
 
-  fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=4', {
-    body:
+  if (energy <= 20){
+    energyScale = 1;
+  }
+  else if (energy >20 && energy <=40) {
+    energyScale = 2;
+  }
+  else if (energy >40 && energy <= 60) {
+    energyScale = 3;
+
+  }
+  else if (energy>60 && energy<=80) {
+    energyScale = 4;
+  }
+  else if (energy > 80) {
+    energyScale =5;
+  }
+
+  if (stress <= 20){
+    stressScale = 1;
+  }
+  else if (stress >20 && stress <=40) {
+    stressScale = 2;
+  }
+  else if (stress >40 && stress <= 60) {
+    stressScale = 3;
+
+  }
+  else if (stress>60 && stress <=80) {
+    stressScale = 4;
+  }
+  else if (stress > 80) {
+    stressScale =5;
+  }
+
+
+  if (sleepQuality <= 20){
+    sleepQualityScale = 1;
+  }
+  else if (sleepQuality >20 && sleepQuality <=40) {
+    sleepQualityScale = 2;
+  }
+  else if (sleepQuality >40 && sleepQuality <= 60) {
+    sleepQualityScale = 3;
+
+  }
+  else if (sleepQuality>60 && sleepQuality <=80) {
+    sleepQualityScale = 4;
+  }
+  else if (sleepQuality > 80) {
+    sleepQualityScale =5;
+  }
+
+
+  if (sleepAmount <= 20){
+    sleepAmountScale = 1;
+  }
+  else if (sleepAmount >20 && sleepAmount <=40) {
+    sleepAmountScale = 2;
+  }
+  else if (sleepAmount >40 && sleepAmount <= 60) {
+    sleepAmountScale = 3;
+
+  }
+  else if (sleepAmount>60 && sleepAmount <=80) {
+    sleepAmountScale = 4;
+  }
+  else if (sleepAmount > 80) {
+    sleepAmountScale =5;
+  }
+
+
+  if (musclePain <= 20){
+    musclePainScale = 1;
+  }
+  else if (musclePain >20 && musclePain <=40) {
+    musclePainScale = 2;
+  }
+  else if (musclePain >40 && musclePain <= 60) {
+    musclePainScale = 3;
+
+  }
+  else if (musclePain>60 && musclePain <=80) {
+    musclePainScale = 4;
+  }
+  else if (musclePain > 80) {
+    musclePainScale =5;
+  }
+
+// method to post the values to wellness API
+
+  fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1', {
+    body:JSON.stringify(
     {
+
     "nutrition": nutritionScale,
     "energy": energyScale,
     "stress": stressScale,
     "sleep_quality": sleepQualityScale,
     "sleep_amount": sleepAmountScale,
     "muscle_pain": musclePainScale
-    }, // must match 'Content-Type' header
+
+
+  }) ,
+    // must match 'Content-Type' header
     headers: {
-      'content-type': 'application/json',
+      'Accept' : 'application/json',
+      'Content-type': 'application/json',
       'X-Auth-Token': this.props.loginToken
     },
     method: 'POST',
@@ -139,7 +216,7 @@ handleSubmit = (e) =>{
   this.setState({
     modal: !this.state.modal,
   });
-  console.log(nutritionScale)
+
   e.preventDefault()
 
 }
