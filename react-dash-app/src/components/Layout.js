@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import CircularProgressBar from 'react-circular-progressbar'
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
 import '../App.css';
-
-
-
-import BarChart from './wellnessChart'
-import WorkloadChart from './workloadChart'
-import RpeChart from './rpeChart'
-import PointerGauge from './PointerGauge'
 import PlayerProfile from './PlayerProfile'
 import Liquid from './LiquidChart'
 
@@ -108,8 +102,9 @@ class Layout extends Component{
               <div>
                 <h3>Welcome back, Chris</h3>
                 <hr />
-                <h4>Your Komodo Number is</h4>
-                <GaugeChart value={komodoScore} />
+                <Col xs={{ size:6, offset: 3}}>
+                <CircularProgressBar percentage={komodoScore} />
+                </Col>
               </div>
               <hr />
               <div>
