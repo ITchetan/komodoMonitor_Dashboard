@@ -24,7 +24,7 @@ class BarChart extends Component{
 
         // here we tell chart to look for data in state
           data={this.props.barData}
-          width={80}
+          width={90}
         	height={300}
 
 

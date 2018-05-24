@@ -18,6 +18,8 @@ class RpeChart extends Component{
       <div className="lineChart">
           <Line
           // here we tell chart to look for data in state
+          width={80}
+        	height={60}
             data={this.props.rpeData}
             options={{
               title:{
@@ -33,7 +35,8 @@ class RpeChart extends Component{
               scales: {
                 yAxes: [{
                     ticks: {
-                        min: 0
+                        suggestedMin: 0,
+                        suggestedMax: 10000
                     }
                 }]
               }

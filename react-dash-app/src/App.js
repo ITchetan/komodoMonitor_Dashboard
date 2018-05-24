@@ -382,7 +382,7 @@ defineData(){
         data:workloadMin,
         lineTension: 0.3,
         fill: 0,
-        backgroundColor:'#ABEBC6'},
+        backgroundColor:"rgba(112, 216, 23,0.7)"},
         {
           label: "Score",
           //data: workload_score,
@@ -396,32 +396,35 @@ defineData(){
             data: workloadMax,
             lineTension: 0.3,
             fill: 0,
-            backgroundColor:'#ABEBC6'}
+            backgroundColor:"rgba(112, 216, 23 ,0.7)"}
           ],
         },
 
 
       // Data for rpe Chart
       rpeData:{
-        labels: rpeLabel,
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         datasets:[{
           label: "Min Target",
-          data: rpeMin,
+          //data: rpeMax
+          data: [4000,3000,4500,3200,4800,3300,3900],
           lineTension: 0.3,
           fill: 0,
-          backgroundColor:'#ABEBC6'},
+          backgroundColor:"rgba(145, 229, 74,0.6)"},
           {
             label: "Score",
-            data: rpeScore,
+            //data: rpeScore,
+            data: [3000,4000,5000,3900,4800,5300,5900],
             lineTension: 0.3,
             borderColor: 'red',
             fill: false,},
             {
               label: "Max Target",
-              data: rpeMax,
+              //data: rpeMax,
+              data: [8000,10000,9000,8900,8800,5300,9900],
               lineTension: 0.3,
               fill: 0,
-              backgroundColor:'#ABEBC6'}
+              backgroundColor:"rgba(145, 229, 74,0.6)"}
 
             ]}
           });
