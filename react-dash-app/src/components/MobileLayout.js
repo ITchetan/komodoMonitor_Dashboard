@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
 import GaugeChart from './GaugeChart'
 import Insight from './Insight'
@@ -8,6 +8,9 @@ import Insight from './Insight'
 import '../App.css';
 import 'react-circular-progressbar/dist/styles.css'
 
+import WellnessLiquid from './WellnessLiquid'
+import WorkloadLiquid from './WorkloadLiquid'
+import RpeLiquid from './RpeLiquid'
 import PlayerProfile from './PlayerProfile'
 
 import WellnessPane from './WellnessPane'
@@ -41,15 +44,13 @@ class MobileLayout extends Component{
 
     let workloadScore = this.props.komodoNumber.workload
     workloadScore = workloadScore*100
-    workloadScore = workloadScore.toFixed(0)
 
     let wellnessScore = this.props.komodoNumber.wellness
     wellnessScore = wellnessScore*100
-    wellnessScore = wellnessScore.toFixed(0)
 
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
-    rpeScore = rpeScore.toFixed(0)
+
 
     return (
   <div className="Layout">
@@ -60,33 +61,41 @@ class MobileLayout extends Component{
 
     <Row className="Column">
 
-      <Col xs={3}>
+      <Col xs={{ size:2, offset:1 }}>
         {this.props.view === "home" &&
         <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
         <a onClick={this.props.changeHome}><HomeIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "workload" &&
         <HeartPulseIcon size={36} color="#d40000" />}
         {this.props.view !== "workload" &&
         <a onClick={this.props.changeWorkload}><HeartPulseIcon size={36} color="#C0C0C0" className="icon" /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "wellness" &&
         <MedicalBagIcon size={36} color="#d40000" />}
         {this.props.view !== "wellness" &&
         <a onClick={this.props.changeWellness}><MedicalBagIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
 
-      <Col xs={3}>
+      <Col xs={2}>
         {this.props.view === "rpe" &&
         <RunFastIcon size={36} color="#d40000" />}
         {this.props.view !== "rpe" &&
         <a onClick={this.props.changeRpe}><RunFastIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
+
+      <Col xs={2}>
+        {this.props.view === "profile" &&
+        <AccountIcon size={36} color="#d40000" />}
+        {this.props.view !== "profile" &&
+        <a onClick={this.props.changeProfile}><AccountIcon size={36} color="#C0C0C0"  /></a>}
+      </Col>
+
       </Row>
 
       <Row>&nbsp;</Row>
@@ -102,6 +111,20 @@ class MobileLayout extends Component{
           <Col xs={{ size:6, offset: 3}}>
           <CircularProgressBar percentage={komodoScore} />
           </Col>
+          <hr />
+          <div>
+            <Row>
+              <Col xs={4}>
+              <WorkloadLiquid value={workloadScore}/>
+              </Col>
+              <Col xs={4}>
+              <WellnessLiquid value={wellnessScore}/>
+              </Col>
+              <Col xs={4}>
+              <RpeLiquid value={rpeScore}/>
+              </Col>
+            </Row>
+          </div>
         </div>}
 
         {this.props.view === "wellness" &&
