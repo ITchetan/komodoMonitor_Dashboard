@@ -158,6 +158,13 @@ fill: #000000;
 }
 
 
+.modal-dialog {
+
+          width: 1800px;
+
+        }
+
+
 
 /* .Login {
   background: "../components/field-bg.59a5e231.jpg";

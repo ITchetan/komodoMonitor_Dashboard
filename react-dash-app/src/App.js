@@ -471,6 +471,7 @@ defineData(){
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
             />
+            <ModalFormRPE/>
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
@@ -505,12 +506,12 @@ defineData(){
             />
 
 
-    
 
+            <ModalFormRPE/>
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
-            <ModalFormRPE profileName = " Chris"/>
+
 
             </div>
           );

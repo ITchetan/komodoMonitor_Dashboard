@@ -225,11 +225,11 @@ handleSubmit = (e) =>{
 
   render() {
     return (
-      <div className = "ModalForm">
+      <div className = "modal-dialog">
       <Container>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+            <Modal isOpen={this.state.modal} size= 'lg'>
               <Form onSubmit ={this.handleSubmit}>
-                  <ModalHeader toggle={this.toggle}>Hi{this.props.profileName}, please complete your wellness survey!!</ModalHeader>
+                  <ModalHeader>Hi {this.props.profileName}, please complete your wellness survey!!</ModalHeader>
                   <ModalBody>
                     <div>
                           <Row>
@@ -253,7 +253,7 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                   </Col>
-                                  <Col className="SmallText" sm={3}>
+                                  <Col className="SmallText" sm={2}>
                                   Very malnourished
                                   </Col>
                           </Row>
@@ -263,7 +263,7 @@ handleSubmit = (e) =>{
                                 Full of energy
                                 </Col>
                                 <Col sm={3}>
-                                <input type="range" min= "1" max = "5" step = "any" value = {this.state.energy} onChange = {this.handleChangeEnergy} list="tickmarks"/>
+                                <input type="range" value = {this.state.energy} onChange = {this.handleChangeEnergy} list="tickmarks"/>
                                   <datalist id="tickmarks">
                                     <option value="0" label="0%"/>
                                     <option value="10"/>
@@ -271,10 +271,14 @@ handleSubmit = (e) =>{
                                     <option value="30"/>
                                     <option value="40"/>
                                     <option value="50" label="50%"/>
-
+                                    <option value="60"/>
+                                    <option value="70"/>
+                                    <option value="80"/>
+                                    <option value="90"/>
+                                    <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={3} className="SmallText">
+                                <Col sm={2} className="SmallText">
                                 Very fatigued
                                 </Col>
                           </Row>
@@ -299,7 +303,7 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={3} className="SmallText">
+                                <Col sm={2} className="SmallText">
                                   Unable to sleep
                                 </Col>
                           </Row>
@@ -324,7 +328,7 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={3} className="SmallText">
+                                <Col sm={2} className="SmallText">
                                   Highly stressed
                                 </Col>
                           </Row>
@@ -349,7 +353,7 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={3} className="SmallText">
+                                <Col sm={2} className="SmallText">
                                   More than 9 hours
                                 </Col>
                           </Row>
@@ -374,7 +378,7 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={3} className="SmallText">
+                                <Col sm={2} className="SmallText">
                                   Very sore
                                 </Col>
                           </Row>
@@ -383,7 +387,7 @@ handleSubmit = (e) =>{
                   </ModalBody>
 
                   <ModalFooter>
-                    <Button color="primary" onClick={this.handleSubmit}>Submit</Button>{' '}
+                    <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary mr-auto">Submit</Button>{' '}
                   </ModalFooter>
 
                 </Form>
