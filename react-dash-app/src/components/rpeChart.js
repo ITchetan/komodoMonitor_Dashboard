@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 
 // class for rpe chart
 class RpeChart extends Component{
@@ -16,10 +16,10 @@ class RpeChart extends Component{
   render(){
     return (
       <div className="lineChart">
-          <Line
+          <Bar
           // here we tell chart to look for data in state
-          width={80}
-        	height={60}
+            //width={80}
+        	   //height={50}
             data={this.props.rpeData}
             options={{
               title:{
