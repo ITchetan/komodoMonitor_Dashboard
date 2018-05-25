@@ -24,13 +24,9 @@ class BarChart extends Component{
 
         // here we tell chart to look for data in state
           data={this.props.barData}
-          width={90}
-        	height={300}
-
-
 
           options={{
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             title:{
               display:this.props.displayTitle,
               text:'Individualised Wellness',

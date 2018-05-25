@@ -14,7 +14,6 @@ class PlayerProfile extends Component{
   }
 
   render(){
-    console.log(this.props.playerFirstData);
     return (
       <div >
       <Container  >

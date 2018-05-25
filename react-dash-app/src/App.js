@@ -287,6 +287,20 @@ defineData(){
     }
   }
 
+  //set color for workloadbar graph depend on which zone the score is
+    let workloadbarColor =[];
+    for (let i = 0; i<workloadScore.length; i++){
+
+      if (workloadScore[i]<workloadMin[i]) {
+        workloadbarColor.push('#e7b416')
+      }
+      else if (workloadScore[i]>workloadMax[i] ) {
+        workloadbarColor.push('#cc3232')
+      }
+      else {workloadbarColor.push('#2dc937')}
+
+    }
+
   //map weekly rpe data to variables
   let dataRpe = this.state.endPointRpe.data;
   let rpeLabel = [];
@@ -306,6 +320,19 @@ defineData(){
         rpeScore.push(dict[key]);
       }
     }
+  }
+//set color for rpebar graph depend on which zone the score is
+  let rpeBarColor =[];
+  for (let i = 0; i<rpeScore.length; i++){
+
+    if (rpeScore[i]<rpeMin[i]) {
+      rpeBarColor.push('#e7b416')
+    }
+    else if (rpeScore[i]>rpeMax[i] ) {
+      rpeBarColor.push('#cc3232')
+    }
+    else {rpeBarColor.push('#2dc937')}
+
   }
 
   //set colors for the wellness graph
@@ -376,20 +403,20 @@ defineData(){
         data:workloadMin,
         lineTension: 0.3,
         fill: 0,
+        type: 'line',
         backgroundColor:"rgba(145, 229, 74,0.6)"},
         {
           label: "Score",
           //data: workload_score,
           data: workloadScore,
-          lineTension: 0.3,
-          borderColor: 'red',
-          fill: false,},
+          backgroundColor: workloadbarColor},
           {
             label: "Max Target",
             //data: workload_target_max,
             data: workloadMax,
             lineTension: 0.3,
             fill: 0,
+            type: 'line',
             backgroundColor:"rgba(145, 229, 74,0.6)"}
           ],
         },
@@ -397,28 +424,30 @@ defineData(){
 
       // Data for rpe Chart
       rpeData:{
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: rpeLabel,
+        //labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S','M', 'T', 'W', 'T', 'F', 'S', 'S'],
         datasets:[{
           label: "Min Target",
-          //data: rpeMax
-          data: [4000,3000,4500,3200,4800,3300,3900],
+          data: rpeMin,
+          //data: [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000],
           lineTension: 0.3,
           fill: 0,
+          type: 'line',
           backgroundColor:"rgba(145, 229, 74,0.6)"},
           {
             label: "Score",
-            //data: rpeScore,
-            data: [3000,4000,5000,3900,4800,5300,5900],
-            lineTension: 0.3,
-            borderColor: 'red',
-            fill: false,},
+            data: rpeScore,
+            //data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
+            backgroundColor: rpeBarColor
+            },
             {
               label: "Max Target",
-              //data: rpeMax,
-              data: [8000,10000,9000,8900,8800,5300,9900],
+              data: rpeMax,
+              //data: [7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000],
               lineTension: 0.3,
               fill: 0,
-              backgroundColor:"rgba(145, 229, 74,0.6)"}
+              backgroundColor:"rgba(145, 229, 74,0.6)",
+              type: 'line'}
 
             ]}
           });
