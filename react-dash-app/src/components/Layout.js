@@ -148,17 +148,20 @@ class Layout extends Component{
         <Col className="Column">
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
+            <Insight insight={this.props.insightsDescriptionData[0]}  />
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
+            <Insight insight={this.props.insightsDescriptionData[1]}  />
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
+            <Insight insight={this.props.insightsDescriptionData[2]}  />
+            <br />
             </Col>
           </Row>
         </Col>
