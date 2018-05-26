@@ -1,10 +1,11 @@
 .Wrapper {
-  background-color: #f5f5f5;
+  background-color: #1a1a00;
   }
 
 .Header {
-  background-color: #dcdcdc;
+  background-color: #fff;
 }
+
 
 .Column {
   background-color: #fff;
@@ -28,13 +29,19 @@
   font-weight: 550;
 }
 
+.centered {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translate(-20%, -50%);}
+
 
 .Insights {
   border-color: #d40000;
   border-width: medium;
   background-color: #d40000;
   color: #fff;
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 
 .InsightValue {

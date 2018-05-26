@@ -102,7 +102,7 @@ class Layout extends Component{
                 <h3>Welcome back, Chris</h3>
                 <hr />
                 <Col xs={{ size:6, offset: 3}}>
-                <CircularProgressBar percentage={komodoScore} />
+                  <CircularProgressBar percentage={komodoScore} initialAnimation={'true'} strokeWidth={'10'} />
                 </Col>
               </div>
               <hr />
