@@ -31,9 +31,9 @@ class Header extends Component{
                       <img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80"  />}
                       {this.props.view !== "profile" &&
 
-                      <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80" /></a>}
+                      <a onClick={this.props.changeProfile} className="logout" title="My Profile"><img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80" /></a>}
                       <br />
-                      <a onClick={this.props.logout} className="logout">Logout</a>
+                      <a onClick={this.props.logout} className="logout" title="Logout">Logout</a>
 
                     </div>
 

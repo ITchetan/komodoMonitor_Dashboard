@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import LiquidChart from 'react-liquidchart';
 import '../App.css';
 
+
 const fontSize = {
       value: 0.6,
       postfix: 0.4,
       legend: 0.3,
     };
+
+const wetColor = {
+  fill:"rgb(23,139,202)"
+}
+const dryColor = {
+  fill:"black"
+}
 
 const stops = [
   <stop key={5} offset="1" stopColor="#C5F2F2" />,
@@ -27,6 +35,8 @@ class Liquid extends Component {
             frequency={2}
             animationTime={2000}
             animationWavesTime={5000}
+            wetStyle={wetColor}
+            dryStyle={dryColor}
             gradient={{
               type: 1,
               x1: 0,
@@ -37,6 +47,7 @@ class Liquid extends Component {
             }}
             postfix="%"
             fontSizes={fontSize}
+
 
           />
 

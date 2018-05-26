@@ -24,13 +24,9 @@ class WorkloadChart extends Component{
             options={{
               title:{
                 display:false,
-                text:'Workload',
-
-                fontSize:25
               },
               legend:{
                 display:false,
-                position:'top'
               },
               scales: {
                 yAxes: [{

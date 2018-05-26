@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import BarChart from './wellnessChart';
+import WellnessTrends from './WellnessTrends';
 import PointerGauge from './PointerGauge'
 import { Button } from 'reactstrap';
 
@@ -37,7 +38,11 @@ class WellnessPane extends Component{
       }
       {this.state.view === 'chart' &&
       <div>
-        <h4>Wellness</h4>
+        <h4>Wellness Trends</h4>
+        <hr />
+        <WellnessTrends  wellnessTrendsData={this.props.wellnessTrendsData}/>
+        <hr />
+        <h4>Individualised Wellness </h4>
         <hr />
         <BarChart barData={this.props.barData}/>
         <p>&nbsp;</p>

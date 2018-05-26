@@ -6,6 +6,11 @@
   background-color: #fff;
 }
 
+.liquid-text {
+    transform: translate(0, 0px);
+    font-family: Roboto;
+  }
+
 
 .Column {
   background-color: #fff;
@@ -19,29 +24,26 @@
 }
 
 .BrandName {
+  font-family: inherit;
   font-size: 2em;
   font-weight: 550;
 }
 
 .SubBrand {
+  font-family: inherit;
   color: #d40000;
   font-size: 1.2em;
   font-weight: 550;
 }
 
-.centered {
-    position: absolute;
-    top: 60%;
-    left: 40%;
-    transform: translate(-20%, -50%);}
-
 
 .Insights {
-  border-color: #d40000;
+  border-color: black;
   border-width: medium;
   background-color: #d40000;
   color: #fff;
   font-size: 1.4em;
+  box-shadow: 3px 3px 3px #808080;
 }
 
 .InsightValue {
@@ -162,6 +164,7 @@ fill: #000000;
 
 .profile {
   border-radius: 50%;
+  box-shadow: 3px 3px 3px #808080;
 }
 
 .logout {
