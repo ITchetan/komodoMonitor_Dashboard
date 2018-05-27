@@ -102,7 +102,7 @@ class Layout extends Component{
                 <h3>Welcome back, Chris</h3>
                 <hr />
                 <Col xs={{ size:6, offset: 3}}>
-                <CircularProgressBar percentage={komodoScore} />
+                  <CircularProgressBar percentage={komodoScore} initialAnimation={'true'} strokeWidth={'10'} />
                 </Col>
               </div>
               <hr />
@@ -122,7 +122,8 @@ class Layout extends Component{
           </div>}
 
           {this.props.view === "wellness" &&
-            <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+            <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}
+            wellnessTrendsData={this.props.wellnessTrendsData}/>
           }
 
           {this.props.view === "workload" &&
@@ -149,18 +150,28 @@ class Layout extends Component{
           <h3>Insights</h3>
           <hr />
           <Row>
+            <Col className="text-center">
+            <h3><strong>Insights</strong></h3>
+            <hr  />
+            </Col>
+
+          </Row>
+          <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
+            <Insight insight={this.props.insightsDescriptionData[0]}  insightValue= {this.props.insightsValueData[0]}/>
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
+            <Insight insight={this.props.insightsDescriptionData[1]}  insightValue= {this.props.insightsValueData[1]}/>
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
+            <Insight insight={this.props.insightsDescriptionData[2]}  insightValue= {this.props.insightsValueData[2]}/>
+            <br />
             </Col>
           </Row>
         </Col>
