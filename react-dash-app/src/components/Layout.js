@@ -145,7 +145,9 @@ class Layout extends Component{
         </Col>
       </Col>
       <Col sm={4} className="d-flex">
-        <Col className="Column">
+        <Col className="text-center Column">
+          <h3>Insights</h3>
+          <hr />
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
