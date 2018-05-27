@@ -11,8 +11,6 @@
   border: outset;
   border-color: #000000;
   border-width: thin;
-  border-radius: 5px;
-  box-shadow: 3px 3px 10px #808080;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -34,6 +32,7 @@
   border-width: thick;
   background-color: #fff;
   color: #000000;
+  box-shadow: 3px 3px 10px #808080;
   font-size: 1.1em;
   margin-bottom: 30px;
 }
