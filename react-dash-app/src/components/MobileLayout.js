@@ -107,7 +107,7 @@ class MobileLayout extends Component{
           <h4>Welcome back, Chris</h4>
           <hr />
           <Col xs={{ size:6, offset: 3}}>
-          <CircularProgressBar percentage={komodoScore} />
+          <CircularProgressBar percentage={komodoScore} initialAnimation={'true'}/>
           </Col>
           <hr />
           <div>
@@ -126,7 +126,8 @@ class MobileLayout extends Component{
         </div>}
 
         {this.props.view === "wellness" &&
-        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}
+        wellnessTrendsData={this.props.wellnessTrendsData}/>
         }
 
         {this.props.view === "workload" &&
