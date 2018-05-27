@@ -53,9 +53,9 @@ class Layout extends Component{
 
     <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
-      <Col sm={3} lg={2} className="d-flex">
-        <Col className="Column">
-        <div style={{ textAlign: 'center' }}>
+      <Col sm={12} md={3} lg={2} className="d-flex">
+        <Row className="Column d-flex">
+        <Col sm={3} md={12} style={{ textAlign: 'center' }}>
 
             {this.props.view === "home" &&
           <HomeIcon size={60} color= '#d40000' />}
@@ -63,8 +63,8 @@ class Layout extends Component{
           <a onClick={this.props.changeHome}><HomeIcon size={60} color="#C0C0C0"  /></a>}
           <h5>Summary</h5>
           <hr />
-        </div>
-        <div style={{ textAlign: 'center' }}>
+        </Col>
+        <Col sm={3} md={12} style={{ textAlign: 'center' }}>
 
           {this.props.view === "workload" &&
           <HeartPulseIcon size={60} color="#d40000" />}
@@ -72,16 +72,16 @@ class Layout extends Component{
           <a onClick={this.props.changeWorkload}><HeartPulseIcon size={60} color="#C0C0C0" className="icon" /></a>}
           <h5>Training Load</h5>
           <hr />
-        </div>
-        <div style={{ textAlign: 'center' }}>
+        </Col>
+        <Col sm={3} md={12} style={{ textAlign: 'center' }}>
           {this.props.view === "wellness" &&
           <MedicalBagIcon size={60} color="#d40000" />}
           {this.props.view !== "wellness" &&
           <a onClick={this.props.changeWellness}><MedicalBagIcon size={60} color="#C0C0C0"  /></a>}
           <h5>Wellness</h5>
           <hr />
-        </div>
-        <div style={{ textAlign: 'center' }}>
+        </Col>
+        <Col sm={3} md={12} style={{ textAlign: 'center' }}>
 
           {this.props.view === "rpe" &&
           <RunFastIcon size={60} color="#d40000" />}
@@ -89,12 +89,12 @@ class Layout extends Component{
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
           <h5>RPE Load</h5>
           <hr />
-        </div>
+        </Col>
 
-      </Col>
+      </Row>
       </Col>
 
-      <Col sm={5} lg={6} className="d-flex">
+      <Col sm={8} md={5} lg={6} className="d-flex">
         <Col className="text-center Column">
           {this.props.view === "home" &&
           <div>
