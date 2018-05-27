@@ -8,8 +8,9 @@
 
 .liquid-text {
     transform: translate(0, 0px);
-    font-family: Roboto;
+    font-family: inherit;
   }
+
 
 
 .Column {

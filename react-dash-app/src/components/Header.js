@@ -18,7 +18,7 @@ class Header extends Component{
         <Container >
           <Row>
               <Col sm={10}>
-                  <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
+                  <img src={require('./komodo.png')} alt="Komodo Monitr" width="40" height="40" />
                   <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
 
               </Col>
