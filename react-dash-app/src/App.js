@@ -422,8 +422,6 @@ defineData(){
         lineTension: 0.3,
         fill: 0,
         type: 'line',
-        borderColor: "94, 213, 121",
-        backgroundColor:"rgba(94, 213, 121 ,0.5)",
         xAxisID: '2nd axis',
       },
 
@@ -431,6 +429,7 @@ defineData(){
           label: "Score",
           data: workloadScore,
           backgroundColor: workloadbarColor
+
         },
 
           {
@@ -439,7 +438,6 @@ defineData(){
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            borderColor: "94, 213, 121",
             backgroundColor:"rgba(94, 213, 121 ,0.5)",
             xAxisID: '2nd axis',
           }
@@ -457,8 +455,6 @@ defineData(){
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            borderColor: "94, 213, 121",
-            backgroundColor:"rgba(94, 213, 121 ,0.5)",
             xAxisID: '2nd axis',
           },
           {
@@ -473,7 +469,6 @@ defineData(){
             data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
             lineTension: 0.3,
             fill: 0,
-            borderColor: "94, 213, 121",
             backgroundColor:"rgba(94, 213, 121 ,0.5)",
             type: 'line',
             xAxisID: '2nd axis',

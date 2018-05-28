@@ -4,8 +4,8 @@ import '../App.css';
 
 
 const fontSize = {
-      value: 0.6,
-      postfix: 0.4,
+      value: 0.5,
+      postfix: 0.3,
       legend: 0.3,
     };
 
