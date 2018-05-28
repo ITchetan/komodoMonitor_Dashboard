@@ -33,6 +33,8 @@ class App extends Component {
       wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
+      ImageUrlData: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
@@ -122,9 +124,10 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe,){
+  loadingData(summary, players, playerImage, wellness, workload, rpe,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
+      endPointPlayerImage: playerImage,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
@@ -323,7 +326,13 @@ defineData(){
     }
   }
 
+  //set url for player image
+  let ImageUrl = URL.createObjectURL(this.state.endPointPlayerImage);
+
   this.setState({
+
+    //set state for player image URL
+    ImageUrlData: ImageUrl,
 
     //set player data states
     playerIdData: playerId,
@@ -481,6 +490,7 @@ defineData(){
             <div>
             <Header changeProfile={this.changeProfile}
                     logout={this.logout}
+                    playerImage={this.state.ImageUrlData}
             />
             <Layout
             barData={this.state.barData}
@@ -500,6 +510,8 @@ defineData(){
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
             />
 
              <ModalFormRPE/>
