@@ -422,7 +422,9 @@ defineData(){
         fill: 0,
         type: 'line',
         borderColor: "rgba(145, 229, 74,0.7)",
-        backgroundColor:"rgba(145, 229, 74,0.3)",},
+        backgroundColor:"rgba(145, 229, 74,0.3)",
+        xAxisID: '2nd axis',
+      },
 
         {
           label: "Score",
@@ -437,9 +439,10 @@ defineData(){
             fill: 0,
             type: 'line',
             borderColor: "rgba(145, 229, 74,0.7)",
-            backgroundColor:"rgba(145, 229, 74,0.3)",}
-          ],
-        },
+            backgroundColor:"rgba(145, 229, 74,0.3)",
+            xAxisID: '2nd axis',
+          }
+          ],},
 
 
       // Data for rpe Chart
@@ -447,29 +450,33 @@ defineData(){
         //labels: rpeLabel,
         labels: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11', '12', '13', '14'],
         datasets:[{
-          label: "Min Target",
-          //data: rpeMin,
-          data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
-          lineTension: 0.3,
-          fill: 0,
-          type: 'line',
-          borderColor: "rgba(145, 229, 74,0.7)",
-          backgroundColor:"rgba(145, 229, 74,0.3)"},
+            label: "Min Target",
+            //data: rpeMin,
+            data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
+            lineTension: 0.3,
+            fill: 0,
+            type: 'line',
+            borderColor: "rgba(145, 229, 74,0.7)",
+            backgroundColor:"rgba(145, 229, 74,0.3)",
+            xAxisID: '2nd axis',
+          },
           {
             label: "Score",
             //data: rpeScore,
             data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
             backgroundColor: rpeBarColor
             },
-            {
-              label: "Max Target",
-              //data: rpeMax,
-              data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
-              lineTension: 0.3,
-              fill: 0,
-              borderColor: "rgba(145, 229, 74,0.7)",
-              backgroundColor:"rgba(145, 229, 74,0.3)",
-              type: 'line'}
+          {
+            label: "Max Target",
+            //data: rpeMax,
+            data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
+            lineTension: 0.3,
+            fill: 0,
+            borderColor: "rgba(145, 229, 74,0.7)",
+            backgroundColor:"rgba(145, 229, 74,0.3)",
+            type: 'line',
+            xAxisID: '2nd axis',
+            }
 
             ]}
           });
