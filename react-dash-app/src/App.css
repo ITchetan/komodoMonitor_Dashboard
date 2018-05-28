@@ -1,9 +1,9 @@
 .Wrapper {
-  background-color: #1a1a00;
+  background-color: #666666;
   }
 
 .Header {
-  background-color: #fff;
+  background-color: #dcdcdc;
 }
 
 .liquid-text {
@@ -16,8 +16,8 @@
 .Column {
   background-color: #fff;
   border: outset;
-  border-color: #000000;
-  border-width: thin;
+  border-color: #595959;
+  border-width: medium;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -38,10 +38,20 @@
 
 .Insights {
   border-color: #d40000;
-  border-width: thick;
+  border-width: medium;
+  background-color: #d40000;
+  color: #fff;
+  box-shadow: 5px 5px 10px #808080;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+}
+
+.Insights:hover {
+  border-color: #d40000;
+  border-width: medium;
   background-color: #fff;
   color: #000000;
-  box-shadow: 3px 3px 10px #808080;
+  box-shadow: 5px 5px 10px #808080;
   font-size: 1.1em;
   margin-bottom: 30px;
 }
@@ -58,7 +68,7 @@ fill: #2dc937;
 }
 .orange
 {
-fill: #e7b416;
+fill: #ffa500;
 }
 .red
 {
@@ -67,6 +77,30 @@ fill: #e7b416;
 .blue
 {
 fill: #90C3D4;
+}
+
+.CircularProgressbar.progressbar-green .CircularProgressbar-path {
+  stroke: #2dc937;
+}
+
+.CircularProgressbar.progressbar-green .CircularProgressbar-text {
+  fill: #2dc937;
+}
+
+.CircularProgressbar.progressbar-orange .CircularProgressbar-path {
+  stroke: #ffa500;
+}
+
+.CircularProgressbar.progressbar-orange .CircularProgressbar-text {
+  fill: #ffa500;
+}
+
+.CircularProgressbar.progressbar-red .CircularProgressbar-path {
+  stroke: #cc3232;
+}
+
+.CircularProgressbar.progressbar-red .CircularProgressbar-text {
+  fill: #cc3232;
 }
 
 .needle, .needle-center
