@@ -23,6 +23,7 @@ class App extends Component {
       password: "",
       page: "login",
       barData:{},
+      wellnessTrendsData:{},
       chartData:{},
       rpeData: {},
       playerSessionId:{},
@@ -35,6 +36,8 @@ class App extends Component {
       wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
+      ImageUrlData: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
@@ -96,6 +99,7 @@ handleWindowSizeChange = () => {
     password: "",
     page: "login",
     barData:{},
+    wellnessTrendsData:{},
     chartData:{},
     rpeData: {},
     playerSessionId:{},
@@ -128,9 +132,11 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
+
   loadingData(summary, players, wellness, workload, rpe,sessions){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
+      endPointPlayerImage: playerImage,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
@@ -326,6 +332,55 @@ console.log(sessionDate);
     }
   }
 
+  //map weekly wellness data ot variables
+  let dataWellnessTrend = this.state.endPointWellness.data;
+  let wellnessWeekLabel = [];
+  let wellnessNutrition = [];
+  let wellnessEnergy = [];
+  let wellnessStress = [];
+  let wellnessSleepQuality = [];
+  let wellnessSleepAmount = [];
+  let wellnessPain = [];
+  let wellnessWeeklyTotal = [];
+
+  for (let i = 0; i < dataWellnessTrend.length; i++) {
+    let dict = dataWellnessTrend[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        wellnessWeekLabel.push(dict[key]);
+      }
+      else if (key ==='nutrition') {
+        wellnessNutrition.push(dict[key]);
+      }
+
+      else if (key ==='energy') {
+        wellnessEnergy.push(dict[key]);
+      }
+
+      else if (key ==='stress') {
+        wellnessStress.push(dict[key]);
+      }
+      else if (key ==='sleep_quality') {
+        wellnessSleepQuality.push(dict[key]);
+      }
+      else if (key ==='sleep_amount') {
+        wellnessSleepAmount.push(dict[key]);
+      }
+      else if (key ==='pain') {
+        wellnessPain.push(dict[key]);
+      }
+    }
+  }
+
+  for (let i = 0; i < wellnessWeekLabel.length; i++) {
+    wellnessWeeklyTotal.push(wellnessNutrition[i] +
+                             wellnessEnergy[i] +
+                             wellnessStress[i] +
+                             wellnessSleepQuality[i] +
+                             wellnessSleepAmount[i] +
+                             wellnessPain[i])
+  }
+console.log(wellnessWeeklyTotal)
   //set color for workloadbar graph depend on which zone the score is
     let workloadbarColor =[];
     for (let i = 0; i<workloadScore.length; i++){
@@ -389,12 +444,20 @@ console.log(sessionDate);
     }
   }
 
+  //set url for player image
+  let ImageUrl = URL.createObjectURL(this.state.endPointPlayerImage);
+
   this.setState({
+
 
     //set player session data states
 
     playerSessionId:sessionId,
     playerSessionDate:sessionDate,
+
+    //set state for player image URL
+    ImageUrlData: ImageUrl,
+
 
     //set player data states
     playerIdData: playerId,
@@ -438,60 +501,83 @@ console.log(sessionDate);
       backgroundColor: bar_colour,
     }]},
 
+    // map data for WellnessTrends here
+    wellnessTrendsData:{
+        labels: ['Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 8','Week 9', 'Week 10','Week 11','Week 12','Week 13','Week 14',
+      'Week 15','Week 16', 'Week 17','Week 18','Week 19','Week 20','Week 21','Week 22','Week 23', 'Week 24','Week 25','Week 26','Week 27','Week 28',
+    'Week 29','Week 30', 'Week 31','Week 32','Week 33','Week 34','Week 35','Week 36','Week 37', 'Week 38','Week 39','Week 40','Week 41','Week 42',
+    'Week 43','Week 44', 'Week 45','Week 46','Week 47','Week 48','Week 49','Week 50','Week 51', 'Week 52','Week 53','Week 54','Week 55','Week 56',
+  'Week 57','Week 58', 'Week 59','Week 60','Week 61','Week 62','Week 63','Week 64','Week 65', 'Week 66','Week 67','Week 68','Week 69','Week 70',
+'Week 71','Week 72', 'Week 73','Week 74','Week 75','Week 76','Week 77','Week 78','Week 79', 'Week 80','Week 81','Week 82','Week 83','Week 84'],
+        datasets:[{
+          label: "Score",
+          data:[16.5,30.0,28.1,9.5,19,9,26,30,22,12,13,14,15,6,6,15,18,8,15,16,25,30,21,19,27,8,22,23,11,5,25,7,30,20,10,24,
+                9,5,14,5,26,27,5,13,7,8,6,13,8,7,5,7,30,16,15,26,21,18,5,10,18,12,15,19,5,22,8,25,13,22,30,14,21,8,23
+                ,12,12,18,16,9,24,11,21,13],
+          lineTension: 0.3,
+          borderColor: '#00BFFF',
+          backgroundColor:"rgb(173,216,230,0.5)"}]},
+
     //map data for workload line graph
     workloadData:{
       labels: workloadLabel,
       datasets:[{
         label: "Min Target",
-        //data: workload_target_min,
         data:workloadMin,
         lineTension: 0.3,
         fill: 0,
         type: 'line',
-        backgroundColor:"rgba(145, 229, 74,0.6)"},
+        xAxisID: '2nd axis',
+      },
+
         {
           label: "Score",
-          //data: workload_score,
           data: workloadScore,
-          backgroundColor: workloadbarColor},
+          backgroundColor: workloadbarColor
+
+        },
+
           {
             label: "Max Target",
-            //data: workload_target_max,
             data: workloadMax,
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            backgroundColor:"rgba(145, 229, 74,0.6)"}
-          ],
-        },
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
+            xAxisID: '2nd axis',
+          }
+          ],},
 
 
       // Data for rpe Chart
       rpeData:{
-        labels: rpeLabel,
-        //labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S','M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        //labels: rpeLabel,
+        labels: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11', '12', '13', '14'],
         datasets:[{
-          label: "Min Target",
-          data: rpeMin,
-          //data: [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000],
-          lineTension: 0.3,
-          fill: 0,
-          type: 'line',
-          backgroundColor:"rgba(145, 229, 74,0.6)"},
+            label: "Min Target",
+            //data: rpeMin,
+            data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
+            lineTension: 0.3,
+            fill: 0,
+            type: 'line',
+            xAxisID: '2nd axis',
+          },
           {
             label: "Score",
-            data: rpeScore,
-            //data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
+            //data: rpeScore,
+            data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
             backgroundColor: rpeBarColor
             },
-            {
-              label: "Max Target",
-              data: rpeMax,
-              //data: [7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000,7000],
-              lineTension: 0.3,
-              fill: 0,
-              backgroundColor:"rgba(145, 229, 74,0.6)",
-              type: 'line'}
+          {
+            label: "Max Target",
+            //data: rpeMax,
+            data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
+            lineTension: 0.3,
+            fill: 0,
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
+            type: 'line',
+            xAxisID: '2nd axis',
+            }
 
             ]}
           });
@@ -534,6 +620,7 @@ console.log(sessionDate);
             />
             <MobileLayout
             barData={this.state.barData}
+            wellnessTrendsData={this.state.wellnessTrendsData}
             workloadData={this.state.workloadData}
             rpeData={this.state.rpeData}
             view={this.state.view}
@@ -562,12 +649,15 @@ console.log(sessionDate);
 
           else if (this.state.page === "main") {
           return (
+
             <div>
             <Header changeProfile={this.changeProfile}
-                    logout={this.logout}
+                    playerImage={this.state.ImageUrlData}
+                    view={this.state.view}
             />
             <Layout
             barData={this.state.barData}
+            wellnessTrendsData={this.state.wellnessTrendsData}
             workloadData={this.state.workloadData}
             rpeData={this.state.rpeData}
             view={this.state.view}
@@ -584,6 +674,9 @@ console.log(sessionDate);
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
+            logout={this.logout}
             />
 
             {this.renderModal()}

@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import ReactLoading from 'react-loading';
 import Login from './Login';
-
-const styles = {
-    paperContainer: {
-        height:600 ,
-        backgroundImage: `url(${"./field-bg.59a5e231.jpg"})`
-    }
-};
 
 class Loading extends Component {
   constructor(props){
@@ -17,16 +8,20 @@ class Loading extends Component {
       tokenData: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
       endPointsSessions:{},
       players: {},
+      playerImage: {},
       summary: {},
       wellness: {},
       workload: {},
       rpe: {},
+
       sessions:{}
+
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -43,15 +38,23 @@ class Loading extends Component {
         this.state.summary === true &&
         this.state.wellness === true &&
         this.state.workload === true &&
+
         this.state.sessions === true &&
         this.state.rpe === true) {
+        this.state.rpe === true &&
+        this.state.playerImage === true) {
+
     this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
+                            this.state.endPointPlayerImage,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
+
                             this.state.endPointSessions,
                             this.state.tokenData,
+
+
                           );
                         }
   }
@@ -71,6 +74,19 @@ class Loading extends Component {
       .then((findUserResponse) => {
         this.setState({ endPointPlayers: findUserResponse,
                         players: true})
+        this.endLoadingHandler()
+        })
+
+    fetch('https://app.komodomonitr.com/api/v1/players/3/image',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.props.loginToken}
+    })
+      .then(ImageResponse => ImageResponse.blob())
+
+      .then((findImageResponse) => {
+        this.setState({ endPointPlayerImage: findImageResponse,
+                        playerImage: true})
+        console.log(this.state.endPointPlayerImage)
         this.endLoadingHandler()
         })
 
@@ -147,50 +163,7 @@ class Loading extends Component {
 render(){
 
   return(
-    <div className="Login" style={styles.paperContainer}>
-    <Container>
-      <Row>
-      <Col sm={10}>
-          <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-          <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
-
-      </Col>
-      </Row>
-      <Row>
-      <Col className="text-center">
-      <h5>Welcome to Komodo Monitr, please Log in</h5>
-      </Col>
-      </Row>
-      <Row>
-      <Col className="text-center">
-              <p>Email</p>
-              <input type="text"
-                     readOnly
-                     id="theInput"
-                     value={this.props.email}
-                      />
-                <p>Password</p>
-               <input type="text"
-                      readOnly
-                      id="theInput2"
-                      value={this.props.pass}
-                       />
-                       <p/>
-                  <input type="submit" disabled/>
-                  <button disabled>
-                  Default
-                  </button>
-              </Col>
-        </Row>
-        <Row>
-          <Col xs="6">
-          </Col>
-          <Col>
-          <ReactLoading type='spin' color='#d40000'/>
-          </Col>
-          </Row>
-      </Container>
-    </div>
+  <Login isLoading={true}/>
   )
 }
 }
