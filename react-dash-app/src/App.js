@@ -133,7 +133,7 @@ handleWindowSizeChange = () => {
 
   //recieve fetched data from loading page and set them into current state of app.js
 
-  loadingData(summary, players, wellness, workload, rpe,sessions){
+  loadingData(summary, players,playerImage, wellness, workload, rpe,sessions,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointPlayerImage: playerImage,

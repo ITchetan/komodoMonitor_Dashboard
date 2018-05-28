@@ -19,7 +19,6 @@ class Loading extends Component {
       wellness: {},
       workload: {},
       rpe: {},
-
       sessions:{}
 
     }
@@ -38,9 +37,7 @@ class Loading extends Component {
         this.state.summary === true &&
         this.state.wellness === true &&
         this.state.workload === true &&
-
         this.state.sessions === true &&
-        this.state.rpe === true) {
         this.state.rpe === true &&
         this.state.playerImage === true) {
 
@@ -50,12 +47,8 @@ class Loading extends Component {
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
-
                             this.state.endPointSessions,
-                            this.state.tokenData,
-
-
-                          );
+                                  );
                         }
   }
   //fetching all the data from the endpoints and updating the states
