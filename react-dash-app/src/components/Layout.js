@@ -22,7 +22,7 @@ class Layout extends Component{
       rpeData: props.rpeData,
       insightsData: props.insightsData,
       playerFirstData: props.playerFirstData,
-      playerLastData: props.playerLastData
+      playerLastData: props.playerLastData,
     }
   }
 
@@ -31,7 +31,6 @@ class Layout extends Component{
     let komodoScore = this.props.komodoNumber.total
     komodoScore = komodoScore*100
     komodoScore = komodoScore.toFixed(0)
-    komodoScore = 80
 
     let workloadScore = this.props.komodoNumber.workload
     workloadScore = workloadScore*100
@@ -52,11 +51,11 @@ class Layout extends Component{
     }
     console.log(strokeColour)
 
+
     return (
   <div className="Layout">
+
   <Container fluid={true}>
-
-
     <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={3} lg={2} className="d-flex">
@@ -151,6 +150,9 @@ class Layout extends Component{
             <h3>My Profile</h3>
             <hr />
             <PlayerProfile
+             logout={this.props.logout}
+             loginToken={this.props.loginToken}
+             playerImage={this.props.playerImage}
              playerFirstData={this.props.playerFirstData}
              playerLastData={this.props.playerLastData}/>
           </div>}

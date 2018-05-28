@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../App.css';
 import ReactLoading from 'react-loading';
+import Header from './Header'
+
 
 
 const styles = {
@@ -77,14 +79,9 @@ loginData(){
   {
     return (
   <div className="Login" style={styles.paperContainer}>
-  <Container>
-    <Row>
-    <Col sm={10}>
-        <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-        <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
 
-    </Col>
-    </Row>
+  <Container>
+    <Header />
     <Row>
     <Col className="text-center">
     <h5>Welcome to Komodo Monitr, please Log in</h5>
@@ -118,6 +115,8 @@ loginData(){
         </Col>
         <Col>
         {this.state.loginLoad === true &&
+          <ReactLoading type='spin' color='#d40000'/>}
+        {this.props.isLoading === true &&
           <ReactLoading type='spin' color='#d40000'/>}
           </Col>
           </Row>
