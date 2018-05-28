@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Container, Col } from 'reactstrap';
+import { Container, Col, Button } from 'reactstrap';
+import { PlusBoxOutlineIcon } from 'mdi-react';
 import '../App.css';
 
 
@@ -23,6 +24,7 @@ class PlayerProfile extends Component{
   onDrop = event => { event.preventDefault()
                       let file = event.dataTransfer.files[0]
                       this.setState({ file })
+                      this.setState({ page: "imageConfirm" })
                     }
 
   changeProfileImage(){
@@ -71,13 +73,24 @@ class PlayerProfile extends Component{
             <Col >
                 <h5><strong> First Name :</strong> {this.props.playerFirstData[0]} </h5>
                 <h5><strong> Last Name : </strong> {this.props.playerLastData[0]} </h5>
-                <a onClick={this.changeProfileImage}> Upload new photo </a>
-                {this.state.page === "image" && <div onDragOver={this.onDrag} onDrop={this.onDrop}>
+
+                {this.state.page === "profile" && <Button color="secondary" onClick={this.changeProfileImage}> Upload new photo </Button>}
+                {this.state.page === "image" && <div className="dropImage" onDragOver={this.onDrag} onDrop={this.onDrop}>
                   <p>Drop an image!</p>
+                  <PlusBoxOutlineIcon/>
+                  <p>
+                  here
+                  </p>
+                  </div>}
+
+                  {this.state.page === "imageConfirm" &&
+                  <div>
+                  <Button color="secondary" onClick={this.changeProfile} >Cancel</Button>
+                  <Button color="primary" onClick={this.confirmUpload} >Confirm</Button>
+                  <div>
                   <img src={url} />
-                  <a onClick={this.changeProfile} >Cancel</a>
-                  <a onClick={this.confirmUpload} >Confirm</a>
-                </div>}
+                  </div>
+                  </div>}
             </Col>
       </Container>
       </div>
