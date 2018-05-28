@@ -56,10 +56,12 @@ class PlayerProfile extends Component{
 
 
   render(){
+
     let { file } = this.state
     let url = file && URL.createObjectURL(file)
 
     console.log(this.props.playerFirstData);
+
     return (
       <div >
       <Container  >

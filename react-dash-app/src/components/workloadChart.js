@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 
 // class for workload chart
 class WorkloadChart extends Component{
@@ -16,21 +16,17 @@ class WorkloadChart extends Component{
   render(){
     return (
       <div className="lineChart">
-          <Line
+          <Bar
           // here we tell chart to look for data in state
-            width={80}
-          	height={60}
+            // width={80}
+          	// height={60}
             data={this.props.workloadData}
             options={{
               title:{
                 display:false,
-                text:'Workload',
-
-                fontSize:25
               },
               legend:{
                 display:false,
-                position:'top'
               },
               scales: {
                 yAxes: [{

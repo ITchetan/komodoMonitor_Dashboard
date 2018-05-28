@@ -23,6 +23,7 @@ class App extends Component {
       password: "",
       page: "login",
       barData:{},
+      wellnessTrendsData:{},
       chartData:{},
       rpeData: {},
       insightsDescriptionData: {},
@@ -95,6 +96,7 @@ handleWindowSizeChange = () => {
     password: "",
     page: "login",
     barData:{},
+    wellnessTrendsData:{},
     chartData:{},
     rpeData: {},
     insightsDescriptionData: {},
@@ -290,6 +292,20 @@ defineData(){
     }
   }
 
+  //set color for workloadbar graph depend on which zone the score is
+    let workloadbarColor =[];
+    for (let i = 0; i<workloadScore.length; i++){
+
+      if (workloadScore[i]<workloadMin[i]) {
+        workloadbarColor.push('#e7b416')
+      }
+      else if (workloadScore[i]>workloadMax[i] ) {
+        workloadbarColor.push('#cc3232')
+      }
+      else {workloadbarColor.push('#2dc937')}
+
+    }
+
   //map weekly rpe data to variables
   let dataRpe = this.state.endPointRpe.data;
   let rpeLabel = [];
@@ -309,6 +325,19 @@ defineData(){
         rpeScore.push(dict[key]);
       }
     }
+  }
+//set color for rpebar graph depend on which zone the score is
+  let rpeBarColor =[];
+  for (let i = 0; i<rpeScore.length; i++){
+
+    if (rpeScore[i]<rpeMin[i]) {
+      rpeBarColor.push('#e7b416')
+    }
+    else if (rpeScore[i]>rpeMax[i] ) {
+      rpeBarColor.push('#cc3232')
+    }
+    else {rpeBarColor.push('#2dc937')}
+
   }
 
   //set colors for the wellness graph
@@ -375,59 +404,82 @@ defineData(){
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
     }]},
+    // map data for WellnessTrends here
+    wellnessTrendsData:{
+        labels: ['Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 8','Week 9', 'Week 10','Week 11','Week 12','Week 13','Week 14',
+      'Week 15','Week 16', 'Week 17','Week 18','Week 19','Week 20','Week 21','Week 22','Week 23', 'Week 24','Week 25','Week 26','Week 27','Week 28',
+    'Week 29','Week 30', 'Week 31','Week 32','Week 33','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
+    'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
+  'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
+'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7'],
+        datasets:[{
+          label: "Score",
+          data:[15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25
+                ,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,
+                15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25
+              ,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25],
+          lineTension: 0.3,
+          borderColor: '#00BFFF',
+          backgroundColor:"rgb(173,216,230,0.5)"}]},
 
     //map data for workload line graph
     workloadData:{
       labels: workloadLabel,
       datasets:[{
         label: "Min Target",
-        //data: workload_target_min,
         data:workloadMin,
         lineTension: 0.3,
         fill: 0,
-        backgroundColor:"rgba(145, 229, 74,0.6)"},
+        type: 'line',
+        borderColor: "rgba(145, 229, 74,0.7)",
+        backgroundColor:"rgba(145, 229, 74,0.3)",},
+
         {
           label: "Score",
-          //data: workload_score,
           data: workloadScore,
-          lineTension: 0.3,
-          borderColor: 'red',
-          fill: false,},
+          backgroundColor: workloadbarColor
+        },
+
           {
             label: "Max Target",
-            //data: workload_target_max,
             data: workloadMax,
             lineTension: 0.3,
             fill: 0,
-            backgroundColor:"rgba(145, 229, 74,0.6)"}
+            type: 'line',
+            borderColor: "rgba(145, 229, 74,0.7)",
+            backgroundColor:"rgba(145, 229, 74,0.3)",}
           ],
         },
 
 
       // Data for rpe Chart
       rpeData:{
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        //labels: rpeLabel,
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S','M', 'T', 'W', 'T', 'F', 'S', 'S'],
         datasets:[{
           label: "Min Target",
-          //data: rpeMax
-          data: [4000,3000,4500,3200,4800,3300,3900],
+          //data: rpeMin,
+          data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
           lineTension: 0.3,
           fill: 0,
-          backgroundColor:"rgba(145, 229, 74,0.6)"},
+          type: 'line',
+          borderColor: "rgba(145, 229, 74,0.7)",
+          backgroundColor:"rgba(145, 229, 74,0.3)"},
           {
             label: "Score",
             //data: rpeScore,
-            data: [3000,4000,5000,3900,4800,5300,5900],
-            lineTension: 0.3,
-            borderColor: 'red',
-            fill: false,},
+            data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
+            backgroundColor: rpeBarColor
+            },
             {
               label: "Max Target",
               //data: rpeMax,
-              data: [8000,10000,9000,8900,8800,5300,9900],
+              data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
               lineTension: 0.3,
               fill: 0,
-              backgroundColor:"rgba(145, 229, 74,0.6)"}
+              borderColor: "rgba(145, 229, 74,0.7)",
+              backgroundColor:"rgba(145, 229, 74,0.3)",
+              type: 'line'}
 
             ]}
           });
@@ -460,6 +512,7 @@ defineData(){
             />
             <MobileLayout
             barData={this.state.barData}
+            wellnessTrendsData={this.state.wellnessTrendsData}
             workloadData={this.state.workloadData}
             rpeData={this.state.rpeData}
             view={this.state.view}
@@ -494,6 +547,7 @@ defineData(){
             />
             <Layout
             barData={this.state.barData}
+            wellnessTrendsData={this.state.wellnessTrendsData}
             workloadData={this.state.workloadData}
             rpeData={this.state.rpeData}
             view={this.state.view}
