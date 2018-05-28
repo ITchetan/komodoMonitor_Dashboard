@@ -20,11 +20,13 @@ class Loading extends Component {
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      endPointsSessions:{},
       players: {},
       summary: {},
       wellness: {},
       workload: {},
       rpe: {},
+      sessions:{}
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -41,12 +43,14 @@ class Loading extends Component {
         this.state.summary === true &&
         this.state.wellness === true &&
         this.state.workload === true &&
+        this.state.sessions === true &&
         this.state.rpe === true) {
     this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
+                            this.state.endPointSessions,
                             this.state.tokenData,
                           );
                         }
@@ -122,6 +126,21 @@ class Loading extends Component {
         //send the end point states to app.js
         this.endLoadingHandler()
       })})
+
+
+      //fetch sessons endpoint
+      .then(token => {fetch('https://app.komodomonitr.com/api/v1/sessions?userId=1',{
+        method: 'get',
+        headers: {'X-Auth-Token': this.props.loginToken}
+      })
+        .then(sessionsResponse => sessionsResponse.json())
+
+        .then((sessionsResponse)=> {
+          this.setState({ endPointSessions: sessionsResponse,
+                          sessions: true})
+          //send the end point states to app.js
+          this.endLoadingHandler()
+        })})
 
 }
 

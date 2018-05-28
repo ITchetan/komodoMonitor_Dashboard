@@ -25,6 +25,8 @@ class App extends Component {
       barData:{},
       chartData:{},
       rpeData: {},
+      playerSessionId:{},
+      playerSessionDate:{},
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
@@ -36,6 +38,7 @@ class App extends Component {
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      endPointSessions:{},
       view: 'home',
       width: window.innerWidth,
 
@@ -95,6 +98,8 @@ handleWindowSizeChange = () => {
     barData:{},
     chartData:{},
     rpeData: {},
+    playerSessionId:{},
+    playerSessionDate:{},
     insightsDescriptionData: {},
     insightsValueData: {},
     playerIdData: {},
@@ -106,6 +111,7 @@ handleWindowSizeChange = () => {
     endPointWellness: {},
     endPointWorkload: {},
     endPointRpe: {},
+    endPointSessions:{},
     view: 'home', })
   }
 
@@ -122,12 +128,13 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe,){
+  loadingData(summary, players, wellness, workload, rpe,sessions){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
+      endPointSessions:sessions
       })
     this.defineData()
     //end loading and show main page
@@ -136,6 +143,38 @@ handleWindowSizeChange = () => {
 
 //take data from the states and configure the data to go into the page as graphs etc...
 defineData(){
+  //extract sessions (session ID and date) data
+
+  // let dataSessions = [{session_id: 1, datetime: "2018-05-17 16:00:00", title: "Training session", type: "train"},
+  //                     {session_id: 2, datetime: "2019-05-17 16:00:00", title: "Training session", type: "train"},
+  //                     {session_id: 3, datetime: "2020-05-17 16:00:00", title: "Training session", type: "train"}]
+
+  let dataSessions = [{session_id: 1, datetime: "2018-05-17 16:00:00", title: "Training session", type: "train"}]
+
+
+
+  // let dataSessions = this.state.endPointSessions
+  console.log(dataSessions);
+  let sessionId = [];
+  let sessionDate = [];
+  // for (var i = 1; i < 3; i++) {
+  //   sessionId.push(i);
+  //   sessionDate.push(i);
+  // }
+
+  for (let i = 0; i < dataSessions.length; i++) {
+    let dict = dataSessions[i];
+    for (let key in dict) {
+      if (key === 'session_id') {
+        sessionId.push(dict[key]);
+      }
+      else if (key === 'datetime') {
+        sessionDate.push(dict[key]);
+      }
+}}
+
+console.log(sessionId);
+console.log(sessionDate);
 
   //extract player data
   let dataPlayer = this.state.endPointPlayers
@@ -352,6 +391,11 @@ defineData(){
 
   this.setState({
 
+    //set player session data states
+
+    playerSessionId:sessionId,
+    playerSessionDate:sessionDate,
+
     //set player data states
     playerIdData: playerId,
     playerFirstData: playerFirst,
@@ -453,7 +497,17 @@ defineData(){
           });
         }
 
+
+      renderModal() {
+            let rpeform = []
+            for (let i = 0; i < this.state.playerSessionId.length; i++){
+              rpeform.push( <div> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId ={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+            }
+            return rpeform
+          }
+
         render() {
+
 
           const { width } = this.state
           const isMobile = width <= 575
@@ -497,7 +551,8 @@ defineData(){
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
             />
-            <ModalFormRPE/>
+
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
@@ -531,7 +586,8 @@ defineData(){
             komodoNumber={this.state.komodoNumberData}
             />
 
-             <ModalFormRPE/>
+            {this.renderModal()}
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
