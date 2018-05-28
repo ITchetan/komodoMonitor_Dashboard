@@ -17,7 +17,8 @@ class WellnessPane extends Component{
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
-    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels, datasets: this.props.wellnessTrendsData.datasets};
+    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels.slice(-30),
+                            datasets: this.props.wellnessTrendsData.datasets};
   }
 
   showGauge() {
@@ -74,9 +75,9 @@ class WellnessPane extends Component{
         </Col>
         <Col sm={3}>
         <select onChange = {this.filterOption} onLoad = {this.filterOption}>
-          <option value="" >Select Range</option>
+          <option disabled >Select Range</option>
             <option value="-30" >Month</option>
-            <option value="-90">Three Months</option>
+            <option value="-90" >Three Months</option>
             <option value="-180">Six Months</option>
             <option value="-365">Year</option>
         </select>
