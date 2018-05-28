@@ -34,6 +34,8 @@ class App extends Component {
       wellnessForm: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
+      ImageUrlData: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
@@ -124,9 +126,10 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, wellness, workload, rpe,){
+  loadingData(summary, players, playerImage, wellness, workload, rpe,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
+      endPointPlayerImage: playerImage,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
@@ -289,6 +292,55 @@ defineData(){
     }
   }
 
+  //map weekly wellness data ot variables
+  let dataWellnessTrend = this.state.endPointWellness.data;
+  let wellnessWeekLabel = [];
+  let wellnessNutrition = [];
+  let wellnessEnergy = [];
+  let wellnessStress = [];
+  let wellnessSleepQuality = [];
+  let wellnessSleepAmount = [];
+  let wellnessPain = [];
+  let wellnessWeeklyTotal = [];
+
+  for (let i = 0; i < dataWellnessTrend.length; i++) {
+    let dict = dataWellnessTrend[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        wellnessWeekLabel.push(dict[key]);
+      }
+      else if (key ==='nutrition') {
+        wellnessNutrition.push(dict[key]);
+      }
+
+      else if (key ==='energy') {
+        wellnessEnergy.push(dict[key]);
+      }
+
+      else if (key ==='stress') {
+        wellnessStress.push(dict[key]);
+      }
+      else if (key ==='sleep_quality') {
+        wellnessSleepQuality.push(dict[key]);
+      }
+      else if (key ==='sleep_amount') {
+        wellnessSleepAmount.push(dict[key]);
+      }
+      else if (key ==='pain') {
+        wellnessPain.push(dict[key]);
+      }
+    }
+  }
+
+  for (let i = 0; i < wellnessWeekLabel.length; i++) {
+    wellnessWeeklyTotal.push(wellnessNutrition[i] +
+                             wellnessEnergy[i] +
+                             wellnessStress[i] +
+                             wellnessSleepQuality[i] +
+                             wellnessSleepAmount[i] +
+                             wellnessPain[i])
+  }
+console.log(wellnessWeeklyTotal)
   //set color for workloadbar graph depend on which zone the score is
     let workloadbarColor =[];
     for (let i = 0; i<workloadScore.length; i++){
@@ -352,7 +404,13 @@ defineData(){
     }
   }
 
+  //set url for player image
+  let ImageUrl = URL.createObjectURL(this.state.endPointPlayerImage);
+
   this.setState({
+
+    //set state for player image URL
+    ImageUrlData: ImageUrl,
 
     //set player data states
     playerIdData: playerId,
@@ -536,7 +594,8 @@ defineData(){
 
             <div>
             <Header changeProfile={this.changeProfile}
-                    logout={this.logout}
+                    playerImage={this.state.ImageUrlData}
+                    view={this.state.view}
             />
             <Layout
             barData={this.state.barData}
@@ -557,6 +616,9 @@ defineData(){
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
+            logout={this.logout}
             />
 
              <ModalFormRPE/>

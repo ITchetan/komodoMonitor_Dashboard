@@ -6,12 +6,13 @@ class Header extends Component{
   constructor(props){
     super(props);
     this.state = {
-
+  
     }
 
   }
   render()
   {
+
       return (
 
         <div className="Header">
@@ -28,12 +29,9 @@ class Header extends Component{
 
                     <div style={{ textAlign: 'center' }}>
                       {this.props.view === "profile" &&
-                      <img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80"  />}
+                      <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"  />}
                       {this.props.view !== "profile" &&
-
-                      <a onClick={this.props.changeProfile} className="logout" title="My Profile"><img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80" /></a>}
-                      <br />
-                      <a onClick={this.props.logout} className="logout" title="Logout">Logout</a>
+                      <a onClick={this.props.changeProfile}><img className="profile" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
 
                     </div>
 

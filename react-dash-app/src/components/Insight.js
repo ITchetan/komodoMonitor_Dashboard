@@ -4,10 +4,7 @@ import '../App.css';
 
 const Insight = (props) => (
   <div>
-    {/*<div className="InsightValue">
-      {props.insightValue}
-    </div>*/}
-    <Card className="Insights">
+    <Card className="Insights text-left">
       <CardBody>{props.insight}</CardBody>
     </Card>
   </div>
