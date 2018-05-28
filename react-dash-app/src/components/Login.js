@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import '../App.css';
 import ReactLoading from 'react-loading';
+import '../App.css';
+
 
 
 const styles = {
@@ -77,7 +79,9 @@ loginData(){
   {
     return (
   <div className="Login" style={styles.paperContainer}>
+
   <Container>
+  <div className="Header">
     <Row>
     <Col sm={10}>
         <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
@@ -85,6 +89,7 @@ loginData(){
 
     </Col>
     </Row>
+    </div>
     <Row>
     <Col className="text-center">
     <h5>Welcome to Komodo Monitr, please Log in</h5>

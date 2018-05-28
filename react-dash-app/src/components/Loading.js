@@ -17,14 +17,17 @@ class Loading extends Component {
       tokenData: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
       players: {},
+      playerImage: {},
       summary: {},
       wellness: {},
       workload: {},
       rpe: {},
+
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -41,13 +44,14 @@ class Loading extends Component {
         this.state.summary === true &&
         this.state.wellness === true &&
         this.state.workload === true &&
-        this.state.rpe === true) {
+        this.state.rpe === true &&
+        this.state.playerImage === true) {
     this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
+                            this.state.endPointPlayerImage,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
-                            this.state.tokenData,
                           );
                         }
   }
@@ -67,6 +71,19 @@ class Loading extends Component {
       .then((findUserResponse) => {
         this.setState({ endPointPlayers: findUserResponse,
                         players: true})
+        this.endLoadingHandler()
+        })
+
+    fetch('https://app.komodomonitr.com/api/v1/players/3/image',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.props.loginToken}
+    })
+      .then(ImageResponse => ImageResponse.blob())
+
+      .then((findImageResponse) => {
+        this.setState({ endPointPlayerImage: findImageResponse,
+                        playerImage: true})
+        console.log(this.state.endPointPlayerImage)
         this.endLoadingHandler()
         })
 

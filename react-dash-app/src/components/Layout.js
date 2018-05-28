@@ -22,14 +22,11 @@ class Layout extends Component{
       rpeData: props.rpeData,
       insightsData: props.insightsData,
       playerFirstData: props.playerFirstData,
-      playerLastData: props.playerLastData
+      playerLastData: props.playerLastData,
+      file: null,
     }
 
   }
-
-
-
-
 
   // Turn overall numbers into percentages with no decimal places
   render() {
@@ -46,11 +43,11 @@ class Layout extends Component{
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
 
+
     return (
   <div className="Layout">
+
   <Container fluid={true}>
-
-
     <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={3} lg={2} className="d-flex">
@@ -139,6 +136,8 @@ class Layout extends Component{
             <h3>My Profile</h3>
             <hr />
             <PlayerProfile
+             loginToken={this.props.loginToken}
+             playerImage={this.props.playerImage}
              playerFirstData={this.props.playerFirstData}
              playerLastData={this.props.playerLastData}/>
           </div>}
