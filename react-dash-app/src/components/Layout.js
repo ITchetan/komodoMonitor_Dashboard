@@ -24,7 +24,6 @@ class Layout extends Component{
       playerFirstData: props.playerFirstData,
       playerLastData: props.playerLastData,
     }
-
   }
 
   // Turn overall numbers into percentages with no decimal places
@@ -41,6 +40,16 @@ class Layout extends Component{
 
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
+
+    let strokeColour
+    if (komodoScore <= 75) {
+      strokeColour =  'progressbar-red'
+    } else if (komodoScore > 75 & komodoScore <= 99) {
+      strokeColour = 'progressbar-orange'
+    } else {
+      strokeColour =  'progressbar-green'
+    }
+    console.log(strokeColour)
 
 
     return (
@@ -95,10 +104,16 @@ class Layout extends Component{
           {this.props.view === "home" &&
           <div>
               <div>
-                <h3>Welcome back, Chris</h3>
+                <h3>Welcome back, {this.props.playerFirstData[0]}</h3>
                 <hr />
-                <Col xs={{ size:6, offset: 3}}>
-                  <CircularProgressBar percentage={komodoScore} initialAnimation={'true'} strokeWidth={'10'} />
+                <h5>Your overall score is {komodoScore}%.</h5>
+                <Col xs={{ size:4, offset: 4}}>
+                  <CircularProgressBar
+                  percentage={komodoScore}
+                  initialAnimation={'true'}
+                  strokeWidth={'10'}
+                  className={strokeColour}
+                   />
                 </Col>
               </div>
               <hr />
@@ -145,14 +160,9 @@ class Layout extends Component{
         </Col>
       </Col>
       <Col sm={4} className="d-flex">
-        <Col className="Column">
-          <Row>
-            <Col className="text-center">
-            <h3><strong>Insights</strong></h3>
-            <hr  />
-            </Col>
-
-          </Row>
+        <Col className="text-center Column">
+          <h3>Insights</h3>
+          <hr />
           <Row>
             <Col>
             <Insight insight={this.props.insightsDescriptionData[0]}  insightValue= {this.props.insightsValueData[0]}/>
