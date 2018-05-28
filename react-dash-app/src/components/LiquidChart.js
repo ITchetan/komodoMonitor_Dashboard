@@ -16,8 +16,8 @@ const dryColor = {//text color
   fill:"black"
 }
 
-const stops = [//fill color
-  <stop stopColor="#C5F2F2" />,
+const stops = [//liquid fill color
+  <stop key={5}stopColor="#C5F2F2" />,
 ];
 
 

@@ -395,6 +395,7 @@ defineData(){
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
     }]},
+
     // map data for WellnessTrends here
     wellnessTrendsData:{
         labels: ['Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 8','Week 9', 'Week 10','Week 11','Week 12','Week 13','Week 14',
@@ -405,7 +406,7 @@ defineData(){
 'Week 71','Week 72', 'Week 73','Week 74','Week 75','Week 76','Week 77','Week 78','Week 79', 'Week 80','Week 81','Week 82','Week 83','Week 84'],
         datasets:[{
           label: "Score",
-          data:[16,30,28,9,19,9,26,30,22,12,13,14,15,6,6,15,18,8,15,16,25,30,21,19,27,8,22,23,11,5,25,7,30,20,10,24,
+          data:[16.5,30.0,28.1,9.5,19,9,26,30,22,12,13,14,15,6,6,15,18,8,15,16,25,30,21,19,27,8,22,23,11,5,25,7,30,20,10,24,
                 9,5,14,5,26,27,5,13,7,8,6,13,8,7,5,7,30,16,15,26,21,18,5,10,18,12,15,19,5,22,8,25,13,22,30,14,21,8,23
                 ,12,12,18,16,9,24,11,21,13],
           lineTension: 0.3,
@@ -421,8 +422,8 @@ defineData(){
         lineTension: 0.3,
         fill: 0,
         type: 'line',
-        borderColor: "rgba(145, 229, 74,0.7)",
-        backgroundColor:"rgba(145, 229, 74,0.3)",
+        borderColor: "94, 213, 121",
+        backgroundColor:"rgba(94, 213, 121 ,0.5)",
         xAxisID: '2nd axis',
       },
 
@@ -438,8 +439,8 @@ defineData(){
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            borderColor: "rgba(145, 229, 74,0.7)",
-            backgroundColor:"rgba(145, 229, 74,0.3)",
+            borderColor: "94, 213, 121",
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
             xAxisID: '2nd axis',
           }
           ],},
@@ -456,8 +457,8 @@ defineData(){
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            borderColor: "rgba(145, 229, 74,0.7)",
-            backgroundColor:"rgba(145, 229, 74,0.3)",
+            borderColor: "94, 213, 121",
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
             xAxisID: '2nd axis',
           },
           {
@@ -472,8 +473,8 @@ defineData(){
             data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
             lineTension: 0.3,
             fill: 0,
-            borderColor: "rgba(145, 229, 74,0.7)",
-            backgroundColor:"rgba(145, 229, 74,0.3)",
+            borderColor: "94, 213, 121",
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
             type: 'line',
             xAxisID: '2nd axis',
             }
@@ -537,6 +538,7 @@ defineData(){
 
           else if (this.state.page === "main") {
           return (
+
             <div>
             <Header changeProfile={this.changeProfile}
                     logout={this.logout}
