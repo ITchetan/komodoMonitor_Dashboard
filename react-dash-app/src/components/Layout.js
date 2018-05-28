@@ -23,7 +23,6 @@ class Layout extends Component{
       insightsData: props.insightsData,
       playerFirstData: props.playerFirstData,
       playerLastData: props.playerLastData,
-      file: null,
     }
 
   }
@@ -136,6 +135,7 @@ class Layout extends Component{
             <h3>My Profile</h3>
             <hr />
             <PlayerProfile
+             logout={this.props.logout}
              loginToken={this.props.loginToken}
              playerImage={this.props.playerImage}
              playerFirstData={this.props.playerFirstData}

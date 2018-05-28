@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import ReactLoading from 'react-loading';
 import Login from './Login';
 
 class Loading extends Component {

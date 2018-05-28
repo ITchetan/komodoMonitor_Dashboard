@@ -66,6 +66,8 @@ class PlayerProfile extends Component{
       <div >
       <Container  >
 
+        <a onClick={this.props.logout} className="logout">Logout</a>
+
             <Col >
                 <img className="profile" src={this.props.playerImage} alt="" height="250" width="250" />
             </Col>
@@ -78,7 +80,7 @@ class PlayerProfile extends Component{
 
                 {this.state.page === "profile" && <Button color="secondary" onClick={this.changeProfileImage}> Upload new photo </Button>}
                 {this.state.page === "image" && <div className="dropImage" onDragOver={this.onDrag} onDrop={this.onDrop}>
-                  <p>Drop an image!</p>
+                  <p>Drop an image</p>
                   <PlusBoxOutlineIcon/>
                   <p>
                   here

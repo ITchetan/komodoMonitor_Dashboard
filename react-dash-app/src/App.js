@@ -292,6 +292,55 @@ defineData(){
     }
   }
 
+  //map weekly wellness data ot variables
+  let dataWellnessTrend = this.state.endPointWellness.data;
+  let wellnessWeekLabel = [];
+  let wellnessNutrition = [];
+  let wellnessEnergy = [];
+  let wellnessStress = [];
+  let wellnessSleepQuality = [];
+  let wellnessSleepAmount = [];
+  let wellnessPain = [];
+  let wellnessWeeklyTotal = [];
+
+  for (let i = 0; i < dataWellnessTrend.length; i++) {
+    let dict = dataWellnessTrend[i];
+    for (let key in dict) {
+      if (key === 'week_start') {
+        wellnessWeekLabel.push(dict[key]);
+      }
+      else if (key ==='nutrition') {
+        wellnessNutrition.push(dict[key]);
+      }
+
+      else if (key ==='energy') {
+        wellnessEnergy.push(dict[key]);
+      }
+
+      else if (key ==='stress') {
+        wellnessStress.push(dict[key]);
+      }
+      else if (key ==='sleep_quality') {
+        wellnessSleepQuality.push(dict[key]);
+      }
+      else if (key ==='sleep_amount') {
+        wellnessSleepAmount.push(dict[key]);
+      }
+      else if (key ==='pain') {
+        wellnessPain.push(dict[key]);
+      }
+    }
+  }
+
+  for (let i = 0; i < wellnessWeekLabel.length; i++) {
+    wellnessWeeklyTotal.push(wellnessNutrition[i] +
+                             wellnessEnergy[i] +
+                             wellnessStress[i] +
+                             wellnessSleepQuality[i] +
+                             wellnessSleepAmount[i] +
+                             wellnessPain[i])
+  }
+console.log(wellnessWeeklyTotal)
   //set color for workloadbar graph depend on which zone the score is
     let workloadbarColor =[];
     for (let i = 0; i<workloadScore.length; i++){
@@ -542,8 +591,8 @@ defineData(){
           return (
             <div>
             <Header changeProfile={this.changeProfile}
-                    logout={this.logout}
                     playerImage={this.state.ImageUrlData}
+                    view={this.state.view}
             />
             <Layout
             barData={this.state.barData}
@@ -566,6 +615,7 @@ defineData(){
             komodoNumber={this.state.komodoNumberData}
             playerImage={this.state.ImageUrlData}
             loginToken={this.state.loginToken}
+            logout={this.logout}
             />
 
              <ModalFormRPE/>

@@ -165,7 +165,7 @@ fill: #000000;
 
 .profile {
   border-radius: 50%;
-  box-shadow: 3px 3px 3px #808080;
+  cursor: pointer;
 }
 
 .logout {
@@ -181,6 +181,14 @@ fill: #000000;
 
 .dropImage{
   background-color: gray;
+}
+
+.profileNoClick{
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thick;
+  border-color: #d40000;
+  cursor: pointer;
 }
 
 
