@@ -69,7 +69,7 @@ class PlayerProfile extends Component{
         <a onClick={this.props.logout} className="logout">Logout</a>
 
             <Col >
-                <img className="profile" src={this.props.playerImage} alt="" height="250" width="250" />
+                <img className="profile" src={this.props.playerImage} alt="" max-width="100%"  />
             </Col>
 
             <br />
