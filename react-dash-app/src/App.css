@@ -3,7 +3,8 @@
   }
 
 .Header {
-  background-color: #dcdcdc;
+  background-color: #333333;
+  padding: 15px;
 }
 
 .liquid-text {

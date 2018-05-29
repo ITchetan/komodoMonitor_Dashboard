@@ -92,7 +92,7 @@ class PlayerProfile extends Component{
                   <Button color="secondary" onClick={this.changeProfile} >Cancel</Button>
                   <Button color="primary" onClick={this.confirmUpload} >Confirm</Button>
                   <div>
-                  <img src={url} />
+                  <img src={url} alt="" />
                   </div>
                   </div>}
             </Col>

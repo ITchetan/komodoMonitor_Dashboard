@@ -6,7 +6,7 @@ class Header extends Component{
   constructor(props){
     super(props);
     this.state = {
-  
+
     }
 
   }
@@ -19,9 +19,7 @@ class Header extends Component{
         <Container >
           <Row>
               <Col sm={10}>
-                  <img src={require('./komodo.png')} alt="Komodo Monitr" width="40" height="40" />
-                  <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
-
+              <img src='km_white.png' height='60' alt='logo'></img>
               </Col>
 
                 <Col sm={2}>
