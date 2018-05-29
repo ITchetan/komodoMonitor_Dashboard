@@ -16,10 +16,10 @@ class Header extends Component{
       return (
 
         <div className="Header">
-        <Container >
+        <Container fluid='true'>
           <Row>
               <Col sm={10}>
-              <img src='km_white.png' height='60' alt='logo'></img>
+              <img src='km_white.png' height='75' alt='logo'></img>
               </Col>
 
                 <Col sm={2}>

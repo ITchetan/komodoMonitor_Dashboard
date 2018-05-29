@@ -31,7 +31,7 @@ class WorkloadPane extends Component{
       <div>
         <h4>Workload</h4>
         <hr />
-        <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
+        <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
         <Button onClick={this.showChart} color="info">View Detail</Button>
         </div>
       }

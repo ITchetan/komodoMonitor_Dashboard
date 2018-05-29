@@ -157,8 +157,11 @@ class MobileLayout extends Component{
           <h3>My Profile</h3>
           <hr />
           <PlayerProfile
-           playerFirstData={this.props.playerFirstData}
-           playerLastData={this.props.playerLastData}/>
+          logout={this.props.logout}
+          loginToken={this.props.loginToken}
+          playerImage={this.props.playerImage}
+          playerFirstData={this.props.playerFirstData}
+          playerLastData={this.props.playerLastData} />
         </div>}
 
         </Col>

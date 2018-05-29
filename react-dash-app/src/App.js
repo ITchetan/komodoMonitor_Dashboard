@@ -578,6 +578,9 @@ console.log(wellnessWeeklyTotal)
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
+            logout={this.logout}
             />
             <ModalFormRPE/>
             {this.state.wellnessForm === true &&

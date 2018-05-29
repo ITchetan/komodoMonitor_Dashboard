@@ -225,13 +225,12 @@ handleSubmit = (e) =>{
 
   render() {
     return (
-      <div className = "modal-dialog">
-      <Container>
+
             <Modal isOpen={this.state.modal} size='lg'>
               <Form onSubmit ={this.handleSubmit}>
                   <ModalHeader>Hi {this.props.profileName}, how are you?</ModalHeader>
                   <ModalBody>
-                    <div>
+                    <Container>
                           <Row>
                             <Label for ="Nutrition:" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center"> Nutrition:</Label>
                           </Row>
@@ -394,7 +393,7 @@ handleSubmit = (e) =>{
                               Very sore
                             </Col>
                           </Row>
-                    </div>
+                    </Container>
 
                   </ModalBody>
 
@@ -405,8 +404,6 @@ handleSubmit = (e) =>{
                 </Form>
 
             </Modal>
-        </Container>
-      </div>
     );
   }
 }
