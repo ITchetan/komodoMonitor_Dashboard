@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import WorkloadChart from './workloadChart';
 import PointerGauge from './PointerGauge'
-import { Button, Row, Col  } from 'reactstrap';
+import { Button} from 'reactstrap';
 
 
 import '../App.css';
@@ -16,7 +16,7 @@ class WorkloadPane extends Component{
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
-    this.tempWorkloadData ={ labels: this.props.workloadData.labels, datasets: this.props.workloadData.datasets};
+    this.tempWorkloadData ={ labels: this.props.workloadData.labels.slice(-14), datasets: this.props.workloadData.datasets};
 
   }
 
@@ -52,30 +52,37 @@ class WorkloadPane extends Component{
       <div>
         <h4>Workload</h4>
         <hr />
-        <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min} gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
-        <Button onClick={this.showChart} color="info">View Detail</Button>
+        <div className="d-flex justify-content-between">
+        <Button onClick={this.showChart} color="info" >View Detail</Button>
+        </div>
+        <hr />
+        <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min}
+        gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
+
       </div>
       }
       {this.state.view === 'chart' &&
       <div>
-        <Row>
-        <Col sm={2} >
-          <Button onClick={this.showGauge} color="info">View Summary</Button>
-        </Col>
-        <Col sm={7}>
+
           <h4>Workload</h4>
-        </Col>
-        <Col sm={3}>
-          <select onChange = {this.filterOption} onLoad = {this.filterOption}>
+
+        <hr />
+        <div className="d-flex justify-content-between">
+
+          <Button onClick={this.showGauge} color="info">View Summary</Button>
+
+
+          <select onChange = {this.filterOption}>
             <option disabled >Select Range</option>
-              <option value="-30" >Month</option>
+              <option value="-14" >Two Weeks</option>
+              <option value="-30">Month</option>
               <option value="-90">Three Months</option>
               <option value="-180">Six Months</option>
               <option value="-365">Year</option>
           </select>
-        </Col>
-        </Row>
-        <hr />
+
+        </div>
+          <hr />
           <WorkloadChart workloadData={this.tempWorkloadData}/>
       </div>
       }

@@ -10,6 +10,8 @@ class RpeChart extends Component{
     return (
       <div className="lineChart">
           <Bar
+            width={5}
+            height={3.5}
             data={this.props.rpeData}// data passed as property
             options={{
               title:{
@@ -19,7 +21,7 @@ class RpeChart extends Component{
                 display:false,
               },
               scales: {
-                xAxes: [{//this will starts line chart on yaxes
+                xAxes: [{//barPercentage: 1,
                       }, {
                         id: '2nd axis',
                         type: 'category',
