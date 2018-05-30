@@ -24,11 +24,14 @@ class Login extends Component{
       passField: '',
       tokenData: {},
       loginLoad: 'false',
+      logInAgain: 'false',
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.handlePassChange = this.handlePassChange.bind(this);
     this.skipLogin = this.skipLogin.bind(this);
+    this.setCookie = this.setCookie.bind(this);
+    this.getCookie = this.getCookie.bind(this);
   }
 
   submitHandler(evt) {
@@ -53,6 +56,26 @@ class Login extends Component{
       this.setState({ passField: passwordData})
     }
 
+    setCookie(cvalue) {
+    document.cookie = "token" + "=" + cvalue + ";" + ";path=/";
+    }
+
+    getCookie(){
+      let name = "token" + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return false;
+    }
+
 loginData(){
   fetch('https://app.komodomonitr.com/api/v1/users/login', {
     body: JSON.stringify({
@@ -64,21 +87,42 @@ loginData(){
     },
     method: 'POST',
   })
-  .then(response => response.json())
-
-
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error;
+    }
+    })
 
   .then(data => {this.setState({tokenData: data.token})
-      this.props.handlerEmail(this.state.tokenData, this.state.emailField, this.state.passField)})
+      this.props.handlerEmail(this.state.tokenData)
+      this.setCookie(this.state.tokenData)
+      })
+  .catch((error) => {
+    this.setState({ logInAgain: true,
+                    loginLoad: false })
+  });
 }
+
+componentDidMount(){
+    if (this.getCookie() !== false && this.props.isLoading !== true && this.props.loginFailed === false) {
+    this.props.handlerEmail(this.getCookie())
+    }
+  }
 
 
 
   //chart is drown here
   render()
   {
+  console.log(this.getCookie())
+
     return (
   <div className="Login" style={styles.paperContainer}>
+
+
+  <Container fluid={true}>
 
     <Header />
     <Container>
@@ -119,6 +163,10 @@ loginData(){
           <ReactLoading type='spin' color='#d40000'/>}
         {this.props.isLoading === true &&
           <ReactLoading type='spin' color='#d40000'/>}
+        {this.state.logInAgain === true &&
+            <p>Wrong Username/Password</p>}
+        {this.props.loginFailed === true &&
+            <p>Please log in again</p>}
           </Col>
           </Row>
     </Container>
