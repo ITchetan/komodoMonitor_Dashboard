@@ -50,7 +50,6 @@ class Layout extends Component{
     } else {
       strokeColour =  'progressbar-green'
     }
-    console.log(strokeColour)
 
 
     return (

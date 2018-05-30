@@ -225,44 +225,47 @@ handleSubmit = (e) =>{
 
   render() {
     return (
-      <div className = "modal-dialog">
-      <Container>
-            <Modal isOpen={this.state.modal} size= 'lg'>
+
+            <Modal isOpen={this.state.modal} size='lg'>
               <Form onSubmit ={this.handleSubmit}>
-                  <ModalHeader>Hi {this.props.profileName}, please complete your wellness survey!!</ModalHeader>
+                  <ModalHeader>Hi {this.props.profileName}, how are you?</ModalHeader>
                   <ModalBody>
-                    <div>
+                    <Container>
                           <Row>
-                                <Label for ="Nutrition:" sm = {3} > Nutrition:</Label>
-                                <Col sm={2} className="SmallText">
-                                  Very Satisfied
-                                </Col>
-                                <Col sm={3}>
-                                  <input type="range" value = {this.state.nutrition} onChange = {this.handleChangeNutrition} list="tickmarks"/>
-                                  <datalist id="tickmarks">
-                                    <option value="0" label="0%"/>
-                                    <option value="10"/>
-                                    <option value="20"/>
-                                    <option value="30"/>
-                                    <option value="40"/>
-                                    <option value="50" label="50%"/>
-                                    <option value="60"/>
-                                    <option value="70"/>
-                                    <option value="80"/>
-                                    <option value="90"/>
-                                    <option value="100" label="100%"/>
-                                  </datalist>
-                                  </Col>
-                                  <Col className="SmallText" sm={2}>
-                                  Very malnourished
-                                  </Col>
+                            <Label for ="Nutrition:" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center"> Nutrition:</Label>
                           </Row>
                           <Row>
-                                <Label for ="Energy" sm = {3} >Energy:</Label>
-                                <Col sm={2} className="SmallText">
+                            <Col sm={{ size: 3 }} className="SmallText text-sm-right">
+                              Very Satisfied
+                            </Col>
+                            <Col sm={4} className="text-sm-center">
+                              <input type="range" value = {this.state.nutrition} onChange = {this.handleChangeNutrition} list="tickmarks"/>
+                              <datalist id="tickmarks">
+                                <option value="0" label="0%"/>
+                                <option value="10"/>
+                                <option value="20"/>
+                                <option value="30"/>
+                                <option value="40"/>
+                                <option value="50" label="50%"/>
+                                <option value="60"/>
+                                <option value="70"/>
+                                <option value="80"/>
+                                <option value="90"/>
+                                <option value="100" label="100%"/>
+                              </datalist>
+                              </Col>
+                              <Col className="SmallText text-sm-left" sm={5}>
+                              Very malnourished
+                              </Col>
+                          </Row>
+                          <Row>
+                            <Label for ="Energy" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center">Energy:</Label>
+                          </Row>
+                          <Row>
+                            <Col sm={3} className="SmallText text-sm-right">
                                 Full of energy
                                 </Col>
-                                <Col sm={3}>
+                                <Col sm={4} className="text-sm-center">
                                 <input type="range" value = {this.state.energy} onChange = {this.handleChangeEnergy} list="tickmarks"/>
                                   <datalist id="tickmarks">
                                     <option value="0" label="0%"/>
@@ -278,111 +281,119 @@ handleSubmit = (e) =>{
                                     <option value="100" label="100%"/>
                                   </datalist>
                                 </Col>
-                                <Col sm={2} className="SmallText">
+                                <Col sm={5} className="SmallText text-sm-left">
                                 Very fatigued
                                 </Col>
                           </Row>
                           <Row>
-                                <Label for ="Sleep quality" sm = {3} >Sleep quality:</Label>
-                                <Col sm={2} className="SmallText">
-                                  Very Rested
-                                </Col>
-                                <Col sm={3}>
-                                <input type="range" value = {this.state.sleepQuality} onChange = {this.handleChangeSleepQuality} list="tickmarks"/>
-                                  <datalist id="tickmarks">
-                                    <option value="0" label="0%"/>
-                                    <option value="10"/>
-                                    <option value="20"/>
-                                    <option value="30"/>
-                                    <option value="40"/>
-                                    <option value="50" label="50%"/>
-                                    <option value="60"/>
-                                    <option value="70"/>
-                                    <option value="80"/>
-                                    <option value="90"/>
-                                    <option value="100" label="100%"/>
-                                  </datalist>
-                                </Col>
-                                <Col sm={2} className="SmallText">
-                                  Unable to sleep
-                                </Col>
+                            <Label for ="Sleep quality" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center">Sleep quality:</Label>
                           </Row>
                           <Row>
-                                <Label for ="Stress" sm = {3} >Stress:</Label>
-                                <Col sm={2} className="SmallText">
-                                  Very relaxed
-                                </Col>
-                                <Col sm={3}>
-                                <input type="range" value = {this.state.stress} onChange = {this.handleChangeStress} list="tickmarks"/>
-                                  <datalist id="tickmarks">
-                                    <option value="0" label="0%"/>
-                                    <option value="10"/>
-                                    <option value="20"/>
-                                    <option value="30"/>
-                                    <option value="40"/>
-                                    <option value="50" label="50%"/>
-                                    <option value="60"/>
-                                    <option value="70"/>
-                                    <option value="80"/>
-                                    <option value="90"/>
-                                    <option value="100" label="100%"/>
-                                  </datalist>
-                                </Col>
-                                <Col sm={2} className="SmallText">
-                                  Highly stressed
-                                </Col>
+                            <Col sm={3} className="SmallText text-sm-right">
+                              Very Rested
+                            </Col>
+                            <Col sm={4} className="text-sm-center">
+                            <input type="range" value = {this.state.sleepQuality} onChange = {this.handleChangeSleepQuality} list="tickmarks"/>
+                              <datalist id="tickmarks">
+                                <option value="0" label="0%"/>
+                                <option value="10"/>
+                                <option value="20"/>
+                                <option value="30"/>
+                                <option value="40"/>
+                                <option value="50" label="50%"/>
+                                <option value="60"/>
+                                <option value="70"/>
+                                <option value="80"/>
+                                <option value="90"/>
+                                <option value="100" label="100%"/>
+                              </datalist>
+                            </Col>
+                            <Col sm={5} className="SmallText text-sm-left">
+                              Unable to sleep
+                            </Col>
                           </Row>
                           <Row>
-                                <Label for ="Sleep amount" sm = {3} >Sleep amount:</Label>
-                                <Col sm={2} className="SmallText">
-                                  Less than 6 hours
-                                </Col>
-                                <Col sm={3}>
-                                <input type="range" value = {this.state.sleepAmount} onChange = {this.handleChangeSleepAmount} list="tickmarks"/>
-                                  <datalist id="tickmarks">
-                                    <option value="0" label="0%"/>
-                                    <option value="10"/>
-                                    <option value="20"/>
-                                    <option value="30"/>
-                                    <option value="40"/>
-                                    <option value="50" label="50%"/>
-                                    <option value="60"/>
-                                    <option value="70"/>
-                                    <option value="80"/>
-                                    <option value="90"/>
-                                    <option value="100" label="100%"/>
-                                  </datalist>
-                                </Col>
-                                <Col sm={2} className="SmallText">
-                                  More than 9 hours
-                                </Col>
+                            <Label for ="Stress" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center">Stress:</Label>
                           </Row>
                           <Row>
-                                <Label for ="Muscle soreness" sm = {3} >Muscle pain:</Label>
-                                <Col sm={2} className="SmallText">
-                                  Feeling Great
-                                </Col>
-                                <Col sm={3}>
-                                <input type="range" value = {this.state.muscleSoreness} onChange = {this.handleChangeMuscleSorness} list="tickmarks"/>
-                                  <datalist id="tickmarks">
-                                    <option value="0" label="0%"/>
-                                    <option value="10"/>
-                                    <option value="20"/>
-                                    <option value="30"/>
-                                    <option value="40"/>
-                                    <option value="50" label="50%"/>
-                                    <option value="60"/>
-                                    <option value="70"/>
-                                    <option value="80"/>
-                                    <option value="90"/>
-                                    <option value="100" label="100%"/>
-                                  </datalist>
-                                </Col>
-                                <Col sm={2} className="SmallText">
-                                  Very sore
-                                </Col>
+                            <Col sm={3} className="SmallText text-sm-right">
+                              Very relaxed
+                            </Col>
+                            <Col sm={4} className="text-sm-center">
+                            <input type="range" value = {this.state.stress} onChange = {this.handleChangeStress} list="tickmarks"/>
+                              <datalist id="tickmarks">
+                                <option value="0" label="0%"/>
+                                <option value="10"/>
+                                <option value="20"/>
+                                <option value="30"/>
+                                <option value="40"/>
+                                <option value="50" label="50%"/>
+                                <option value="60"/>
+                                <option value="70"/>
+                                <option value="80"/>
+                                <option value="90"/>
+                                <option value="100" label="100%"/>
+                              </datalist>
+                            </Col>
+                            <Col sm={5} className="SmallText text-sm-left">
+                              Highly stressed
+                            </Col>
                           </Row>
-                    </div>
+                          <Row>
+                            <Label for ="Sleep amount" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center">Sleep amount:</Label>
+                          </Row>
+                          <Row>
+                            <Col sm={3} className="SmallText text-sm-right">
+                              Less than 6 hours
+                            </Col>
+                            <Col sm={4} className="text-sm-center">
+                            <input type="range" value = {this.state.sleepAmount} onChange = {this.handleChangeSleepAmount} list="tickmarks"/>
+                              <datalist id="tickmarks">
+                                <option value="0" label="0%"/>
+                                <option value="10"/>
+                                <option value="20"/>
+                                <option value="30"/>
+                                <option value="40"/>
+                                <option value="50" label="50%"/>
+                                <option value="60"/>
+                                <option value="70"/>
+                                <option value="80"/>
+                                <option value="90"/>
+                                <option value="100" label="100%"/>
+                              </datalist>
+                            </Col>
+                            <Col sm={5} className="SmallText text-sm-left">
+                              More than 9 hours
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Label for ="Muscle soreness" xs={12} sm={{ size: 4, offset: 3 }} className="text-sm-center">Muscle pain:</Label>
+                          </Row>
+                          <Row>
+                            <Col sm={3} className="SmallText text-sm-right">
+                              Feeling Great
+                            </Col>
+                            <Col sm={4} className="text-sm-center">
+                            <input type="range" value = {this.state.muscleSoreness} onChange = {this.handleChangeMuscleSorness} list="tickmarks"/>
+                              <datalist id="tickmarks">
+                                <option value="0" label="0%"/>
+                                <option value="10"/>
+                                <option value="20"/>
+                                <option value="30"/>
+                                <option value="40"/>
+                                <option value="50" label="50%"/>
+                                <option value="60"/>
+                                <option value="70"/>
+                                <option value="80"/>
+                                <option value="90"/>
+                                <option value="100" label="100%"/>
+                              </datalist>
+                            </Col>
+                            <Col sm={5} className="SmallText text-sm-left">
+                              Very sore
+                            </Col>
+                          </Row>
+                    </Container>
 
                   </ModalBody>
 
@@ -393,8 +404,6 @@ handleSubmit = (e) =>{
                 </Form>
 
             </Modal>
-        </Container>
-      </div>
     );
   }
 }

@@ -67,9 +67,10 @@ class ModalFormRPE extends React.Component {
               <ModalBody>
                 <div>
                       <Row>
-                      <br/>
-                      <Col sm={5}>
-                      <FormGroup >
+                      <Col sm={1}>
+                      </Col>
+                      <Col>
+                        <FormGroup >
                         <Label for="Select">Level of Exertion  </Label>
                         <Input type="select" name="select" id="listSelect">
                           <option>6    No exertion at all</option>
@@ -92,11 +93,13 @@ class ModalFormRPE extends React.Component {
                       </FormGroup>
                       </Col>
                       </Row>
+                      <Button color="secondary" onClick={this.toggle} className='mr-auto'>Absent</Button>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onClick={this.handleSubmit_rpe}>Submit</Button>{' '}
-                <Button color="secondary" onClick={this.toggle}>Absent</Button>
+                <Button color="primary" onClick={this.toggle} className='mr-auto'>Submit</Button>{' '}
+
+
               </ModalFooter>
               </Form>
             </Modal>
