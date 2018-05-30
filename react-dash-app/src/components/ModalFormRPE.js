@@ -81,7 +81,7 @@ class ModalFormRPE extends React.Component {
       <Container>
             <Modal isOpen={this.state.modal} size="lg">
             <Form onSubmit = {this.handleSubmit_rpe}>
-              <ModalHeader>Please complete your RPE survey for Session #{this.props.playerSessionId}              
+              <ModalHeader>Please complete your RPE survey for Session #{this.props.playerSessionId}
               <br/> Date : {this.props.playerSessionDate} </ModalHeader>
               <ModalBody>
                 <div>

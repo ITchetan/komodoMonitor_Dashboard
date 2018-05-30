@@ -50,7 +50,7 @@ class WorkloadPane extends Component{
       <div>
       {this.state.view === 'gauge' &&
       <div>
-        <h4>Workload</h4>
+        <h3>Workload</h3>
         <hr />
         <div className="d-flex justify-content-between">
         <Button onClick={this.showChart} color="info" >View Detail</Button>
@@ -64,7 +64,7 @@ class WorkloadPane extends Component{
       {this.state.view === 'chart' &&
       <div>
 
-          <h4>Workload</h4>
+          <h3>Workload</h3>
 
         <hr />
         <div className="d-flex justify-content-between">
