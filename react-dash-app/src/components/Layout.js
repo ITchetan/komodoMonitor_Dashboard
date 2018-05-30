@@ -16,7 +16,8 @@ class Layout extends Component{
   constructor(props){
     super(props);
     this.state = {
-      // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
+      // chart data will be generated in app and passed in chart property,
+        //following is telling chart that data will come from property
       barData: props.barData,
       workloadData: props.workloadData,
       rpeData: props.rpeData,

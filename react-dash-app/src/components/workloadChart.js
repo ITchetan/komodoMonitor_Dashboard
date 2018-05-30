@@ -3,24 +3,15 @@ import {Bar} from 'react-chartjs-2';
 
 // class for workload chart
 class WorkloadChart extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
-      workloadData:props.workloadData
-    }
-  }
-
 
   //chart is drown here
   render(){
     return (
       <div className="lineChart">
           <Bar
-          // here we tell chart to look for data in state
-            // width={80}
-          	// height={60}
-            data={this.props.workloadData}
+            width={5}
+            height={3.5}
+              data={this.props.workloadData}// data passed as property
             options={{
               title:{
                 display:false,
@@ -29,6 +20,13 @@ class WorkloadChart extends Component{
                 display:false,
               },
               scales: {
+                xAxes: [{
+                }, {
+                  id: '2nd axis',
+                  type: 'category',
+                  position: 'bottom',
+                  display: false // want this hidden
+                }],
                 yAxes: [{
                     ticks: {
                       suggestedMin: 0,

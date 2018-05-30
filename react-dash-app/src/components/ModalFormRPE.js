@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter,FormGroup } from 'reactstrap';
+import { Form,Input, Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter,FormGroup } from 'reactstrap';
 
 class ModalFormRPE extends React.Component {
   constructor(props) {
@@ -8,10 +8,12 @@ class ModalFormRPE extends React.Component {
     this.state = {
       modal: true,
       buttonLabel:'Wellness Form',
-      profileName:props.profileName
+      profileName:props.profileName,
+      playerSessionId:props.playerSessionId,
+      playerSessionDate:props.playerSessionDate,
     };
-
-    this.toggle = this.toggle.bind(this);
+    this.handleSubmit_rpe = this.handleSubmit_rpe.bind(this);
+    // this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
@@ -21,14 +23,47 @@ class ModalFormRPE extends React.Component {
   }
 
 
+  handleSubmit_rpe = (e) =>{
+
+  // method to post the values to RPE API
+  let rpeScore;
+
+    fetch('https://app.komodomonitr.com/api/v1/data/rpe?sessionId='+this.props.playerSessionId+'&userId=1', {
+      body:JSON.stringify(
+      {
+      "score": 8
+
+    }) ,
+      // must match 'Content-Type' header
+      headers: {
+        'Accept' : 'application/json',
+        'Content-type': 'application/json',
+        'X-Auth-Token': this.props.loginToken
+      },
+      method: 'POST',
+    });
+
+    this.setState({
+      modal: !this.state.modal,
+    });
+
+    e.preventDefault()
+
+  }
+
+
+
 
 
   render() {
     return (
       <div className = "ModalForm">
       <Container>
-            <Modal isOpen={this.state.modal} size="sm">
-              <ModalHeader>Hi{this.props.profileName}, please complete your RPE survey!!</ModalHeader>
+            <Modal isOpen={this.state.modal} size="lg">
+            <Form onSubmit = {this.handleSubmit_rpe}>
+              <ModalHeader>Hi {this.props.profileName},please complete your RPE survey!!
+              <br/> Session ID : {this.props.playerSessionId}
+              <br/> Date : {this.props.playerSessionDate} </ModalHeader>
               <ModalBody>
                 <div>
                       <Row>
@@ -64,7 +99,9 @@ class ModalFormRPE extends React.Component {
               <ModalFooter>
                 <Button color="primary" onClick={this.toggle} className='mr-auto'>Submit</Button>{' '}
 
+
               </ModalFooter>
+              </Form>
             </Modal>
         </Container>
       </div>

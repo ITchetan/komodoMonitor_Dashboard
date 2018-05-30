@@ -10,10 +10,9 @@ class WellnessTrends extends Component{
     return (
       <div className="lineChart">
           <Line
-          // here we tell chart to look for data in state
             width={5}
-          	height={1}
-            data={this.props.wellnessTrendsData}
+          	height={1.5}
+            data={this.props.wellnessTrendsData}// data passed as property
             options={{
               title:{
                 display:false,
