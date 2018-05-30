@@ -195,19 +195,27 @@ class Loading extends Component {
 
 
       //fetch sessons endpoint
-      .then(token => {fetch('https://app.komodomonitr.com/api/v1/sessions?userId=1',{
+      fetch('https://app.komodomonitr.com/api/v1/sessions?userId=1',{
         method: 'get',
         headers: {'X-Auth-Token': this.props.loginToken}
       })
-        .then(sessionsResponse => sessionsResponse.json())
+        .then((sessionsResponse) => {
+        if (sessionsResponse.ok) {
+          return sessionsResponse.json();
+        } else {
+          throw new Error;
+        }
+      })
 
         .then((sessionsResponse)=> {
           this.setState({ endPointSessions: sessionsResponse,
                           sessions: true})
           //send the end point states to app.js
           this.endLoadingHandler()
-        })})
-
+        })
+        .catch((error) => {
+          this.props.loadingFailed()
+        });
 }
 
 render(){

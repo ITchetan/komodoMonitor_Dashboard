@@ -119,13 +119,12 @@ componentDidMount(){
   console.log(this.getCookie())
 
     return (
+
   <div className="Login" style={styles.paperContainer}>
-
-
+    <Header />
   <Container fluid={true}>
 
-    <Header />
-    <Container>
+
     <Row>&nbsp;</Row>
     <Row>
     <Col className="text-center">
@@ -163,10 +162,16 @@ componentDidMount(){
           <ReactLoading type='spin' color='#d40000'/>}
         {this.props.isLoading === true &&
           <ReactLoading type='spin' color='#d40000'/>}
-        {this.state.logInAgain === true &&
-            <p>Wrong Username/Password</p>}
         {this.props.loginFailed === true &&
             <p>Please log in again</p>}
+          </Col>
+          </Row>
+          <Row>
+          <Col xs="5">
+          </Col>
+          <Col>
+          {this.state.logInAgain === true &&
+              <p>Wrong Username/Password</p>}
           </Col>
           </Row>
     </Container>
