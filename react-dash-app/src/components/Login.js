@@ -80,8 +80,9 @@ loginData(){
     return (
   <div className="Login" style={styles.paperContainer}>
 
-  <Container>
     <Header />
+    <Container>
+    <Row>&nbsp;</Row>
     <Row>
     <Col className="text-center">
     <h5>Welcome to Komodo Monitr, please Log in</h5>

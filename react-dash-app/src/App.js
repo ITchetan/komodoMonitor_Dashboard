@@ -26,6 +26,8 @@ class App extends Component {
       wellnessTrendsData:{},
       chartData:{},
       rpeData: {},
+      playerSessionId:{},
+      playerSessionDate:{},
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
@@ -39,6 +41,7 @@ class App extends Component {
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      endPointSessions:{},
       view: 'home',
       width: window.innerWidth,
 
@@ -99,6 +102,8 @@ handleWindowSizeChange = () => {
     wellnessTrendsData:{},
     chartData:{},
     rpeData: {},
+    playerSessionId:{},
+    playerSessionDate:{},
     insightsDescriptionData: {},
     insightsValueData: {},
     playerIdData: {},
@@ -110,6 +115,7 @@ handleWindowSizeChange = () => {
     endPointWellness: {},
     endPointWorkload: {},
     endPointRpe: {},
+    endPointSessions:{},
     view: 'home', })
   }
 
@@ -126,13 +132,15 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, playerImage, wellness, workload, rpe,){
+
+  loadingData(summary, players,playerImage, wellness, workload, rpe,sessions,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointPlayerImage: playerImage,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
+      endPointSessions:sessions
       })
     this.defineData()
     //end loading and show main page
@@ -141,6 +149,26 @@ handleWindowSizeChange = () => {
 
 //take data from the states and configure the data to go into the page as graphs etc...
 defineData(){
+
+
+  let dataSessions = this.state.endPointSessions
+  console.log(dataSessions);
+  let sessionId = [];
+  let sessionDate = [];
+
+  for (let i = 0; i < dataSessions.length; i++) {
+    let dict = dataSessions[i];
+    for (let key in dict) {
+      if (key === 'session_id') {
+        sessionId.push(dict[key]);
+      }
+      else if (key === 'datetime') {
+        sessionDate.push(dict[key]);
+      }
+}}
+
+console.log(sessionId);
+console.log(sessionDate);
 
   //extract player data
   let dataPlayer = this.state.endPointPlayers
@@ -410,8 +438,15 @@ console.log(wellnessWeeklyTotal)
 
   this.setState({
 
+
+    //set player session data states
+
+    playerSessionId:sessionId,
+    playerSessionDate:sessionDate,
+
     //set state for player image URL
     ImageUrlData: ImageUrl,
+
 
     //set player data states
     playerIdData: playerId,
@@ -544,7 +579,17 @@ console.log(wellnessWeeklyTotal)
           });
         }
 
+
+      renderModal() {
+            let rpeform = []
+            for (let i = 0; i < this.state.playerSessionId.length; i++){
+              rpeform.push( <div> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId ={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+            }
+            return rpeform
+          }
+
         render() {
+
 
           const { width } = this.state
           const isMobile = width <= 575
@@ -588,8 +633,12 @@ console.log(wellnessWeeklyTotal)
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
+            logout={this.logout}
             />
-            <ModalFormRPE/>
+
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
@@ -629,7 +678,8 @@ console.log(wellnessWeeklyTotal)
             logout={this.logout}
             />
 
-             <ModalFormRPE/>
+            {this.renderModal()}
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }

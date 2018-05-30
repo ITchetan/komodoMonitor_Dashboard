@@ -57,7 +57,7 @@ class RpePane extends Component{
           <hr />
           <PointerGauge name={"RPE"} value={this.props.rpeSummary.value}
           gaugeLowerBound={this.props.rpeSummary.min} gaugeUpperBound={this.props.rpeSummary.max}
-          gaugeMaxValue={10000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
+          gaugeMaxValue={10000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
         </div>
         }
 

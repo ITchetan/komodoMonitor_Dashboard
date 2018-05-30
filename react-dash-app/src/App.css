@@ -3,7 +3,8 @@
   }
 
 .Header {
-  background-color: #dcdcdc;
+  background-color: #333333;
+  padding: 15px;
 }
 
 .liquid-text {
@@ -72,7 +73,7 @@ fill: #ffa500;
 }
 .red
 {
-  fill: #cc3232;
+  fill: #d40000;
 }
 .blue
 {
@@ -206,11 +207,11 @@ fill: #000000;
 }
 
 
-.modal-dialog {
+/* .modal-dialog {
 
           width: 1800px;
 
-        }
+        } */
 
 .dropImage{
   background-color: gray;

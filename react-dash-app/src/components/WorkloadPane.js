@@ -57,7 +57,7 @@ class WorkloadPane extends Component{
         </div>
         <hr />
         <PointerGauge name={"Workload"} value={this.props.workloadSummary.value} gaugeLowerBound={this.props.workloadSummary.min}
-        gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
+        gaugeUpperBound={this.props.workloadSummary.max} gaugeMaxValue={25000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
 
       </div>
       }
