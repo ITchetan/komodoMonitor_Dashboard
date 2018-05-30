@@ -149,24 +149,12 @@ handleWindowSizeChange = () => {
 
 //take data from the states and configure the data to go into the page as graphs etc...
 defineData(){
-  //extract sessions (session ID and date) data
-
-  // let dataSessions = [{session_id: 1, datetime: "2018-05-17 16:00:00", title: "Training session", type: "train"},
-  //                     {session_id: 2, datetime: "2019-05-17 16:00:00", title: "Training session", type: "train"},
-  //                     {session_id: 3, datetime: "2020-05-17 16:00:00", title: "Training session", type: "train"}]
-
-  let dataSessions = [{session_id: 1, datetime: "2018-05-17 16:00:00", title: "Training session", type: "train"}]
 
 
-
-  // let dataSessions = this.state.endPointSessions
+  let dataSessions = this.state.endPointSessions
   console.log(dataSessions);
   let sessionId = [];
   let sessionDate = [];
-  // for (var i = 1; i < 3; i++) {
-  //   sessionId.push(i);
-  //   sessionDate.push(i);
-  // }
 
   for (let i = 0; i < dataSessions.length; i++) {
     let dict = dataSessions[i];
