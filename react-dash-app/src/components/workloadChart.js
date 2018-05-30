@@ -9,7 +9,9 @@ class WorkloadChart extends Component{
     return (
       <div className="lineChart">
           <Bar
-            data={this.props.workloadData}// data passed as property
+            width={5}
+            height={3.5}
+              data={this.props.workloadData}// data passed as property
             options={{
               title:{
                 display:false,
@@ -18,7 +20,7 @@ class WorkloadChart extends Component{
                 display:false,
               },
               scales: {
-                xAxes: [{//this starts line chart on yaxes
+                xAxes: [{
                 }, {
                   id: '2nd axis',
                   type: 'category',
