@@ -51,6 +51,7 @@ class App extends Component {
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
     this.logout = this.logout.bind(this);
+    this.loadingFailed = this.loadingFailed.bind(this);
 
   }
 
@@ -115,10 +116,9 @@ handleWindowSizeChange = () => {
 
 
   //receive email and password from login page
-  getLogin(tokenData, emailData, passwordData){
-    this.setState({ loginToken: tokenData,
-                    email: emailData,
-                    password: passwordData})
+  getLogin(tokenData){
+    this.setState({ loginToken: tokenData })
+    console.log(this.state.loginToken)
     //enter laoding state after user and pass have been received
     this.setState({ page: "loading", })
   };
@@ -137,6 +137,11 @@ handleWindowSizeChange = () => {
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
+  }
+
+  loadingFailed(){
+    document.cookie = "token=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    this.setState({ page: "login" })
   }
 
 //take data from the states and configure the data to go into the page as graphs etc...
@@ -542,14 +547,18 @@ console.log(wellnessWeeklyTotal)
           if (this.state.page === "login") {
             return(
               <div className="Login">
-              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin}  />
+              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin} loginFailed={ false }  />
               </div>
             )
           }
           else if (this.state.page === "loading") {
             return(
               <div className="Loading">
-              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken} email={this.state.email} pass={this.state.password}/>
+              <Loading loadingData={this.loadingData}
+                loginToken={this.state.loginToken}
+                email={this.state.email}
+                pass={this.state.password}
+                loadingFailed={this.loadingFailed}/>
               </div>
             )
           }

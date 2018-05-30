@@ -166,10 +166,14 @@ fill: #000000;
 .profile {
   border-radius: 50%;
   cursor: pointer;
+  border-style: solid;
+  border-width: thick;
+  border-color: #black;
 }
 
 .logout {
   cursor: pointer;
+
 }
 
 

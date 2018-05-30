@@ -18,6 +18,7 @@ class Loading extends Component {
       wellness: {},
       workload: {},
       rpe: {},
+      isLoading: true,
 
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
@@ -26,7 +27,8 @@ class Loading extends Component {
 
   componentDidMount(){
   //get username and password from app.js
-    this.getData(this.props.loginEmail, this.props.loginPass);
+
+    this.getData();
   }
 
   //send the state of the endpoints to app.js
@@ -47,7 +49,7 @@ class Loading extends Component {
                         }
   }
   //fetching all the data from the endpoints and updating the states
-  getData(email, password){
+  getData(){
 
     // login, get the token and set token state
 
@@ -57,19 +59,33 @@ class Loading extends Component {
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(userResponse => userResponse.json())
-
+      .then((userResponse) => {
+      if (userResponse.ok) {
+        return userResponse.json();
+      } else {
+        throw new Error;
+      }
+    })
       .then((findUserResponse) => {
         this.setState({ endPointPlayers: findUserResponse,
                         players: true})
         this.endLoadingHandler()
         })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     fetch('https://app.komodomonitr.com/api/v1/players/3/image',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(ImageResponse => ImageResponse.blob())
+        .then((imageResponse) => {
+        if (imageResponse.ok) {
+          return imageResponse.blob();
+        } else {
+          throw new Error;
+        }
+      })
 
       .then((findImageResponse) => {
         this.setState({ endPointPlayerImage: findImageResponse,
@@ -77,66 +93,107 @@ class Loading extends Component {
         console.log(this.state.endPointPlayerImage)
         this.endLoadingHandler()
         })
+      .catch((error) => {
+        this.props.loadingFailed()
+      })
+
 
     //fetch summary endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(response => response.json())
+      .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error;
+      }
+    })
 
       .then((summaryResponse)=> {
         this.setState({ endPointSummary: summaryResponse,
                         summary: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch wellness endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(wellnessResponse => wellnessResponse.json())
+      .then((wellnessResponse) => {
+      if (wellnessResponse.ok) {
+        return wellnessResponse.json();
+      } else {
+        throw new Error;
+      }
+    })
 
       .then((wellnessResponse)=> {
         this.setState({ endPointWellness: wellnessResponse,
                         wellness: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch workload endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(workloadResponse => workloadResponse.json())
+      .then((workloadResponse) => {
+      if (workloadResponse.ok) {
+        return workloadResponse.json();
+      } else {
+        throw new Error;
+      }
+    })
 
       .then((workloadResponse)=> {
         this.setState({ endPointWorkload: workloadResponse,
                         workload: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch rpe laod endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(rpeResponse => rpeResponse.json())
+      .then((rpeResponse) => {
+      if (rpeResponse.ok) {
+        return rpeResponse.json();
+      } else {
+        throw new Error;
+      }
+    })
 
       .then((rpeResponse)=> {
         this.setState({ endPointRpe: rpeResponse,
                         rpe: true})
         //send the end point states to app.js
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
 }
 
 render(){
+  console.log(this.props.loginToken)
 
   return(
-  <Login isLoading={true}/>
+  <Login isLoading={this.state.isLoading}/>
   )
 }
 }
