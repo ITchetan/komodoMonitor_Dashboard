@@ -91,7 +91,7 @@ loginData(){
     if (response.ok) {
       return response.json();
     } else {
-      throw new Error;
+      throw new Error();
     }
     })
 
