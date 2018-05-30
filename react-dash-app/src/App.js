@@ -583,7 +583,7 @@ console.log(wellnessWeeklyTotal)
       renderModal() {
             let rpeform = []
             for (let i = 0; i < this.state.playerSessionId.length; i++){
-              rpeform.push( <div> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId ={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+              rpeform.push( <div key={this.state.playerSessionId[i]}> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
             }
             return rpeform
           }
