@@ -81,8 +81,7 @@ class ModalFormRPE extends React.Component {
       <Container>
             <Modal isOpen={this.state.modal} size="lg">
             <Form onSubmit = {this.handleSubmit_rpe}>
-              <ModalHeader>Hi {this.props.profileName},please complete your RPE survey!!
-              <br/> Session ID : {this.props.playerSessionId}
+              <ModalHeader>Please complete your RPE survey for Session #{this.props.playerSessionId}              
               <br/> Date : {this.props.playerSessionDate} </ModalHeader>
               <ModalBody>
                 <div>
@@ -113,7 +112,6 @@ class ModalFormRPE extends React.Component {
                       </FormGroup>
                       </Col>
                       </Row>
-                      <Button color="secondary" onClick={this.handleSubmit_rpe} className='mr-auto'>Absent</Button>
                 </div>
               </ModalBody>
               <ModalFooter>
