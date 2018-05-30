@@ -232,7 +232,7 @@ handleSubmit = (e) =>{
                   <ModalBody>
                     <Container>
                           <Row>
-                            <Label for ="Nutrition:" xs={12} sm={{ size: 4, offset: 3 }} className="text-center"> Nutrition:</Label>
+                            <Label for ="Nutrition:" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText"> Nutrition</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
@@ -259,7 +259,7 @@ handleSubmit = (e) =>{
                               </Col>
                           </Row>
                           <Row>
-                            <Label for ="Energy" xs={12} sm={{ size: 4, offset: 3 }} className="text-center">Energy:</Label>
+                            <Label for ="Energy" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText">Energy</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
@@ -286,7 +286,7 @@ handleSubmit = (e) =>{
                                 </Col>
                           </Row>
                           <Row>
-                            <Label for ="Sleep quality" xs={12} sm={{ size: 4, offset: 3 }} className="text-center">Sleep quality:</Label>
+                            <Label for ="Sleep quality" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText">Sleep quality</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
@@ -313,7 +313,7 @@ handleSubmit = (e) =>{
                             </Col>
                           </Row>
                           <Row>
-                            <Label for ="Stress" xs={12} sm={{ size: 4, offset: 3 }} className="text-center">Stress:</Label>
+                            <Label for ="Stress" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText">Stress</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
@@ -340,7 +340,7 @@ handleSubmit = (e) =>{
                             </Col>
                           </Row>
                           <Row>
-                            <Label for ="Sleep amount" xs={12} sm={{ size: 4, offset: 3 }} className="text-center">Sleep amount:</Label>
+                            <Label for ="Sleep amount" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText">Sleep amount</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
@@ -367,7 +367,7 @@ handleSubmit = (e) =>{
                             </Col>
                           </Row>
                           <Row>
-                            <Label for ="Muscle soreness" xs={12} sm={{ size: 4, offset: 3 }} className="text-center">Muscle pain:</Label>
+                            <Label for ="Muscle soreness" xs={12} sm={{ size: 4, offset: 3 }} className="text-center BoldText">Muscle pain</Label>
                           </Row>
                           <Row>
                             <Col xs={6} sm={3} className="SmallText text-left text-sm-right">
