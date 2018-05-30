@@ -113,7 +113,6 @@ class ModalFormRPE extends React.Component {
                       </FormGroup>
                       </Col>
                       </Row>
-                      <Button color="secondary" onClick={this.handleSubmit_rpe} className='mr-auto'>Absent</Button>
                 </div>
               </ModalBody>
               <ModalFooter>
