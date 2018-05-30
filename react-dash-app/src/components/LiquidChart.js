@@ -4,20 +4,20 @@ import '../App.css';
 
 
 const fontSize = {
-      value: 0.6,
-      postfix: 0.4,
+      value: 0.5,
+      postfix: 0.3,
       legend: 0.3,
     };
 
-const wetColor = {
+const wetColor = {//text color
   fill:"rgb(23,139,202)"
 }
-const dryColor = {
+const dryColor = {//text color
   fill:"black"
 }
 
-const stops = [
-  <stop key={5} offset="1" stopColor="#C5F2F2" />,
+const stops = [//liquid fill color
+  <stop key={5}stopColor="#C5F2F2" />,
 ];
 
 

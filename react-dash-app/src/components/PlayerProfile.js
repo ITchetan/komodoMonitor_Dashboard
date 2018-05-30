@@ -69,7 +69,7 @@ class PlayerProfile extends Component{
         <a onClick={this.props.logout} className="logout">Logout</a>
 
             <Col >
-                <img className="profile" src={this.props.playerImage} alt="" height="250" width="250" />
+                <img className="profile" src={this.props.playerImage} alt="" width="50%" height="auto"  />
             </Col>
 
             <br />
@@ -92,7 +92,7 @@ class PlayerProfile extends Component{
                   <Button color="secondary" onClick={this.changeProfile} >Cancel</Button>
                   <Button color="primary" onClick={this.confirmUpload} >Confirm</Button>
                   <div>
-                  <img src={url} />
+                  <img src={url} alt="" />
                   </div>
                   </div>}
             </Col>

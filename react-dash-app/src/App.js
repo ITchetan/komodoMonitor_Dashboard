@@ -26,6 +26,8 @@ class App extends Component {
       wellnessTrendsData:{},
       chartData:{},
       rpeData: {},
+      playerSessionId:{},
+      playerSessionDate:{},
       insightsDescriptionData: {},
       insightsValueData: {},
       playerIdData: {},
@@ -39,6 +41,7 @@ class App extends Component {
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      endPointSessions:{},
       view: 'home',
       width: window.innerWidth,
 
@@ -100,6 +103,8 @@ handleWindowSizeChange = () => {
     wellnessTrendsData:{},
     chartData:{},
     rpeData: {},
+    playerSessionId:{},
+    playerSessionDate:{},
     insightsDescriptionData: {},
     insightsValueData: {},
     playerIdData: {},
@@ -111,6 +116,7 @@ handleWindowSizeChange = () => {
     endPointWellness: {},
     endPointWorkload: {},
     endPointRpe: {},
+    endPointSessions:{},
     view: 'home', })
   }
 
@@ -126,13 +132,15 @@ handleWindowSizeChange = () => {
 
 
   //recieve fetched data from loading page and set them into current state of app.js
-  loadingData(summary, players, playerImage, wellness, workload, rpe,){
+
+  loadingData(summary, players,playerImage, wellness, workload, rpe,sessions,){
     this.setState({ endPointSummary: summary,
       endPointPlayers: players,
       endPointPlayerImage: playerImage,
       endPointWellness: wellness,
       endPointWorkload: workload,
       endPointRpe: rpe,
+      endPointSessions:sessions
       })
     this.defineData()
     //end loading and show main page
@@ -146,6 +154,26 @@ handleWindowSizeChange = () => {
 
 //take data from the states and configure the data to go into the page as graphs etc...
 defineData(){
+
+
+  let dataSessions = this.state.endPointSessions
+  console.log(dataSessions);
+  let sessionId = [];
+  let sessionDate = [];
+
+  for (let i = 0; i < dataSessions.length; i++) {
+    let dict = dataSessions[i];
+    for (let key in dict) {
+      if (key === 'session_id') {
+        sessionId.push(dict[key]);
+      }
+      else if (key === 'datetime') {
+        sessionDate.push(dict[key]);
+      }
+}}
+
+console.log(sessionId);
+console.log(sessionDate);
 
   //extract player data
   let dataPlayer = this.state.endPointPlayers
@@ -346,12 +374,13 @@ defineData(){
                              wellnessPain[i])
   }
 console.log(wellnessWeeklyTotal)
+
   //set color for workloadbar graph depend on which zone the score is
     let workloadbarColor =[];
     for (let i = 0; i<workloadScore.length; i++){
 
       if (workloadScore[i]<workloadMin[i]) {
-        workloadbarColor.push('#e7b416')
+        workloadbarColor.push('#ffa500')
       }
       else if (workloadScore[i]>workloadMax[i] ) {
         workloadbarColor.push('#cc3232')
@@ -385,7 +414,7 @@ console.log(wellnessWeeklyTotal)
   for (let i = 0; i<rpeScore.length; i++){
 
     if (rpeScore[i]<rpeMin[i]) {
-      rpeBarColor.push('#e7b416')
+      rpeBarColor.push('#ffa500')
     }
     else if (rpeScore[i]>rpeMax[i] ) {
       rpeBarColor.push('#cc3232')
@@ -402,7 +431,7 @@ console.log(wellnessWeeklyTotal)
       bar_colour.push('#2dc937')
     }
     else if (wellnessValues[i] === 4) {
-      bar_colour.push('#e7b416')
+      bar_colour.push('#ffa500')
     }
     else if (wellnessValues[i]===5) {
       bar_colour.push('#cc3232')
@@ -414,8 +443,15 @@ console.log(wellnessWeeklyTotal)
 
   this.setState({
 
+
+    //set player session data states
+
+    playerSessionId:sessionId,
+    playerSessionDate:sessionDate,
+
     //set state for player image URL
     ImageUrlData: ImageUrl,
+
 
     //set player data states
     playerIdData: playerId,
@@ -458,20 +494,22 @@ console.log(wellnessWeeklyTotal)
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
     }]},
+
     // map data for WellnessTrends here
     wellnessTrendsData:{
+        //labels : wellnessWeekLabel,
         labels: ['Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 8','Week 9', 'Week 10','Week 11','Week 12','Week 13','Week 14',
-      'Week 15','Week 16', 'Week 17','Week 18','Week 19','Week 20','Week 21','Week 22','Week 23', 'Week 24','Week 25','Week 26','Week 27','Week 28',
-    'Week 29','Week 30', 'Week 31','Week 32','Week 33','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
-    'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
-  'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7',
-'Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7','Week 1','Week 2', 'Week 3','Week 4','Week 5','Week 6','Week 7'],
+                  'Week 15','Week 16', 'Week 17','Week 18','Week 19','Week 20','Week 21','Week 22','Week 23', 'Week 24','Week 25','Week 26','Week 27','Week 28',
+                'Week 29','Week 30', 'Week 31','Week 32','Week 33','Week 34','Week 35','Week 36','Week 37', 'Week 38','Week 39','Week 40','Week 41','Week 42',
+                'Week 43','Week 44', 'Week 45','Week 46','Week 47','Week 48','Week 49','Week 50','Week 51', 'Week 52','Week 53','Week 54','Week 55','Week 56',
+              'Week 57','Week 58', 'Week 59','Week 60','Week 61','Week 62','Week 63','Week 64','Week 65', 'Week 66','Week 67','Week 68','Week 69','Week 70',
+            'Week 71','Week 72', 'Week 73','Week 74','Week 75','Week 76','Week 77','Week 78','Week 79', 'Week 80','Week 81','Week 82','Week 83','Week 84'],
         datasets:[{
           label: "Score",
-          data:[15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25
-                ,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,
-                15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25
-              ,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25,15,20,10,5,19,6,25],
+          //data: wellnessWeeklyTotal,
+          data:[16.5,30.0,28.1,9.5,19,9,26,30,22,12,13,14,15,6,6,15,18,8,15,16,25,30,21,19,27,8,22,23,11,5,25,7,30,20,10,24,
+                9,5,14,5,26,27,5,13,7,8,6,13,8,7,5,7,30,16,15,26,21,18,5,10,18,12,15,19,5,22,8,25,13,22,30,14,21,8,23
+                ,12,12,18,16,9,24,11,21,13],
           lineTension: 0.3,
           borderColor: '#00BFFF',
           backgroundColor:"rgb(173,216,230,0.5)"}]},
@@ -485,13 +523,14 @@ console.log(wellnessWeeklyTotal)
         lineTension: 0.3,
         fill: 0,
         type: 'line',
-        borderColor: "rgba(145, 229, 74,0.7)",
-        backgroundColor:"rgba(145, 229, 74,0.3)",},
+        xAxisID: '2nd axis',
+      },
 
         {
           label: "Score",
           data: workloadScore,
           backgroundColor: workloadbarColor
+
         },
 
           {
@@ -500,46 +539,62 @@ console.log(wellnessWeeklyTotal)
             lineTension: 0.3,
             fill: 0,
             type: 'line',
-            borderColor: "rgba(145, 229, 74,0.7)",
-            backgroundColor:"rgba(145, 229, 74,0.3)",}
-          ],
-        },
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
+            xAxisID: '2nd axis',
+          }
+          ],},
 
 
       // Data for rpe Chart
       rpeData:{
         //labels: rpeLabel,
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S','M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: ['1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11', '12', '13', '14',
+                  '1', '2', '3', '4', '5', '6', '7','8', '9', '10', '11', '12', '13', '14'],
         datasets:[{
-          label: "Min Target",
-          //data: rpeMin,
-          data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
-          lineTension: 0.3,
-          fill: 0,
-          type: 'line',
-          borderColor: "rgba(145, 229, 74,0.7)",
-          backgroundColor:"rgba(145, 229, 74,0.3)"},
+            label: "Min Target",
+            //data: rpeMin,
+            data: [3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000,
+            3000,5000,4000,5000,3000,2000,5000,3000,1000,3000,2000,5000,1000,3000],
+            lineTension: 0.3,
+            fill: 0,
+            type: 'line',
+            xAxisID: '2nd axis',
+          },
           {
             label: "Score",
             //data: rpeScore,
-            data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
-            backgroundColor: rpeBarColor
+            data: [3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900,
+            3000,4000,5000,3900,4800,5300,5900,3000,4000,5000,3900,4800,5300,5900],
+            //backgroundColor: rpeBarColor
+            backgroundColor: '#85C1E9'
             },
-            {
-              label: "Max Target",
-              //data: rpeMax,
-              data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
-              lineTension: 0.3,
-              fill: 0,
-              borderColor: "rgba(145, 229, 74,0.7)",
-              backgroundColor:"rgba(145, 229, 74,0.3)",
-              type: 'line'}
+          {
+            label: "Max Target",
+            //data: rpeMax,
+            data: [7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000,
+            7000,9000,7000,6000,7000,7000,10000,7000,6000,7000,5000,7000,4000,7000],
+            lineTension: 0.3,
+            fill: 0,
+            backgroundColor:"rgba(94, 213, 121 ,0.5)",
+            type: 'line',
+            xAxisID: '2nd axis',
+            }
 
             ]}
           });
         }
 
+
+      renderModal() {
+            let rpeform = []
+            for (let i = 0; i < this.state.playerSessionId.length; i++){
+              rpeform.push( <div> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId ={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+            }
+            return rpeform
+          }
+
         render() {
+
 
           const { width } = this.state
           const isMobile = width <= 575
@@ -587,8 +642,13 @@ console.log(wellnessWeeklyTotal)
             workloadSummary={this.state.workloadSummaryData}
             rpeSummary={this.state.rpeSummaryData}
             komodoNumber={this.state.komodoNumberData}
+            playerImage={this.state.ImageUrlData}
+            loginToken={this.state.loginToken}
+            logout={this.logout}
             />
-            <ModalFormRPE/>
+
+            {this.renderModal()}
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
@@ -598,6 +658,7 @@ console.log(wellnessWeeklyTotal)
 
           else if (this.state.page === "main") {
           return (
+
             <div>
             <Header changeProfile={this.changeProfile}
                     playerImage={this.state.ImageUrlData}
@@ -627,7 +688,8 @@ console.log(wellnessWeeklyTotal)
             logout={this.logout}
             />
 
-             <ModalFormRPE/>
+            {this.renderModal()}
+
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }

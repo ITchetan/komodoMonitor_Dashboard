@@ -49,6 +49,15 @@ class MobileLayout extends Component{
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
 
+    let strokeColour
+    if (komodoScore <= 75) {
+      strokeColour =  'progressbar-red'
+    } else if (komodoScore > 75 & komodoScore <= 99) {
+      strokeColour = 'progressbar-orange'
+    } else {
+      strokeColour =  'progressbar-green'
+    }
+
 
     return (
   <div className="Layout">
@@ -107,7 +116,12 @@ class MobileLayout extends Component{
           <h4>Welcome back, Chris</h4>
           <hr />
           <Col xs={{ size:6, offset: 3}}>
-          <CircularProgressBar percentage={komodoScore} initialAnimation={'true'}/>
+          <CircularProgressBar
+            percentage={komodoScore}
+            initialAnimation={'true'}
+            strokeWidth={'10'}
+            className={strokeColour}
+            />
           </Col>
           <hr />
           <div>
@@ -143,8 +157,11 @@ class MobileLayout extends Component{
           <h3>My Profile</h3>
           <hr />
           <PlayerProfile
-           playerFirstData={this.props.playerFirstData}
-           playerLastData={this.props.playerLastData}/>
+          logout={this.props.logout}
+          loginToken={this.props.loginToken}
+          playerImage={this.props.playerImage}
+          playerFirstData={this.props.playerFirstData}
+          playerLastData={this.props.playerLastData} />
         </div>}
 
         </Col>

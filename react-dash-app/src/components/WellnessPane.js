@@ -3,7 +3,6 @@ import BarChart from './wellnessChart';
 import WellnessTrends from './WellnessTrends';
 import PointerGauge from './PointerGauge'
 import { Button } from 'reactstrap';
-import {  Row, Col } from 'reactstrap';
 import '../App.css';
 
 
@@ -17,7 +16,8 @@ class WellnessPane extends Component{
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
-    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels, datasets: this.props.wellnessTrendsData.datasets};
+    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels.slice(-14),
+                            datasets: this.props.wellnessTrendsData.datasets};
   }
 
   showGauge() {
@@ -50,38 +50,31 @@ class WellnessPane extends Component{
       <div>
       {this.state.view === 'gauge' &&
       <div>
-        <Row>
-        <Col sm={2} >
-        <Button onClick={this.showChart} color="info">View Detail</Button>
-        </Col>
-        <Col sm={8}>
         <h4>Wellness</h4>
-        </Col>
-        </Row>
+        <hr />
+        <div className="d-flex justify-content-between">
+        <Button onClick={this.showChart} color="info">View Detail</Button>
+        </div>
         <hr />
         <PointerGauge name={"Wellness"} value={this.props.wellnessTotal} gaugeLowerBound={15}
         gaugeUpperBound={20} gaugeMaxValue={30} firstArc={"green"} secondArc={"orange"} thirdArc={"red"} />
-        </div>
+      </div>
       }
       {this.state.view === 'chart' &&
       <div>
-        <Row>
-        <Col sm={2} >
-          <Button onClick={this.showGauge} color="info">View Summary</Button>
-        </Col>
-        <Col sm={7}>
           <h4>Overall Wellness Trend</h4>
-        </Col>
-        <Col sm={3}>
-        <select onChange = {this.filterOption} onLoad = {this.filterOption}>
-          <option value="" >Select Range</option>
-            <option value="-30" >Month</option>
+          <hr />
+          <div className="d-flex justify-content-between">
+          <Button onClick={this.showGauge} color="info">View Summary</Button>
+          <select onChange = {this.filterOption} onLoad = {this.filterOption}>
+            <option disabled >Select Range</option>
+            <option value="-14" >Two Weeks</option>
+            <option value="-30">Month</option>
             <option value="-90">Three Months</option>
             <option value="-180">Six Months</option>
             <option value="-365">Year</option>
-        </select>
-        </Col>
-        </Row>
+          </select>
+          </div >
         <hr />
           <WellnessTrends  wellnessTrendsData={this.tempWellnessData}/>
         <hr />
