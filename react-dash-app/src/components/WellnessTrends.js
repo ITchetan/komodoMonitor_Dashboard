@@ -10,8 +10,6 @@ class WellnessTrends extends Component{
     return (
       <div className="lineChart">
           <Line
-            width={5}
-          	height={1.5}
             data={this.props.wellnessTrendsData}// data passed as property
             options={{
               title:{

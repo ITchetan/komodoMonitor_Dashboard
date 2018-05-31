@@ -14,6 +14,7 @@ class WellnessPane extends Component{
     }
     this.showGauge = this.showGauge.bind(this);
     this.showChart = this.showChart.bind(this);
+    this.showTrend = this.showTrend.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
     this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels.slice(-14),
@@ -28,6 +29,10 @@ class WellnessPane extends Component{
     this.setState({ view: 'chart' })
   }
 
+  showTrend() {
+    this.setState({ view: 'trend' })
+  }
+
 // filter data to show in chart depend on selection
   filterOption(e) {
     let selectedVal=parseInt(e.target.value,0);
@@ -40,7 +45,7 @@ class WellnessPane extends Component{
     let tempLabels = this.tempWellnessData.labels;
     this.tempWellnessData.labels= tempLabels.slice(selectedVal);
     }
-    this.showChart();
+    this.showTrend();
   }
 
 
@@ -52,8 +57,9 @@ class WellnessPane extends Component{
       <div>
         <h3>Wellness</h3>
         <hr />
-        <div className="d-flex justify-content-between">
-        <Button onClick={this.showChart} color="info">View Detail</Button>
+        <div className="d-flex justify-content-start">
+        <Button onClick={this.showChart} color="info">View Detail</Button>&nbsp;
+        <Button onClick={this.showTrend} color="info">View Trend</Button>
         </div>
         <hr />
         <PointerGauge name={"Wellness"} value={this.props.wellnessTotal} gaugeLowerBound={15}
@@ -62,10 +68,26 @@ class WellnessPane extends Component{
       }
       {this.state.view === 'chart' &&
       <div>
-          <h3>Overall Wellness Trend</h3>
+          <h3>Wellness</h3>
+          <hr />
+          <div className="d-flex justify-content-start">
+          <Button onClick={this.showGauge} color="info">View Summary</Button>&nbsp;
+          <Button onClick={this.showTrend} color="info">View Trend</Button>
+          </div >
+        <hr />
+          <BarChart barData={this.props.barData}/>
+      </div>
+      }
+      {this.state.view === 'trend' &&
+      <div>
+          <h3>Wellness</h3>
           <hr />
           <div className="d-flex justify-content-between">
-          <Button onClick={this.showGauge} color="info">View Summary</Button>
+          <div>
+          <Button onClick={this.showGauge} color="info">View Summary</Button>&nbsp;
+          <Button onClick={this.showChart} color="info">View Detail</Button>
+          </div>
+          <div>
           <select onChange = {this.filterOption} onLoad = {this.filterOption}>
             <option disabled >Select Range</option>
             <option value="-14" >Two Weeks</option>
@@ -74,15 +96,12 @@ class WellnessPane extends Component{
             <option value="-180">Six Months</option>
             <option value="-365">Year</option>
           </select>
+          </div>
           </div >
         <hr />
           <WellnessTrends  wellnessTrendsData={this.tempWellnessData}/>
-        <hr />
-          <h4>Individualised Wellness </h4>
-        <hr />
-          <BarChart barData={this.props.barData}/>
       </div>
-      }
+    }
       </div>
       )}
   }

@@ -29,7 +29,7 @@ class Header extends Component{
                       {this.props.view === "profile" &&
                       <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"  />}
                       {this.props.view !== "profile" &&
-                      <a onClick={this.props.changeProfile}><img className="profile" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
+                      <a onClick={this.props.changeProfile}><img className="profile pointer" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
 
                     </div>
 

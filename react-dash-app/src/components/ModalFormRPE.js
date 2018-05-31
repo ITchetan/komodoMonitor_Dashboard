@@ -28,9 +28,7 @@ class ModalFormRPE extends React.Component {
     let strScore = e.target.value
     let numSpace = strScore.slice(0,2)
     let num = numSpace.trim()
-    let realnum = parseInt(num)
-
-    console.log(realnum)
+    let realnum = parseInt(num, 10)
 
     this.setState({
         rpeScore: realnum
@@ -46,8 +44,6 @@ class ModalFormRPE extends React.Component {
 
   let rpeScore = this.state.rpeScore;
 
-  console.log(rpeScore);
-    console.log(this.props.playerSessionId)
 
     fetch('https://app.komodomonitr.com/api/v1/data/rpe?sessionId='+this.props.playerSessionId+'&userId=1', {
       body:JSON.stringify(

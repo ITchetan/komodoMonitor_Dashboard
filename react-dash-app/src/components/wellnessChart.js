@@ -6,17 +6,14 @@ class BarChart extends Component{
   render(){
 
     return (<div className="barChart">
-    
+
         <HorizontalBar
 
         // here we tell chart to look for data in state
           data={this.props.barData}
-          width={10}
-          height={200}
 
           options={{
-            maintainAspectRatio: false,
-            title:{
+              title:{
               display:false,
             },
             legend:{
