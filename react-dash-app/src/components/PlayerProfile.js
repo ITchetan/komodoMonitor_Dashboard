@@ -65,6 +65,7 @@ class PlayerProfile extends Component{
     return (
       <div >
       <Container  >
+
             <Col >
                 <img className="profile" src={this.props.playerImage} alt="" width="50%" height="auto"  />
             </Col>
@@ -91,8 +92,9 @@ class PlayerProfile extends Component{
                   <img src={url} alt="" />
                   </div>
                   </div>}
-            </Col>
 
+            </Col>
+            
       </Container>
       </div>
     )
