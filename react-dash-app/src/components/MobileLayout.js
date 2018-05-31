@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon, InfoOutlineIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
 import Insight from './Insight'
-import Info from './Info'
 
 import '../App.css';
 import 'react-circular-progressbar/dist/styles.css'
-// import Popup from './InfoPopup'
 
 
 import Liquid from './LiquidChart'
@@ -70,7 +68,7 @@ class MobileLayout extends Component{
 
     <Row className="Column">
 
-      <Col xs={{ size:2}}>
+      <Col xs={{ size:2, offset:1 }}>
         {this.props.view === "home" &&
         <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
@@ -104,12 +102,7 @@ class MobileLayout extends Component{
         {this.props.view !== "profile" &&
         <a onClick={this.props.changeProfile}><AccountIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
-      <Col xs={2}>
-      {this.props.view === "info" &&
-      <InfoOutlineIcon size={36} color="#d40000"/>}
-      {this.props.view !== "info" &&
-      <a onClick={this.props.changeInfo}><InfoOutlineIcon size={36} color="#C0C0C0"/></a>}
-      </Col>
+
       </Row>
 
       <Row>&nbsp;</Row>
@@ -157,9 +150,6 @@ class MobileLayout extends Component{
 
         {this.props.view === "rpe" &&
         <RpePane rpeSummary={this.props.rpeSummary} rpeData={this.props.rpeData} />
-        }
-        {this.props.view === "info" &&
-        <Info  />
         }
 
         {this.props.view === "profile" &&
