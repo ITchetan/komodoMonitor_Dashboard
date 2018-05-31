@@ -25,9 +25,9 @@ class Header extends Component{
                 <Col sm={2}>
 
 
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ textAlign: 'center' }} data-toggle="tooltip" data-placement="bottom" title="My Profile">
                       {this.props.view === "profile" &&
-                      <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"  />}
+                      <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"   />}
                       {this.props.view !== "profile" &&
                       <a onClick={this.props.changeProfile}><img className="profile" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
 

@@ -98,7 +98,8 @@ class Layout extends Component{
           <h5>RPE Load</h5>
           <hr />
         </div>
-        <div style={{ textAlign: 'center' }} >
+        <div style={{ textAlign: 'center' }}
+        data-toggle="tooltip" data-placement="bottom" title="Information">
         {this.props.view === "info" &&
         <InfoOutlineIcon size={36} color="#d40000"/>}
         {this.props.view !== "info" &&
