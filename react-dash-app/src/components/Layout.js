@@ -104,7 +104,7 @@ class Layout extends Component{
           {this.props.view === "home" &&
           <div>
               <div>
-                <h3>Welcome back, {this.props.playerFirstData[0]}</h3>
+                <h3>Welcome back, {this.props.playerFirstData[2]}</h3>
                 <hr />
                 <h5>Your overall score is {komodoScore}%.</h5>
                 <Col xs={12} lg={{ size: 10, offset: 1 }}>
