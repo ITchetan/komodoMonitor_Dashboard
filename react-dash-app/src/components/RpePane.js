@@ -49,7 +49,7 @@ class RpePane extends Component{
       <div>
         {this.state.view === 'gauge' &&
         <div >
-          <h4>RPE</h4>
+          <h3>RPE</h3>
           <hr />
           <div className="d-flex justify-content-between">
             <Button onClick={this.showChart} color="info" >View Detail</Button>
@@ -63,7 +63,7 @@ class RpePane extends Component{
 
         {this.state.view === 'chart' &&
         <div>
-          <h4>RPE</h4>
+          <h3>RPE</h3>
           <hr />
           <div className="d-flex justify-content-between">
             <Button onClick={this.showGauge} color="info">View Summary</Button>

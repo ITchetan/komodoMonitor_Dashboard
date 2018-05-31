@@ -16,7 +16,7 @@ class Header extends Component{
       return (
 
         <div className="Header">
-        <Container fluid='true'>
+        <Container fluid={true}>
           <Row>
               <Col sm={10}>
               <img src='km_white.png' height='75' alt='logo'></img>

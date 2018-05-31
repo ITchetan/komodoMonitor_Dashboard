@@ -50,7 +50,7 @@ class WellnessPane extends Component{
       <div>
       {this.state.view === 'gauge' &&
       <div>
-        <h4>Wellness</h4>
+        <h3>Wellness</h3>
         <hr />
         <div className="d-flex justify-content-between">
         <Button onClick={this.showChart} color="info">View Detail</Button>
@@ -62,7 +62,7 @@ class WellnessPane extends Component{
       }
       {this.state.view === 'chart' &&
       <div>
-          <h4>Overall Wellness Trend</h4>
+          <h3>Overall Wellness Trend</h3>
           <hr />
           <div className="d-flex justify-content-between">
           <Button onClick={this.showGauge} color="info">View Summary</Button>

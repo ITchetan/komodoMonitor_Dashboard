@@ -18,8 +18,7 @@ class MobileHeader extends Component{
         <Container >
           <Row>
             <Col xs={12}>
-              <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-              <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
+              <img src='km_white.png' height='75' alt='logo'></img>
             </Col>
           </Row>
         </Container>

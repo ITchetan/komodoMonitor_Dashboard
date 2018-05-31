@@ -69,7 +69,7 @@ class Loading extends Component {
       if (userResponse.ok) {
         return userResponse.json();
       } else {
-        throw new Error;
+        throw new Error();
       }
     })
       .then((findUserResponse) => {
@@ -89,7 +89,7 @@ class Loading extends Component {
         if (imageResponse.ok) {
           return imageResponse.blob();
         } else {
-          throw new Error;
+          throw new Error();
         }
       })
 
@@ -113,7 +113,7 @@ class Loading extends Component {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error;
+        throw new Error();
       }
     })
 
@@ -135,7 +135,7 @@ class Loading extends Component {
       if (wellnessResponse.ok) {
         return wellnessResponse.json();
       } else {
-        throw new Error;
+        throw new Error();
       }
     })
 
@@ -157,7 +157,7 @@ class Loading extends Component {
       if (workloadResponse.ok) {
         return workloadResponse.json();
       } else {
-        throw new Error;
+        throw new Error();
       }
     })
 
@@ -179,7 +179,7 @@ class Loading extends Component {
       if (rpeResponse.ok) {
         return rpeResponse.json();
       } else {
-        throw new Error;
+        throw new Error();
       }
     })
 
@@ -203,7 +203,7 @@ class Loading extends Component {
         if (sessionsResponse.ok) {
           return sessionsResponse.json();
         } else {
-          throw new Error;
+          throw new Error();
         }
       })
 
