@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RpeChart from './rpeChart';
 import PointerGauge from './PointerGauge'
-import { Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 
 
 import '../App.css';
@@ -15,7 +15,6 @@ class RpePane extends Component{
     this.showGauge = this.showGauge.bind(this);
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
-
     // initial data for RPE
     this.tempRpeData ={ labels: this.props.rpeData.labels.slice(-14),
                             datasets: this.props.rpeData.datasets};
@@ -30,26 +29,26 @@ class RpePane extends Component{
   }
 
   // filter data to show in chart depend on selection
+    filterOption(e) {
+      let selectedVal=parseInt(e.target.value,0);
+      this.tempRpeData ={ labels: this.props.rpeData.labels,
+                              datasets: this.props.rpeData.datasets};
 
-  filterOption(e) {
-    let selectedVal=parseInt(e.target.value,0);
-    this.tempRpeData ={ labels: this.props.rpeData.labels,
-                            datasets: this.props.rpeData.datasets};
-
-    // If selected value is less than total number then do this
-    if(Math.abs(selectedVal) <= this.props.rpeData.labels.length)
-    {
-    let tempLabels = this.tempRpeData.labels;
-    this.tempRpeData.labels= tempLabels.slice(selectedVal);
+      // If selected value is less than total number then do this
+      if(Math.abs(selectedVal) <= this.props.rpeData.labels.length)
+      {
+      let tempLabels = this.temprpeData.labels;
+      this.tempRpeData.labels= tempLabels.slice(selectedVal);
+      }
+      this.showChart();
     }
-    this.showChart();
-  }
-
 
 
   render() {
     return (
       <div>
+
+
 
         {this.state.view === 'gauge' &&
         <div >
@@ -84,10 +83,9 @@ class RpePane extends Component{
             <RpeChart rpeData={this.tempRpeData}/>
           </div>
           }
-      </div>
 
+      </div>
       )}
   }
-
 
 export default RpePane;
