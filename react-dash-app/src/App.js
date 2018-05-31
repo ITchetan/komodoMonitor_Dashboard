@@ -384,7 +384,7 @@ console.log(wellnessWeeklyTotal)
     for (let i = 0; i<workloadScore.length; i++){
 
       if (workloadScore[i]<workloadMin[i]) {
-        workloadbarColor.push('#ffa500')
+        workloadbarColor.push('#90C3D4')
       }
       else if (workloadScore[i]>workloadMax[i] ) {
         workloadbarColor.push('#cc3232')
@@ -418,7 +418,7 @@ console.log(wellnessWeeklyTotal)
   for (let i = 0; i<rpeScore.length; i++){
 
     if (rpeScore[i]<rpeMin[i]) {
-      rpeBarColor.push('#ffa500')
+      rpeBarColor.push('#90C3D4')
     }
     else if (rpeScore[i]>rpeMax[i] ) {
       rpeBarColor.push('#cc3232')
@@ -494,7 +494,7 @@ console.log(wellnessWeeklyTotal)
 
     //map data for wellness graph
     barData:{
-      labels:wellnessLabels,
+      labels:['Nutrition', 'Energy', 'Stress', 'Sleep Quality', 'Sleep Amount', 'Muscle Pain'],
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
     }]},
@@ -592,7 +592,7 @@ console.log(wellnessWeeklyTotal)
       renderModal() {
             let rpeform = []
             for (let i = 0; i < this.state.playerSessionId.length; i++){
-              rpeform.push( <div key={this.state.playerSessionId[i]}> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+              rpeform.push( <div key={this.state.playerSessionId[i]}> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[0]} playerSessionId={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
             }
             return rpeform
           }
@@ -695,7 +695,7 @@ console.log(wellnessWeeklyTotal)
             {this.renderModal()}
 
             {this.state.wellnessForm === true &&
-            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[0]}/>
             }
 
 
