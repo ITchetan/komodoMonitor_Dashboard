@@ -14,6 +14,7 @@ class ModalFormWellness extends React.Component {
       stress:'0',
       sleepAmount:'0',
       muscleSoreness:'0',
+      someflag:false,
 
     };
 
@@ -212,6 +213,21 @@ handleSubmit = (e) =>{
     },
     method: 'POST',
   });
+
+  .then(response => {
+            console.log();
+            if (response.status.toString() === '201') {
+                // I want to LOAD COMPONENT B HERE!!!!!!!!!!!!!!!!!!!!!!
+                setState({someflag:true})
+            }
+            else {
+              setState({someflag:false})
+            }
+            return new Error('Error receiving server response');
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
   this.setState({
     modal: !this.state.modal,
