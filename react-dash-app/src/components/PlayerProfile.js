@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Col, Button } from 'reactstrap';
-import { PlusBoxOutlineIcon } from 'mdi-react';
+import { PlusBoxOutlineIcon, LogoutIcon } from 'mdi-react';
 import '../App.css';
 
 
@@ -64,10 +64,8 @@ class PlayerProfile extends Component{
 
     return (
       <div >
+        <a onClick={this.props.logout} className="logout"><LogoutIcon/></a>
       <Container  >
-
-        <a onClick={this.props.logout} className="logout">Logout</a>
-
             <Col >
                 <img className="profile" src={this.props.playerImage} alt="" width="50%" height="auto"  />
             </Col>
