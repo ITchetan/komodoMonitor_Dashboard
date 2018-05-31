@@ -54,11 +54,7 @@ class App extends Component {
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
     this.logout = this.logout.bind(this);
-
-    this.changeInfo = this.changeInfo.bind(this);
-
     this.loadingFailed = this.loadingFailed.bind(this);
-
 
   }
 
@@ -91,10 +87,6 @@ handleWindowSizeChange = () => {
 
   changeRpe(){
     this.setState({ view: 'rpe'})
-  }
-
-  changeInfo(){
-    this.setState({ view: 'info'})
   }
 
   changeProfile(){
@@ -645,7 +637,6 @@ console.log(wellnessWeeklyTotal)
             changeWorkload={this.changeWorkload}
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
-            changeInfo={this.changeInfo}
             changeProfile={this.changeProfile}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
@@ -687,7 +678,6 @@ console.log(wellnessWeeklyTotal)
             changeWorkload={this.changeWorkload}
             changeWellness={this.changeWellness}
             changeRpe={this.changeRpe}
-            changeInfo={this.changeInfo}
             changeProfile={this.changeProfile}
             insightsDescriptionData={this.state.insightsDescriptionData}
             insightsValueData={this.state.insightsValueData}
