@@ -94,8 +94,7 @@ class PlayerProfile extends Component{
                   </div>}
 
             </Col>
-            <br />
-            <Button onClick={this.props.logout} className="logout">Logout</Button>
+            
       </Container>
       </div>
     )

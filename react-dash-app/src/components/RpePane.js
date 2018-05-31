@@ -14,6 +14,10 @@ class RpePane extends Component{
     }
     this.showGauge = this.showGauge.bind(this);
     this.showChart = this.showChart.bind(this);
+    this.filterOption = this.filterOption.bind(this);
+    // initial data for RPE
+    this.tempRpeData ={ labels: this.props.rpeData.labels.slice(-14),
+                            datasets: this.props.rpeData.datasets};
   }
 
   showGauge() {
@@ -24,27 +28,27 @@ class RpePane extends Component{
     this.setState({ view: 'chart' })
   }
 
+  // filter data to show in chart depend on selection
+    filterOption(e) {
+      let selectedVal=parseInt(e.target.value,0);
+      this.tempRpeData ={ labels: this.props.rpeData.labels,
+                              datasets: this.props.rpeData.datasets};
+
+      // If selected value is less than total number then do this
+      if(Math.abs(selectedVal) <= this.props.rpeData.labels.length)
+      {
+      let tempLabels = this.temprpeData.labels;
+      this.tempRpeData.labels= tempLabels.slice(selectedVal);
+      }
+      this.showChart();
+    }
+
+
   render() {
     return (
       <div>
 
-      {this.state.view === 'gauge' &&
-      <div>
-        <h4>RPE</h4>
-        <hr />
-        <PointerGauge name={"RPE"} value={this.props.rpeSummary.value} gaugeLowerBound={this.props.rpeSummary.min} gaugeUpperBound={this.props.rpeSummary.max} gaugeMaxValue={10000} firstArc={"orange"} secondArc={"green"} thirdArc={"red"} />
-        <Button onClick={this.showChart} color="info">View Detail</Button>
-        </div>
-      }
-      {this.state.view === 'chart' &&
-      <div>
-        <h4>RPE</h4>
-        <hr />
-        <RpeChart rpeData={this.props.rpeData}/>
-        <p>&nbsp;</p>
-        <Button onClick={this.showGauge} color="info">View Summary</Button>
-      </div>
-      }
+
 
         {this.state.view === 'gauge' &&
         <div >
