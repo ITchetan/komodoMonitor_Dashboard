@@ -24,7 +24,7 @@ class Header extends Component{
 
                 <Col sm={2}>
 
-
+                  {this.props.showProfile !== false &&
                     <div style={{ textAlign: 'center' }}>
                       {this.props.view === "profile" &&
                       <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"  />}
@@ -32,6 +32,7 @@ class Header extends Component{
                       <a onClick={this.props.changeProfile}><img className="profile" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
 
                     </div>
+                  }
 
                 </Col>
 

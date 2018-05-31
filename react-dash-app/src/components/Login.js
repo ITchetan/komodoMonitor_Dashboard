@@ -57,19 +57,19 @@ class Login extends Component{
     }
 
     setCookie(cvalue) {
-    document.cookie = "token" + "=" + cvalue + ";" + ";path=/";
+    document.cookie = "token=" + cvalue + ";path=/";
     }
 
     getCookie(){
-      let name = "token" + "=";
+      let name = "token=";
       let decodedCookie = decodeURIComponent(document.cookie);
       let ca = decodedCookie.split(';');
       for(let i = 0; i <ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
           c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
           return c.substring(name.length, c.length);
         }
       }
@@ -121,7 +121,7 @@ componentDidMount(){
     return (
 
   <div className="Login" style={styles.paperContainer}>
-    <Header />
+    <Header showProfile={false}/>
   <Container fluid={true}>
 
 

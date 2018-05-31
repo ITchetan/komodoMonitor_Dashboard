@@ -94,30 +94,34 @@ handleWindowSizeChange = () => {
   }
 
   logout(){
+    document.cookie = "token=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.setState({
-    loginToken: {},
-    email: "",
-    password: "",
-    page: "login",
-    barData:{},
-    wellnessTrendsData:{},
-    chartData:{},
-    rpeData: {},
-    playerSessionId:{},
-    playerSessionDate:{},
-    insightsDescriptionData: {},
-    insightsValueData: {},
-    playerIdData: {},
-    playerFirstData: {},
-    playerLastData: {},
-    wellnessForm: {},
-    endPointSummary: {},
-    endPointPlayers: {},
-    endPointWellness: {},
-    endPointWorkload: {},
-    endPointRpe: {},
-    endPointSessions:{},
-    view: 'home', })
+      loginToken: {},
+      email: "",
+      password: "",
+      page: "login",
+      barData:{},
+      wellnessTrendsData:{},
+      chartData:{},
+      rpeData: {},
+      playerSessionId:{},
+      playerSessionDate:{},
+      insightsDescriptionData: {},
+      insightsValueData: {},
+      playerIdData: {},
+      playerFirstData: {},
+      playerLastData: {},
+      wellnessForm: {},
+      endPointSummary: {},
+      endPointPlayers: {},
+      endPointPlayerImage: {},
+      ImageUrlData: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
+      endPointSessions:{},
+      view: 'home',
+      width: window.innerWidth,})
   }
 
 
