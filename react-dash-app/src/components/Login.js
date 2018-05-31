@@ -141,7 +141,7 @@ componentDidMount(){
                    onChange={this.handleChange}
                     />
               <p>Password</p>
-             <input type="text"
+             <input type="password"
                     id="theInput2"
                     value={this.state.passField}
                     onChange={this.handlePassChange}
