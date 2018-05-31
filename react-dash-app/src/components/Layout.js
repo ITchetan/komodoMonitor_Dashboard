@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon} from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
 import Insight from './Insight'
 import '../App.css';
 import PlayerProfile from './PlayerProfile'
 import Liquid from './LiquidChart'
+import Popup from './InfoPopup'
 
 
 import WellnessPane from './WellnessPane'
@@ -94,6 +95,9 @@ class Layout extends Component{
           <a onClick={this.props.changeRpe}><RunFastIcon size={60} color="#C0C0C0"  /></a>}
           <h5>RPE Load</h5>
           <hr />
+        </div>
+        <div style={{ textAlign: 'center' }} >
+          <Popup />
         </div>
 
       </Col>

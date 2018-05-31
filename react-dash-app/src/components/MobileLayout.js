@@ -6,6 +6,7 @@ import Insight from './Insight'
 
 import '../App.css';
 import 'react-circular-progressbar/dist/styles.css'
+import Popup from './InfoPopup'
 
 
 import Liquid from './LiquidChart'
@@ -68,7 +69,7 @@ class MobileLayout extends Component{
 
     <Row className="Column">
 
-      <Col xs={{ size:2, offset:1 }}>
+      <Col xs={{ size:2}}>
         {this.props.view === "home" &&
         <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
@@ -102,7 +103,9 @@ class MobileLayout extends Component{
         {this.props.view !== "profile" &&
         <a onClick={this.props.changeProfile}><AccountIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
-
+      <Col xs={2}>
+      <Popup />
+      </Col>
       </Row>
 
       <Row>&nbsp;</Row>
