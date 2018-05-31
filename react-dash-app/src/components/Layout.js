@@ -115,16 +115,18 @@ class Layout extends Component{
           {this.props.view === "home" &&
           <div>
               <div>
-                <h3>Welcome back, {this.props.playerFirstData[0]}</h3>
+                <h3>Welcome back, {this.props.playerFirstData[2]}</h3>
                 <hr />
                 <h5>Your overall score is {komodoScore}%.</h5>
-                <Col xs={{ size:4, offset: 4}}>
+                <Col xs={12} lg={{ size: 10, offset: 1 }}>
+                <Col xs={4} sm={{ size:8, offset: 2 }} lg={{ size: 6, offset: 3 }}>
                   <CircularProgressBar
                   percentage={komodoScore}
                   initialAnimation={'true'}
                   strokeWidth={'10'}
                   className={strokeColour}
                    />
+                </Col>
                 </Col>
               </div>
               <hr />

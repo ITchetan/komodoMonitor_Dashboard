@@ -27,6 +27,7 @@ class RpePane extends Component{
   render() {
     return (
       <div>
+
       {this.state.view === 'gauge' &&
       <div>
         <h4>RPE</h4>
@@ -44,6 +45,41 @@ class RpePane extends Component{
         <Button onClick={this.showGauge} color="info">View Summary</Button>
       </div>
       }
+
+        {this.state.view === 'gauge' &&
+        <div >
+          <h3>RPE</h3>
+          <hr />
+          <div className="d-flex justify-content-between">
+            <Button onClick={this.showChart} color="info" >View Detail</Button>
+          </div>
+          <hr />
+          <PointerGauge name={"RPE"} value={this.props.rpeSummary.value}
+          gaugeLowerBound={this.props.rpeSummary.min} gaugeUpperBound={this.props.rpeSummary.max}
+          gaugeMaxValue={10000} firstArc={"blue"} secondArc={"green"} thirdArc={"red"} />
+        </div>
+        }
+
+        {this.state.view === 'chart' &&
+        <div>
+          <h3>RPE</h3>
+          <hr />
+          <div className="d-flex justify-content-between">
+            <Button onClick={this.showGauge} color="info">View Summary</Button>
+            <select onChange = {this.filterOption}>
+                <option disabled >Select Range</option>
+                <option value="-14" >Two Weeks</option>
+                <option value="-30">Month</option>
+                <option value="-90">Three Months</option>
+                <option value="-180">Six Months</option>
+                <option value="-365">Year</option>
+            </select>
+          </div>
+          <hr />
+            <RpeChart rpeData={this.tempRpeData}/>
+          </div>
+          }
+
       </div>
       )}
   }

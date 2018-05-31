@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Col, Button } from 'reactstrap';
-import { PlusBoxOutlineIcon } from 'mdi-react';
+import { PlusBoxOutlineIcon, LogoutIcon } from 'mdi-react';
 import '../App.css';
 
 
@@ -66,8 +66,6 @@ class PlayerProfile extends Component{
       <div >
       <Container  >
 
-
-
             <Col >
                 <img className="profile" src={this.props.playerImage} alt="" width="50%" height="auto"  />
             </Col>
@@ -75,9 +73,8 @@ class PlayerProfile extends Component{
             <br />
 
             <Col >
-                <h5><strong> First Name :</strong> {this.props.playerFirstData[0]} </h5>
-                <h5><strong> Last Name : </strong> {this.props.playerLastData[0]} </h5>
-
+                <h4><strong> {this.props.playerFirstData[0]} {this.props.playerLastData[0]} </strong></h4>
+                <p><Button color="primary" onClick={this.props.logout}>Logout <LogoutIcon size={14} color='#fff' /></Button></p>
                 {this.state.page === "profile" && <Button color="secondary" onClick={this.changeProfileImage}> Upload new photo </Button>}
                 {this.state.page === "image" && <div className="dropImage" onDragOver={this.onDrag} onDrop={this.onDrop}>
                   <p>Drop an image</p>

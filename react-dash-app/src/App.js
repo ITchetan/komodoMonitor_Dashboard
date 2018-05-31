@@ -54,7 +54,11 @@ class App extends Component {
     this.loadingData = this.loadingData.bind(this);
     this.changeProfile = this.changeProfile.bind(this);
     this.logout = this.logout.bind(this);
+
     this.changeInfo = this.changeInfo.bind(this);
+
+    this.loadingFailed = this.loadingFailed.bind(this);
+
 
   }
 
@@ -98,38 +102,41 @@ handleWindowSizeChange = () => {
   }
 
   logout(){
+    document.cookie = "token=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.setState({
-    loginToken: {},
-    email: "",
-    password: "",
-    page: "login",
-    barData:{},
-    wellnessTrendsData:{},
-    chartData:{},
-    rpeData: {},
-    playerSessionId:{},
-    playerSessionDate:{},
-    insightsDescriptionData: {},
-    insightsValueData: {},
-    playerIdData: {},
-    playerFirstData: {},
-    playerLastData: {},
-    wellnessForm: {},
-    endPointSummary: {},
-    endPointPlayers: {},
-    endPointWellness: {},
-    endPointWorkload: {},
-    endPointRpe: {},
-    endPointSessions:{},
-    view: 'home', })
+      loginToken: {},
+      email: "",
+      password: "",
+      page: "login",
+      barData:{},
+      wellnessTrendsData:{},
+      chartData:{},
+      rpeData: {},
+      playerSessionId:{},
+      playerSessionDate:{},
+      insightsDescriptionData: {},
+      insightsValueData: {},
+      playerIdData: {},
+      playerFirstData: {},
+      playerLastData: {},
+      wellnessForm: {},
+      endPointSummary: {},
+      endPointPlayers: {},
+      endPointPlayerImage: {},
+      ImageUrlData: {},
+      endPointWellness: {},
+      endPointWorkload: {},
+      endPointRpe: {},
+      endPointSessions:{},
+      view: 'home',
+      width: window.innerWidth,})
   }
 
 
   //receive email and password from login page
-  getLogin(tokenData, emailData, passwordData){
-    this.setState({ loginToken: tokenData,
-                    email: emailData,
-                    password: passwordData})
+  getLogin(tokenData){
+    this.setState({ loginToken: tokenData })
+    console.log(this.state.loginToken)
     //enter laoding state after user and pass have been received
     this.setState({ page: "loading", })
   };
@@ -150,6 +157,11 @@ handleWindowSizeChange = () => {
     this.defineData()
     //end loading and show main page
     this.setState({page: "main"})
+  }
+
+  loadingFailed(){
+    document.cookie = "token=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    this.setState({ page: "login" })
   }
 
 //take data from the states and configure the data to go into the page as graphs etc...
@@ -380,7 +392,7 @@ console.log(wellnessWeeklyTotal)
     for (let i = 0; i<workloadScore.length; i++){
 
       if (workloadScore[i]<workloadMin[i]) {
-        workloadbarColor.push('#ffa500')
+        workloadbarColor.push('#90C3D4')
       }
       else if (workloadScore[i]>workloadMax[i] ) {
         workloadbarColor.push('#cc3232')
@@ -414,7 +426,7 @@ console.log(wellnessWeeklyTotal)
   for (let i = 0; i<rpeScore.length; i++){
 
     if (rpeScore[i]<rpeMin[i]) {
-      rpeBarColor.push('#ffa500')
+      rpeBarColor.push('#90C3D4')
     }
     else if (rpeScore[i]>rpeMax[i] ) {
       rpeBarColor.push('#cc3232')
@@ -490,7 +502,7 @@ console.log(wellnessWeeklyTotal)
 
     //map data for wellness graph
     barData:{
-      labels:wellnessLabels,
+      labels:['Nutrition', 'Energy', 'Stress', 'Sleep Quality', 'Sleep Amount', 'Muscle Pain'],
       datasets:[{data:wellnessValues,
       backgroundColor: bar_colour,
     }]},
@@ -588,7 +600,7 @@ console.log(wellnessWeeklyTotal)
       renderModal() {
             let rpeform = []
             for (let i = 0; i < this.state.playerSessionId.length; i++){
-              rpeform.push( <div> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[2]} playerSessionId ={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
+              rpeform.push( <div key={this.state.playerSessionId[i]}> <ModalFormRPE loginToken={this.state.loginToken} profileName ={this.state.playerFirstData[0]} playerSessionId={this.state.playerSessionId[i]} playerSessionDate = {this.state.playerSessionDate[i]}/> </div> )
             }
             return rpeform
           }
@@ -602,14 +614,18 @@ console.log(wellnessWeeklyTotal)
           if (this.state.page === "login") {
             return(
               <div className="Login">
-              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin}  />
+              <Login handlerEmail={this.getLogin} skipLogin={this.skipLogin} loginFailed={ false }  />
               </div>
             )
           }
           else if (this.state.page === "loading") {
             return(
               <div className="Loading">
-              <Loading loadingData={this.loadingData} loginToken={this.state.loginToken} email={this.state.email} pass={this.state.password}/>
+              <Loading loadingData={this.loadingData}
+                loginToken={this.state.loginToken}
+                email={this.state.email}
+                pass={this.state.password}
+                loadingFailed={this.loadingFailed}/>
               </div>
             )
           }
@@ -689,7 +705,7 @@ console.log(wellnessWeeklyTotal)
             {this.renderModal()}
 
             {this.state.wellnessForm === true &&
-            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[0]}/>
             }
 
 

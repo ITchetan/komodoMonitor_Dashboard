@@ -137,20 +137,20 @@ handleSubmit = (e) =>{
 
 
   if (sleepQuality <= 20){
-    sleepQualityScale = 1;
+    sleepQualityScale = 5;
   }
   else if (sleepQuality >20 && sleepQuality <=40) {
-    sleepQualityScale = 2;
+    sleepQualityScale = 4;
   }
   else if (sleepQuality >40 && sleepQuality <= 60) {
     sleepQualityScale = 3;
 
   }
   else if (sleepQuality>60 && sleepQuality <=80) {
-    sleepQualityScale = 4;
+    sleepQualityScale = 2;
   }
   else if (sleepQuality > 80) {
-    sleepQualityScale =5;
+    sleepQualityScale = 1;
   }
 
 
@@ -398,7 +398,7 @@ handleSubmit = (e) =>{
                   </ModalBody>
 
                   <ModalFooter>
-                    <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary mr-auto">Submit</Button>{' '}
+                    <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary ml-auto">Submit</Button>{' '}
                   </ModalFooter>
 
                 </Form>
