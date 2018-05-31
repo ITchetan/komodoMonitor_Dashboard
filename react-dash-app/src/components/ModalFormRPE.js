@@ -112,7 +112,7 @@ class ModalFormRPE extends React.Component {
               </ModalBody>
               <ModalFooter>
 
-                <Button color="primary" onClick={this.handleSubmit_rpe} className='mr-auto'>Submit</Button>{' '}
+                <Button color="primary" onClick={this.handleSubmit_rpe} className='ml-auto'>Submit</Button>{' '}
 
 
               </ModalFooter>

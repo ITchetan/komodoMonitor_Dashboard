@@ -398,7 +398,7 @@ handleSubmit = (e) =>{
                   </ModalBody>
 
                   <ModalFooter>
-                    <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary mr-auto">Submit</Button>{' '}
+                    <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary ml-auto">Submit</Button>{' '}
                   </ModalFooter>
 
                 </Form>
