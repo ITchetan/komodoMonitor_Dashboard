@@ -92,6 +92,7 @@ class PlayerProfile extends Component{
                   </div>
                   </div>}
             </Col>
+
       </Container>
       </div>
     )

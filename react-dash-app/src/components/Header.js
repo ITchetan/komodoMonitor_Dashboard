@@ -24,6 +24,14 @@ class Header extends Component{
 
                 <Col sm={2}>
 
+
+
+
+
+                    <div style={{ textAlign: 'center' }} data-toggle="tooltip" data-placement="bottom" title="My Profile">
+
+
+
                   {this.props.showProfile !== false &&
                     <div style={{ textAlign: 'center' }}>
                       {this.props.view === "profile" &&
@@ -33,7 +41,7 @@ class Header extends Component{
 
                     </div>
                   }
-
+                  </div>
                 </Col>
 
             </Row>

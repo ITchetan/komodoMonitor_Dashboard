@@ -15,7 +15,8 @@ class RpePane extends Component{
     this.showGauge = this.showGauge.bind(this);
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
-    // initial data for wellness trends
+
+    // initial data for RPE
     this.tempRpeData ={ labels: this.props.rpeData.labels.slice(-14),
                             datasets: this.props.rpeData.datasets};
   }
@@ -29,6 +30,7 @@ class RpePane extends Component{
   }
 
   // filter data to show in chart depend on selection
+
   filterOption(e) {
     let selectedVal=parseInt(e.target.value,0);
     this.tempRpeData ={ labels: this.props.rpeData.labels,
@@ -44,9 +46,11 @@ class RpePane extends Component{
   }
 
 
+
   render() {
     return (
       <div>
+
         {this.state.view === 'gauge' &&
         <div >
           <h3>RPE</h3>
