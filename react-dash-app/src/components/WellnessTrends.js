@@ -12,6 +12,9 @@ class WellnessTrends extends Component{
           <Line
             data={this.props.wellnessTrendsData}// data passed as property
             options={{
+              animation: {
+                        duration: 5
+                    },
               title:{
                 display:false,
               },

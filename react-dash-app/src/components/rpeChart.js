@@ -17,6 +17,9 @@ class RpeChart extends Component{
               title:{
                 display:false,
               },
+              animation: {
+                        duration: 5
+                    },
               legend:{
                 display:false,
               },
@@ -31,7 +34,7 @@ class RpeChart extends Component{
                   yAxes: [{
                         ticks: {
                             suggestedMin: 0,
-                            suggestedMax: 8000
+                            suggestedMax: 10000
                           }
                         }]
                   }

@@ -13,6 +13,9 @@ class WorkloadChart extends Component{
             height={3.5}
               data={this.props.workloadData}// data passed as property
             options={{
+              animation: {
+                        duration: 5
+                    },
               title:{
                 display:false,
               },
@@ -30,7 +33,7 @@ class WorkloadChart extends Component{
                 yAxes: [{
                     ticks: {
                       suggestedMin: 0,
-                      suggestedMax: 12000
+                      suggestedMax: 10000
                     }
                 }]
               }
