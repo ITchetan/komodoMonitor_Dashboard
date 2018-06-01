@@ -116,7 +116,6 @@ componentDidMount(){
   //chart is drown here
   render()
   {
-  console.log(this.getCookie())
 
     return (
 

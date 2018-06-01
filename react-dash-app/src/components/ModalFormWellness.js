@@ -14,6 +14,8 @@ class ModalFormWellness extends React.Component {
       stress:'0',
       sleepAmount:'0',
       muscleSoreness:'0',
+      FormPosted: true,
+      counter: 0,
 
     };
 
@@ -211,12 +213,35 @@ handleSubmit = (e) =>{
       'X-Auth-Token': this.props.loginToken
     },
     method: 'POST',
-  });
+  })
 
-  this.setState({
-    modal: !this.state.modal,
-  });
+  .then((response) => {
+     if (response.ok) {
+       console.log('no error')
+           this.setState({formPosted:true,
+                     modal:!this.state.modal,})
 
+     } else {
+       throw new Error('error reciving server resposnse');
+     }
+     })
+
+   .catch((error) => {
+
+
+     console.log(this.state.counter)
+     if (this.state.counter === 1) {
+       this.setState({ formPosted: false,
+                       modal:!this.state.modal,})
+     }
+     else {
+       console.log(error);
+       this.setState({ formPosted: false,
+                       modal:this.state.modal,
+                     counter: this.state.counter + 1})
+
+     }
+});
   e.preventDefault()
 
 }
@@ -399,6 +424,8 @@ handleSubmit = (e) =>{
 
                   <ModalFooter>
                     <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary ml-auto">Submit</Button>{' '}
+                    {this.state.formPosted === false &&
+                   <font color ='red'>Error:Unable to submit the form! Please refresh the browser and resubmit.</font>}
                   </ModalFooter>
 
                 </Form>

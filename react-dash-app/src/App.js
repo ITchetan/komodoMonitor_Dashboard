@@ -136,7 +136,6 @@ handleWindowSizeChange = () => {
   //receive email and password from login page
   getLogin(tokenData){
     this.setState({ loginToken: tokenData })
-    console.log(this.state.loginToken)
     //enter laoding state after user and pass have been received
     this.setState({ page: "loading", })
   };
@@ -169,7 +168,6 @@ defineData(){
 
 
   let dataSessions = this.state.endPointSessions
-  console.log(dataSessions);
   let sessionId = [];
   let sessionDate = [];
 
@@ -184,8 +182,6 @@ defineData(){
       }
 }}
 
-console.log(sessionId);
-console.log(sessionDate);
 
   //extract player data
   let dataPlayer = this.state.endPointPlayers
@@ -385,7 +381,6 @@ console.log(sessionDate);
                              wellnessSleepAmount[i] +
                              wellnessPain[i])
   }
-console.log(wellnessWeeklyTotal)
 
   //set color for workloadbar graph depend on which zone the score is
     let workloadbarColor =[];

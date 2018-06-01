@@ -96,7 +96,6 @@ class Loading extends Component {
       .then((findImageResponse) => {
         this.setState({ endPointPlayerImage: findImageResponse,
                         playerImage: true})
-        console.log(this.state.endPointPlayerImage)
         this.endLoadingHandler()
         })
       .catch((error) => {
@@ -219,7 +218,6 @@ class Loading extends Component {
 }
 
 render(){
-  console.log(this.props.loginToken)
 
   return(
   <Login isLoading={this.state.isLoading}/>
