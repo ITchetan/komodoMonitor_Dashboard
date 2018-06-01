@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, InfoOutlineIcon} from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
 import Insight from './Insight'
 import '../App.css';
 import PlayerProfile from './PlayerProfile'
 import Liquid from './LiquidChart'
+// import Popup from './InfoPopup'
+import Info from './Info'
+
 
 
 import WellnessPane from './WellnessPane'
@@ -16,20 +19,16 @@ class Layout extends Component{
   constructor(props){
     super(props);
     this.state = {
-      // chart data will be generated in app and passed in chart property, following is telling chart that data will come from property
+      // chart data will be generated in app and passed in chart property,
+        //following is telling chart that data will come from property
       barData: props.barData,
       workloadData: props.workloadData,
       rpeData: props.rpeData,
       insightsData: props.insightsData,
       playerFirstData: props.playerFirstData,
-      playerLastData: props.playerLastData
+      playerLastData: props.playerLastData,
     }
-
   }
-
-
-
-
 
   // Turn overall numbers into percentages with no decimal places
   render() {
@@ -46,11 +45,20 @@ class Layout extends Component{
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
 
+    let strokeColour
+    if (komodoScore <= 75) {
+      strokeColour =  'progressbar-red'
+    } else if (komodoScore > 75 & komodoScore <= 99) {
+      strokeColour = 'progressbar-orange'
+    } else {
+      strokeColour =  'progressbar-green'
+    }
+
+
     return (
   <div className="Layout">
+
   <Container fluid={true}>
-
-
     <Row className='d-flex'>&nbsp;</Row>
     <Row className="d-flex">
       <Col sm={3} lg={2} className="d-flex">
@@ -90,6 +98,14 @@ class Layout extends Component{
           <h5>RPE Load</h5>
           <hr />
         </div>
+        <div style={{ textAlign: 'center' }}
+        data-toggle="tooltip" data-placement="bottom" title="Information">
+        {this.props.view === "info" &&
+        <InfoOutlineIcon size={36} color="#d40000"/>}
+        {this.props.view !== "info" &&
+        <a onClick={this.props.changeInfo}><InfoOutlineIcon size={36} color="#C0C0C0"/></a>}
+
+        </div>
 
       </Col>
       </Col>
@@ -99,10 +115,18 @@ class Layout extends Component{
           {this.props.view === "home" &&
           <div>
               <div>
-                <h3>Welcome back, Chris</h3>
+                <h3>Welcome back, {this.props.playerFirstData[0]}</h3>
                 <hr />
-                <Col xs={{ size:6, offset: 3}}>
-                <CircularProgressBar percentage={komodoScore} />
+                <h5>Your overall score is {komodoScore}%.</h5>
+                <Col xs={12} lg={{ size: 10, offset: 1 }}>
+                <Col xs={4} sm={{ size:8, offset: 2 }} lg={{ size: 6, offset: 3 }}>
+                  <CircularProgressBar
+                  percentage={komodoScore}
+                  initialAnimation={'true'}
+                  strokeWidth={'10'}
+                  className={strokeColour}
+                   />
+                </Col>
                 </Col>
               </div>
               <hr />
@@ -122,7 +146,8 @@ class Layout extends Component{
           </div>}
 
           {this.props.view === "wellness" &&
-            <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+            <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}
+            wellnessTrendsData={this.props.wellnessTrendsData}/>
           }
 
           {this.props.view === "workload" &&
@@ -132,12 +157,18 @@ class Layout extends Component{
           {this.props.view === "rpe" &&
           <RpePane rpeSummary={this.props.rpeSummary} rpeData={this.props.rpeData} />
           }
+          {this.props.view === "info" &&
+          <Info  />
+          }
 
           {this.props.view === "profile" &&
           <div>
             <h3>My Profile</h3>
             <hr />
             <PlayerProfile
+             logout={this.props.logout}
+             loginToken={this.props.loginToken}
+             playerImage={this.props.playerImage}
              playerFirstData={this.props.playerFirstData}
              playerLastData={this.props.playerLastData}/>
           </div>}
@@ -145,20 +176,25 @@ class Layout extends Component{
         </Col>
       </Col>
       <Col sm={4} className="d-flex">
-        <Col className="Column">
+        <Col className="text-center Column">
+          <h3>Insights</h3>
+          <hr />
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[0]} insightValue= {this.props.insightsValueData[0]} />
+            <Insight insight={this.props.insightsDescriptionData[0]}  insightValue= {this.props.insightsValueData[0]}/>
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[1]} insightValue ={this.props.insightsValueData[1]} />
+            <Insight insight={this.props.insightsDescriptionData[1]}  insightValue= {this.props.insightsValueData[1]}/>
+            <br />
             </Col>
           </Row>
           <Row>
             <Col>
-            <Insight insight={this.props.insightsDescriptionData[2]} insightValue={this.props.insightsValueData[2]} />
+            <Insight insight={this.props.insightsDescriptionData[2]}  insightValue= {this.props.insightsValueData[2]}/>
+            <br />
             </Col>
           </Row>
         </Col>

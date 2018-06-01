@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import ReactLoading from 'react-loading';
 import Login from './Login';
-
-const styles = {
-    paperContainer: {
-        height:600 ,
-        backgroundImage: `url(${"./field-bg.59a5e231.jpg"})`
-    }
-};
 
 class Loading extends Component {
   constructor(props){
@@ -17,14 +8,21 @@ class Loading extends Component {
       tokenData: {},
       endPointSummary: {},
       endPointPlayers: {},
+      endPointPlayerImage: {},
       endPointWellness: {},
       endPointWorkload: {},
       endPointRpe: {},
+      endPointsSessions:{},
       players: {},
+      playerImage: {},
       summary: {},
       wellness: {},
       workload: {},
       rpe: {},
+      isLoading: true,
+      sessions:{}
+
+
     }
     this.endLoadingHandler = this.endLoadingHandler.bind(this);
     this.getData = this.getData.bind(this);
@@ -32,7 +30,8 @@ class Loading extends Component {
 
   componentDidMount(){
   //get username and password from app.js
-    this.getData(this.props.loginEmail, this.props.loginPass);
+
+    this.getData();
   }
 
   //send the state of the endpoints to app.js
@@ -41,18 +40,22 @@ class Loading extends Component {
         this.state.summary === true &&
         this.state.wellness === true &&
         this.state.workload === true &&
-        this.state.rpe === true) {
+        this.state.sessions === true &&
+        this.state.rpe === true &&
+        this.state.playerImage === true) {
+
     this.props.loadingData( this.state.endPointSummary,
                             this.state.endPointPlayers,
+                            this.state.endPointPlayerImage,
                             this.state.endPointWellness,
                             this.state.endPointWorkload,
                             this.state.endPointRpe,
-                            this.state.tokenData,
-                          );
+                            this.state.endPointSessions,
+                                  );
                         }
   }
   //fetching all the data from the endpoints and updating the states
-  getData(email, password){
+  getData(){
 
     // login, get the token and set token state
 
@@ -62,116 +65,162 @@ class Loading extends Component {
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(userResponse => userResponse.json())
-
+      .then((userResponse) => {
+      if (userResponse.ok) {
+        return userResponse.json();
+      } else {
+        throw new Error();
+      }
+    })
       .then((findUserResponse) => {
         this.setState({ endPointPlayers: findUserResponse,
                         players: true})
         this.endLoadingHandler()
         })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
-    //fetch summary endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/players/3/image',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(response => response.json())
+        .then((imageResponse) => {
+        if (imageResponse.ok) {
+          return imageResponse.blob();
+        } else {
+          throw new Error();
+        }
+      })
+
+      .then((findImageResponse) => {
+        this.setState({ endPointPlayerImage: findImageResponse,
+                        playerImage: true})
+        this.endLoadingHandler()
+        })
+      .catch((error) => {
+        this.props.loadingFailed()
+      })
+
+
+    //fetch summary endpoint
+    fetch('https://app.komodomonitr.com/api/v1/data/summary?userId=1',{
+      method: 'get',
+      headers: {'X-Auth-Token': this.props.loginToken}
+    })
+      .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error();
+      }
+    })
 
       .then((summaryResponse)=> {
         this.setState({ endPointSummary: summaryResponse,
                         summary: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch wellness endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(wellnessResponse => wellnessResponse.json())
+      .then((wellnessResponse) => {
+      if (wellnessResponse.ok) {
+        return wellnessResponse.json();
+      } else {
+        throw new Error();
+      }
+    })
 
       .then((wellnessResponse)=> {
         this.setState({ endPointWellness: wellnessResponse,
                         wellness: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch workload endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/train_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(workloadResponse => workloadResponse.json())
+      .then((workloadResponse) => {
+      if (workloadResponse.ok) {
+        return workloadResponse.json();
+      } else {
+        throw new Error();
+      }
+    })
 
       .then((workloadResponse)=> {
         this.setState({ endPointWorkload: workloadResponse,
                         workload: true})
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
     //fetch rpe laod endpoint
-    .then(token => {fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=1',{
+    fetch('https://app.komodomonitr.com/api/v1/data/rpe_load?userId=1',{
       method: 'get',
       headers: {'X-Auth-Token': this.props.loginToken}
     })
-      .then(rpeResponse => rpeResponse.json())
+      .then((rpeResponse) => {
+      if (rpeResponse.ok) {
+        return rpeResponse.json();
+      } else {
+        throw new Error();
+      }
+    })
 
       .then((rpeResponse)=> {
         this.setState({ endPointRpe: rpeResponse,
                         rpe: true})
         //send the end point states to app.js
         this.endLoadingHandler()
-      })})
+      })
+      .catch((error) => {
+        this.props.loadingFailed()
+      });
 
+
+      //fetch sessons endpoint
+      fetch('https://app.komodomonitr.com/api/v1/sessions?userId=1',{
+        method: 'get',
+        headers: {'X-Auth-Token': this.props.loginToken}
+      })
+        .then((sessionsResponse) => {
+        if (sessionsResponse.ok) {
+          return sessionsResponse.json();
+        } else {
+          throw new Error();
+        }
+      })
+
+        .then((sessionsResponse)=> {
+          this.setState({ endPointSessions: sessionsResponse,
+                          sessions: true})
+          //send the end point states to app.js
+          this.endLoadingHandler()
+        })
+        .catch((error) => {
+          this.props.loadingFailed()
+        });
 }
 
 render(){
 
   return(
-    <div className="Login" style={styles.paperContainer}>
-    <Container>
-      <Row>
-      <Col sm={10}>
-          <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-          <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
-
-      </Col>
-      </Row>
-      <Row>
-      <Col className="text-center">
-      <h5>Welcome to Komodo Monitr, please Log in</h5>
-      </Col>
-      </Row>
-      <Row>
-      <Col className="text-center">
-              <p>Email</p>
-              <input type="text"
-                     readOnly
-                     id="theInput"
-                     value={this.props.email}
-                      />
-                <p>Password</p>
-               <input type="text"
-                      readOnly
-                      id="theInput2"
-                      value={this.props.pass}
-                       />
-                       <p/>
-                  <input type="submit" disabled/>
-                  <button disabled>
-                  Default
-                  </button>
-              </Col>
-        </Row>
-        <Row>
-          <Col xs="6">
-          </Col>
-          <Col>
-          <ReactLoading type='spin' color='#d40000'/>
-          </Col>
-          </Row>
-      </Container>
-    </div>
+  <Login isLoading={this.state.isLoading}/>
   )
 }
 }

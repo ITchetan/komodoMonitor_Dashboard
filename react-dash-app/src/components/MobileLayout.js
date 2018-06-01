@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon } from 'mdi-react';
+import { HomeIcon, HeartPulseIcon, MedicalBagIcon, RunFastIcon, AccountIcon, InfoOutlineIcon } from 'mdi-react';
 import CircularProgressBar from 'react-circular-progressbar'
 import Insight from './Insight'
+import Info from './Info'
 
 import '../App.css';
 import 'react-circular-progressbar/dist/styles.css'
+// import Popup from './InfoPopup'
 
 
 import Liquid from './LiquidChart'
@@ -49,6 +51,15 @@ class MobileLayout extends Component{
     let rpeScore = this.props.komodoNumber.rpe
     rpeScore = rpeScore*100
 
+    let strokeColour
+    if (komodoScore <= 75) {
+      strokeColour =  'progressbar-red'
+    } else if (komodoScore > 75 & komodoScore <= 99) {
+      strokeColour = 'progressbar-orange'
+    } else {
+      strokeColour =  'progressbar-green'
+    }
+
 
     return (
   <div className="Layout">
@@ -59,7 +70,7 @@ class MobileLayout extends Component{
 
     <Row className="Column">
 
-      <Col xs={{ size:2, offset:1 }}>
+      <Col xs={{ size:2}}>
         {this.props.view === "home" &&
         <HomeIcon size={36} color= '#d40000' />}
         {this.props.view !== "home" &&
@@ -93,7 +104,12 @@ class MobileLayout extends Component{
         {this.props.view !== "profile" &&
         <a onClick={this.props.changeProfile}><AccountIcon size={36} color="#C0C0C0"  /></a>}
       </Col>
-
+      <Col xs={2}>
+      {this.props.view === "info" &&
+      <InfoOutlineIcon size={36} color="#d40000"/>}
+      {this.props.view !== "info" &&
+      <a onClick={this.props.changeInfo}><InfoOutlineIcon size={36} color="#C0C0C0"/></a>}
+      </Col>
       </Row>
 
       <Row>&nbsp;</Row>
@@ -107,7 +123,12 @@ class MobileLayout extends Component{
           <h4>Welcome back, Chris</h4>
           <hr />
           <Col xs={{ size:6, offset: 3}}>
-          <CircularProgressBar percentage={komodoScore} />
+          <CircularProgressBar
+            percentage={komodoScore}
+            initialAnimation={'true'}
+            strokeWidth={'10'}
+            className={strokeColour}
+            />
           </Col>
           <hr />
           <div>
@@ -126,7 +147,8 @@ class MobileLayout extends Component{
         </div>}
 
         {this.props.view === "wellness" &&
-        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}/>
+        <WellnessPane wellnessTotal={this.props.wellnessTotal} barData={this.props.barData}
+        wellnessTrendsData={this.props.wellnessTrendsData}/>
         }
 
         {this.props.view === "workload" &&
@@ -136,14 +158,20 @@ class MobileLayout extends Component{
         {this.props.view === "rpe" &&
         <RpePane rpeSummary={this.props.rpeSummary} rpeData={this.props.rpeData} />
         }
+        {this.props.view === "info" &&
+        <Info  />
+        }
 
         {this.props.view === "profile" &&
         <div>
           <h3>My Profile</h3>
           <hr />
           <PlayerProfile
-           playerFirstData={this.props.playerFirstData}
-           playerLastData={this.props.playerLastData}/>
+          logout={this.props.logout}
+          loginToken={this.props.loginToken}
+          playerImage={this.props.playerImage}
+          playerFirstData={this.props.playerFirstData}
+          playerLastData={this.props.playerLastData} />
         </div>}
 
         </Col>

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import LiquidChart from 'react-liquidchart';
+import '../App.css';
+
 
 const fontSize = {
-      value: 0.6,
-      postfix: 0.4,
+      value: 0.5,
+      postfix: 0.3,
       legend: 0.3,
     };
-const stops = [
-  <stop key={4} offset="0" stopColor="red" />,
-  <stop key={5} offset="1" stopColor="#F2F3F4" />,
+
+const wetColor = {//text color
+  fill:"rgb(23,139,202)"
+}
+const dryColor = {//text color
+  fill:"black"
+}
+
+const stops = [//liquid fill color
+  <stop key={5}stopColor="#C5F2F2" />,
 ];
+
 
 class Liquid extends Component {
 
@@ -23,8 +33,10 @@ class Liquid extends Component {
             value={this.props.value}
             amplitude={10}
             frequency={2}
-            animationTime={2000}
-            animationWavesTime={5000}
+            animationTime={1000}
+            animationWavesTime={2000}
+            wetStyle={wetColor}
+            dryStyle={dryColor}
             gradient={{
               type: 1,
               x1: 0,
@@ -35,6 +47,8 @@ class Liquid extends Component {
             }}
             postfix="%"
             fontSizes={fontSize}
+
+
           />
 
     );

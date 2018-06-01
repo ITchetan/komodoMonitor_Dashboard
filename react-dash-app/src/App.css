@@ -1,28 +1,36 @@
 .Wrapper {
-  background-color: #f5f5f5;
+  background-color: #666666;
   }
 
 .Header {
-  background-color: #dcdcdc;
+  background-color: #333333;
+  padding: 15px;
 }
+
+.liquid-text {
+    transform: translate(0, 0px);
+    font-family: inherit;
+  }
+
+
 
 .Column {
   background-color: #fff;
   border: outset;
-  border-color: #000000;
-  border-width: thin;
-  border-radius: 5px;
-  box-shadow: 3px 3px 3px #808080;
+  border-color: #595959;
+  border-width: medium;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .BrandName {
+  font-family: inherit;
   font-size: 2em;
   font-weight: 550;
 }
 
 .SubBrand {
+  font-family: inherit;
   color: #d40000;
   font-size: 1.2em;
   font-weight: 550;
@@ -34,7 +42,19 @@
   border-width: medium;
   background-color: #d40000;
   color: #fff;
+  box-shadow: 5px 5px 10px #808080;
   font-size: 1.1em;
+  margin-bottom: 30px;
+}
+
+.Insights:hover {
+  border-color: #d40000;
+  border-width: medium;
+  background-color: #fff;
+  color: #000000;
+  box-shadow: 5px 5px 10px #808080;
+  font-size: 1.1em;
+  margin-bottom: 30px;
 }
 
 .InsightValue {
@@ -46,18 +66,52 @@
 .green
 {
 fill: #2dc937;
+background: #2dc937;
 }
 .orange
 {
-fill: #e7b416;
+fill: #ffa500;
+background: #ffa500;
 }
 .red
 {
-  fill: #cc3232;
+  fill: #d40000;
+  background: #d40000;
+
 }
 .blue
 {
 fill: #90C3D4;
+background: #90C3D4;
+}
+.greenZone
+{
+  background:rgba(94, 213, 121 ,0.5);
+  fill: rgba(94, 213, 121 ,0.5);
+}
+
+.CircularProgressbar.progressbar-green .CircularProgressbar-path {
+  stroke: #2dc937;
+}
+
+.CircularProgressbar.progressbar-green .CircularProgressbar-text {
+  fill: #2dc937;
+}
+
+.CircularProgressbar.progressbar-orange .CircularProgressbar-path {
+  stroke: #ffa500;
+}
+
+.CircularProgressbar.progressbar-orange .CircularProgressbar-text {
+  fill: #ffa500;
+}
+
+.CircularProgressbar.progressbar-red .CircularProgressbar-path {
+  stroke: #cc3232;
+}
+
+.CircularProgressbar.progressbar-red .CircularProgressbar-text {
+  fill: #cc3232;
 }
 
 .needle, .needle-center
@@ -71,6 +125,10 @@ fill: #000000;
 
 .SmallText {
   font-size: 0.8em;
+}
+
+.BoldText {
+  font-weight: 600;
 }
 
 .card-default {
@@ -155,19 +213,41 @@ fill: #000000;
 
 .profile {
   border-radius: 50%;
+  border-style: solid;
+  border-width: thick;
+  border-color: #black;
 }
 
-.logout {
+.pointer {
   cursor: pointer;
 }
 
 
-.modal-dialog {
+/* .modal-dialog {
 
           width: 1800px;
 
-        }
+        } */
 
+.dropImage{
+  background-color: gray;
+}
+
+.profileNoClick{
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thick;
+  border-color: #d40000;
+  }
+
+.info {
+  width: 50px;
+  height: 20px;
+  margin: 10px;
+  border: 2px solid rgba(0, 0, 0, .2);
+}
+
+.modal-backdrop {background: rgba(0, 0, 0, .5);}
 
 
 /* .Login {

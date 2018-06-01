@@ -12,30 +12,34 @@ class Header extends Component{
   }
   render()
   {
+
       return (
 
         <div className="Header">
-        <Container >
+        <Container fluid={true}>
           <Row>
               <Col sm={10}>
-                  <img src={require('./komodo.png')} alt="Komodo Monitr" height="50" />
-                  <span className="BrandName">KOMODO </span><span className="SubBrand">MONITR</span>
-
+              <img src='km_white.png' height='75' alt='logo'></img>
               </Col>
 
                 <Col sm={2}>
 
 
-                    <div style={{ textAlign: 'center' }}>
-                      {this.props.view === "profile" &&
-                      <img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80"  />}
-                      {this.props.view !== "profile" &&
 
-                      <a onClick={this.props.changeProfile}><img className="profile" src={require('./fakePlayer.jpg')} alt="" height="80" width="80" /></a>}
-                      <a onClick={this.props.logout} className="logout">Logout</a>
+                    <div style={{ textAlign: 'center' }} data-toggle="tooltip" data-placement="bottom" title="My Profile">
+
+
+                  {this.props.showProfile !== false &&
+                    <div style={{ textAlign: 'center' }}>
+
+                      {this.props.view === "profile" &&
+                      <img className="profileNoClick" src={this.props.playerImage} alt="" height="80" width="80"   />}
+                      {this.props.view !== "profile" &&
+                      <a onClick={this.props.changeProfile}><img className="profile pointer" src={this.props.playerImage} alt="" height="80" width="80" /></a>}
 
                     </div>
-
+                  }
+                  </div>
                 </Col>
 
             </Row>
