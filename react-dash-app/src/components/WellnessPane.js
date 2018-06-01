@@ -17,7 +17,7 @@ class WellnessPane extends Component{
     this.showTrend = this.showTrend.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
-    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels.slice(-14),
+    this.tempWellnessData ={ labels: this.props.wellnessTrendsData.labels.slice(-4),
                             datasets: this.props.wellnessTrendsData.datasets};
   }
 
@@ -90,11 +90,10 @@ class WellnessPane extends Component{
           <div>
           <select onChange = {this.filterOption} onLoad = {this.filterOption}>
             <option disabled >Select Range</option>
-            <option value="-14" >Two Weeks</option>
-            <option value="-30">Month</option>
-            <option value="-90">Three Months</option>
-            <option value="-180">Six Months</option>
-            <option value="-365">Year</option>
+            <option value="-4">Month</option>
+            <option value="-12">Three Months</option>
+            <option value="-24">Six Months</option>
+            <option value="0">All</option>
           </select>
           </div>
           </div >

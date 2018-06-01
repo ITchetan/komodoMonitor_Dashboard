@@ -16,7 +16,7 @@ class RpePane extends Component{
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for RPE
-    this.tempRpeData ={ labels: this.props.rpeData.labels.slice(-14),
+    this.tempRpeData ={ labels: this.props.rpeData.labels.slice(-4),
                             datasets: this.props.rpeData.datasets};
   }
 
@@ -72,11 +72,10 @@ class RpePane extends Component{
             <Button onClick={this.showGauge} color="info">View Summary</Button>
             <select onChange = {this.filterOption}>
                 <option disabled >Select Range</option>
-                <option value="-14" >Two Weeks</option>
-                <option value="-30">Month</option>
-                <option value="-90">Three Months</option>
-                <option value="-180">Six Months</option>
-                <option value="-365">Year</option>
+                <option value="-4">Month</option>
+                <option value="-12">Three Months</option>
+                <option value="-24">Six Months</option>
+                <option value="0">All</option>
             </select>
           </div>
           <hr />
