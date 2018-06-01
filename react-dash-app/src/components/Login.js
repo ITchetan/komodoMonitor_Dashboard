@@ -8,7 +8,7 @@ import Header from './Header'
 
 const styles = {
     paperContainer: {
-        height:600 ,
+        height:750 ,
         backgroundImage: `url(${"./field-bg.59a5e231.jpg"})`
     }
 };

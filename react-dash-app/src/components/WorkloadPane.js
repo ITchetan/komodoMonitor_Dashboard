@@ -16,7 +16,7 @@ class WorkloadPane extends Component{
     this.showChart = this.showChart.bind(this);
     this.filterOption = this.filterOption.bind(this);
     // initial data for wellness trends
-    this.tempWorkloadData ={ labels: this.props.workloadData.labels.slice(-14), datasets: this.props.workloadData.datasets};
+    this.tempWorkloadData ={ labels: this.props.workloadData.labels.slice(-4), datasets: this.props.workloadData.datasets};
 
   }
 
@@ -74,11 +74,10 @@ class WorkloadPane extends Component{
 
           <select onChange = {this.filterOption}>
             <option disabled >Select Range</option>
-              <option value="-14" >Two Weeks</option>
-              <option value="-30">Month</option>
-              <option value="-90">Three Months</option>
-              <option value="-180">Six Months</option>
-              <option value="-365">Year</option>
+              <option value="-4">Month</option>
+              <option value="-12">Three Months</option>
+              <option value="-24">Six Months</option>
+              <option value="0">All</option>
           </select>
 
         </div>

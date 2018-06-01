@@ -33,8 +33,8 @@ class Liquid extends Component {
             value={this.props.value}
             amplitude={10}
             frequency={2}
-            animationTime={2000}
-            animationWavesTime={5000}
+            animationTime={1000}
+            animationWavesTime={2000}
             wetStyle={wetColor}
             dryStyle={dryColor}
             gradient={{

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form,Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import '../App.css';
 
 class ModalFormWellness extends React.Component {
   constructor(props) {
@@ -251,7 +252,7 @@ handleSubmit = (e) =>{
   render() {
     return (
 
-            <Modal isOpen={this.state.modal} size='lg'>
+            <Modal  isOpen={this.state.modal} size='lg'>
               <Form onSubmit ={this.handleSubmit}>
                   <ModalHeader>Hi {this.props.profileName}, how are you?</ModalHeader>
                   <ModalBody>
