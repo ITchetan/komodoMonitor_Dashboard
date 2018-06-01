@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form,Container,Row,Col,Label,Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import Login from './Login';
 class ModalFormWellness extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,8 @@ class ModalFormWellness extends React.Component {
       stress:'0',
       sleepAmount:'0',
       muscleSoreness:'0',
+      formPosted:true,
+      counter:0
 
     };
 
@@ -82,7 +84,8 @@ handleSubmit = (e) =>{
   let stress = this.state.stress;
   let sleepQuality = this.state.sleepQuality;
   let sleepAmount = this.state.sleepAmount;
-  let musclePain = this.state.muscleSoreness
+  let musclePain = this.state.muscleSoreness;
+  let counter = 0;
 
   if (nutrition <= 20){
     nutritionScale = 1;
@@ -191,7 +194,8 @@ handleSubmit = (e) =>{
 
 // method to post the values to wellness API
 
-  fetch('https://app.komodomonitr.com/api/v1/data/wellness?userId=1', {
+  fetch
+  ('https://app.komodomonitr.com/api/v1/data/wellness?userId=1', {
     body:JSON.stringify(
     {
 
@@ -211,11 +215,52 @@ handleSubmit = (e) =>{
       'X-Auth-Token': this.props.loginToken
     },
     method: 'POST',
+  })
+  // .then(response => {
+  //             console.log();
+  //             if (response.status.toString() === '200') {
+  //                 // I want to LOAD COMPONENT B HERE!!!!!!!!!!!!!!!!!!!!!!
+  //                 setState({someflag: 1 or true})
+  //             }
+  //             return new Error('Error receiving server response');
+  //         })
+  // .catch(error => {
+  //     console.log(error);
+  // });
+
+  .then((response) => {
+    if (response.ok) {
+      console.log('no error')
+          this.setState({formPosted:true,
+                    modal:!this.state.modal,})
+
+    } else {
+      throw new Error('error reciving server resposnse');
+    }
+    })
+
+  .catch((error) => {
+
+
+    console.log(this.state.counter)
+    if (this.state.counter === 1) {
+      this.setState({ formPosted: false,
+                      modal:!this.state.modal,})
+    }
+    else {
+      console.log(error);
+      this.setState({ formPosted: false,
+                      modal:this.state.modal,
+                    counter: this.state.counter + 1})
+
+    }
+
   });
 
-  this.setState({
-    modal: !this.state.modal,
-  });
+
+  // this.setState({
+  //   modal: !this.state.modal,
+  // });
 
   e.preventDefault()
 
@@ -224,8 +269,11 @@ handleSubmit = (e) =>{
 
 
   render() {
-    return (
+console.log(this.state.counter);
 
+
+      return (
+        <div>
             <Modal isOpen={this.state.modal} size='lg'>
               <Form onSubmit ={this.handleSubmit}>
                   <ModalHeader>Hi {this.props.profileName}, how are you?</ModalHeader>
@@ -399,12 +447,19 @@ handleSubmit = (e) =>{
 
                   <ModalFooter>
                     <Button color="primary" onClick={this.handleSubmit} className="btn btn-primary mr-auto">Submit</Button>{' '}
+                    {this.state.formPosted === false &&
+                    <font color ='red'>Error:Unable to submit the form! Please refresh the browser and resubmit.</font>}
                   </ModalFooter>
 
                 </Form>
 
             </Modal>
+          </div>
     );
+
+
+
+
   }
 }
 

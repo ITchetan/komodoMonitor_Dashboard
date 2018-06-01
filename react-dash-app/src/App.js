@@ -652,6 +652,7 @@ console.log(wellnessWeeklyTotal)
             {this.state.wellnessForm === true &&
             <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
+
             </div>
           );
         }
@@ -688,11 +689,13 @@ console.log(wellnessWeeklyTotal)
             logout={this.logout}
             />
 
-            {this.renderModal()}
 
+            {this.renderModal()}
             {this.state.wellnessForm === true &&
-            <ModalFormWellness loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
+            <ModalFormWellness handlerEmail={this.getLogin} skipLogin={this.skipLogin} loginToken={this.state.loginToken} profileName = {this.state.playerFirstData[2]}/>
             }
+
+
 
 
             </div>
