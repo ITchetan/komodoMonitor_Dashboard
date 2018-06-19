@@ -37,7 +37,7 @@ class RpePane extends Component{
       // If selected value is less than total number then do this
       if(Math.abs(selectedVal) <= this.props.rpeData.labels.length)
       {
-      let tempLabels = this.temprpeData.labels;
+      let tempLabels = this.tempRpeData.labels;
       this.tempRpeData.labels= tempLabels.slice(selectedVal);
       }
       this.showChart();
